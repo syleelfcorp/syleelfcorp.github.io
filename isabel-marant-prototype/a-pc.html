@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Isabel Marant — LF Mall 브랜드관</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body { font-family: 'Pretendard Variable', 'Pretendard', sans-serif; color: #000; background: #fff; overflow-x: hidden; min-width: 1920px; }
+  a { text-decoration: none; color: inherit; } img { display: block; max-width: 100%; } ul, li { list-style: none; }
+  .page-wrap { width: 1920px; margin: 0 auto; }
+
+  /* GNB */
+  .gnb { display: flex; align-items: center; justify-content: space-between; height: 88px; padding: 0 160px; background: #fff; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid transparent; transition: border-color .3s; }
+  .gnb.scrolled { border-bottom-color: #eee; }
+  .gnb__left { display: flex; align-items: center; gap: 44px; }
+  .gnb__logo img { height: 34px; width: auto; }
+  .gnb__nav { display: flex; gap: 24px; }
+  .gnb__nav a { font-size: 15px; font-weight: 400; line-height: 1.5; color: #000; position: relative; transition: opacity .2s; }
+  .gnb__nav a:hover { opacity: .55; }
+  .gnb__nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #000; transition: width .3s; }
+  .gnb__nav a:hover::after { width: 100%; }
+  .gnb__right { display: flex; align-items: center; gap: 20px; }
+  .gnb__lf-logo { width: 92px; height: 20px; display: flex; align-items: center; justify-content: center; }
+  .gnb__lf-logo img { width: 92px; height: 20px; object-fit: contain; }
+  .gnb__icons { display: flex; align-items: center; }
+  .gnb__icon { width: 56px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .gnb__icon svg { width: 22px; height: 22px; stroke: #000; fill: none; stroke-width: 1.5; }
+
+  /* HERO */
+  .hero { position: relative; width: 1920px; height: 888px; overflow: hidden; }
+  .hero__img { width: 100%; height: 768px; object-fit: cover; transition: transform 8s ease-out; }
+  .hero:hover .hero__img { transform: scale(1.02); }
+  .hero__content { position: absolute; top: 347px; left: 502px; text-align: center; }
+  .hero__title { font-size: 28px; font-weight: 600; line-height: 1.35; color: #000; margin-bottom: 16px; }
+  .hero__link { font-size: 14px; font-weight: 400; line-height: 1.5; text-decoration: underline; color: #000; cursor: pointer; transition: opacity .2s; }
+  .hero__link:hover { opacity: .6; }
+
+  .section-title { font-size: 28px; font-weight: 600; line-height: 1.35; text-align: center; color: #000; }
+
+  /* PRODUCT */
+  .product-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 0 160px; }
+  .product-grid--flush { padding: 0; }
+  .product-card { width: 385px; cursor: pointer; }
+  .product-card__thumb { position: relative; width: 100%; aspect-ratio: 295 / 374.65; overflow: hidden; background: #f5f5f5; }
+  .product-card__thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .product-card:hover .product-card__thumb img { transform: scale(1.05); }
+  .product-card__thumb::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.02); pointer-events: none; }
+  .product-card__wish { position: absolute; top: 15px; right: 15px; z-index: 2; width: 20px; height: 18px; cursor: pointer; transition: transform .2s; }
+  .product-card__wish:hover { transform: scale(1.15); }
+  .product-card__wish img { width: 100%; height: 100%; object-fit: contain; }
+  .product-card__meta { padding-top: 12px; padding-right: 5px; }
+  .product-card__name { font-size: 14px; font-weight: 400; line-height: 1.5; color: #000; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 8px; }
+  .product-card__price { font-size: 15px; font-weight: 700; line-height: 1.25; color: #000; }
+
+  .new-arrivals { padding: 0 0 80px; }
+  .new-arrivals .section-title { margin-bottom: 20px; }
+
+  .brand-desc { text-align: center; }
+  .brand-desc p { font-size: 14px; font-weight: 400; line-height: 1.5; color: #000; max-width: 927px; margin: 0 auto; }
+
+  .category-banners { display: flex; gap: 20px; padding: 0 160px 120px; justify-content: center; }
+  .category-banner { flex: 0 0 790px; cursor: pointer; }
+  .category-banner__img { width: 790px; height: 1003px; overflow: hidden; }
+  .category-banner__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+  .category-banner:hover .category-banner__img img { transform: scale(1.03); }
+  .category-banner__label { margin-top: 12px; font-size: 20px; font-weight: 600; line-height: 1.5; text-align: center; color: #000; }
+
+  .wide-banner { position: relative; margin: 0 160px 40px; height: 800px; overflow: hidden; cursor: pointer; }
+  .wide-banner img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+  .wide-banner:hover img { transform: scale(1.02); }
+  .wide-banner__content { position: absolute; top: 50%; transform: translateY(-50%); text-align: center; }
+  .wide-banner__content--left { left: 335px; }
+  .wide-banner__content--right { left: 1103px; }
+  .wide-banner__title { font-size: 28px; font-weight: 600; line-height: 1.35; color: #000; margin-bottom: 16px; }
+  .wide-banner__link { font-size: 14px; font-weight: 400; line-height: 1.5; text-decoration: underline; color: #000; }
+
+  .beckett-products { padding: 0 160px; }
+  .beckett-products .product-grid { padding: 0; }
+
+  .runway { display: flex; gap: 20px; padding: 0 160px; }
+  .runway__feature { flex: 0 0 790px; height: 1117px; overflow: hidden; cursor: pointer; background: #d4d0c8; }
+  .runway__feature img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+  .runway__feature:hover img { transform: scale(1.03); }
+  .runway__products { flex: 0 0 790px; display: flex; flex-wrap: wrap; gap: 20px; }
+  .runway__products .product-card { width: 385px; }
+
+  .high-summer { display: flex; gap: 20px; padding: 0 160px; }
+  .high-summer__products { flex: 0 0 790px; display: flex; flex-wrap: wrap; gap: 20px; }
+  .high-summer__products .product-card { width: 385px; }
+  .high-summer__feature { flex: 0 0 790px; height: 1117px; overflow: hidden; cursor: pointer; }
+  .high-summer__feature img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+  .high-summer__feature:hover img { transform: scale(1.03); }
+
+  .footer-logo { display: flex; align-items: center; justify-content: center; height: 456px; }
+  .footer-logo img { width: 260px; height: auto; object-fit: contain; }
+
+  .footer { background: #fff; padding-bottom: 40px; }
+  .footer__top { display: flex; gap: 30px; align-items: center; justify-content: center; padding: 20px 0; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+  .footer__col { width: 250px; } .footer__col--cs { width: 280px; } .footer__col--family { width: 277px; }
+  .footer__divider { width: 1px; height: 180px; background: #eee; }
+  .footer__col-title { font-size: 14px; font-weight: 700; color: #555; line-height: 19px; margin-bottom: 10px; }
+  .footer__cs-number { font-size: 25px; font-weight: 700; color: #555; margin-bottom: 4px; }
+  .footer__cs-number span { font-size: 13px; font-weight: 400; color: #757575; }
+  .footer__cs-hours { font-size: 13px; font-weight: 400; color: #757575; line-height: 18px; margin-bottom: 10px; }
+  .footer__cs-links { display: flex; gap: 32px; }
+  .footer__cs-links a { font-size: 13px; color: #757575; text-decoration: underline; }
+  .footer__menu-grid { display: flex; gap: 32px; }
+  .footer__menu-list { display: flex; flex-direction: column; gap: 8px; }
+  .footer__menu-list a { font-size: 13px; color: #757575; line-height: 18px; transition: color .2s; }
+  .footer__menu-list a:hover { color: #333; }
+  .footer__news-list { display: flex; flex-direction: column; gap: 8px; }
+  .footer__news-list p { font-size: 13px; color: #757575; line-height: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .footer__family-btn { border: 1px solid #ddd; height: 36px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; cursor: pointer; margin-top: 14px; }
+  .footer__family-btn span { font-size: 13px; font-weight: 700; color: #757575; }
+  .footer__bottom { max-width: 1240px; margin: 20px auto 0; display: flex; flex-direction: column; gap: 20px; }
+  .footer__service-menu { display: flex; gap: 20px; font-size: 13px; color: #555; }
+  .footer__service-menu a { transition: color .2s; } .footer__service-menu a:hover { color: #000; } .footer__service-menu a.bold { font-weight: 700; }
+  .footer__info { font-size: 13px; color: #757575; line-height: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .footer__info-row { display: flex; gap: 20px; flex-wrap: wrap; }
+  .footer__info-row a { color: #000; text-decoration: underline; }
+  .footer__social { display: flex; gap: 12px; }
+  .footer__social a { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #555; color: #fff; transition: background .2s; }
+  .footer__social a:hover { background: #000; }
+  .footer__social svg { width: 16px; height: 16px; fill: #fff; }
+
+  .section-gap-lg { height: 120px; }
+  .fade-up { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="gnb" id="gnb">
+    <div class="gnb__left">
+      <a href="#" class="gnb__logo"><img src="https://www.figma.com/api/mcp/asset/97efa529-c547-4c79-b3bf-e9f8bec113bb" alt="Isabel Marant"></a>
+      <nav class="gnb__nav"><a href="#">여성</a><a href="#">신발</a><a href="#">가방</a><a href="#">남성</a></nav>
+    </div>
+    <div class="gnb__right">
+      <a href="#" class="gnb__lf-logo"><img src="https://www.figma.com/api/mcp/asset/5350e89d-666f-43fd-90d6-bfd5689bf9fc" alt="LF Mall"></a>
+      <div class="gnb__icons">
+        <div class="gnb__icon" title="검색"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></div>
+        <div class="gnb__icon" title="마이페이지"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+        <div class="gnb__icon" title="장바구니"><svg viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 2h3l1 4"/></svg></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <img class="hero__img" src="https://www.figma.com/api/mcp/asset/2285fa7a-63ac-4230-8f51-39aec2270d55" alt="2026 Summer Collection">
+    <div class="hero__content"><h1 class="hero__title">2026년 여름 컬렉션</h1><a href="#" class="hero__link">자세히 보기</a></div>
+  </section>
+
+  <section class="new-arrivals fade-up">
+    <h2 class="section-title">신상품</h2>
+    <div class="product-grid">
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/21922c1e-9502-4b78-9804-b76fd773ac4a" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">JULINE 자수 가벼운 코튼 롱 슬리브 블라우스</p><p class="product-card__price">919,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/a931c6cb-832e-4a05-af9e-83a6da0c8980" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">PICADILIA 스커트</p><p class="product-card__price">699,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/e7c4bd29-d8ad-4852-9df7-7c5c305bab6a" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">DARNER BUCKLE 부츠</p><p class="product-card__price">1,690,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/ac4c5cfa-9956-4861-8853-d2f8627aef53" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">OSKAN HOBO SOFT 우븐 스웨이드 송아지 가죽 백</p><p class="product-card__price">1,890,000</p></div></div>
+    </div>
+  </section>
+
+  <section class="brand-desc fade-up">
+    <p>Isabel Marant은 자유, 여성스러움, 시크함과 자연스러운 우아함이 조화를 이루는 룩으로 파리지앵 워드로브를 선보입니다. Isabel Marant, Marant Étoile과 Marant Homme 라인은 쿨 럭셔리와 보헤미안 시크 스타일 사이에서 진정한 장인정신과 결합된 자유롭고 즉흥적인 정신을 표현합니다. 독특한 스타일과 계절을 뛰어넘는 타임리스 실루엣을 만나보세요.</p>
+  </section>
+
+  <div class="section-gap-lg"></div>
+
+  <section class="category-banners fade-up">
+    <div class="category-banner"><div class="category-banner__img"><img src="https://www.figma.com/api/mcp/asset/67997d37-9888-46b0-8b39-ed9a33d6e9c6" alt="아이코닉 백"></div><p class="category-banner__label">아이코닉 백</p></div>
+    <div class="category-banner"><div class="category-banner__img"><img src="https://www.figma.com/api/mcp/asset/9136ef8b-a010-4573-8769-7ba1d50f76f0" alt="셔츠"></div><p class="category-banner__label">셔츠</p></div>
+  </section>
+
+  <div class="wide-banner fade-up">
+    <img src="https://www.figma.com/api/mcp/asset/81cf8116-065f-44f6-9585-6d6f47fbccc0" alt="상징적인 베켓">
+    <div class="wide-banner__content wide-banner__content--left"><h2 class="wide-banner__title">상징적인 베켓</h2><a href="#" class="wide-banner__link">자세히 보기</a></div>
+  </div>
+
+  <section class="beckett-products fade-up">
+    <div class="product-grid product-grid--flush">
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/a963828e-7af9-4b90-ae7f-008738944e18" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈</p><p class="product-card__price">1,190,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/e27ec5c2-897d-42c4-a67c-bf3678f5f8b8" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈</p><p class="product-card__price">1,190,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/23ad3b65-b4e1-4699-9bbc-e93d5005b48e" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈</p><p class="product-card__price">1,190,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/61c936e7-94a9-4fd1-91a4-956e212980a0" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈</p><p class="product-card__price">1,354,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/701c6b02-a8b3-46d9-867e-377fa8949749" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈</p><p class="product-card__price">1,190,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/e6bcd24c-e133-497b-8bb2-d73e8b7c26ba" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈</p><p class="product-card__price">1,890,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/daf7377e-2e47-4737-8cde-34ac5a622465" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈</p><p class="product-card__price">1,190,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/ea2f4ef3-61f2-4357-8519-a60d04e8fed9" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈</p><p class="product-card__price">1,780,000</p></div></div>
+    </div>
+  </section>
+
+  <div class="section-gap-lg"></div>
+
+  <section class="runway fade-up">
+    <div class="runway__feature"><img src="https://www.figma.com/api/mcp/asset/e2a96c9b-c870-4ed0-899f-1d32bbaa092f" alt="Runway"></div>
+    <div class="runway__products">
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/3650d39e-28be-4b32-b5bf-0218a37fc523" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">셸리 루스 핏 유선형 튜닉 셔츠</p><p class="product-card__price">1,090,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/203f0390-d0ff-4bdf-b4df-bf46a9de77cf" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">ALISON 킥 플레어 데님 팬츠</p><p class="product-card__price">1,390,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/e5ce5c04-44ff-4705-a62e-09bbed35438e" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">ABRYEL 이중 소재 웨지 뮬</p><p class="product-card__price">2,392,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/335eb875-0acb-40aa-9ecd-9b033f1b9d54" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">JANIS 가죽과 메탈 소재 펜던트 목걸이</p><p class="product-card__price">629,000</p></div></div>
+    </div>
+  </section>
+
+  <div class="section-gap-lg"></div>
+
+  <section class="high-summer fade-up">
+    <div class="high-summer__products">
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/1d86eb45-56ed-4b22-9d14-74eb21b6bff5" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">NINA 리넨 자수 블라우스</p><p class="product-card__price">2,190,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/dec22ced-543a-4196-aae7-b452cab13a46" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">PURIA 코튼 플로럴 레이스 러플 미니 스커트</p><p class="product-card__price">912,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/f2d8224b-f27c-4d65-96fe-b59a6848e37a" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">리아드 글래디에이터 투조 레이스업 부츠</p><p class="product-card__price">1,824,000</p></div></div>
+      <div class="product-card"><div class="product-card__thumb"><img src="https://www.figma.com/api/mcp/asset/f4fc1591-44b3-486a-a83d-8284feeed8bd" alt=""><div class="product-card__wish"><img src="https://www.figma.com/api/mcp/asset/34d558d9-6e74-4ab9-8680-6f092511aab7" alt="wish"></div></div><div class="product-card__meta"><p class="product-card__name">카탈리나 라인스톤 펜던트 귀걸이</p><p class="product-card__price">683,000</p></div></div>
+    </div>
+    <div class="high-summer__feature"><img src="https://www.figma.com/api/mcp/asset/5dd1e668-f815-477a-96f0-d7a1d35bd908" alt="High Summer"></div>
+  </section>
+
+  <div class="section-gap-lg"></div>
+
+  <div class="wide-banner fade-up">
+    <img src="https://www.figma.com/api/mcp/asset/3dfa7ede-ec3a-4a5f-862d-7da95fb1d469" alt="남성 컬렉션">
+    <div class="wide-banner__content wide-banner__content--right"><h2 class="wide-banner__title">남성 컬렉션</h2><a href="#" class="wide-banner__link">자세히 보기</a></div>
+  </div>
+
+  <section class="footer-logo fade-up"><img src="https://www.figma.com/api/mcp/asset/97efa529-c547-4c79-b3bf-e9f8bec113bb" alt="Isabel Marant"></section>
+
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__col footer__col--cs">
+        <p class="footer__col-title">고객서비스센터</p>
+        <p class="footer__cs-number">1544-5114 <span>(유료)</span></p>
+        <p class="footer__cs-hours">상담시간 : 월~금 9:00~18:00 (주말,공휴일 휴무)</p>
+        <div class="footer__cs-links"><a href="#">1:1 상담 ›</a><a href="#">고객제안 ›</a></div>
+      </div>
+      <div class="footer__divider"></div>
+      <div class="footer__col">
+        <p class="footer__col-title">CUSTOMER SERVICE</p>
+        <div class="footer__menu-grid">
+          <div class="footer__menu-list"><a href="#">회원가입</a><a href="#">배송/교환/반품</a><a href="#">1:1 상담</a><a href="#">상품권 구매</a><a href="#">단체구매 신청/조회</a></div>
+          <div class="footer__menu-list"><a href="#">AS</a><a href="#">쿠폰</a><a href="#">마일리지</a><a href="#">실시간 채팅상담</a></div>
+        </div>
+      </div>
+      <div class="footer__divider"></div>
+      <div class="footer__col">
+        <p class="footer__col-title">NEWS (고객 공지사항)</p>
+        <div class="footer__news-list"><p>[공지] 개인정보처리방침 개정안내 (2019도)</p><p>[당첨자 발표] 웰컴백 경품 이벤트 당첨자 발표</p><p>[질스튜어트뉴욕 여성] Perfect Coat for you…</p><p>2019년 1월 LF멤버체계가 업그레이드 됩니다.</p><p>[공지] 개인정보처리방침 개정안내 (2019도)</p></div>
+      </div>
+      <div class="footer__divider"></div>
+      <div class="footer__col footer__col--family">
+        <div class="footer__family-btn"><span>FAMILY SITE</span><svg viewBox="0 0 7 4" width="7" height="4"><path d="M0.5 0.5L3.5 3.5L6.5 0.5" stroke="#757575" fill="none" stroke-width="1"/></svg></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__service-menu"><a href="#">회사소개</a><a href="#">이용약관</a><a href="#" class="bold">개인정보처리방침</a><a href="#" class="bold">읽기 쉬운 개인정보처리방침</a><a href="#">청소년보호정책</a><a href="#">고객센터</a><a href="#">제휴/입점문의</a><a href="#">패밀리 인증</a><a href="#">제휴임직원 인증</a></div>
+      <div class="footer__info">
+        <div class="footer__info-row"><span>사업자 등록번호 : 211-87-87724</span><span>통신판매업신고 : 제 2010-서울강남-00066호</span><a href="#">사업자 정보확인 ›</a></div>
+        <div class="footer__info-row"><span>서울 강남구 언주로 870</span><span>대표전화 : 1544-5114 (유료)</span><span>팩스 : 031-360-0003</span><span>이메일 : lfcs@lfcorp.com</span></div>
+        <div class="footer__info-row"><span>(주)LF 대표이사 김상균, 온라인사업총괄 권성훈</span></div>
+      </div>
+      <div class="footer__social">
+        <a href="#" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+        <a href="#" title="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" title="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.6C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<script>
+  const gnb = document.getElementById('gnb');
+  window.addEventListener('scroll', () => { gnb.classList.toggle('scrolled', window.scrollY > 10); });
+  const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
