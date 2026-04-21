@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Isabel Marant — 브랜드관 PC</title>
+<style>
+/* ===== RESET ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, 'Apple SD Gothic Neo', sans-serif;
+  background: #fff;
+  color: #000;
+  min-width: 1920px;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; border: 0; }
+a { text-decoration: none; color: inherit; }
+
+/* ===== GNB ===== */
+.gnb {
+  position: relative;
+  width: 100%;
+  background: #fff;
+}
+.gnb img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.gnb-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: #fff;
+  transform: translateY(-100%);
+  transition: transform 0.25s ease;
+}
+.gnb-sticky.--visible {
+  transform: translateY(0);
+}
+.gnb-sticky img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== HERO ===== */
+.hero-pc {
+  position: relative;
+  width: 100%;
+  height: 768px;
+  overflow: hidden;
+  background: #666;
+}
+.hero-pc__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-pc__info {
+  position: absolute;
+  top: 347px;
+  left: 502px;
+  text-align: center;
+  color: #000;
+}
+.hero-pc__title {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.hero-pc__link {
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: underline;
+}
+
+/* ===== CONTENT CONTAINER ===== */
+.content-area {
+  width: 1240px;
+  margin: 0 auto;
+}
+
+/* ===== SECTION GAP ===== */
+.gap-80 { height: 80px; }
+.gap-120 { height: 120px; }
+
+/* ===== OSKAN SECTION ===== */
+.oskan-banner-pc {
+  display: flex;
+  justify-content: center;
+}
+.oskan-banner-pc__img {
+  width: 610px;
+  height: 774px;
+  object-fit: cover;
+}
+
+/* ===== PRODUCT GRID PC ===== */
+.prod-grid-pc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 20px;
+  justify-content: center;
+}
+.prod-card-pc {
+  width: 290px;
+}
+.prod-card-pc__thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 290 / 370;
+  overflow: hidden;
+  background: #eee;
+}
+.prod-card-pc__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.prod-card-pc__thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.02);
+  pointer-events: none;
+}
+.prod-card-pc__wish {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+}
+.prod-card-pc__wish img {
+  width: 24px; height: 22px;
+  object-fit: contain;
+}
+.prod-card-pc__meta { padding-top: 16px; }
+.prod-card-pc__name {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.prod-card-pc__price {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #000;
+}
+
+/* ===== BRAND DESC ===== */
+.brand-desc-pc {
+  padding: 0 40px;
+  text-align: center;
+}
+.brand-desc-pc__text {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #000;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ===== CATEGORY CAROUSEL PC ===== */
+.cat-carousel-pc {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.cat-carousel-pc__item {
+  width: 400px;
+}
+.cat-carousel-pc__img {
+  width: 100%;
+  aspect-ratio: 400 / 508;
+  object-fit: cover;
+}
+.cat-carousel-pc__label {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000;
+}
+
+/* ===== NEW ARRIVAL PC ===== */
+.new-arrival-pc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.new-arrival-pc__wrap {
+  width: 610px;
+}
+.new-arrival-pc__img {
+  width: 100%;
+  aspect-ratio: 400 / 508;
+  object-fit: cover;
+}
+.new-arrival-pc__title {
+  margin-top: 12px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #000;
+  text-align: center;
+}
+
+/* ===== ALL PRODUCTS 8 GRID ===== */
+.prod-grid-pc-8 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 20px;
+}
+.prod-grid-pc-8 .prod-card-pc {
+  width: calc(25% - 15px);
+}
+
+/* ===== OFFICIAL BANNER PC ===== */
+.official-banner-pc {
+  width: 1240px;
+  margin: 0 auto;
+  margin-bottom: 80px;
+  overflow: hidden;
+}
+.official-banner-pc img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ===== FOOTER PC ===== */
+.footer-pc {
+  background: #fff;
+  border-top: 1px solid #eee;
+  padding: 40px 340px 60px;
+}
+.footer-pc__top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 20px;
+  font-size: 12px;
+  font-family: 'Apple SD Gothic Neo', sans-serif;
+  color: #000;
+}
+.footer-pc__top-sep {
+  width: 1px; height: 10px;
+  background: #ddd;
+}
+.footer-pc__brand-logo {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+.footer-pc__brand-logo img {
+  height: 20px; width: auto;
+}
+.footer-pc__body {
+  display: flex;
+  gap: 60px;
+  padding-top: 20px;
+  border-top: 1px solid #e9e9e9;
+}
+.footer-pc__biz {
+  flex: 1;
+}
+.footer-pc__biz-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.footer-pc__biz-header svg { width: 34px; height: 15px; }
+.footer-pc__biz-label {
+  font-size: 13px;
+  font-family: 'Apple SD Gothic Neo', sans-serif;
+}
+.footer-pc__links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-family: 'Apple SD Gothic Neo', sans-serif;
+  color: #757575;
+  margin-bottom: 20px;
+}
+.footer-pc__links-sep {
+  width: 1px; height: 8px;
+  background: #ddd;
+}
+.footer-pc__links strong { font-weight: 700; }
+.footer-pc__sns {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+.footer-pc__sns svg {
+  width: 32px; height: 32px;
+}
+.footer-pc__bank {
+  margin-top: 20px;
+  font-size: 10px;
+  font-family: 'Apple SD Gothic Neo', sans-serif;
+  color: #757575;
+  line-height: 14px;
+  letter-spacing: -0.2px;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== GNB (기본 - 스크롤 전) ===== -->
+<header class="gnb">
+  <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_pc_gnb.png" alt="GNB">
+</header>
+
+<!-- ===== GNB (sticky - 스크롤 시 나타남) ===== -->
+<div class="gnb-sticky" id="pcGnbSticky">
+  <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_pc_gnb_sticky.png" alt="GNB Sticky">
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero-pc">
+  <img class="hero-pc__img" src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_hero.png" alt="2026년 여름 컬렉션">
+  <div class="hero-pc__info">
+    <div class="hero-pc__title">2026년 여름 컬렉션</div>
+    <div class="hero-pc__link">자세히 보기</div>
+  </div>
+</section>
+
+<div class="gap-120"></div>
+
+<!-- ===== OSKAN BANNER + 상품 4개 ===== -->
+<div class="content-area">
+  <div class="oskan-banner-pc">
+    <img class="oskan-banner-pc__img" src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_category01.png" alt="OSKAN BAG">
+  </div>
+
+  <div style="height:20px;"></div>
+
+  <div class="prod-grid-pc">
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_oskan_product01.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">OSKAN HOBO SOFT 숄더백</div>
+        <div class="prod-card-pc__price">1,890,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_oskan_product02.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">OSKAN HOBO SOFT 숄더백</div>
+        <div class="prod-card-pc__price">1,890,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_oskan_product03.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">OSKAN HOBO SOFT 숄더백</div>
+        <div class="prod-card-pc__price">1,890,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_oskan_product03.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">OSKAN HOBO SOFT 숄더백</div>
+        <div class="prod-card-pc__price">1,890,000</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gap-80"></div>
+
+<!-- ===== BRAND DESCRIPTION ===== -->
+<section class="brand-desc-pc">
+  <div class="brand-desc-pc__text">
+    Isabel Marant은 자유, 여성스러움, 시크함과 자연스러운<br>
+    우아함이 조화를 이루는 룩으로 파리지앵 워드로브를 선보입니다.<br>
+    Isabel Marant, Marant Étoile과 Marant Homme 라인은<br>
+    쿨 럭셔리와 보헤미안 시크 스타일 사이에서<br>
+    진정한 장인정신과 결합된 자유롭고 즉흥적인 정신을 표현합니다.<br>
+    독특한 스타일과 계절을 뛰어넘는 타임리스 실루엣을 만나보세요.
+  </div>
+</section>
+
+<div class="gap-80"></div>
+
+<!-- ===== CATEGORY CAROUSEL PC ===== -->
+<div class="content-area">
+  <div class="cat-carousel-pc">
+    <div class="cat-carousel-pc__item">
+      <img class="cat-carousel-pc__img" src="https://syleelfcorp.github.io/image/isabelmarant_A/b_category01.png" alt="여름 가방">
+      <div class="cat-carousel-pc__label">여름 가방</div>
+    </div>
+    <div class="cat-carousel-pc__item">
+      <img class="cat-carousel-pc__img" src="https://syleelfcorp.github.io/image/isabelmarant_A/b_category02.png" alt="주얼리">
+      <div class="cat-carousel-pc__label">주얼리</div>
+    </div>
+    <div class="cat-carousel-pc__item">
+      <img class="cat-carousel-pc__img" src="https://syleelfcorp.github.io/image/isabelmarant_A/b_category03.png" alt="남성">
+      <div class="cat-carousel-pc__label">남성</div>
+    </div>
+  </div>
+</div>
+
+<div class="gap-80"></div>
+
+<!-- ===== BECKETT PRODUCTS (4 items) ===== -->
+<div class="content-area">
+  <div class="prod-grid-pc">
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product01.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">베켓 스니커즈</div>
+        <div class="prod-card-pc__price">1,190,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product02.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">베켓 스니커즈</div>
+        <div class="prod-card-pc__price">1,190,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product03.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">베켓 스니커즈</div>
+        <div class="prod-card-pc__price">1,190,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product04.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">베켓 스니커즈</div>
+        <div class="prod-card-pc__price">1,354,000</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gap-80"></div>
+
+<!-- ===== NEW ARRIVAL BANNER ===== -->
+<div class="content-area">
+  <section class="new-arrival-pc">
+    <div class="new-arrival-pc__wrap">
+      <img class="new-arrival-pc__img" src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_category02.png" alt="신상품">
+      <div class="new-arrival-pc__title">신상품</div>
+    </div>
+  </section>
+</div>
+
+<div class="gap-80"></div>
+
+<!-- ===== ALL PRODUCTS (8 items, 2 rows x 4 cols) ===== -->
+<div class="content-area">
+  <div class="prod-grid-pc-8">
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_bestseller_product01.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">ZELLY 플로럴 코튼 실크 러플 탑</div>
+        <div class="prod-card-pc__price">1,990,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_bestseller_product02.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">베켓 웨지 스니커즈</div>
+        <div class="prod-card-pc__price">1,190,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_bestseller_product03.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">IZAE 코튼 가디건</div>
+        <div class="prod-card-pc__price">1,034,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_bestseller_product04.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">베켓 웨지 스니커즈</div>
+        <div class="prod-card-pc__price">1,190,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_bestseller_product05.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">PAYTON 코튼 플로럴 레이스 카프탄 스타일 탑</div>
+        <div class="prod-card-pc__price">919,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_bestseller_product06.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">OSKAN HOBO SOFT 숄더백</div>
+        <div class="prod-card-pc__price">1,890,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_bestseller_product07.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">SEBANI 쇼트 슬리브 비대칭 티셔츠</div>
+        <div class="prod-card-pc__price">619,000</div>
+      </div>
+    </div>
+    <div class="prod-card-pc">
+      <div class="prod-card-pc__thumb">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_bestseller_product08.png" alt="">
+        <div class="prod-card-pc__wish"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/like.png" alt="like"></div>
+      </div>
+      <div class="prod-card-pc__meta">
+        <div class="prod-card-pc__name">리나 비대칭 펜던트 귀걸이</div>
+        <div class="prod-card-pc__price">743,000</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gap-80"></div>
+
+<!-- ===== OFFICIAL BANNER ===== -->
+<div class="official-banner-pc">
+  <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_pc_footer_marant.png" alt="Isabel Marant Official">
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer style="width:100%;">
+  <img src="https://syleelfcorp.github.io/image/isabelmarant_A/b_pc_footer.png" alt="Footer" style="width:100%;height:auto;display:block;">
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var gnb = document.querySelector('.gnb');
+  var stickyGnb = document.getElementById('pcGnbSticky');
+  window.addEventListener('scroll', function() {
+    var gnbBottom = gnb.getBoundingClientRect().bottom;
+    if (gnbBottom <= 0) {
+      stickyGnb.classList.add('--visible');
+    } else {
+      stickyGnb.classList.remove('--visible');
+    }
+  });
+});
+</script>
+</body>
+</html>
