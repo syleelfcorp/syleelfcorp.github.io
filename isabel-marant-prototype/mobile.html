@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Isabel Marant — LF Mall 브랜드관 (Mobile)</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
+    color: #000; background: #fff; min-width: 320px; max-width: 599px; margin: 0 auto;
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  /* GNB */
+  .gnb {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px; padding: 6px 10px; background: #fff;
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid transparent; transition: border-color .3s;
+  }
+  .gnb.scrolled { border-bottom-color: #eee; }
+  .gnb__back { width: 70px; height: 40px; display: flex; align-items: center; cursor: pointer; }
+  .gnb__back img { width: 40px; height: 40px; object-fit: contain; }
+  .gnb__logo { flex: 1; max-width: 160px; display: flex; align-items: center; justify-content: center; height: 40px; }
+  .gnb__logo img { width: 112px; height: 24px; object-fit: contain; }
+  .gnb__icons { width: 85px; height: 40px; display: flex; align-items: center; justify-content: flex-end; gap: 5px; }
+  .gnb__icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .gnb__icon img { width: 40px; height: 40px; object-fit: contain; }
+  .gnb__icon--cart { position: relative; }
+  .gnb__badge {
+    position: absolute; top: 2px; right: 2px;
+    width: 18px; height: 18px; border-radius: 50%; background: #dc2832;
+    font-size: 10px; font-weight: 600; color: #fff;
+    display: flex; align-items: center; justify-content: center; line-height: 1;
+  }
+
+  /* HERO - updated with gradient dimmed + white text at bottom */
+  .hero-mo { position: relative; width: 100%; aspect-ratio: 375/540; overflow: hidden; }
+  .hero-mo img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-mo__dimmed {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.2) 100%);
+    pointer-events: none;
+  }
+  .hero-mo__content {
+    position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+    text-align: center;
+  }
+  .hero-mo__title { font-size: 22px; font-weight: 600; line-height: 1.5; color: #fff; margin-bottom: 4px; }
+  .hero-mo__link { font-size: 14px; font-weight: 400; line-height: 1.5; text-decoration: underline; color: #fff; }
+
+  /* SECTION TITLE */
+  .mo-section-title {
+    font-size: 16px; font-weight: 600; line-height: 1.5;
+    text-align: center; color: #000; padding: 0 20px 16px;
+  }
+
+  /* PRODUCT CARDS */
+  .mo-product-card { cursor: pointer; }
+  .mo-product-card__thumb {
+    position: relative; width: 100%; aspect-ratio: 165/209;
+    overflow: hidden; background: #f5f5f5;
+  }
+  .mo-product-card__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .mo-product-card__thumb::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.02); pointer-events: none; }
+  .mo-product-card__wish { display: none; }
+  .mo-product-card__meta { padding-top: 12px; padding-right: 5px; }
+  .mo-product-card__name {
+    font-size: 13px; font-weight: 400; line-height: 1.5; color: #000;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 6px;
+  }
+  .mo-product-card__price { font-size: 14px; font-weight: 700; line-height: 1.25; color: #000; }
+
+  /* PRODUCT GRID (2-col) */
+  .mo-product-grid {
+    display: flex; flex-wrap: wrap; gap: 24px 5px; padding: 0 20px;
+  }
+  .mo-product-grid .mo-product-card { width: calc(50% - 2.5px); }
+
+  /* BRAND DESC */
+  .mo-brand-desc { padding: 0 24px; text-align: center; }
+  .mo-brand-desc p { font-size: 13px; font-weight: 400; line-height: 1.5; color: #000; }
+
+  /* BEKKET ROLLING (MO: banner + swipeable product carousel) */
+  .mo-bekket-rolling { padding: 0; }
+  .mo-bekket-rolling__banner { margin: 0 20px; width: calc(100% - 40px); aspect-ratio: 335/445; overflow: hidden; }
+  .mo-bekket-rolling__banner img { width: 100%; height: 100%; object-fit: cover; }
+  .mo-bekket-rolling__products {
+    display: flex; gap: 5px; padding: 0 20px; margin-top: 20px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mo-bekket-rolling__products::-webkit-scrollbar { display: none; }
+  .mo-bekket-rolling__products .mo-product-card { width: 165px; min-width: 165px; flex-shrink: 0; }
+
+  /* OSKAN HOBO (MO: same as high-summer - banner + swipeable products) */
+  .mo-oskan-section { }
+  .mo-oskan-section__banner { margin: 0 20px; width: calc(100% - 40px); aspect-ratio: 335/485; overflow: hidden; }
+  .mo-oskan-section__banner img { width: 100%; height: 100%; object-fit: cover; }
+  .mo-oskan-section__products {
+    display: flex; gap: 5px; padding: 0 20px; margin-top: 20px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mo-oskan-section__products::-webkit-scrollbar { display: none; }
+  .mo-oskan-section__products .mo-product-card { width: 165px; min-width: 165px; flex-shrink: 0; }
+
+  /* HORIZONTAL SCROLL PRODUCTS */
+  .mo-scroll-products {
+    display: flex; gap: 5px; padding: 0 20px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mo-scroll-products::-webkit-scrollbar { display: none; }
+  .mo-scroll-products .mo-product-card { width: 165px; min-width: 165px; flex-shrink: 0; }
+
+  /* WIDE BANNER (mobile) - updated with gradient dimmed + white text at bottom */
+  .mo-wide-banner { position: relative; margin: 0 20px; aspect-ratio: 335/465; overflow: hidden; cursor: pointer; }
+  .mo-wide-banner img { width: 100%; height: 100%; object-fit: cover; }
+  .mo-wide-banner__dimmed {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.2) 100%);
+    pointer-events: none;
+  }
+  .mo-wide-banner__content {
+    position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+    text-align: center;
+  }
+  .mo-wide-banner__title { font-size: 22px; font-weight: 600; line-height: 1.5; color: #fff; margin-bottom: 4px; }
+  .mo-wide-banner__link { font-size: 14px; font-weight: 400; line-height: 1.5; text-decoration: underline; color: #fff; }
+
+  /* BOUTIQUE (MO) */
+  .mo-boutique { position: relative; overflow: hidden; }
+  .mo-boutique__bg { width: 100%; aspect-ratio: 375/400; overflow: hidden; }
+  .mo-boutique__bg img { width: 100%; height: 100%; object-fit: cover; }
+  .mo-boutique__card {
+    position: relative; margin: -100px 20px 0; background: #fff; padding: 40px 20px 24px; z-index: 1;
+  }
+  .mo-boutique__title { font-size: 22px; font-weight: 600; line-height: 1.5; text-align: center; color: #000; margin-bottom: 32px; }
+  .mo-boutique__list { overflow: hidden; }
+  .mo-boutique__list-inner { display: flex; transition: transform .4s ease; }
+  .mo-boutique__page { flex: 0 0 100%; min-width: 100%; display: flex; flex-direction: column; gap: 0; }
+  .mo-boutique__item { display: flex; align-items: center; justify-content: space-between; padding: 0; }
+  .mo-boutique__item + .mo-boutique__item { margin-top: 24px; }
+  .mo-boutique__item-info { flex: 1; min-width: 0; padding-right: 20px; }
+  .mo-boutique__item-name { font-size: 12px; font-weight: 600; line-height: 1.25; color: #000; margin-bottom: 4px; }
+  .mo-boutique__item-addr { font-size: 12px; font-weight: 400; line-height: 1.25; color: #000; }
+  .mo-boutique__item-tel { font-size: 12px; font-weight: 400; line-height: 1.25; color: #000; margin-top: 4px; }
+  .mo-boutique__item-btn {
+    flex-shrink: 0; border: 1px solid #ddd; background: none; padding: 8px 16px;
+    font-family: inherit; font-size: 12px; font-weight: 400; line-height: 1.25; color: #000; cursor: pointer; white-space: nowrap;
+  }
+  .mo-boutique__arrows { display: flex; gap: 40px; justify-content: center; margin-top: 24px; }
+  .mo-boutique__arrows button {
+    background: none; border: none; padding: 0; width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity .2s;
+  }
+  .mo-boutique__arrows button img { width: 36px; height: 36px; object-fit: contain; }
+  .mo-boutique__arrows button.active { opacity: 1; cursor: pointer; }
+  .mo-boutique__arrows button.disabled { opacity: .25; cursor: default; pointer-events: none; }
+  .mo-boutique__arrows .arrow-flip img { transform: scaleX(-1); }
+
+  /* FOOTER LOGO */
+  .mo-footer-logo { display: flex; align-items: center; justify-content: center; height: 212px; }
+  .mo-footer-logo img { width: 149px; height: 32px; object-fit: contain; }
+
+  /* FOOTER */
+  .mo-footer { padding: 20px; border-top: 1px solid #ddd; }
+  .mo-footer__cs-title { font-size: 13px; font-weight: 700; color: #555; margin-bottom: 8px; }
+  .mo-footer__cs-number { font-size: 20px; font-weight: 700; color: #555; margin-bottom: 4px; }
+  .mo-footer__cs-number span { font-size: 12px; font-weight: 400; color: #757575; }
+  .mo-footer__cs-hours { font-size: 12px; color: #757575; line-height: 16px; margin-bottom: 12px; }
+  .mo-footer__links { display: flex; gap: 16px; margin-bottom: 20px; }
+  .mo-footer__links a { font-size: 12px; color: #757575; text-decoration: underline; }
+  .mo-footer__service-menu { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 16px; }
+  .mo-footer__service-menu a { font-size: 12px; color: #555; }
+  .mo-footer__service-menu a.bold { font-weight: 700; }
+  .mo-footer__info { font-size: 11px; color: #757575; line-height: 16px; margin-bottom: 16px; }
+  .mo-footer__info p { margin-bottom: 4px; }
+  .mo-footer__social { display: flex; gap: 10px; }
+  .mo-footer__social a {
+    width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: #555;
+  }
+  .mo-footer__social svg { width: 14px; height: 14px; fill: #fff; }
+
+  .section-gap { height: 48px; }
+  .section-gap-sm { height: 20px; }
+
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+  <!-- GNB -->
+  <header class="gnb" id="gnb">
+    <div class="gnb__back">
+      <img src="https://syleelfcorp.github.io/image/isabelmarant_A/ic_prev.png" alt="뒤로가기">
+    </div>
+    <div class="gnb__logo">
+      <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_footerlogo.png" alt="Isabel Marant">
+    </div>
+    <div class="gnb__icons">
+      <div class="gnb__icon">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/ic_search.png" alt="검색">
+      </div>
+      <div class="gnb__icon gnb__icon--cart">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/ic_cart.png" alt="장바구니">
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO - gradient dimmed + white text at bottom -->
+  <section class="hero-mo">
+    <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_hero.png" alt="Isabel Marant 2026년 여름 컬렉션 메인 비주얼">
+    <div class="hero-mo__dimmed"></div>
+    <div class="hero-mo__content">
+      <h1 class="hero-mo__title">2026년 여름 컬렉션</h1>
+      <a href="#" class="hero-mo__link">자세히 보기</a>
+    </div>
+  </section>
+
+  <!-- 베켓 롤링 (replaces 신상품) -->
+  <section class="mo-bekket-rolling fade-up" style="padding: 48px 0;">
+    <div class="mo-bekket-rolling__banner"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket.png" alt="Isabel Marant 아이코닉 베켓 스니커즈 컬렉션"></div>
+    <div class="mo-bekket-rolling__products">
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product01.png" alt="Isabel Marant 베켓 웨지 스니커즈 크림 - 1,190,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">베켓 웨지 스니커즈 크림</p><p class="mo-product-card__price">1,190,000</p></div></div>
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product02.png" alt="Isabel Marant 베켓 웨지 스니커즈 카멜 - 1,190,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">베켓 웨지 스니커즈 카멜</p><p class="mo-product-card__price">1,190,000</p></div></div>
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product03.png" alt="Isabel Marant 베켓 웨지 스니커즈 블랙 - 1,190,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">베켓 웨지 스니커즈 블랙</p><p class="mo-product-card__price">1,190,000</p></div></div>
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product04.png" alt="Isabel Marant 베켓 웨지 스니커즈 라이트핑크 - 1,190,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">베켓 웨지 스니커즈 라이트핑크</p><p class="mo-product-card__price">1,190,000</p></div></div>
+    </div>
+  </section>
+
+  <!-- 브랜드 설명 -->
+  <section class="mo-brand-desc fade-up">
+    <p>Isabel Marant은 자유, 여성스러움, 시크함과 자연스러운 우아함이 조화를 이루는 룩으로 파리지앵 워드로브를 선보입니다. Isabel Marant, Marant Étoile과 Marant Homme 라인은 쿨 럭셔리와 보헤미안 시크 스타일 사이에서 진정한 장인정신과 결합된 자유롭고 즉흥적인 정신을 표현합니다. 독특한 스타일과 계절을 뛰어넘는 타임리스 실루엣을 만나보세요.</p>
+  </section>
+
+  <div class="section-gap"></div>
+
+  <!-- 오스칸 호보 백 (replaces category banners + bekket banner + bekket products) -->
+  <section class="mo-oskan-section fade-up">
+    <div class="mo-oskan-section__banner"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_oskan.png" alt="Isabel Marant 오스칸 호보 소프트 백 컬렉션"></div>
+    <div class="mo-oskan-section__products">
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_oskan_product01.png" alt="Isabel Marant 오스칸 호보 소프트 백 블랙 - 1,890,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">오스칸 호보 소프트 백</p><p class="mo-product-card__price">1,890,000</p></div></div>
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_oskan_product02.png" alt="Isabel Marant 오스칸 호보 소프트 백 탄 - 1,890,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">오스칸 호보 소프트 백</p><p class="mo-product-card__price">1,890,000</p></div></div>
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_oskan_product03.png" alt="Isabel Marant 오스칸 호보 소프트 백 카멜 - 1,890,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">오스칸 호보 소프트 백</p><p class="mo-product-card__price">1,890,000</p></div></div>
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_oskan_product04.png" alt="Isabel Marant 오스칸 호보 소프트 백 크림 - 1,890,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">오스칸 호보 소프트 백</p><p class="mo-product-card__price">1,890,000</p></div></div>
+    </div>
+  </section>
+
+  <div class="section-gap"></div>
+
+  <!-- 런웨이 배너 -->
+  <section class="fade-up">
+    <div style="padding: 0 20px;">
+      <div style="width: 100%; aspect-ratio: 335/485; overflow: hidden;">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_runway.png" alt="Isabel Marant 2026 런웨이 컬렉션 룩북" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+    <div class="section-gap-sm"></div>
+    <div class="mo-scroll-products">
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_runway_product01.png" alt="Isabel Marant 셸리 루스 핏 유선형 튜닉 셔츠 - 1,890,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">셸리 루스 핏 유선형 튜닉 셔츠</p><p class="mo-product-card__price">1,890,000</p></div></div>
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_runway_product02.png" alt="Isabel Marant ALISON 킥 플레어 데님 팬츠 - 1,890,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">ALISON 킥 플레어 데님 팬츠</p><p class="mo-product-card__price">1,890,000</p></div></div>
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_runway_product03.png" alt="Isabel Marant ABRYEL 이중 소재 웨지 뮬 - 2,392,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">ABRYEL 이중 소재 웨지 뮬</p><p class="mo-product-card__price">2,392,000</p></div></div>
+    </div>
+  </section>
+
+  <div class="section-gap"></div>
+
+  <!-- 하이 서머 배너 -->
+  <section class="fade-up">
+    <div style="padding: 0 20px;">
+      <div style="width: 100%; aspect-ratio: 335/485; overflow: hidden;">
+        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_hisummer.png" alt="Isabel Marant 하이 서머 컬렉션 - 보헤미안 시크 스타일링" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+    <div class="section-gap-sm"></div>
+    <div class="mo-scroll-products">
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_summer_product01.png" alt="Isabel Marant NINA 리넨 자수 블라우스 - 1,890,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">NINA 리넨 자수 블라우스</p><p class="mo-product-card__price">1,890,000</p></div></div>
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_summer_product02.png" alt="Isabel Marant PURIA 코튼 플로럴 레이스 러플 미니 스커트 - 1,890,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">PURIA 코튼 플로럴 레이스 러플 미니 스커트</p><p class="mo-product-card__price">1,890,000</p></div></div>
+      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_summer_product03.png" alt="Isabel Marant 리아드 글래디에이터 투조 레이스업 부츠 - 1,890,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">리아드 글래디에이터 투조 레이스업 부츠</p><p class="mo-product-card__price">1,890,000</p></div></div>
+    </div>
+  </section>
+
+  <div class="section-gap"></div>
+
+  <!-- 남성 컬렉션 배너 - gradient dimmed + white text at bottom -->
+  <div class="mo-wide-banner fade-up">
+    <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_men.png" alt="Isabel Marant 남성 컬렉션 - 밀리터리 셔츠 스타일링">
+    <div class="mo-wide-banner__dimmed"></div>
+    <div class="mo-wide-banner__content">
+      <h2 class="mo-wide-banner__title">남성 컬렉션</h2>
+      <a href="#" class="mo-wide-banner__link">자세히 보기</a>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+
+  <!-- 부티크 정보 -->
+  <section class="mo-boutique fade-up">
+    <div class="mo-boutique__bg"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_boutique.png" alt="Isabel Marant 부티크 매장 인테리어"></div>
+    <div class="mo-boutique__card">
+      <h2 class="mo-boutique__title">부티크 정보</h2>
+      <div class="mo-boutique__list">
+        <div class="mo-boutique__list-inner" id="moBoutiqueTrack">
+          <div class="mo-boutique__page">
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 청담 플래그십</p><p class="mo-boutique__item-addr">서울 강남구 압구정로80길 6</p><p class="mo-boutique__item-tel"><a href="tel:02-516-3737">02-516-3737</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/pkbfbxaBrN', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 현대백화점 압구정본점</p><p class="mo-boutique__item-addr">서울 강남구 압구정로 165 3층</p><p class="mo-boutique__item-tel"><a href="tel:02-3438-6131">02-3438-6131</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/x-TJoWEjFE', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 현대백화점 무역센터점</p><p class="mo-boutique__item-addr">서울 강남구 테헤란로 517 3층</p><p class="mo-boutique__item-tel"><a href="tel:02-3467-8385">02-3467-8385</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/5MMvnpNfWr', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 신세계 강남점</p><p class="mo-boutique__item-addr">서울 서초구 신반포로 176 3층</p><p class="mo-boutique__item-tel"><a href="tel:02-3479-1892">02-3479-1892</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/cTc0A044pQ', '_blank')">지도 보기</button></div>
+          </div>
+          <div class="mo-boutique__page">
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 롯데백화점 강남점</p><p class="mo-boutique__item-addr">서울 강남구 도곡로 401 3층</p><p class="mo-boutique__item-tel"><a href="tel:02-531-2321">02-531-2321</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/_pNEsqHAFn', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 롯데백화점 에비뉴엘 잠실점</p><p class="mo-boutique__item-addr">서울 송파구 올림픽로 300 3층</p><p class="mo-boutique__item-tel"><a href="tel:02-3213-2374">02-3213-2374</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/lnh_55hsJz', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 더현대 서울</p><p class="mo-boutique__item-addr">서울 영등포구 여의대로 108 2층</p><p class="mo-boutique__item-tel"><a href="tel:02-3277-0223">02-3277-0223</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/qbuWHatTFy', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 신세계백화점 타임스퀘어점</p><p class="mo-boutique__item-addr">서울 영등포구 영중로 9 2층</p><p class="mo-boutique__item-tel"><a href="tel:02-2639-1467">02-2639-1467</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/vLGcn0R5RP', '_blank')">지도 보기</button></div>
+          </div>
+          <div class="mo-boutique__page">
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 현대백화점 목동점</p><p class="mo-boutique__item-addr">서울 양천구 목동동로 257 4층</p><p class="mo-boutique__item-tel"><a href="tel:02-2163-1412">02-2163-1412</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/QuIO8UNumK', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 현대백화점 판교점</p><p class="mo-boutique__item-addr">경기 성남시 분당구 판교역로 146번길 20 2층</p><p class="mo-boutique__item-tel"><a href="tel:031-5170-1280">031-5170-1280</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/CPyJuGsBKk', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 신세계백화점 사우스시티점</p><p class="mo-boutique__item-addr">경기 용인시 수지구 포은대로 536 3층</p><p class="mo-boutique__item-tel"><a href="tel:031-695-1559">031-695-1559</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/ZKsxYwOv1A', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 갤러리아백화점 광교점</p><p class="mo-boutique__item-addr">경기 수원시 영통구 광교중앙로 124 3층</p><p class="mo-boutique__item-tel"><a href="tel:031-5174-7363">031-5174-7363</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/430nQVbREI', '_blank')">지도 보기</button></div>
+          </div>
+          <div class="mo-boutique__page">
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 롯데백화점 인천점</p><p class="mo-boutique__item-addr">인천 남동구 인주대로 593 3층</p><p class="mo-boutique__item-tel"><a href="tel:032-242-2287">032-242-2287</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/q92gHR3roC', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 현대백화점 중동점</p><p class="mo-boutique__item-addr">경기 부천시 길주로 180 2층</p><p class="mo-boutique__item-tel"><a href="tel:032-623-2278">032-623-2278</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/9MnoN08g0t', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 현대백화점 킨텍스점</p><p class="mo-boutique__item-addr">경기 고양시 일산서구 호수로 817 2층</p><p class="mo-boutique__item-tel"><a href="tel:031-822-3354">031-822-3354</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/bmk2SXCzvn', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 신세계백화점 광주점</p><p class="mo-boutique__item-addr">광주 서구 무진대로 932 4층</p><p class="mo-boutique__item-tel"><a href="tel:062-360-1486">062-360-1486</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/TT_x3G9D71', '_blank')">지도 보기</button></div>
+          </div>
+          <div class="mo-boutique__page">
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 신세계백화점 대구점</p><p class="mo-boutique__item-addr">대구 동구 동부로 149 3층</p><p class="mo-boutique__item-tel"><a href="tel:053-661-6298">053-661-6298</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/4zcoKchnu0', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 더현대 대구</p><p class="mo-boutique__item-addr">대구 중구 달구벌대로 2077 2층</p><p class="mo-boutique__item-tel"><a href="tel:053-245-2367">053-245-2367</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/KqmyYWXGYQ', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 신세계백화점 센텀시티점</p><p class="mo-boutique__item-addr">부산 해운대구 센텀남대로 35 2층</p><p class="mo-boutique__item-tel"><a href="tel:051-745-2469">051-745-2469</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/443ggwdyfw', '_blank')">지도 보기</button></div>
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 갤러리아백화점 타임월드점</p><p class="mo-boutique__item-addr">대전 서구 대덕대로 211 3층</p><p class="mo-boutique__item-tel"><a href="tel:042-720-6393">042-720-6393</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/Lh5eC9RIfD', '_blank')">지도 보기</button></div>
+          </div>
+          <div class="mo-boutique__page">
+            <div class="mo-boutique__item"><div class="mo-boutique__item-info"><p class="mo-boutique__item-name">이자벨마랑 신세계백화점 아트앤사이언스점</p><p class="mo-boutique__item-addr">대전 유성구 엑스포로 1 2층</p><p class="mo-boutique__item-tel"><a href="tel:042-607-8244">042-607-8244</a></p></div><button class="mo-boutique__item-btn" onclick="window.open('https://kko.to/BcWv490nlv', '_blank')">지도 보기</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="mo-boutique__arrows">
+        <button id="moBoutiquePrev" class="disabled arrow-flip" aria-label="이전"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
+        <button id="moBoutiqueNext" class="active" aria-label="다음"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER LOGO -->
+  <section class="mo-footer-logo fade-up">
+    <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_footerlogo.png" alt="Isabel Marant">
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="mo-footer">
+    <p class="mo-footer__cs-title">고객서비스센터</p>
+    <p class="mo-footer__cs-number">1544-5114 <span>(유료)</span></p>
+    <p class="mo-footer__cs-hours">상담시간 : 월~금 9:00~18:00 (주말,공휴일 휴무)</p>
+    <div class="mo-footer__links"><a href="#">1:1 상담 ›</a><a href="#">고객제안 ›</a></div>
+    <div class="mo-footer__service-menu">
+      <a href="#">회사소개</a><a href="#">이용약관</a>
+      <a href="#" class="bold">개인정보처리방침</a>
+      <a href="#">청소년보호정책</a><a href="#">고객센터</a>
+    </div>
+    <div class="mo-footer__info">
+      <p>사업자 등록번호 : 211-87-87724</p>
+      <p>통신판매업신고 : 제 2010-서울강남-00066호</p>
+      <p>서울 강남구 언주로 870 | 대표전화 : 1544-5114</p>
+      <p>(주)LF 대표이사 김상균, 온라인사업총괄 권성훈</p>
+    </div>
+    <div class="mo-footer__social">
+      <a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.6C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12z"/></svg></a>
+    </div>
+  </footer>
+
+<script>
+  const gnb = document.getElementById('gnb');
+  window.addEventListener('scroll', () => { gnb.classList.toggle('scrolled', window.scrollY > 10); });
+  const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Mobile boutique carousel - horizontal pagination, 4 per page, 6 pages
+  (function() {
+    var track = document.getElementById('moBoutiqueTrack');
+    var pages = track.querySelectorAll('.mo-boutique__page');
+    var prevBtn = document.getElementById('moBoutiquePrev');
+    var nextBtn = document.getElementById('moBoutiqueNext');
+    var totalPages = pages.length;
+    var currentPage = 0;
+
+    function update() {
+      track.style.transform = 'translateX(-' + (currentPage * 100) + '%)';
+      prevBtn.className = currentPage > 0 ? 'active arrow-flip' : 'disabled arrow-flip';
+      nextBtn.className = currentPage < totalPages - 1 ? 'active' : 'disabled';
+    }
+
+    prevBtn.addEventListener('click', function() {
+      if (currentPage > 0) { currentPage--; update(); }
+    });
+    nextBtn.addEventListener('click', function() {
+      if (currentPage < totalPages - 1) { currentPage++; update(); }
+    });
+
+    update();
+  })();
+</script>
+</body>
+</html>
