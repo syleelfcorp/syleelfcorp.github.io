@@ -17,7 +17,7 @@
   a { text-decoration: none; color: inherit; }
   img { display: block; max-width: 100%; }
 
-  /* GNB */
+  /* MO GNB */
   .gnb {
     display: flex; align-items: center; justify-content: space-between;
     height: 52px; padding: 6px 10px; background: #fff;
@@ -40,7 +40,7 @@
     display: flex; align-items: center; justify-content: center; line-height: 1;
   }
 
-  /* HERO - updated with gradient dimmed + white text at bottom */
+  /* MO HERO */
   .hero-mo { position: relative; width: 100%; aspect-ratio: 375/540; overflow: hidden; }
   .hero-mo img { width: 100%; height: 100%; object-fit: cover; }
   .hero-mo__dimmed {
@@ -55,13 +55,13 @@
   .hero-mo__title { font-size: 22px; font-weight: 600; line-height: 1.5; color: #fff; margin-bottom: 4px; }
   .hero-mo__link { font-size: 14px; font-weight: 400; line-height: 1.5; text-decoration: underline; color: #fff; }
 
-  /* SECTION TITLE */
+  /* MO SECTION TITLE */
   .mo-section-title {
     font-size: 16px; font-weight: 600; line-height: 1.5;
     text-align: center; color: #000; padding: 0 20px 16px;
   }
 
-  /* PRODUCT CARDS */
+  /* MO PRODUCT CARDS */
   .mo-product-card { cursor: pointer; }
   .mo-product-card__thumb {
     position: relative; width: 100%; aspect-ratio: 165/209;
@@ -77,17 +77,17 @@
   }
   .mo-product-card__price { font-size: 14px; font-weight: 700; line-height: 1.25; color: #000; }
 
-  /* PRODUCT GRID (2-col) */
+  /* MO PRODUCT GRID (2-col) */
   .mo-product-grid {
     display: flex; flex-wrap: wrap; gap: 24px 5px; padding: 0 20px;
   }
   .mo-product-grid .mo-product-card { width: calc(50% - 2.5px); }
 
-  /* BRAND DESC */
+  /* MO BRAND DESC */
   .mo-brand-desc { padding: 0 24px; text-align: center; }
   .mo-brand-desc p { font-size: 13px; font-weight: 400; line-height: 1.5; color: #000; }
 
-  /* BEKKET ROLLING (MO: banner + swipeable product carousel) */
+  /* MO BEKKET ROLLING */
   .mo-bekket-rolling { padding: 0; }
   .mo-bekket-rolling__banner { margin: 0 20px; width: calc(100% - 40px); aspect-ratio: 335/445; overflow: hidden; }
   .mo-bekket-rolling__banner img { width: 100%; height: 100%; object-fit: cover; }
@@ -98,7 +98,27 @@
   .mo-bekket-rolling__products::-webkit-scrollbar { display: none; }
   .mo-bekket-rolling__products .mo-product-card { width: 165px; min-width: 165px; flex-shrink: 0; }
 
-  /* OSKAN HOBO (MO: same as high-summer - banner + swipeable products) */
+  /* MO HERO PRODUCT */
+  .mo-hero-product { padding: 20px 0 48px; }
+  .mo-hero-product__viewport { overflow: hidden; }
+  .mo-hero-product__track { display: flex; transition: transform .4s ease; }
+  .mo-hero-product__page {
+    flex: 0 0 100%; min-width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px 5px;
+    padding: 0 20px;
+  }
+  .mo-hero-product__arrow { display: flex; gap: 32px; justify-content: center; margin-top: 32px; }
+  .mo-hero-product__arrow button {
+    background: none; border: none; padding: 0; width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity .2s;
+  }
+  .mo-hero-product__arrow button img { width: 36px; height: 36px; object-fit: contain; }
+  .mo-hero-product__arrow button.active { opacity: 1; cursor: pointer; }
+  .mo-hero-product__arrow button.disabled { opacity: .25; cursor: default; pointer-events: none; }
+  .mo-hero-product__arrow .arrow-flip img { transform: scaleX(-1); }
+
+  /* MO OSKAN HOBO */
   .mo-oskan-section { }
   .mo-oskan-section__banner { margin: 0 20px; width: calc(100% - 40px); aspect-ratio: 335/485; overflow: hidden; }
   .mo-oskan-section__banner img { width: 100%; height: 100%; object-fit: cover; }
@@ -109,7 +129,7 @@
   .mo-oskan-section__products::-webkit-scrollbar { display: none; }
   .mo-oskan-section__products .mo-product-card { width: 165px; min-width: 165px; flex-shrink: 0; }
 
-  /* HORIZONTAL SCROLL PRODUCTS */
+  /* MO HORIZONTAL SCROLL PRODUCTS */
   .mo-scroll-products {
     display: flex; gap: 5px; padding: 0 20px;
     overflow-x: auto; -webkit-overflow-scrolling: touch;
@@ -118,7 +138,7 @@
   .mo-scroll-products::-webkit-scrollbar { display: none; }
   .mo-scroll-products .mo-product-card { width: 165px; min-width: 165px; flex-shrink: 0; }
 
-  /* WIDE BANNER (mobile) - updated with gradient dimmed + white text at bottom */
+  /* MO WIDE BANNER */
   .mo-wide-banner { position: relative; margin: 0 20px; aspect-ratio: 335/465; overflow: hidden; cursor: pointer; }
   .mo-wide-banner img { width: 100%; height: 100%; object-fit: cover; }
   .mo-wide-banner__dimmed {
@@ -133,7 +153,7 @@
   .mo-wide-banner__title { font-size: 22px; font-weight: 600; line-height: 1.5; color: #fff; margin-bottom: 4px; }
   .mo-wide-banner__link { font-size: 14px; font-weight: 400; line-height: 1.5; text-decoration: underline; color: #fff; }
 
-  /* BOUTIQUE (MO) */
+  /* MO BOUTIQUE */
   .mo-boutique { position: relative; overflow: hidden; }
   .mo-boutique__bg { width: 100%; aspect-ratio: 375/400; overflow: hidden; }
   .mo-boutique__bg img { width: 100%; height: 100%; object-fit: cover; }
@@ -165,11 +185,11 @@
   .mo-boutique__arrows button.disabled { opacity: .25; cursor: default; pointer-events: none; }
   .mo-boutique__arrows .arrow-flip img { transform: scaleX(-1); }
 
-  /* FOOTER LOGO */
+  /* MO FOOTER LOGO */
   .mo-footer-logo { display: flex; align-items: center; justify-content: center; height: 212px; }
   .mo-footer-logo img { width: 149px; height: 32px; object-fit: contain; }
 
-  /* FOOTER */
+  /* MO FOOTER */
   .mo-footer { padding: 20px; border-top: 1px solid #ddd; }
   .mo-footer__cs-title { font-size: 13px; font-weight: 700; color: #555; margin-bottom: 8px; }
   .mo-footer__cs-number { font-size: 20px; font-weight: 700; color: #555; margin-bottom: 4px; }
@@ -198,7 +218,7 @@
 </head>
 <body>
 
-  <!-- GNB -->
+  <!-- MO GNB -->
   <header class="gnb" id="gnb">
     <div class="gnb__back">
       <img src="https://syleelfcorp.github.io/image/isabelmarant_A/ic_prev.png" alt="뒤로가기">
@@ -216,17 +236,48 @@
     </div>
   </header>
 
-  <!-- HERO - gradient dimmed + white text at bottom -->
+  <!-- MO 히어로 -->
   <section class="hero-mo">
-    <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_hero.png" alt="Isabel Marant 2026년 여름 컬렉션 메인 비주얼">
+    <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_hero.png" alt="Isabel Marant High Summer 컬렉션 메인 비주얼">
     <div class="hero-mo__dimmed"></div>
     <div class="hero-mo__content">
-      <h1 class="hero-mo__title">2026년 여름 컬렉션</h1>
+      <h1 class="hero-mo__title">High Summer</h1>
       <a href="#" class="hero-mo__link">자세히 보기</a>
     </div>
   </section>
 
-  <!-- 베켓 롤링 (replaces 신상품) -->
+  <!-- MO 히어로 연관상품 -->
+  <section class="mo-hero-product fade-up">
+    <div class="mo-hero-product__viewport">
+      <div class="mo-hero-product__track" id="moHeroProductTrack">
+        <div class="mo-hero-product__page">
+          <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red01.png" alt="Isabel Marant JULINE 자수 블라우스 - 919,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">JULINE 자수 블라우스</p><p class="mo-product-card__price">919,000</p></div></div>
+          <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red02.png" alt="Isabel Marant BAYIA 라피아 숄더백 - 1,590,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">BAYIA 라피아 숄더백</p><p class="mo-product-card__price">1,590,000</p></div></div>
+          <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red03.png" alt="Isabel Marant PICADILIA 자수 미니 스커트 - 699,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">PICADILIA 자수 미니 스커트</p><p class="mo-product-card__price">699,000</p></div></div>
+          <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red04.png" alt="Isabel Marant 레이자 발레리나 - 1,490,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">레이자 발레리나</p><p class="mo-product-card__price">1,490,000</p></div></div>
+        </div>
+        <div class="mo-hero-product__page">
+          <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue01.png" alt="Isabel Marant SABBA 프린트 맥시 드레스 - 1,090,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">SABBA 프린트 맥시 드레스</p><p class="mo-product-card__price">1,090,000</p></div></div>
+          <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue02.png" alt="Isabel Marant LENA 자수 블라우스 - 959,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">LENA 자수 블라우스</p><p class="mo-product-card__price">959,000</p></div></div>
+          <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue03.png" alt="Isabel Marant IELA 뮬 샌들 - 2,403,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">IELA 뮬 샌들</p><p class="mo-product-card__price">2,403,000</p></div></div>
+          <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue04.png" alt="Isabel Marant PICADILIA 자수 미니 스커트 - 699,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">PICADILIA 자수 미니 스커트</p><p class="mo-product-card__price">699,000</p></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mo-hero-product__arrow">
+      <button id="moHeroProductPrev" class="disabled arrow-flip" aria-label="이전"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
+      <button id="moHeroProductNext" class="active" aria-label="다음"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
+    </div>
+  </section>
+
+  <!-- MO 브랜드 설명 -->
+  <section class="mo-brand-desc fade-up">
+    <p>Isabel Marant은 자유, 여성스러움, 시크함과 자연스러운 우아함이 조화를 이루는 룩으로 파리지앵 워드로브를 선보입니다.</p>
+    <p>Isabel Marant, Marant Étoile과 Marant Homme 라인은 쿨 럭셔리와 보헤미안 시크 스타일 사이에서 진정한 장인정신과 결합된 자유롭고 즉흥적인 정신을 표현합니다.</p>
+    <p>독특한 스타일과 계절을 뛰어넘는 타임리스 실루엣을 만나보세요.</p>
+  </section>
+
+  <!-- MO 베켓 롤링 -->
   <section class="mo-bekket-rolling fade-up" style="padding: 48px 0;">
     <div class="mo-bekket-rolling__banner"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket.png" alt="Isabel Marant 아이코닉 베켓 스니커즈 컬렉션"></div>
     <div class="mo-bekket-rolling__products">
@@ -237,14 +288,9 @@
     </div>
   </section>
 
-  <!-- 브랜드 설명 -->
-  <section class="mo-brand-desc fade-up">
-    <p>Isabel Marant은 자유, 여성스러움, 시크함과 자연스러운 우아함이 조화를 이루는 룩으로 파리지앵 워드로브를 선보입니다. Isabel Marant, Marant Étoile과 Marant Homme 라인은 쿨 럭셔리와 보헤미안 시크 스타일 사이에서 진정한 장인정신과 결합된 자유롭고 즉흥적인 정신을 표현합니다. 독특한 스타일과 계절을 뛰어넘는 타임리스 실루엣을 만나보세요.</p>
-  </section>
-
   <div class="section-gap"></div>
 
-  <!-- 오스칸 호보 백 (replaces category banners + bekket banner + bekket products) -->
+  <!-- MO 오스칸 호보 백 -->
   <section class="mo-oskan-section fade-up">
     <div class="mo-oskan-section__banner"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_oskan.png" alt="Isabel Marant 오스칸 호보 소프트 백 컬렉션"></div>
     <div class="mo-oskan-section__products">
@@ -257,25 +303,7 @@
 
   <div class="section-gap"></div>
 
-  <!-- 런웨이 배너 -->
-  <section class="fade-up">
-    <div style="padding: 0 20px;">
-      <div style="width: 100%; aspect-ratio: 335/485; overflow: hidden;">
-        <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_runway.png" alt="Isabel Marant 2026 런웨이 컬렉션 룩북" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-    </div>
-    <div class="section-gap-sm"></div>
-    <div class="mo-scroll-products">
-      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_runway_product01.png" alt="Isabel Marant 셸리 루스 핏 유선형 튜닉 셔츠 - 1,890,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">셸리 루스 핏 유선형 튜닉 셔츠</p><p class="mo-product-card__price">1,890,000</p></div></div>
-      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_runway_product02.png" alt="Isabel Marant ALISON 킥 플레어 데님 팬츠 - 1,890,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">ALISON 킥 플레어 데님 팬츠</p><p class="mo-product-card__price">1,890,000</p></div></div>
-      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_runway_product03.png" alt="Isabel Marant ABRYEL 이중 소재 웨지 뮬 - 2,392,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">ABRYEL 이중 소재 웨지 뮬</p><p class="mo-product-card__price">2,392,000</p></div></div>
-      <div class="mo-product-card"><div class="mo-product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_runway_product04.png" alt="Isabel Marant JANIS 가죽과 메탈 소재 펜던트 목걸이 - 629,000원"></div><div class="mo-product-card__meta"><p class="mo-product-card__name">JANIS 가죽과 메탈 소재 펜던트 목걸이</p><p class="mo-product-card__price">629,000</p></div></div>
-    </div>
-  </section>
-
-  <div class="section-gap"></div>
-
-  <!-- 하이 서머 배너 -->
+  <!-- MO 하이 서머 -->
   <section class="fade-up">
     <div style="padding: 0 20px;">
       <div style="width: 100%; aspect-ratio: 335/485; overflow: hidden;">
@@ -293,7 +321,7 @@
 
   <div class="section-gap"></div>
 
-  <!-- 남성 컬렉션 배너 - gradient dimmed + white text at bottom -->
+  <!-- MO 남성 컬렉션 -->
   <div class="mo-wide-banner fade-up">
     <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_men.png" alt="Isabel Marant 남성 컬렉션 - 밀리터리 셔츠 스타일링">
     <div class="mo-wide-banner__dimmed"></div>
@@ -305,7 +333,7 @@
 
   <div class="section-gap"></div>
 
-  <!-- 부티크 정보 -->
+  <!-- MO 부티크 정보 -->
   <section class="mo-boutique fade-up">
     <div class="mo-boutique__bg"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_boutique.png" alt="Isabel Marant 부티크 매장 인테리어"></div>
     <div class="mo-boutique__card">
@@ -354,12 +382,12 @@
     </div>
   </section>
 
-  <!-- FOOTER LOGO -->
+  <!-- MO 푸터 로고 -->
   <section class="mo-footer-logo fade-up">
     <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_mo_footerlogo.png" alt="Isabel Marant">
   </section>
 
-  <!-- FOOTER -->
+  <!-- MO 푸터 -->
   <footer class="mo-footer">
     <p class="mo-footer__cs-title">고객서비스센터</p>
     <p class="mo-footer__cs-number">1544-5114 <span>(유료)</span></p>
@@ -389,6 +417,58 @@
   const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+  // Mobile hero product carousel - 4 products per page, 2 pages, arrow + swipe
+  (function() {
+    var track = document.getElementById('moHeroProductTrack');
+    if (!track) return;
+    var pages = track.querySelectorAll('.mo-hero-product__page');
+    var prevBtn = document.getElementById('moHeroProductPrev');
+    var nextBtn = document.getElementById('moHeroProductNext');
+    var totalPages = pages.length;
+    var currentPage = 0;
+
+    function update() {
+      track.style.transform = 'translateX(-' + (currentPage * 100) + '%)';
+      prevBtn.className = currentPage > 0 ? 'active arrow-flip' : 'disabled arrow-flip';
+      nextBtn.className = currentPage < totalPages - 1 ? 'active' : 'disabled';
+    }
+
+    prevBtn.addEventListener('click', function() {
+      if (currentPage > 0) { currentPage--; update(); }
+    });
+    nextBtn.addEventListener('click', function() {
+      if (currentPage < totalPages - 1) { currentPage++; update(); }
+    });
+
+    // Touch swipe support
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchActive = false;
+    var SWIPE_THRESHOLD = 50; // px
+
+    track.addEventListener('touchstart', function(e) {
+      if (e.touches.length !== 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchActive = true;
+    }, { passive: true });
+
+    track.addEventListener('touchend', function(e) {
+      if (!touchActive) return;
+      touchActive = false;
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      var dy = e.changedTouches[0].clientY - touchStartY;
+      // Ignore mostly-vertical gestures (let scroll happen)
+      if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy)) return;
+      if (dx < 0 && currentPage < totalPages - 1) { currentPage++; update(); }
+      else if (dx > 0 && currentPage > 0) { currentPage--; update(); }
+    }, { passive: true });
+
+    track.addEventListener('touchcancel', function() { touchActive = false; }, { passive: true });
+
+    update();
+  })();
+
   // Mobile boutique carousel - horizontal pagination, 4 per page, 6 pages
   (function() {
     var track = document.getElementById('moBoutiqueTrack');
@@ -410,6 +490,32 @@
     nextBtn.addEventListener('click', function() {
       if (currentPage < totalPages - 1) { currentPage++; update(); }
     });
+
+    // Touch swipe support
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchActive = false;
+    var SWIPE_THRESHOLD = 50; // px
+
+    track.addEventListener('touchstart', function(e) {
+      if (e.touches.length !== 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchActive = true;
+    }, { passive: true });
+
+    track.addEventListener('touchend', function(e) {
+      if (!touchActive) return;
+      touchActive = false;
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      var dy = e.changedTouches[0].clientY - touchStartY;
+      // Ignore mostly-vertical gestures (let scroll happen)
+      if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy)) return;
+      if (dx < 0 && currentPage < totalPages - 1) { currentPage++; update(); }
+      else if (dx > 0 && currentPage > 0) { currentPage--; update(); }
+    }, { passive: true });
+
+    track.addEventListener('touchcancel', function() { touchActive = false; }, { passive: true });
 
     update();
   })();

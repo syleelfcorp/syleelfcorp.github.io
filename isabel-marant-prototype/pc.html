@@ -2,19 +2,19 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1920">
+<meta name="viewport" content="width=1400">
 <title>Isabel Marant — LF Mall 브랜드관</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-  body { font-family: 'Pretendard Variable', 'Pretendard', sans-serif; color: #000; background: #fff; min-width: 1920px; }
+  body { font-family: 'Pretendard Variable', 'Pretendard', sans-serif; color: #000; background: #fff; min-width: 1400px; }
   a { text-decoration: none; color: inherit; } img { display: block; max-width: 100%; } ul, li { list-style: none; }
-  .page-wrap { width: 1920px; margin: 0 auto; }
+  .page-wrap { width: 100%; min-width: 1400px; max-width: 1920px; margin: 0 auto; }
 
   /* GNB */
-  .gnb { display: flex; align-items: center; justify-content: space-between; height: 88px; padding: 0 160px; background: #fff; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid transparent; transition: border-color .3s; }
+  .gnb { display: flex; align-items: center; justify-content: space-between; height: 88px; padding: 0 min(160px, 8.333vw); background: #fff; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid transparent; transition: border-color .3s; }
   .gnb.scrolled { border-bottom-color: #eee; }
   .gnb__left { display: flex; align-items: center; gap: 44px; }
   .gnb__logo img { height: 34px; width: auto; }
@@ -31,10 +31,10 @@
   .gnb__icon img { width: 26px; height: 26px; object-fit: contain; }
 
   /* HERO */
-  .hero { position: relative; width: 1920px; height: 888px; overflow: hidden; }
-  .hero__img { width: 100%; height: 768px; object-fit: cover; transition: transform 8s ease-out; }
+  .hero { position: relative; width: 100%; aspect-ratio: 1920 / 888; overflow: hidden; }
+  .hero__img { width: 100%; height: 86.486%; object-fit: cover; transition: transform 8s ease-out; }
   .hero:hover .hero__img { transform: scale(1.02); }
-  .hero__content { position: absolute; top: 347px; left: 502px; text-align: center; }
+  .hero__content { position: absolute; top: 39.077%; left: 26.146%; text-align: center; }
   .hero__title { font-size: 28px; font-weight: 600; line-height: 1.35; color: #000; margin-bottom: 16px; }
   .hero__link { font-size: 14px; font-weight: 400; line-height: 1.5; text-decoration: underline; color: #000; cursor: pointer; transition: opacity .2s; }
   .hero__link:hover { opacity: .6; }
@@ -53,17 +53,34 @@
   .product-card__price { font-size: 15px; font-weight: 700; line-height: 1.25; color: #000; }
 
   .brand-desc { text-align: center; }
-  .brand-desc p { font-size: 14px; font-weight: 400; line-height: 1.5; color: #000; max-width: 927px; margin: 0 auto; }
+  .brand-desc p { font-size: 14px; font-weight: 400; line-height: 1.5; color: #000; }
+
+  /* HERO PRODUCT */
+  .hero-product { padding: 60px min(160px, 8.333vw) 0; position: relative; }
+  .hero-product__viewport { overflow: hidden; }
+  .hero-product__track { display: flex; transition: transform .5s ease; }
+  .hero-product__page { flex: 0 0 100%; min-width: 100%; display: flex; gap: min(20px, 1.0417vw); }
+  .hero-product__page .product-card { width: min(385px, 20.052vw); flex: 1 1 0; min-width: 0; }
+  .hero-product__arrow { display: flex; gap: 40px; justify-content: center; margin-top: 60px; }
+  .hero-product__arrow button {
+    background: none; border: none; padding: 0; width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity .2s;
+  }
+  .hero-product__arrow button img { width: 36px; height: 36px; object-fit: contain; }
+  .hero-product__arrow button.active { opacity: 1; cursor: pointer; }
+  .hero-product__arrow button.disabled { opacity: .25; cursor: default; pointer-events: none; }
+  .hero-product__arrow .arrow-flip img { transform: scaleX(-1); }
 
   /* BEKKET ROLLING */
-  .bekket-rolling { padding: 0 160px; position: relative; }
-  .bekket-rolling__inner { display: flex; gap: 20px; }
-  .bekket-rolling__banner { flex: 0 0 588px; height: 740px; overflow: hidden; background: #f1f1f1; }
+  .bekket-rolling { padding: 0 min(160px, 8.333vw); position: relative; }
+  .bekket-rolling__inner { display: flex; gap: min(20px, 1.0417vw); align-items: stretch; }
+  .bekket-rolling__banner { flex: 0 0 min(588px, 30.625vw); aspect-ratio: 588 / 740; overflow: hidden; background: #f1f1f1; }
   .bekket-rolling__banner img { width: 100%; height: 100%; object-fit: cover; }
-  .bekket-rolling__products-wrap { flex: 1; overflow: hidden; }
-  .bekket-rolling__products { display: flex; gap: 20px; transition: transform .5s ease; }
-  .bekket-rolling__products .product-card { width: 400px; min-width: 400px; flex-shrink: 0; }
-  .bekket-rolling__arrow { display: flex; gap: 40px; justify-content: flex-end; padding-top: 0px; }
+  .bekket-rolling__products-wrap { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
+  .bekket-rolling__products { display: flex; gap: min(20px, 1.0417vw); transition: transform .5s ease; width: 100%; }
+  .bekket-rolling__products .product-card { width: min(400px, 20.833vw); min-width: min(400px, 20.833vw); flex-shrink: 0; }
+  .bekket-rolling__arrow { display: flex; gap: 40px; justify-content: flex-end; margin-top: auto; }
   .bekket-rolling__arrow button {
     background: none; border: none; padding: 0; width: 36px; height: 36px;
     display: flex; align-items: center; justify-content: center;
@@ -75,35 +92,27 @@
   .bekket-rolling__arrow .arrow-flip img { transform: scaleX(-1); }
 
   /* OSKAN HOBO (mirrors high-summer layout: products left, image right) */
-  .oskan-hobo { display: flex; gap: 20px; padding: 0 160px; }
-  .oskan-hobo__products { flex: 0 0 790px; display: flex; flex-wrap: wrap; gap: 20px; }
-  .oskan-hobo__products .product-card { width: 385px; }
-  .oskan-hobo__feature { flex: 0 0 790px; height: 1117px; overflow: hidden; cursor: pointer; }
+  .oskan-hobo { display: flex; gap: min(20px, 1.0417vw); padding: 0 min(160px, 8.333vw); }
+  .oskan-hobo__products { flex: 0 0 min(790px, 41.146vw); display: flex; flex-wrap: wrap; gap: min(20px, 1.0417vw); }
+  .oskan-hobo__products .product-card { width: min(385px, 20.052vw); }
+  .oskan-hobo__feature { flex: 0 0 min(790px, 41.146vw); aspect-ratio: 790 / 1117; overflow: hidden; cursor: pointer; }
   .oskan-hobo__feature img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
   .oskan-hobo__feature:hover img { transform: scale(1.03); }
 
-  /* RUNWAY */
-  .runway { display: flex; gap: 20px; padding: 0 160px; }
-  .runway__feature { flex: 0 0 790px; height: 1117px; overflow: hidden; cursor: pointer; background: #d4d0c8; }
-  .runway__feature img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
-  .runway__feature:hover img { transform: scale(1.03); }
-  .runway__products { flex: 0 0 790px; display: flex; flex-wrap: wrap; gap: 20px; }
-  .runway__products .product-card { width: 385px; }
-
   /* HIGH SUMMER */
-  .high-summer { display: flex; gap: 20px; padding: 0 160px; }
-  .high-summer__products { flex: 0 0 790px; display: flex; flex-wrap: wrap; gap: 20px; }
-  .high-summer__products .product-card { width: 385px; }
-  .high-summer__feature { flex: 0 0 790px; height: 1117px; overflow: hidden; cursor: pointer; }
+  .high-summer { display: flex; gap: min(20px, 1.0417vw); padding: 0 min(160px, 8.333vw); }
+  .high-summer__products { flex: 0 0 min(790px, 41.146vw); display: flex; flex-wrap: wrap; gap: min(20px, 1.0417vw); }
+  .high-summer__products .product-card { width: min(385px, 20.052vw); }
+  .high-summer__feature { flex: 0 0 min(790px, 41.146vw); aspect-ratio: 790 / 1117; overflow: hidden; cursor: pointer; }
   .high-summer__feature img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
   .high-summer__feature:hover img { transform: scale(1.03); }
 
   /* WIDE BANNER */
-  .wide-banner { position: relative; margin: 0 160px 120px; height: 800px; overflow: hidden; cursor: pointer; }
+  .wide-banner { position: relative; margin: 0 min(160px, 8.333vw) 120px; aspect-ratio: 2 / 1; overflow: hidden; cursor: pointer; }
   .wide-banner img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
   .wide-banner:hover img { transform: scale(1.02); }
   .wide-banner__content { position: absolute; top: 50%; transform: translateY(-50%); text-align: center; }
-  .wide-banner__content--right { left: 1103px; }
+  .wide-banner__content--right { left: 68.9375%; }
   .wide-banner__title { font-size: 28px; font-weight: 600; line-height: 1.35; color: #000; margin-bottom: 16px; }
   .wide-banner__link { font-size: 14px; font-weight: 400; line-height: 1.5; text-decoration: underline; color: #000; }
 
@@ -112,8 +121,8 @@
   .boutique__bg { position: absolute; inset: 0; z-index: 0; }
   .boutique__bg img { width: 100%; height: 100%; object-fit: cover; }
   .boutique__card {
-    position: absolute; right: 160px; top: 50%; transform: translateY(-50%);
-    width: 790px; background: #fff; padding: 60px 80px 48px; z-index: 1;
+    position: absolute; right: min(160px, 8.333vw); top: 50%; transform: translateY(-50%);
+    width: min(790px, 41.146vw); background: #fff; padding: 60px min(80px, 4.167vw) 48px; z-index: 1;
   }
   .boutique__title { font-size: 28px; font-weight: 600; line-height: 1.35; text-align: center; color: #000; margin-bottom: 40px; }
   .boutique__list { overflow: hidden; height: 372px; }
@@ -201,9 +210,35 @@
   </header>
 
   <section class="hero">
-    <img class="hero__img" src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_hero.png" alt="Isabel Marant 2026년 여름 컬렉션 메인 비주얼">
-    <div class="hero__content"><h1 class="hero__title">2026년 여름 컬렉션</h1><a href="#" class="hero__link">자세히 보기</a></div>
+    <img class="hero__img" src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_hero.png" alt="Isabel Marant High Summer 컬렉션 메인 비주얼">
+    <div class="hero__content"><h1 class="hero__title">High Summer</h1><a href="#" class="hero__link">자세히 보기</a></div>
   </section>
+
+  <!-- 히어로 연관상품 -->
+  <section class="hero-product fade-up">
+    <div class="hero-product__viewport">
+      <div class="hero-product__track" id="heroProductTrack">
+        <div class="hero-product__page">
+          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red01.png" alt="Isabel Marant JULINE 자수 블라우스 - 919,000원"></div><div class="product-card__meta"><p class="product-card__name">JULINE 자수 블라우스</p><p class="product-card__price">919,000</p></div></div>
+          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red02.png" alt="Isabel Marant BAYIA 라피아 숄더백 - 1,590,000원"></div><div class="product-card__meta"><p class="product-card__name">BAYIA 라피아 숄더백</p><p class="product-card__price">1,590,000</p></div></div>
+          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red03.png" alt="Isabel Marant PICADILIA 자수 미니 스커트 - 699,000원"></div><div class="product-card__meta"><p class="product-card__name">PICADILIA 자수 미니 스커트</p><p class="product-card__price">699,000</p></div></div>
+          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red04.png" alt="Isabel Marant 레이자 발레리나 - 1,490,000원"></div><div class="product-card__meta"><p class="product-card__name">레이자 발레리나</p><p class="product-card__price">1,490,000</p></div></div>
+        </div>
+        <div class="hero-product__page">
+          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue01.png" alt="Isabel Marant SABBA 프린트 맥시 드레스 - 1,090,000원"></div><div class="product-card__meta"><p class="product-card__name">SABBA 프린트 맥시 드레스</p><p class="product-card__price">1,090,000</p></div></div>
+          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue02.png" alt="Isabel Marant LENA 자수 블라우스 - 959,000원"></div><div class="product-card__meta"><p class="product-card__name">LENA 자수 블라우스</p><p class="product-card__price">959,000</p></div></div>
+          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue03.png" alt="Isabel Marant IELA 뮬 샌들 - 2,403,000원"></div><div class="product-card__meta"><p class="product-card__name">IELA 뮬 샌들</p><p class="product-card__price">2,403,000</p></div></div>
+          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue04.png" alt="Isabel Marant PICADILIA 자수 미니 스커트 - 699,000원"></div><div class="product-card__meta"><p class="product-card__name">PICADILIA 자수 미니 스커트</p><p class="product-card__price">699,000</p></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-product__arrow">
+      <button id="heroProductPrev" class="disabled arrow-flip" aria-label="이전"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
+      <button id="heroProductNext" class="active" aria-label="다음"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
+    </div>
+  </section>
+
+  <div class="section-gap-lg"></div>
 
   <!-- 베켓 롤링 -->
   <section class="bekket-rolling fade-up">
@@ -216,18 +251,20 @@
           <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product03.png" alt="Isabel Marant 베켓 웨지 스니커즈 블랙 - 1,190,000원"></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈 블랙</p><p class="product-card__price">1,190,000</p></div></div>
           <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product04.png" alt="Isabel Marant 베켓 웨지 스니커즈 라이트핑크 - 1,190,000원"></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈 라이트핑크</p><p class="product-card__price">1,190,000</p></div></div>
         </div>
+        <div class="bekket-rolling__arrow">
+          <button id="bekketPrev" class="disabled arrow-flip" aria-label="이전"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
+          <button id="bekketNext" class="active" aria-label="다음"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
+        </div>
       </div>
-    </div>
-    <div class="bekket-rolling__arrow">
-      <button id="bekketPrev" class="disabled arrow-flip" aria-label="이전"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
-      <button id="bekketNext" class="active" aria-label="다음"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
     </div>
   </section>
 
   <div class="section-gap-lg"></div>
 
   <section class="brand-desc fade-up">
-    <p>Isabel Marant은 자유, 여성스러움, 시크함과 자연스러운 우아함이 조화를 이루는 룩으로 파리지앵 워드로브를 선보입니다. Isabel Marant, Marant Étoile과 Marant Homme 라인은 쿨 럭셔리와 보헤미안 시크 스타일 사이에서 진정한 장인정신과 결합된 자유롭고 즉흥적인 정신을 표현합니다. 독특한 스타일과 계절을 뛰어넘는 타임리스 실루엣을 만나보세요.</p>
+    <p>Isabel Marant은 자유, 여성스러움, 시크함과 자연스러운 우아함이 조화를 이루는 룩으로 파리지앵 워드로브를 선보입니다.</p>
+    <p>Isabel Marant, Marant Étoile과 Marant Homme 라인은 쿨 럭셔리와 보헤미안 시크 스타일 사이에서 진정한 장인정신과 결합된 자유롭고 즉흥적인 정신을 표현합니다.</p>
+    <p>독특한 스타일과 계절을 뛰어넘는 타임리스 실루엣을 만나보세요.</p>
   </section>
 
   <div class="section-gap-lg"></div>
@@ -245,26 +282,14 @@
 
   <div class="section-gap-lg"></div>
 
-  <section class="runway fade-up">
-    <div class="runway__feature"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_runway.png" alt="Isabel Marant 2026 런웨이 컬렉션 룩북"></div>
-    <div class="runway__products">
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_runway_product01.png" alt="Isabel Marant 셸리 루스 핏 유선형 튜닉 셔츠 - 1,090,000원"></div><div class="product-card__meta"><p class="product-card__name">셸리 루스 핏 유선형 튜닉 셔츠</p><p class="product-card__price">1,090,000</p></div></div>
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_runway_product02.png" alt="Isabel Marant ALISON 킥 플레어 데님 팬츠 - 1,390,000원"></div><div class="product-card__meta"><p class="product-card__name">ALISON 킥 플레어 데님 팬츠</p><p class="product-card__price">1,390,000</p></div></div>
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_runway_product03.png" alt="Isabel Marant ABRYEL 이중 소재 웨지 뮬 - 2,392,000원"></div><div class="product-card__meta"><p class="product-card__name">ABRYEL 이중 소재 웨지 뮬</p><p class="product-card__price">2,392,000</p></div></div>
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_runway_product04.png" alt="Isabel Marant JANIS 가죽 메탈 펜던트 목걸이 - 629,000원"></div><div class="product-card__meta"><p class="product-card__name">JANIS 가죽과 메탈 소재 펜던트 목걸이</p><p class="product-card__price">629,000</p></div></div>
-    </div>
-  </section>
-
-  <div class="section-gap-lg"></div>
-
   <section class="high-summer fade-up">
+    <div class="high-summer__feature"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_hisummer.png" alt="Isabel Marant 하이 서머 컬렉션 - 보헤미안 시크 스타일링"></div>
     <div class="high-summer__products">
       <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_summer_product01.png" alt="Isabel Marant NINA 리넨 자수 블라우스 - 2,190,000원"></div><div class="product-card__meta"><p class="product-card__name">NINA 리넨 자수 블라우스</p><p class="product-card__price">2,190,000</p></div></div>
       <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_summer_product02.png" alt="Isabel Marant PURIA 코튼 플로럴 레이스 러플 미니 스커트 - 912,000원"></div><div class="product-card__meta"><p class="product-card__name">PURIA 코튼 플로럴 레이스 러플 미니 스커트</p><p class="product-card__price">912,000</p></div></div>
       <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_summer_product03.png" alt="Isabel Marant 리아드 글래디에이터 투조 레이스업 부츠 - 1,824,000원"></div><div class="product-card__meta"><p class="product-card__name">리아드 글래디에이터 투조 레이스업 부츠</p><p class="product-card__price">1,824,000</p></div></div>
       <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_summer_product04.png" alt="Isabel Marant 카탈리나 라인스톤 펜던트 귀걸이 - 683,000원"></div><div class="product-card__meta"><p class="product-card__name">카탈리나 라인스톤 펜던트 귀걸이</p><p class="product-card__price">683,000</p></div></div>
     </div>
-    <div class="high-summer__feature"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_hisummer.png" alt="Isabel Marant 하이 서머 컬렉션 - 보헤미안 시크 스타일링"></div>
   </section>
 
   <div class="section-gap-lg"></div>
@@ -376,21 +401,22 @@
   const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Bekket rolling carousel - 4 products, 1 click toggle
+  // Bekket rolling carousel - 4 products, 1 click toggle, responsive
   (function() {
     var track = document.getElementById('bekketTrack');
     var prevBtn = document.getElementById('bekketPrev');
     var nextBtn = document.getElementById('bekketNext');
+    var wrap = track.parentElement; // .bekket-rolling__products-wrap
     var cards = track.querySelectorAll('.product-card');
-    var cardWidth = 400;
-    var gap = 20;
     var isSlid = false;
+    var slideDistance = 0;
 
-    // Calculate how far to slide: total track width minus visible container width
-    // Container width = 1600 (page padding area) - 588 (banner) - 20 (gap) = 992px
-    var containerWidth = 992;
-    var totalTrackWidth = (cards.length * cardWidth) + ((cards.length - 1) * gap);
-    var slideDistance = totalTrackWidth - containerWidth;
+    function recalc() {
+      // Measure actual rendered widths
+      var containerWidth = wrap.getBoundingClientRect().width;
+      var totalTrackWidth = track.scrollWidth;
+      slideDistance = Math.max(0, totalTrackWidth - containerWidth);
+    }
 
     function update() {
       if (isSlid) {
@@ -403,10 +429,42 @@
     }
 
     nextBtn.addEventListener('click', function() {
-      if (!isSlid) { isSlid = true; update(); }
+      if (!isSlid) { isSlid = true; recalc(); update(); }
     });
     prevBtn.addEventListener('click', function() {
-      if (isSlid) { isSlid = false; update(); }
+      if (isSlid) { isSlid = false; recalc(); update(); }
+    });
+
+    // Recalculate on window resize so slide distance stays correct
+    window.addEventListener('resize', function() {
+      recalc();
+      update();
+    });
+
+    recalc();
+    update();
+  })();
+
+  // Hero Product carousel - 4 products per page, 2 pages, page-by-page navigation
+  (function() {
+    var track = document.getElementById('heroProductTrack');
+    var pages = track.querySelectorAll('.hero-product__page');
+    var prevBtn = document.getElementById('heroProductPrev');
+    var nextBtn = document.getElementById('heroProductNext');
+    var totalPages = pages.length;
+    var currentPage = 0;
+
+    function update() {
+      track.style.transform = 'translateX(-' + (currentPage * 100) + '%)';
+      prevBtn.className = currentPage > 0 ? 'active arrow-flip' : 'disabled arrow-flip';
+      nextBtn.className = currentPage < totalPages - 1 ? 'active' : 'disabled';
+    }
+
+    prevBtn.addEventListener('click', function() {
+      if (currentPage > 0) { currentPage--; update(); }
+    });
+    nextBtn.addEventListener('click', function() {
+      if (currentPage < totalPages - 1) { currentPage++; update(); }
     });
 
     update();
