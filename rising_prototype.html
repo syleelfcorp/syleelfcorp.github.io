@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>실시간 랭킹 급상승 상품 — 프로토타입 3종</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Pretendard Variable', -apple-system, sans-serif; background: #f5f5f5; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 16px 80px; }
+
+.type-label { font-size: 14px; font-weight: 600; color: #757575; letter-spacing: -0.02em; margin-bottom: 8px; text-align: center; }
+.type-desc { font-size: 12px; color: #aaa; text-align: center; margin-bottom: 16px; line-height: 1.5; }
+
+/* ===== SHARED ===== */
+.phone { background: #fff; width: 375px; max-width: 100%; overflow: hidden; }
+.hdr { display: flex; justify-content: space-between; align-items: flex-start; padding: 24px 20px 12px; }
+.hdr-t { font-size: 18px; font-weight: 600; color: #000; line-height: 1.5; letter-spacing: -0.02em; }
+.hdr-s { font-size: 12px; font-weight: 400; color: #757575; white-space: nowrap; margin-top: 4px; line-height: 1.25; }
+
+/* ===== Heart SVG ===== */
+.heart { width: 20px; height: 18px; flex-shrink: 0; }
+.heart-sm { width: 24px; height: 22px; flex-shrink: 0; }
+
+/* ===== TYPE A: STACK CARD ===== */
+.stack-clip { overflow: hidden; height: 228px; position: relative; margin: 0 20px 48px; }
+.stack-bg3 { position: absolute; left: 50%; transform: translateX(-50%); width: 295px; height: 184px; top: 44px; background: #eee; z-index: 1; }
+.stack-bg2 { position: absolute; left: 50%; transform: translateX(-50%); width: 315px; height: 197px; top: 22px; background: #f3f3f3; z-index: 2; }
+.scard { position: absolute; left: 50%; transform: translateX(-50%); overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+.scard-inner { display: flex; height: 100%; }
+.scard-img { width: 165px; height: 100%; flex-shrink: 0; position: relative; overflow: hidden; }
+.scard-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.scard-img::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.02); }
+.scard-like { position: absolute; top: 12px; right: 12px; z-index: 1; }
+.scard-det { flex: 1; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+.scard-rank { display: flex; align-items: center; gap: 4px; }
+.scard-rank span { font-size: 22px; font-weight: 600; color: #DC2832; line-height: 1.5; }
+.scard-rank .arrow { display: inline-block; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 8px solid #DC2832; margin-left: 2px; }
+.scard-meta { display: flex; flex-direction: column; gap: 6px; }
+.scard-brand { font-size: 13px; font-weight: 600; color: #000; line-height: 1.5; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.scard-name { font-size: 13px; font-weight: 400; color: #000; line-height: 1.5; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.scard-price { display: flex; align-items: baseline; gap: 4px; font-size: 14px; font-weight: 700; line-height: 1.25; }
+.scard-disc { color: #DC2832; }
+.scard-pr { color: #000; }
+
+/* ===== TYPE B: HERO + LIST ===== */
+.hero-clip { overflow: hidden; position: relative; margin: 0 0 48px; }
+.hero-card { display: flex; height: 209px; background: #f9f9f9; width: 335px; }
+.hero-card .h-img { width: 165px; height: 209px; flex-shrink: 0; position: relative; overflow: hidden; }
+.hero-card .h-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-card .h-img::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.02); }
+.hero-card .h-like { position: absolute; top: 12px; right: 12px; z-index: 1; }
+.hero-card .h-det { flex: 1; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+.hero-card .h-rank { display: flex; align-items: center; gap: 4px; }
+.hero-card .h-rank span { font-size: 22px; font-weight: 600; color: #DC2832; line-height: 1.5; }
+.hero-card .h-rank .arrow { display: inline-block; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 8px solid #DC2832; }
+.hero-card .h-meta { display: flex; flex-direction: column; gap: 6px; }
+.hero-card .h-brand { font-size: 13px; font-weight: 600; color: #000; line-height: 1.5; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hero-card .h-name { font-size: 13px; font-weight: 400; color: #000; line-height: 1.5; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.hero-card .h-pr { display: flex; align-items: baseline; gap: 4px; font-size: 14px; font-weight: 700; line-height: 1.25; }
+.hero-card .h-disc { color: #DC2832; }
+.hero-card .h-price { color: #000; }
+
+.list-row { display: flex; align-items: center; gap: 12px; padding: 0 0; height: 93px; border-top: 0.5px solid #eee; }
+.list-row .l-rankwrap { display: flex; align-items: center; gap: 4px; min-width: 48px; justify-content: center; }
+.list-row .l-rankwrap span { font-size: 15px; font-weight: 600; color: #DC2832; line-height: 1.5; }
+.list-row .l-rankwrap .arrow { display: inline-block; width: 0; height: 0; border-left: 3.5px solid transparent; border-right: 3.5px solid transparent; border-bottom: 7px solid #DC2832; }
+.list-row .l-thumb { width: 64px; height: 81px; flex-shrink: 0; overflow: hidden; }
+.list-row .l-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.list-row .l-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.list-row .l-brand { font-size: 12px; font-weight: 600; color: #000; line-height: 1.5; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.list-row .l-name { font-size: 12px; font-weight: 400; color: #000; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.list-row .l-pr { display: flex; align-items: baseline; gap: 4px; font-size: 13px; font-weight: 700; line-height: 1.25; }
+.list-row .l-disc { color: #DC2832; }
+.list-row .l-price { color: #000; }
+.list-row .l-like { flex-shrink: 0; }
+
+.cd-b { position: absolute; left: 0; right: 0; overflow: hidden; transition: top 0.55s cubic-bezier(0.4, 0, 0.15, 1), height 0.55s cubic-bezier(0.4, 0, 0.15, 1), opacity 0.55s cubic-bezier(0.4, 0, 0.15, 1); }
+
+/* ===== TYPE C: 균등 2카드 ===== */
+.c-slots { display: flex; flex-direction: column; gap: 12px; margin: 0 20px 48px; }
+.c-slot { position: relative; height: 137px; overflow: hidden; }
+.ccard { position: absolute; left: 0; right: 0; top: 0; display: flex; gap: 16px; align-items: center; background: #f9f9f9; height: 137px; transition: transform 0.45s cubic-bezier(0.4, 0, 0.15, 1), opacity 0.45s cubic-bezier(0.4, 0, 0.15, 1); }
+.ccard.c-enter { transform: translateY(100%); opacity: 0; }
+.ccard.c-visible { transform: translateY(0); opacity: 1; }
+.ccard.c-exit { transform: translateY(-100%); opacity: 0; }
+.ccard-img { width: 108px; height: 137px; flex-shrink: 0; position: relative; overflow: hidden; }
+.ccard-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ccard-img::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.02); }
+.ccard-rnum { position: absolute; top: 6px; left: 10px; font-size: 15px; font-weight: 400; color: #000; }
+.ccard-det { flex: 1; display: flex; flex-direction: column; gap: 16px; justify-content: center; min-width: 0; padding-right: 16px; }
+.ccard-top { display: flex; align-items: flex-start; justify-content: space-between; }
+.ccard-rank { display: flex; align-items: center; gap: 4px; }
+.ccard-rank span { font-size: 16px; font-weight: 600; color: #DC2832; line-height: 1.5; }
+.c-arrow { display: inline-block; width: 0; height: 0; border-left: 3.5px solid transparent; border-right: 3.5px solid transparent; border-bottom: 7px solid #DC2832; }
+.ccard-meta { display: flex; flex-direction: column; gap: 6px; }
+.ccard-br { font-size: 13px; font-weight: 600; color: #000; line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ccard-nm { font-size: 13px; font-weight: 400; color: #000; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ccard-pr { display: flex; align-items: baseline; gap: 4px; }
+.ccard-dc { font-size: 13px; font-weight: 700; color: #DC2832; line-height: 1.25; }
+.ccard-pc { font-size: 14px; font-weight: 700; color: #000; line-height: 1.25; }
+</style>
+</head>
+<body>
+
+<!-- ========== TYPE A: 히어로 + 리스트 ========== -->
+<div>
+  <p class="type-label">TYPE A — 히어로 + 리스트</p>
+  <p class="type-desc">히어로 퇴장 → 리스트 1번째가 히어로로 확대 → 나머지 한 칸씩 상승 → 맨 아래 새 진입</p>
+  <div class="phone" id="phoneB">
+    <div class="hdr">
+      <span class="hdr-t">실시간<br>랭킹 급상승 상품</span>
+      <span class="hdr-s">02/02 18:00 갱신</span>
+    </div>
+    <div class="hero-clip" id="heroClip" style="margin: 0 20px 48px;"></div>
+  </div>
+</div>
+
+<!-- ========== TYPE B: 균등 2카드 ========== -->
+<div>
+  <p class="type-label">TYPE B — 균등 2카드 (개별 교체)</p>
+  <p class="type-desc">1번 자리에 3번이 slide-up 등장 → 0.5초 뒤 2번 자리에 4번 등장 / 빈틈 없는 제자리 교체</p>
+  <div class="phone" id="phoneC">
+    <div class="hdr">
+      <span class="hdr-t">실시간<br>랭킹 급상승 상품</span>
+      <span class="hdr-s">02/02 18:00 갱신</span>
+    </div>
+    <div class="c-slots">
+      <div class="c-slot" id="cs0"></div>
+      <div class="c-slot" id="cs1"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TYPE C: 스택 카드 ========== -->
+<div>
+  <p class="type-label">TYPE C — 스택 카드</p>
+  <p class="type-desc">맨 앞 퇴장 → 2번째 승격 → 새 카드 2번째 진입 / 3번째 고정 힌트</p>
+  <div class="phone" id="phoneA">
+    <div class="hdr">
+      <span class="hdr-t">실시간<br>랭킹 급상승 상품</span>
+      <span class="hdr-s">02/02 18:00 갱신</span>
+    </div>
+    <div class="stack-clip" id="stackClip">
+      <div class="stack-bg3"></div>
+      <div class="stack-bg2"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var IMGS = [
+  'https://nimg.lfmall.co.kr/file/product/prd/HS/2026/375/HSSW6BP01WT_00.jpg',
+  'https://nimg.lfmall.co.kr/file/product/prd/KN/2026/375/KNSO6E601MU_00.jpg',
+  'https://nimg.lfmall.co.kr/file/product/prd/AA/2025/375/AABA6E205BK_00.jpg',
+  'https://nimg.lfmall.co.kr/file/product/prd/HS/2026/375/HSSW6B406I2_00.jpg',
+];
+
+var HEART_SVG = '<svg class="heart" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 16.5C10 16.5 1.5 12 1.5 6.5C1.5 3.46 3.96 1 7 1C8.5 1 9.83 1.62 10 2.5C10.17 1.62 11.5 1 13 1C16.04 1 18.5 3.46 18.5 6.5C18.5 12 10 16.5 10 16.5Z" stroke="#AAAAAA" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var HEART_SM_SVG = '<svg class="heart-sm" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20C12 20 2 15 2 8C2 4.41 4.69 1.5 8 1.5C9.8 1.5 11.42 2.24 12 3.3C12.58 2.24 14.2 1.5 16 1.5C19.31 1.5 22 4.41 22 8C22 15 12 20 12 20Z" stroke="#AAAAAA" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+var P = [
+  { rank: 199, brand: 'HAZZYS', name: '퓨어 코튼 클래식 체크 셔츠 화이트', disc: '52%', price: '89,000', img: IMGS[0], num: 1 },
+  { rank: 152, brand: 'DAKS', name: '울 블렌드 체크 캐시미어 머플러 네이비', disc: '45%', price: '178,000', img: IMGS[1], num: 2 },
+  { rank: 98,  brand: 'DUNST', name: '오버사이즈 코튼 트윌 트렌치코트 베이지', disc: '40%', price: '259,000', img: IMGS[2], num: 3 },
+  { rank: 67,  brand: 'JILLSTUART NEWYORK', name: '플로럴 자카드 미디 원피스 라벤더', disc: '55%', price: '198,000', img: IMGS[3], num: 4 },
+  { rank: 45,  brand: 'KEEN', name: '재스퍼 II 워터프루프 로우 하이킹 슈즈', disc: '35%', price: '149,000', img: IMGS[0], num: 5 },
+  { rank: 31,  brand: 'HAZZYS', name: '피마 코튼 라운드 니트 네이비 멜란지', disc: '48%', price: '129,000', img: IMGS[1], num: 6 },
+  { rank: 22,  brand: 'DAKS', name: '하우스 체크 레더 트리밍 토트백 블랙', disc: '30%', price: '358,000', img: IMGS[2], num: 7 },
+  { rank: 15,  brand: 'DUNST', name: '와이드 핀턱 코튼 팬츠 크림', disc: '42%', price: '118,000', img: IMGS[3], num: 8 },
+  { rank: 9,   brand: 'JILLSTUART NEWYORK', name: '크리스탈 버클 스트랩 미니 숄더백 아이보리', disc: '38%', price: '228,000', img: IMGS[0], num: 9 },
+  { rank: 5,   brand: 'KEEN', name: '유니크 II 오픈 에어 스니커 샌들 그레이', disc: '25%', price: '119,000', img: IMGS[1], num: 10 },
+];
+var N = P.length;
+var DELAY = 5000;
+var STAGGER = 500;
+function gi(i) { return ((i % N) + N) % N; }
+
+// ===== TYPE A: STACK CARD =====
+(function() {
+  var cl = document.getElementById('stackClip');
+  var offset = 0, paused = false;
+
+  function scHTML(p) {
+    return '<div class="scard-inner">' +
+      '<div class="scard-img"><img src="' + p.img + '" alt="' + p.name + '"><div class="scard-like">' + HEART_SVG + '</div></div>' +
+      '<div class="scard-det">' +
+        '<div class="scard-rank"><span>' + p.rank + '</span><i class="arrow"></i></div>' +
+        '<div class="scard-meta">' +
+          '<span class="scard-brand">' + p.brand + '</span>' +
+          '<span class="scard-name">' + p.name + '</span>' +
+          '<div class="scard-price"><span class="scard-disc">' + p.disc + '</span><span class="scard-pr">' + p.price + '</span></div>' +
+        '</div>' +
+      '</div></div>';
+  }
+
+  function mkSC(p, isFront) {
+    var el = document.createElement('div');
+    el.className = 'scard';
+    el.innerHTML = scHTML(p);
+    if (isFront) {
+      el.dataset.role = 'front';
+      el.style.cssText = 'width:335px;height:209px;top:0px;z-index:4;opacity:1;background:#f9f9f9';
+    } else {
+      el.dataset.role = 'next';
+      el.style.cssText = 'width:315px;height:197px;top:22px;z-index:3;opacity:1;background:#f3f3f3';
+    }
+    return el;
+  }
+
+  function render() {
+    var old = cl.querySelectorAll('.scard');
+    for (var i = 0; i < old.length; i++) old[i].remove();
+    cl.appendChild(mkSC(P[gi(offset + 1)], false));
+    cl.appendChild(mkSC(P[gi(offset)], true));
+  }
+
+  function advance() {
+    var front = cl.querySelector('[data-role="front"]');
+    var next = cl.querySelector('[data-role="next"]');
+    if (!front || !next) return;
+    requestAnimationFrame(function() { requestAnimationFrame(function() {
+      front.style.top = '-220px';
+      front.style.opacity = '0';
+      next.style.width = '335px';
+      next.style.height = '209px';
+      next.style.top = '0px';
+      next.style.zIndex = '4';
+      next.style.background = '#f9f9f9';
+      next.dataset.role = 'front';
+      var inc = mkSC(P[gi(offset + 2)], false);
+      inc.style.top = '44px';
+      inc.style.opacity = '0';
+      var bg3 = cl.querySelector('.stack-bg3');
+      cl.insertBefore(inc, bg3 ? bg3.nextSibling : cl.firstChild);
+      requestAnimationFrame(function() {
+        inc.style.top = '22px';
+        inc.style.opacity = '1';
+      });
+      function onEnd() {
+        front.removeEventListener('transitionend', onEnd);
+        offset = gi(offset + 1);
+        render();
+      }
+      front.addEventListener('transitionend', onEnd);
+    }); });
+  }
+
+  render();
+  setInterval(function() { if (!paused) advance(); }, DELAY);
+  cl.addEventListener('touchstart', function() { paused = true; }, { passive: true });
+  cl.addEventListener('touchend', function() { setTimeout(function() { paused = false; }, 1500); }, { passive: true });
+  cl.addEventListener('mouseenter', function() { paused = true; });
+  cl.addEventListener('mouseleave', function() { paused = false; });
+})();
+
+// ===== TYPE B: HERO + LIST =====
+(function() {
+  var vp = document.getElementById('heroClip');
+  var HH = 209, LH = 93;
+  vp.style.height = (HH + LH * 2) + 'px';
+  var offset = 0, paused = false;
+
+  function heroH(p) {
+    return '<div class="hero-card">' +
+      '<div class="h-img"><img src="' + p.img + '" alt="' + p.name + '"><div class="h-like">' + HEART_SVG + '</div></div>' +
+      '<div class="h-det">' +
+        '<div class="h-rank"><span>' + p.rank + '</span><i class="arrow"></i></div>' +
+        '<div class="h-meta">' +
+          '<span class="h-brand">' + p.brand + '</span>' +
+          '<span class="h-name">' + p.name + '</span>' +
+          '<div class="h-pr"><span class="h-disc">' + p.disc + '</span><span class="h-price">' + p.price + '</span></div>' +
+        '</div>' +
+      '</div></div>';
+  }
+
+  function listH(p) {
+    return '<div class="list-row">' +
+      '<div class="l-rankwrap"><span>' + p.rank + '</span><i class="arrow"></i></div>' +
+      '<div class="l-thumb"><img src="' + p.img + '" alt="' + p.name + '"></div>' +
+      '<div class="l-info">' +
+        '<span class="l-brand">' + p.brand + '</span>' +
+        '<span class="l-name">' + p.name + '</span>' +
+        '<div class="l-pr"><span class="l-disc">' + p.disc + '</span><span class="l-price">' + p.price + '</span></div>' +
+      '</div>' +
+      '<div class="l-like">' + HEART_SM_SVG + '</div>' +
+    '</div>';
+  }
+
+  function render() {
+    vp.innerHTML = '';
+    for (var s = 0; s < 4; s++) {
+      var p = P[gi(offset + s)];
+      var el = document.createElement('div');
+      el.className = 'cd-b';
+      el.dataset.slot = String(s);
+      if (s === 0) {
+        el.innerHTML = heroH(p);
+        el.style.top = '0px';
+        el.style.height = HH + 'px';
+        el.style.opacity = '1';
+      } else {
+        el.innerHTML = listH(p);
+        el.style.top = HH + (s - 1) * LH + 'px';
+        el.style.height = LH + 'px';
+        el.style.opacity = s <= 2 ? '1' : '0';
+      }
+      vp.appendChild(el);
+    }
+  }
+
+  function advance() {
+    var cs = vp.querySelectorAll('.cd-b');
+    if (!cs.length) return;
+    requestAnimationFrame(function() { requestAnimationFrame(function() {
+      for (var i = 0; i < cs.length; i++) {
+        var el = cs[i], s = parseInt(el.dataset.slot);
+        if (s === 0) {
+          el.style.top = -HH + 'px';
+          el.style.opacity = '0';
+        } else if (s === 1) {
+          el.innerHTML = heroH(P[gi(offset + 1)]);
+          el.style.top = '0px';
+          el.style.height = HH + 'px';
+        } else if (s === 2) {
+          el.style.top = HH + 'px';
+        } else if (s === 3) {
+          el.style.top = HH + LH + 'px';
+          el.style.opacity = '1';
+        }
+      }
+      function onEnd() {
+        cs[0].removeEventListener('transitionend', onEnd);
+        offset = gi(offset + 1);
+        render();
+      }
+      cs[0].addEventListener('transitionend', onEnd);
+    }); });
+  }
+
+  render();
+  setInterval(function() { if (!paused) advance(); }, DELAY);
+  vp.addEventListener('touchstart', function() { paused = true; }, { passive: true });
+  vp.addEventListener('touchend', function() { setTimeout(function() { paused = false; }, 1500); }, { passive: true });
+  vp.addEventListener('mouseenter', function() { paused = true; });
+  vp.addEventListener('mouseleave', function() { paused = false; });
+})();
+
+// ===== TYPE C: 균등 2카드 (개별 교체) =====
+(function() {
+  var s0 = document.getElementById('cs0');
+  var s1 = document.getElementById('cs1');
+  var offset = 0, paused = false;
+
+  function mkCard(p) {
+    var el = document.createElement('div');
+    el.className = 'ccard c-enter';
+    el.innerHTML =
+      '<div class="ccard-img"><img src="' + p.img + '" alt="' + p.name + '"></div>' +
+      '<div class="ccard-det">' +
+        '<div class="ccard-top">' +
+          '<div class="ccard-rank"><span>' + p.rank + '</span><i class="c-arrow"></i></div>' +
+          HEART_SM_SVG +
+        '</div>' +
+        '<div class="ccard-meta">' +
+          '<span class="ccard-br">' + p.brand + '</span>' +
+          '<span class="ccard-nm">' + p.name + '</span>' +
+          '<div class="ccard-pr"><span class="ccard-dc">' + p.disc + '</span><span class="ccard-pc">' + p.price + '</span></div>' +
+        '</div>' +
+      '</div>';
+    return el;
+  }
+
+  function swapSlot(slot, product, cb) {
+    var oldCard = slot.querySelector('.ccard.c-visible');
+    var newCard = mkCard(product);
+    slot.appendChild(newCard);
+    requestAnimationFrame(function() { requestAnimationFrame(function() {
+      if (oldCard) { oldCard.classList.remove('c-visible'); oldCard.classList.add('c-exit'); }
+      newCard.classList.remove('c-enter');
+      newCard.classList.add('c-visible');
+      function done() {
+        newCard.removeEventListener('transitionend', done);
+        if (oldCard) oldCard.remove();
+        if (cb) cb();
+      }
+      newCard.addEventListener('transitionend', done);
+    }); });
+  }
+
+  function init() {
+    var c0 = mkCard(P[gi(offset)]);
+    var c1 = mkCard(P[gi(offset + 1)]);
+    s0.appendChild(c0);
+    requestAnimationFrame(function() {
+      c0.classList.remove('c-enter');
+      c0.classList.add('c-visible');
+      setTimeout(function() {
+        s1.appendChild(c1);
+        requestAnimationFrame(function() {
+          c1.classList.remove('c-enter');
+          c1.classList.add('c-visible');
+        });
+      }, STAGGER);
+    });
+  }
+
+  function advance() {
+    if (paused) return;
+    var nextO = gi(offset + 2);
+    swapSlot(s0, P[gi(nextO)]);
+    setTimeout(function() {
+      swapSlot(s1, P[gi(nextO + 1)], function() {
+        offset = nextO;
+      });
+    }, STAGGER);
+  }
+
+  init();
+  setInterval(function() { if (!paused) advance(); }, DELAY + STAGGER);
+
+  var area = document.querySelector('.c-slots');
+  area.addEventListener('touchstart', function() { paused = true; }, { passive: true });
+  area.addEventListener('touchend', function() { setTimeout(function() { paused = false; }, 1500); }, { passive: true });
+  area.addEventListener('mouseenter', function() { paused = true; });
+  area.addEventListener('mouseleave', function() { paused = false; });
+})();
+</script>
+</body>
+</html>
