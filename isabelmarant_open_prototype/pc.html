@@ -31,7 +31,7 @@
   .gnb__icon img { width: 26px; height: 26px; object-fit: contain; }
 
   /* HERO */
-  .hero { position: relative; width: 100%; aspect-ratio: 1920 / 888; overflow: hidden; }
+  .hero { display: block; position: relative; width: 100%; aspect-ratio: 1920 / 888; overflow: hidden; cursor: pointer; }
   .hero__img { width: 100%; height: 86.486%; object-fit: cover; transition: transform 8s ease-out; }
   .hero:hover .hero__img { transform: scale(1.02); }
   .hero__content { position: absolute; top: 39.077%; left: 26.146%; text-align: center; }
@@ -72,10 +72,10 @@
   .hero-product__arrow button.disabled { opacity: .25; cursor: default; pointer-events: none; }
   .hero-product__arrow .arrow-flip img { transform: scaleX(-1); }
 
-  /* BEKKET ROLLING */
+  /* 룩+상품 A */
   .bekket-rolling { padding: 0 min(160px, 8.333vw); position: relative; }
   .bekket-rolling__inner { display: flex; gap: min(20px, 1.0417vw); align-items: stretch; }
-  .bekket-rolling__banner { flex: 0 0 min(588px, 30.625vw); aspect-ratio: 588 / 740; overflow: hidden; background: #f1f1f1; }
+  .bekket-rolling__banner { flex: 0 0 min(588px, 30.625vw); aspect-ratio: 790 / 994; overflow: hidden; background: #f1f1f1; }
   .bekket-rolling__banner img { width: 100%; height: 100%; object-fit: cover; }
   .bekket-rolling__products-wrap { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
   .bekket-rolling__products { display: flex; gap: min(20px, 1.0417vw); transition: transform .5s ease; width: 100%; }
@@ -91,7 +91,7 @@
   .bekket-rolling__arrow button.disabled { opacity: .25; cursor: default; pointer-events: none; }
   .bekket-rolling__arrow .arrow-flip img { transform: scaleX(-1); }
 
-  /* OSKAN HOBO (mirrors high-summer layout: products left, image right) */
+  /* 룩+상품 B (mirrors high-summer layout: products left, image right) */
   .oskan-hobo { display: flex; gap: min(20px, 1.0417vw); padding: 0 min(160px, 8.333vw); }
   .oskan-hobo__products { flex: 0 0 min(790px, 41.146vw); display: flex; flex-wrap: wrap; gap: min(20px, 1.0417vw); }
   .oskan-hobo__products .product-card { width: min(385px, 20.052vw); }
@@ -99,7 +99,7 @@
   .oskan-hobo__feature img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
   .oskan-hobo__feature:hover img { transform: scale(1.03); }
 
-  /* HIGH SUMMER */
+  /* 룩+상품 C */
   .high-summer { display: flex; gap: min(20px, 1.0417vw); padding: 0 min(160px, 8.333vw); }
   .high-summer__products { flex: 0 0 min(790px, 41.146vw); display: flex; flex-wrap: wrap; gap: min(20px, 1.0417vw); }
   .high-summer__products .product-card { width: min(385px, 20.052vw); }
@@ -108,7 +108,7 @@
   .high-summer__feature:hover img { transform: scale(1.03); }
 
   /* WIDE BANNER */
-  .wide-banner { position: relative; margin: 0 min(160px, 8.333vw) 120px; aspect-ratio: 2 / 1; overflow: hidden; cursor: pointer; }
+  .wide-banner { display: block; position: relative; margin: 0 min(160px, 8.333vw) 120px; aspect-ratio: 2 / 1; overflow: hidden; cursor: pointer; }
   .wide-banner img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
   .wide-banner:hover img { transform: scale(1.02); }
   .wide-banner__content { position: absolute; top: 50%; transform: translateY(-50%); text-align: center; }
@@ -197,63 +197,53 @@
 
   <header class="gnb" id="gnb">
     <div class="gnb__left">
-      <a href="#" class="gnb__logo"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_footerlogo.png" alt="Isabel Marant"></a>
-      <nav class="gnb__nav"><a href="#">여성</a><a href="#">신발</a><a href="#">가방</a><a href="#">남성</a></nav>
+      <a href="#" class="gnb__logo"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_footerlogo.png" alt="Isabel Marant"></a>
+      <nav class="gnb__nav"><a href="https://www.lfmall.co.kr/app/search/result/이자벨마랑?tid=110050&categoryIds=110050&rootCategoryId=110050&saleType=1&order=recent" target="_blank">여성</a><a href="https://www.lfmall.co.kr/app/search/result/이자벨마랑?tid=110637&categoryIds=110637&rootCategoryId=110637&saleType=1&order=recent" target="_blank">신발</a><a href="https://www.lfmall.co.kr/app/search/result/이자벨마랑?tid=110403&categoryIds=110404&rootCategoryId=110403&saleType=1&order=recent&pid=110404" target="_blank">가방</a><a href="https://www.lfmall.co.kr/app/search/result/이자벨마랑?tid=110219&categoryIds=110219&rootCategoryId=110219&saleType=1&order=recent" target="_blank">남성</a></nav>
     </div>
     <div class="gnb__right">
-      <a href="#" class="gnb__lf-logo"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_malllogo.png" alt="LF Mall"></a>
+      <a href="#" class="gnb__lf-logo"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_malllogo.png" alt="LF Mall"></a>
       <div class="gnb__icons">
-        <div class="gnb__icon" title="마이페이지"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/ic_mypage.png" alt="마이페이지"></div>
-        <div class="gnb__icon" title="장바구니"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/ic_cart.png" alt="장바구니"></div>
+        <div class="gnb__icon" title="마이페이지"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/ic_mypage.png" alt="마이페이지"></div>
+        <div class="gnb__icon" title="장바구니"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/ic_cart.png" alt="장바구니"></div>
       </div>
     </div>
   </header>
 
-  <section class="hero">
-    <img class="hero__img" src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_hero.png" alt="Isabel Marant High Summer 컬렉션 메인 비주얼">
-    <div class="hero__content"><h1 class="hero__title">High Summer</h1><a href="#" class="hero__link">자세히 보기</a></div>
-  </section>
+  <a class="hero" href="https://www.lfmall.co.kr" target="_blank">
+    <img class="hero__img" src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_hero.png" alt="Isabel Marant Pre-Collection 컬렉션 메인 비주얼">
+    <div class="hero__content"><h1 class="hero__title">Pre-Collection</h1><span class="hero__link">자세히 보기</span></div>
+  </a>
 
   <!-- 히어로 연관상품 -->
   <section class="hero-product fade-up">
     <div class="hero-product__viewport">
       <div class="hero-product__track" id="heroProductTrack">
         <div class="hero-product__page">
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red01.png" alt="Isabel Marant JULINE 자수 블라우스 - 919,000원"></div><div class="product-card__meta"><p class="product-card__name">JULINE 자수 블라우스</p><p class="product-card__price">919,000</p></div></div>
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red02.png" alt="Isabel Marant BAYIA 라피아 숄더백 - 1,590,000원"></div><div class="product-card__meta"><p class="product-card__name">BAYIA 라피아 숄더백</p><p class="product-card__price">1,590,000</p></div></div>
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red03.png" alt="Isabel Marant PICADILIA 자수 미니 스커트 - 699,000원"></div><div class="product-card__meta"><p class="product-card__name">PICADILIA 자수 미니 스커트</p><p class="product-card__price">699,000</p></div></div>
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_red04.png" alt="Isabel Marant 레이자 발레리나 - 1,490,000원"></div><div class="product-card__meta"><p class="product-card__name">레이자 발레리나</p><p class="product-card__price">1,490,000</p></div></div>
-        </div>
-        <div class="hero-product__page">
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue01.png" alt="Isabel Marant SABBA 프린트 맥시 드레스 - 1,090,000원"></div><div class="product-card__meta"><p class="product-card__name">SABBA 프린트 맥시 드레스</p><p class="product-card__price">1,090,000</p></div></div>
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue02.png" alt="Isabel Marant LENA 자수 블라우스 - 959,000원"></div><div class="product-card__meta"><p class="product-card__name">LENA 자수 블라우스</p><p class="product-card__price">959,000</p></div></div>
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue03.png" alt="Isabel Marant IELA 뮬 샌들 - 2,403,000원"></div><div class="product-card__meta"><p class="product-card__name">IELA 뮬 샌들</p><p class="product-card__price">2,403,000</p></div></div>
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/pc_highsummer_product_blue04.png" alt="Isabel Marant PICADILIA 자수 미니 스커트 - 699,000원"></div><div class="product-card__meta"><p class="product-card__name">PICADILIA 자수 미니 스커트</p><p class="product-card__price">699,000</p></div></div>
+          <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISJA6F331I2" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/pc_highsummer_product_red01.png" alt="Isabel Marant 베이지 벨티드 양가죽 자켓 - 6,890,000원"></div><div class="product-card__meta"><p class="product-card__name">베이지 벨티드 양가죽 자켓</p><p class="product-card__price">6,890,000</p></div></a>
+          <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISSK6F351CR" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/pc_highsummer_product_red02.png" alt="Isabel Marant 크림 패턴 랩 스타일 스커트 - 1,790,000원"></div><div class="product-card__meta"><p class="product-card__name">크림 패턴 랩 스타일 스커트</p><p class="product-card__price">1,790,000</p></div></a>
+          <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISSO6F401CM" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/pc_highsummer_product_red03.png" alt="Isabel Marant 캐멀 배색 커프 부츠 - 2,490,000원"></div><div class="product-card__meta"><p class="product-card__name">캐멀 배색 커프 부츠</p><p class="product-card__price">2,490,000</p></div></a>
+          <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISJE6F451GD" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/pc_highsummer_product_red04.png" alt="Isabel Marant 골드 스톤 체인 펜던트 목걸이 - 909,000원"></div><div class="product-card__meta"><p class="product-card__name">골드 스톤 체인 펜던트 목걸이</p><p class="product-card__price">909,000</p></div></a>
         </div>
       </div>
-    </div>
-    <div class="hero-product__arrow">
-      <button id="heroProductPrev" class="disabled arrow-flip" aria-label="이전"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
-      <button id="heroProductNext" class="active" aria-label="다음"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
     </div>
   </section>
 
   <div class="section-gap-lg"></div>
 
-  <!-- 베켓 롤링 -->
+  <!-- 룩+상품 A -->
   <section class="bekket-rolling fade-up">
     <div class="bekket-rolling__inner">
-      <div class="bekket-rolling__banner"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket.png" alt="Isabel Marant 아이코닉 베켓 스니커즈 컬렉션"></div>
+      <div class="bekket-rolling__banner"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_bekket.png" alt="Isabel Marant 아이코닉 베켓 스니커즈 컬렉션"></div>
       <div class="bekket-rolling__products-wrap">
         <div class="bekket-rolling__products" id="bekketTrack">
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product01.png" alt="Isabel Marant 베켓 웨지 스니커즈 크림 - 1,190,000원"></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈 크림</p><p class="product-card__price">1,190,000</p></div></div>
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product02.png" alt="Isabel Marant 베켓 웨지 스니커즈 카멜 - 1,190,000원"></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈 카멜</p><p class="product-card__price">1,190,000</p></div></div>
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product03.png" alt="Isabel Marant 베켓 웨지 스니커즈 블랙 - 1,190,000원"></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈 블랙</p><p class="product-card__price">1,190,000</p></div></div>
-          <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_bekket_product04.png" alt="Isabel Marant 베켓 웨지 스니커즈 라이트핑크 - 1,190,000원"></div><div class="product-card__meta"><p class="product-card__name">베켓 웨지 스니커즈 라이트핑크</p><p class="product-card__price">1,190,000</p></div></div>
+          <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISSO6F701BK" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_bekket_product01.png" alt="Isabel Marant [BEKETT] 블랙 소가죽 베켓 스니커즈 - 1,290,000원"></div><div class="product-card__meta"><p class="product-card__name">[BEKETT] 블랙 소가죽 베켓 스니커즈</p><p class="product-card__price">1,290,000</p></div></a>
+          <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISSO6F701CR" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_bekket_product02.png" alt="Isabel Marant [BEKETT] 크림 소가죽 베켓 스니커즈 - 1,290,000원"></div><div class="product-card__meta"><p class="product-card__name">[BEKETT] 크림 소가죽 베켓 스니커즈</p><p class="product-card__price">1,290,000</p></div></a>
+          <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISSO6F702I1" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_bekket_product03.png" alt="Isabel Marant [BEKETT] 라이트베이지 배색 소가죽 베켓 스니커즈 - 1,290,000원"></div><div class="product-card__meta"><p class="product-card__name">[BEKETT] 라이트베이지 배색 소가죽 베켓 스니커즈</p><p class="product-card__price">1,290,000</p></div></a>
+          <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISSO6F701CM" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_bekket_product04.png" alt="Isabel Marant [BEKETT] 캐멀 소가죽 베켓 스니커즈 - 1,290,000원"></div><div class="product-card__meta"><p class="product-card__name">[BEKETT] 캐멀 소가죽 베켓 스니커즈</p><p class="product-card__price">1,290,000</p></div></a>
         </div>
         <div class="bekket-rolling__arrow">
-          <button id="bekketPrev" class="disabled arrow-flip" aria-label="이전"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
-          <button id="bekketNext" class="active" aria-label="다음"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
+          <button id="bekketPrev" class="disabled arrow-flip" aria-label="이전"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/arrow_r.png" alt=""></button>
+          <button id="bekketNext" class="active" aria-label="다음"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/arrow_r.png" alt=""></button>
         </div>
       </div>
     </div>
@@ -269,39 +259,40 @@
 
   <div class="section-gap-lg"></div>
 
-  <!-- 오스칸 호보 백 -->
+  <!-- 룩+상품 B -->
   <section class="oskan-hobo fade-up">
     <div class="oskan-hobo__products">
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_oskan_product01.png" alt="Isabel Marant 오스칸 호보 OSKAN HOBO SOFT 숄더백 블랙 스터드 - 1,890,000원"></div><div class="product-card__meta"><p class="product-card__name">OSKAN HOBO SOFT 숄더백 블랙 스터드</p><p class="product-card__price">2,890,000</p></div></div>
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_oskan_product02.png" alt="Isabel Marant 오스칸 호보 OSKAN HOBO SOFT 꼬임 숄더백 크림 - 1,890,000원"></div><div class="product-card__meta"><p class="product-card__name">OSKAN HOBO SOFT 꼬임 숄더백 크림</p><p class="product-card__price">1,890,000</p></div></div>
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_oskan_product03.png" alt="Isabel Marant 오스칸 호보 OSKAN HOBO SOFT 꼬임 숄더백 카멜 - 1,890,000원"></div><div class="product-card__meta"><p class="product-card__name">OSKAN HOBO SOFT 꼬임 숄더백 카멜</p><p class="product-card__price">1,890,000</p></div></div>
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_oskan_product04.png" alt="Isabel Marant 오스칸 호보 OSKAN HOBO SOFT 꼬임 숄더백 블랙 - 1,890,000원"></div><div class="product-card__meta"><p class="product-card__name">OSKAN HOBO SOFT 꼬임 숄더백 블랙</p><p class="product-card__price">1,890,000</p></div></div>
+      <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISBA6F401BK" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_oskan_product01.png" alt="Isabel Marant [MAIA] 블랙 솔리드 반달 숄더백 - 2,690,000원"></div><div class="product-card__meta"><p class="product-card__name">[MAIA] 블랙 솔리드 반달 숄더백</p><p class="product-card__price">2,690,000</p></div></a>
+      <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISBA6F401W2" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_oskan_product02.png" alt="Isabel Marant [MAIA] 브라운 솔리드 반달 숄더백 - 2,690,000원"></div><div class="product-card__meta"><p class="product-card__name">[MAIA] 브라운 솔리드 반달 숄더백</p><p class="product-card__price">2,690,000</p></div></a>
+      <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISBA6F411CM" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_oskan_product03.png" alt="Isabel Marant [MAIA] 캐멀 스웨이드 플리츠 미디엄 숄더백 - 2,490,000원"></div><div class="product-card__meta"><p class="product-card__name">[MAIA] 캐멀 스웨이드 플리츠 미디엄 숄더백</p><p class="product-card__price">2,490,000</p></div></a>
+      <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISBA6F412CM" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_oskan_product04.png" alt="Isabel Marant [MAIA] 캐멀 스웨이드 플리츠 라지 숄더백 - 3,190,000원"></div><div class="product-card__meta"><p class="product-card__name">[MAIA] 캐멀 스웨이드 플리츠 라지 숄더백</p><p class="product-card__price">3,190,000</p></div></a>
     </div>
-    <div class="oskan-hobo__feature"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_oskan.png" alt="Isabel Marant 오스칸 호보 소프트 백 컬렉션"></div>
+    <div class="oskan-hobo__feature"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_oskan.png" alt="Isabel Marant 오스칸 호보 소프트 백 컬렉션"></div>
   </section>
 
   <div class="section-gap-lg"></div>
 
+  <!-- 룩+상품 C -->
   <section class="high-summer fade-up">
-    <div class="high-summer__feature"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_hisummer.png" alt="Isabel Marant 하이 서머 컬렉션 - 보헤미안 시크 스타일링"></div>
+    <div class="high-summer__feature"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_hisummer.png" alt="Isabel Marant 하이 서머 컬렉션 - 보헤미안 시크 스타일링"></div>
     <div class="high-summer__products">
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_summer_product01.png" alt="Isabel Marant NINA 리넨 자수 블라우스 - 2,190,000원"></div><div class="product-card__meta"><p class="product-card__name">NINA 리넨 자수 블라우스</p><p class="product-card__price">2,190,000</p></div></div>
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_summer_product02.png" alt="Isabel Marant PURIA 코튼 플로럴 레이스 러플 미니 스커트 - 912,000원"></div><div class="product-card__meta"><p class="product-card__name">PURIA 코튼 플로럴 레이스 러플 미니 스커트</p><p class="product-card__price">912,000</p></div></div>
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_summer_product03.png" alt="Isabel Marant 리아드 글래디에이터 투조 레이스업 부츠 - 1,824,000원"></div><div class="product-card__meta"><p class="product-card__name">리아드 글래디에이터 투조 레이스업 부츠</p><p class="product-card__price">1,824,000</p></div></div>
-      <div class="product-card"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_summer_product04.png" alt="Isabel Marant 카탈리나 라인스톤 펜던트 귀걸이 - 683,000원"></div><div class="product-card__meta"><p class="product-card__name">카탈리나 라인스톤 펜던트 귀걸이</p><p class="product-card__price">683,000</p></div></div>
+      <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISBL6F541CR" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_summer_product01.png" alt="Isabel Marant 크림 핀턱 프릴 장식 긴팔 블라우스 - 999,000원"></div><div class="product-card__meta"><p class="product-card__name">크림 핀턱 프릴 장식 긴팔 블라우스</p><p class="product-card__price">999,000</p></div></a>
+      <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISBE6F431W2" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_summer_product02.png" alt="Isabel Marant 브라운 양가죽 장식 스트랩 벨트 - 1,190,000원"></div><div class="product-card__meta"><p class="product-card__name">브라운 양가죽 장식 스트랩 벨트</p><p class="product-card__price">1,190,000</p></div></a>
+      <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISBA6F501W3" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_summer_product03.png" alt="Isabel Marant 다크브라운 스웨이드 스터드 장식 숄더백 - 1,990,000원"></div><div class="product-card__meta"><p class="product-card__name">다크브라운 스웨이드 스터드 장식 숄더백</p><p class="product-card__price">1,990,000</p></div></a>
+      <a class="product-card" href="https://www.lfmall.co.kr/app/product/ISSK6F541CR" target="_blank"><div class="product-card__thumb"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_summer_product04.png" alt="Isabel Marant 크림 도트 패턴 고데 디테일 스커트 - 839,000원"></div><div class="product-card__meta"><p class="product-card__name">크림 도트 패턴 고데 디테일 스커트</p><p class="product-card__price">839,000</p></div></a>
     </div>
   </section>
 
   <div class="section-gap-lg"></div>
 
-  <div class="wide-banner fade-up">
-    <img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_men.png" alt="Isabel Marant 남성 컬렉션 - 밀리터리 셔츠 스타일링">
-    <div class="wide-banner__content wide-banner__content--right"><h2 class="wide-banner__title">남성 컬렉션</h2><a href="#" class="wide-banner__link">자세히 보기</a></div>
-  </div>
+  <a class="wide-banner fade-up" href="https://www.lfmall.co.kr/app/search/result/이자벨마랑?tid=110219&categoryIds=110219&rootCategoryId=110219&saleType=1&order=recent" target="_blank">
+    <img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_men.png" alt="Isabel Marant 남성 컬렉션 - 밀리터리 셔츠 스타일링">
+    <div class="wide-banner__content wide-banner__content--right"><h2 class="wide-banner__title">남성 컬렉션</h2><span class="wide-banner__link">자세히 보기</span></div>
+  </a>
 
   <!-- 부티크 정보 -->
   <section class="boutique fade-up">
-    <div class="boutique__bg"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_boutique.png" alt="Isabel Marant 부티크 매장 인테리어"></div>
+    <div class="boutique__bg"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_boutique.png" alt="Isabel Marant 부티크 매장 인테리어"></div>
     <div class="boutique__card">
       <h2 class="boutique__title">부티크 정보</h2>
       <div class="boutique__list">
@@ -310,7 +301,7 @@
             <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 청담 플래그십</p><p class="boutique__item-addr">서울 강남구 압구정로80길 6</p><p class="boutique__item-tel">02-516-3737</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/pkbfbxaBrN', '_blank')">지도 보기</button></div>
             <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 현대백화점 압구정본점</p><p class="boutique__item-addr">서울 강남구 압구정로 165 3층</p><p class="boutique__item-tel">02-3438-6131</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/x-TJoWEjFE', '_blank')">지도 보기</button></div>
             <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 현대백화점 무역센터점</p><p class="boutique__item-addr">서울 강남구 테헤란로 517 3층</p><p class="boutique__item-tel">02-3467-8385</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/5MMvnpNfWr', '_blank')">지도 보기</button></div>
-            <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 신세계 강남점</p><p class="boutique__item-addr">서울 서초구 신반포로 176 3층</p><p class="boutique__item-tel">02-3479-1892</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/cTc0A044pQ', '_blank')">지도 보기</button></div>
+            <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 신세계 강남점</p><p class="boutique__item-addr">서울 서초구 신반포로 176 4층</p><p class="boutique__item-tel">02-3479-1892</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/cTc0A044pQ', '_blank')">지도 보기</button></div>
           </div>
           <div class="boutique__page">
             <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 롯데백화점 강남점</p><p class="boutique__item-addr">서울 강남구 도곡로 401 3층</p><p class="boutique__item-tel">02-531-2321</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/_pNEsqHAFn', '_blank')">지도 보기</button></div>
@@ -319,13 +310,13 @@
             <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 신세계백화점 타임스퀘어점</p><p class="boutique__item-addr">서울 영등포구 영중로 9 2층</p><p class="boutique__item-tel">02-2639-1467</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/vLGcn0R5RP', '_blank')">지도 보기</button></div>
           </div>
           <div class="boutique__page">
-            <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 현대백화점 목동점</p><p class="boutique__item-addr">서울 양천구 목동동로 257 4층</p><p class="boutique__item-tel">02-2163-1412</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/QuIO8UNumK', '_blank')">지도 보기</button></div>
+            <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 현대백화점 목동점</p><p class="boutique__item-addr">서울 양천구 목동동로 257 별관 1층</p><p class="boutique__item-tel">02-2163-1412</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/QuIO8UNumK', '_blank')">지도 보기</button></div>
             <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 현대백화점 판교점</p><p class="boutique__item-addr">경기 성남시 분당구 판교역로 146번길 20 2층</p><p class="boutique__item-tel">031-5170-1280</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/CPyJuGsBKk', '_blank')">지도 보기</button></div>
-            <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 신세계백화점 사우스시티점</p><p class="boutique__item-addr">경기 용인시 수지구 포은대로 536 3층</p><p class="boutique__item-tel">031-695-1559</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/ZKsxYwOv1A', '_blank')">지도 보기</button></div>
+            <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 신세계백화점 사우스시티점</p><p class="boutique__item-addr">경기 용인시 수지구 포은대로 536 2층</p><p class="boutique__item-tel">031-695-1559</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/ZKsxYwOv1A', '_blank')">지도 보기</button></div>
             <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 갤러리아백화점 광교점</p><p class="boutique__item-addr">경기 수원시 영통구 광교중앙로 124 3층</p><p class="boutique__item-tel">031-5174-7363</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/430nQVbREI', '_blank')">지도 보기</button></div>
           </div>
           <div class="boutique__page">
-            <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 롯데백화점 인천점</p><p class="boutique__item-addr">인천 남동구 인주대로 593 3층</p><p class="boutique__item-tel">032-242-2287</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/q92gHR3roC', '_blank')">지도 보기</button></div>
+            <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 롯데백화점 인천점</p><p class="boutique__item-addr">인천 남동구 인주대로 593 2층</p><p class="boutique__item-tel">032-242-2287</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/q92gHR3roC', '_blank')">지도 보기</button></div>
             <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 현대백화점 중동점</p><p class="boutique__item-addr">경기 부천시 길주로 180 2층</p><p class="boutique__item-tel">032-623-2278</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/9MnoN08g0t', '_blank')">지도 보기</button></div>
             <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 현대백화점 킨텍스점</p><p class="boutique__item-addr">경기 고양시 일산서구 호수로 817 2층</p><p class="boutique__item-tel">031-822-3354</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/bmk2SXCzvn', '_blank')">지도 보기</button></div>
             <div class="boutique__item"><div class="boutique__item-info"><p class="boutique__item-name">이자벨마랑 신세계백화점 광주점</p><p class="boutique__item-addr">광주 서구 무진대로 932 4층</p><p class="boutique__item-tel">062-360-1486</p></div><button class="boutique__item-btn" onclick="window.open('https://kko.to/TT_x3G9D71', '_blank')">지도 보기</button></div>
@@ -342,13 +333,13 @@
         </div>
       </div>
       <div class="boutique__arrows">
-        <button id="boutiquePrev" class="disabled arrow-flip" aria-label="이전"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
-        <button id="boutiqueNext" class="active" aria-label="다음"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/arrow_r.png" alt=""></button>
+        <button id="boutiquePrev" class="disabled arrow-flip" aria-label="이전"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/arrow_r.png" alt=""></button>
+        <button id="boutiqueNext" class="active" aria-label="다음"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/arrow_r.png" alt=""></button>
       </div>
     </div>
   </section>
 
-  <section class="footer-logo fade-up"><img src="https://syleelfcorp.github.io/image/isabelmarant_A/a_pc_footerlogo.png" alt="Isabel Marant"></section>
+  <section class="footer-logo fade-up"><img src="https://syleelfcorp.github.io/image/isabelmarant_open/a_pc_footerlogo.png" alt="Isabel Marant"></section>
 
   <footer class="footer">
     <div class="footer__top">
@@ -442,31 +433,6 @@
     });
 
     recalc();
-    update();
-  })();
-
-  // Hero Product carousel - 4 products per page, 2 pages, page-by-page navigation
-  (function() {
-    var track = document.getElementById('heroProductTrack');
-    var pages = track.querySelectorAll('.hero-product__page');
-    var prevBtn = document.getElementById('heroProductPrev');
-    var nextBtn = document.getElementById('heroProductNext');
-    var totalPages = pages.length;
-    var currentPage = 0;
-
-    function update() {
-      track.style.transform = 'translateX(-' + (currentPage * 100) + '%)';
-      prevBtn.className = currentPage > 0 ? 'active arrow-flip' : 'disabled arrow-flip';
-      nextBtn.className = currentPage < totalPages - 1 ? 'active' : 'disabled';
-    }
-
-    prevBtn.addEventListener('click', function() {
-      if (currentPage > 0) { currentPage--; update(); }
-    });
-    nextBtn.addEventListener('click', function() {
-      if (currentPage < totalPages - 1) { currentPage++; update(); }
-    });
-
     update();
   })();
 
