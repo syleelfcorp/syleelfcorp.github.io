@@ -374,7 +374,11 @@
     display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:1px;
     background:var(--row-hover);
   }
-  .folder-tile .cover img{width:100%;height:100%;object-fit:cover;}
+  .folder-tile .cover img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .4s cubic-bezier(.2,.6,.2,1);
+  }
+  .folder-tile:hover .cover img{transform:scale(1.1);}
   .folder-tile .cover .big{grid-row:1 / span 2;}
   .folder-tile .cover.cover-empty{
     display:flex;align-items:center;justify-content:center;
@@ -386,7 +390,6 @@
   }
   .folder-tile .ft-name svg{width:15px;height:15px;opacity:.55;flex:none;}
   .folder-tile .ft-count{font-size:var(--fs-sm);color:var(--muted);margin-top:2px;}
-  .folder-tile:hover .cover{outline:2px solid var(--ink);outline-offset:2px;}
   .folder-tile.new .cover{
     border:1px dashed var(--line-strong);background:#fff;
     display:flex;align-items:center;justify-content:center;color:var(--muted);
