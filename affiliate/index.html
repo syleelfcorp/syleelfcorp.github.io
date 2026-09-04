@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>파트너스 크리에이터 탐색</title>
+<title>파트너스 파트너 탐색</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css">
 <style>
   :root{
@@ -506,7 +506,7 @@
     </button>
     <div class="search">
       <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input type="text" id="searchInput" placeholder="브랜드 무드, 착장, 크리에이터 이름으로 검색">
+      <input type="text" id="searchInput" placeholder="브랜드 무드, 착장, 파트너 이름으로 검색">
       <button type="button" id="searchBtn">검색</button>
     </div>
     <nav class="header-nav">
@@ -550,7 +550,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
     </button>
     <div class="page-head folder-head" id="folderHead"></div>
-    <div class="folder-empty" id="folderEmpty" hidden>아직 저장한 크리에이터가 없어요</div>
+    <div class="folder-empty" id="folderEmpty" hidden>아직 저장한 파트너가 없어요</div>
     <div class="grid" id="folderCardGrid"></div>
   </section>
 
@@ -589,8 +589,8 @@
       </div>
     </div>
     <div class="m-right">
-      <h3>유사 크리에이터 <span class="m-sim-count"></span></h3>
-      <div class="m-sim-empty" hidden>겹치는 태그의 크리에이터가 아직 없어요</div>
+      <h3>유사 파트너 <span class="m-sim-count"></span></h3>
+      <div class="m-sim-empty" hidden>겹치는 태그의 파트너가 아직 없어요</div>
       <div class="m-sim"></div>
     </div>
   </div>
@@ -870,7 +870,7 @@
       + '<div class="sm-sep"></div>'
       + '<button class="sm-new"><span class="sm-thumb">' + plusSm + '</span>'
       + '<span class="sm-meta"><span class="sm-name">새 폴더 만들기</span>'
-      + '<span class="sm-count">크리에이터 정리</span></span></button>';
+      + '<span class="sm-count">파트너 정리</span></span></button>';
     }
     btn.addEventListener('click', function(e){
       e.stopPropagation();
@@ -1184,7 +1184,7 @@
     }).join('');
     modal.querySelector('.m-tags').innerHTML = c.t.map(function(t){ return '<span>' + t + '</span>'; }).join('');
     modal.querySelector('.m-bio').textContent =
-      c.name + ' 님은 ' + c.t.join(', ') + ' 무드를 중심으로 일상 착장을 기록하는 크리에이터입니다. '
+      c.name + ' 님은 ' + c.t.join(', ') + ' 무드를 중심으로 일상 착장을 기록하는 파트너입니다. '
       + '브랜드 협업 시 자연스러운 데일리 룩 콘텐츠와 높은 저장율에 강점이 있습니다.';
     modal.querySelector('.m-posts').innerHTML = [1, 2, 3, 4, 5, 6].map(function(k){
       return '<img src="' + imgUrl(idx + k) + '" alt="">';
