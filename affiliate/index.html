@@ -952,13 +952,11 @@
 
   /* ---------- search ---------- */
   var searchGrid = document.getElementById('searchGrid');
-  var curSearch = null, curSort = 'rel', curSearchIdxs = [];
+  var curSearch = null, curSort = 'latest', curSearchIdxs = [];
   var SORTS = [
-    { key:'rel', label:'관련도순' },
     { key:'latest', label:'최신순' },
     { key:'oldest', label:'오래된순' },
-    { key:'popular', label:'인기순' },
-    { key:'random', label:'무작위' }
+    { key:'popular', label:'인기순' }
   ];
   function numOf(s){
     var m = String(s).match(/([\d.]+)\s*(만|천)?/);
@@ -980,7 +978,6 @@
     if(curSort === 'latest') a.sort(function(x, y){ return y - x; });
     else if(curSort === 'oldest') a.sort(function(x, y){ return x - y; });
     else if(curSort === 'popular') a.sort(function(x, y){ return numOf(CREATORS[y].f) - numOf(CREATORS[x].f); });
-    else if(curSort === 'random') a.sort(function(){ return Math.random() - 0.5; });
     return a;
   }
   function renderSortMenu(){
