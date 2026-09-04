@@ -374,12 +374,13 @@
     display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:1px;
     background:var(--row-hover);
   }
+  .folder-tile .cover .cell{overflow:hidden;}
+  .folder-tile .cover .cell.big{grid-row:1 / span 2;}
   .folder-tile .cover img{
     width:100%;height:100%;object-fit:cover;
     transition:transform .4s cubic-bezier(.2,.6,.2,1);
   }
-  .folder-tile:hover .cover img{transform:scale(1.1);}
-  .folder-tile .cover .big{grid-row:1 / span 2;}
+  .folder-tile:hover .cover img{transform:scale(1.05);}
   .folder-tile .cover.cover-empty{
     display:flex;align-items:center;justify-content:center;
     color:var(--muted-2);font-size:var(--fs-sm);
@@ -1058,9 +1059,9 @@
         var pics = [];
         for(var p = 0; p < 3; p++) pics.push(latest[p % latest.length]);
         cover = '<div class="cover">'
-          + '<img class="big" src="' + imgUrl(pics[0]) + '" alt="">'
-          + '<img src="' + imgUrl(pics[1]) + '" alt="">'
-          + '<img src="' + imgUrl(pics[2]) + '" alt="">'
+          + '<div class="cell big"><img src="' + imgUrl(pics[0]) + '" alt=""></div>'
+          + '<div class="cell"><img src="' + imgUrl(pics[1]) + '" alt=""></div>'
+          + '<div class="cell"><img src="' + imgUrl(pics[2]) + '" alt=""></div>'
           + '</div>';
       }
       tile.innerHTML = cover
