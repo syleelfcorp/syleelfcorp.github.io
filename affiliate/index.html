@@ -723,6 +723,9 @@
     popBackdrop.hidden = true;
   }
   popBackdrop.addEventListener('click', closeAll);
+  document.addEventListener('click', function(e){
+    if(bar.classList.contains('pop-active') && !e.target.closest('.f-btn') && !e.target.closest('.pop')) closeAll();
+  });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeAll(); });
 
   reset.addEventListener('click', function(e){
