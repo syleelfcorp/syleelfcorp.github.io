@@ -333,6 +333,26 @@
 
   .folder-empty{padding:96px 0;text-align:center;color:var(--muted);font-size:var(--fs-sm);}
 
+  .search-head{
+    display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+  .sort-wrap{position:relative;flex:none;}
+  .sort-btn{
+    height:44px;padding:0 15px;
+    border:1px solid var(--line-strong);border-radius:999px;
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:var(--fs-sm);font-weight:600;color:var(--ink);
+    transition:border-color .12s ease;
+  }
+  .sort-btn:hover{border-color:var(--ink);}
+  .sort-btn .sb-ico{width:15px;height:15px;flex:none;}
+  .sort-btn .caret{width:11px;height:11px;opacity:.55;transition:transform .15s ease;}
+  .sort-btn.is-open .caret{transform:rotate(180deg);}
+  .sort-menu{left:auto;right:0;min-width:184px;}
+  .sort-menu .opt{justify-content:space-between;}
+
+  .search-empty{padding:96px 0;text-align:center;color:var(--muted);font-size:var(--fs-sm);}
+
   .toast{
     position:fixed;left:50%;bottom:32px;transform:translateX(-50%);
     background:var(--ink);color:#fff;
@@ -477,8 +497,8 @@
     <div class="logo" id="navHome">파트너스</div>
     <div class="search">
       <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input type="text" placeholder="브랜드 무드, 착장, 크리에이터 이름으로 검색">
-      <button type="button">검색</button>
+      <input type="text" id="searchInput" placeholder="브랜드 무드, 착장, 크리에이터 이름으로 검색">
+      <button type="button" id="searchBtn">검색</button>
     </div>
     <nav class="header-nav">
       <a href="#" id="navFolders">폴더</a>
@@ -492,6 +512,22 @@
   <section id="view-explore" class="view">
     <div class="filterbar" id="filterbar"></div>
     <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="view-search" class="view" hidden>
+    <div class="page-head search-head">
+      <h1 id="searchTitle"></h1>
+      <div class="sort-wrap">
+        <button class="sort-btn" type="button" id="sortBtn">
+          <svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 4v16m0 0-3-3m3 3 3-3M17 20V4m0 0-3 3m3-3 3 3"/></svg>
+          <span id="sortLabel">관련도순</span>
+          <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+        </button>
+        <div class="pop sort-menu" id="sortMenu" hidden></div>
+      </div>
+    </div>
+    <div class="search-empty" id="searchEmpty" hidden>검색 결과가 없어요</div>
+    <div class="grid" id="searchGrid"></div>
   </section>
 
   <section id="view-folders" class="view" hidden>
@@ -910,13 +946,101 @@
 
   function showView(name){
     curView = name;
-    ['explore', 'folders', 'folder'].forEach(function(v){
+    ['explore', 'search', 'folders', 'folder'].forEach(function(v){
       document.getElementById('view-' + v).hidden = (v !== name);
     });
-    document.getElementById('navFolders').classList.toggle('is-active', name !== 'explore');
+    document.getElementById('navFolders').classList.toggle('is-active', name === 'folders' || name === 'folder');
     window.scrollTo(0, 0);
   }
   function goExplore(){ showView('explore'); masonry(grid, EXPLORE); }
+
+  /* ---------- search ---------- */
+  var searchGrid = document.getElementById('searchGrid');
+  var curSearch = null, curSort = 'rel';
+  var SORTS = [
+    { key:'rel', label:'관련도순' },
+    { key:'fol-desc', label:'팔로워 많은순' },
+    { key:'fol-asc', label:'팔로워 적은순' },
+    { key:'view-desc', label:'조회수 많은순' }
+  ];
+  function numOf(s){
+    var m = String(s).match(/([\d.]+)\s*(만|천)?/);
+    if(!m) return 0;
+    var v = parseFloat(m[1]);
+    if(m[2] === '만') v *= 10000; else if(m[2] === '천') v *= 1000;
+    return v;
+  }
+  function searchCreators(q){
+    var ql = q.toLowerCase();
+    return CREATORS.map(function(_, i){ return i; }).filter(function(i){
+      var c = CREATORS[i];
+      if(c.name.toLowerCase().indexOf(ql) > -1) return true;
+      return c.t.some(function(t){ return t.indexOf(q) > -1 || q.indexOf(t) > -1; });
+    });
+  }
+  function applySort(idxs){
+    var a = idxs.slice();
+    if(curSort === 'fol-desc') a.sort(function(x, y){ return numOf(CREATORS[y].f) - numOf(CREATORS[x].f); });
+    else if(curSort === 'fol-asc') a.sort(function(x, y){ return numOf(CREATORS[x].f) - numOf(CREATORS[y].f); });
+    else if(curSort === 'view-desc') a.sort(function(x, y){ return numOf(CREATORS[y].v) - numOf(CREATORS[x].v); });
+    return a;
+  }
+  function renderSortMenu(){
+    var menu = document.getElementById('sortMenu');
+    menu.innerHTML = SORTS.map(function(s){
+      return '<button class="opt' + (s.key === curSort ? ' is-sel' : '') + '" data-sort="' + s.key + '">'
+        + '<span>' + s.label + '</span>' + check + '</button>';
+    }).join('');
+    document.getElementById('sortLabel').textContent = (SORTS.filter(function(s){ return s.key === curSort; })[0] || SORTS[0]).label;
+  }
+  function renderSearch(q){
+    curSearch = q;
+    document.getElementById('searchInput').value = q;
+    document.getElementById('searchTitle').textContent = q;
+    renderSortMenu();
+    var idxs = applySort(searchCreators(q));
+    showView('search');
+    var empty = document.getElementById('searchEmpty');
+    if(!idxs.length){
+      empty.hidden = false; searchGrid.hidden = true;
+    } else {
+      empty.hidden = true; searchGrid.hidden = false;
+      searchGrid._cols = null;
+      masonry(searchGrid, idxs);
+    }
+  }
+  (function(){
+    var sortBtn = document.getElementById('sortBtn');
+    var sortMenu = document.getElementById('sortMenu');
+    sortBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = !sortMenu.hidden;
+      sortMenu.hidden = open;
+      sortBtn.classList.toggle('is-open', !open);
+    });
+    sortMenu.addEventListener('click', function(e){
+      e.stopPropagation();
+      var opt = e.target.closest('.opt');
+      if(!opt) return;
+      curSort = opt.dataset.sort;
+      sortMenu.hidden = true;
+      sortBtn.classList.remove('is-open');
+      if(curSearch != null) renderSearch(curSearch);
+    });
+    document.addEventListener('click', function(){
+      sortMenu.hidden = true;
+      sortBtn.classList.remove('is-open');
+    });
+  })();
+
+  function doSearch(){
+    var q = document.getElementById('searchInput').value.trim();
+    if(q) location.hash = 'search/' + encodeURIComponent(q);
+  }
+  document.getElementById('searchBtn').addEventListener('click', doSearch);
+  document.getElementById('searchInput').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') doSearch();
+  });
 
   function renderFolders(){
     folderGrid.innerHTML = '';
@@ -1100,11 +1224,15 @@
     closeDetail();
     var h = location.hash.slice(1);
     var mf = h.match(/^folder\/(\d+)$/);
+    var ms = h.match(/^search\/(.+)$/);
     if(mf && FOLDERS[+mf[1]]){
       renderFolderDetail(+mf[1]);
+    } else if(ms){
+      renderSearch(decodeURIComponent(ms[1]));
     } else if(h === 'folders'){
       renderFolders(); showView('folders');
     } else {
+      if(document.getElementById('searchInput')) document.getElementById('searchInput').value = '';
       goExplore();
     }
   }
@@ -1121,6 +1249,10 @@
     clearTimeout(rt);
     rt = setTimeout(function(){
       if(curView === 'explore') masonry(grid, EXPLORE);
+      else if(curView === 'search' && curSearch != null){
+        var si = applySort(searchCreators(curSearch));
+        if(si.length){ searchGrid._cols = null; masonry(searchGrid, si); }
+      }
       else if(curView === 'folder' && curFolder != null){
         var m = creatorsInFolder(curFolder);
         if(m.length) masonry(folderCardGrid, m);
