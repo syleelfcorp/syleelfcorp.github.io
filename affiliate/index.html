@@ -527,12 +527,7 @@
   <section id="view-search" class="view" hidden>
     <div class="page-head search-head">
       <h1 id="searchTitle"></h1>
-      <div class="sort-wrap">
-        <button class="sort-btn" type="button" id="sortBtn" aria-label="정렬">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 4v16m0 0-3-3m3 3 3-3M17 20V4m0 0-3 3m3-3 3 3"/></svg>
-        </button>
-        <div class="pop sort-menu" id="sortMenu" hidden></div>
-      </div>
+      <span id="searchSortMount"></span>
     </div>
     <div class="search-empty" id="searchEmpty" hidden>검색 결과가 없어요</div>
     <div class="grid" id="searchGrid"></div>
@@ -724,6 +719,7 @@
     });
     bar.classList.remove('pop-active');
     popBackdrop.hidden = true;
+    if(typeof closeSortMenus === 'function') closeSortMenus();
   }
   popBackdrop.addEventListener('click', closeAll);
   document.addEventListener('click', function(e){
@@ -964,15 +960,16 @@
     document.getElementById('navFolders').classList.toggle('is-active', name === 'folders' || name === 'folder');
     window.scrollTo(0, 0);
   }
-  function goExplore(){ showView('explore'); masonry(grid, EXPLORE); }
+  function renderExplore(){ grid._cols = null; masonry(grid, applySort(EXPLORE)); }
+  function goExplore(){ showView('explore'); renderExplore(); }
 
   /* ---------- search ---------- */
   var searchGrid = document.getElementById('searchGrid');
-  var curSearch = null, curSort = 'latest', curSearchIdxs = [];
+  var curSearch = null, curSort = 'follower', curSearchIdxs = [];
   var SORTS = [
-    { key:'latest', label:'최신순' },
-    { key:'oldest', label:'오래된순' },
-    { key:'popular', label:'인기순' }
+    { key:'follower', label:'팔로워 순' },
+    { key:'views', label:'조회수 순' },
+    { key:'joined', label:'최신가입 순' }
   ];
   function numOf(s){
     var m = String(s).match(/([\d.]+)\s*(만|천)?/);
@@ -991,22 +988,57 @@
   }
   function applySort(idxs){
     var a = idxs.slice();
-    if(curSort === 'latest') a.sort(function(x, y){ return y - x; });
-    else if(curSort === 'oldest') a.sort(function(x, y){ return x - y; });
-    else if(curSort === 'popular') a.sort(function(x, y){ return numOf(CREATORS[y].f) - numOf(CREATORS[x].f); });
+    if(curSort === 'follower') a.sort(function(x, y){ return numOf(CREATORS[y].f) - numOf(CREATORS[x].f); });
+    else if(curSort === 'views') a.sort(function(x, y){ return numOf(CREATORS[y].v) - numOf(CREATORS[x].v); });
+    else if(curSort === 'joined') a.sort(function(x, y){ return y - x; });
     return a;
   }
-  function renderSortMenu(){
-    document.getElementById('sortMenu').innerHTML = SORTS.map(function(s){
-      return '<button class="opt' + (s.key === curSort ? ' is-sel' : '') + '" data-sort="' + s.key + '">'
-        + '<span>' + s.label + '</span>' + check + '</button>';
-    }).join('');
+  var SORT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 4v16m0 0-3-3m3 3 3-3M17 20V4m0 0-3 3m3-3 3 3"/></svg>';
+  var sortControls = [];
+  function renderSortMenus(){
+    sortControls.forEach(function(sc){
+      sc.menu.innerHTML = SORTS.map(function(s){
+        return '<button class="opt' + (s.key === curSort ? ' is-sel' : '') + '" data-sort="' + s.key + '">'
+          + '<span>' + s.label + '</span>' + check + '</button>';
+      }).join('');
+    });
   }
+  function closeSortMenus(){
+    sortControls.forEach(function(sc){ sc.menu.hidden = true; sc.btn.classList.remove('is-open'); });
+  }
+  document.addEventListener('click', closeSortMenus);
+  function buildSortControl(onChange){
+    var wrap = document.createElement('div');
+    wrap.className = 'sort-wrap';
+    wrap.innerHTML = '<button class="sort-btn" type="button" aria-label="정렬">' + SORT_ICON + '</button>'
+      + '<div class="pop sort-menu" hidden></div>';
+    var btn = wrap.querySelector('.sort-btn');
+    var menu = wrap.querySelector('.sort-menu');
+    sortControls.push({ btn: btn, menu: menu });
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = !menu.hidden;
+      closeAll();
+      closeSortMenus();
+      if(!open){ menu.hidden = false; btn.classList.add('is-open'); }
+    });
+    menu.addEventListener('click', function(e){
+      e.stopPropagation();
+      var opt = e.target.closest('.opt');
+      if(!opt) return;
+      curSort = opt.dataset.sort;
+      closeSortMenus();
+      renderSortMenus();
+      onChange();
+    });
+    renderSortMenus();
+    return wrap;
+  }
+
   function renderSearch(q){
     curSearch = q;
     document.getElementById('searchInput').value = q;
     document.getElementById('searchTitle').textContent = q;
-    renderSortMenu();
     curSearchIdxs = applySort(searchCreators(q));
     showView('search');
     var empty = document.getElementById('searchEmpty');
@@ -1019,27 +1051,15 @@
     }
   }
   (function(){
-    var sortBtn = document.getElementById('sortBtn');
-    var sortMenu = document.getElementById('sortMenu');
-    sortBtn.addEventListener('click', function(e){
-      e.stopPropagation();
-      var open = !sortMenu.hidden;
-      sortMenu.hidden = open;
-      sortBtn.classList.toggle('is-open', !open);
-    });
-    sortMenu.addEventListener('click', function(e){
-      e.stopPropagation();
-      var opt = e.target.closest('.opt');
-      if(!opt) return;
-      curSort = opt.dataset.sort;
-      sortMenu.hidden = true;
-      sortBtn.classList.remove('is-open');
+    var mount = document.getElementById('searchSortMount');
+    mount.parentNode.insertBefore(buildSortControl(function(){
       if(curSearch != null) renderSearch(curSearch);
-    });
-    document.addEventListener('click', function(){
-      sortMenu.hidden = true;
-      sortBtn.classList.remove('is-open');
-    });
+    }), mount);
+    mount.remove();
+
+    var es = buildSortControl(function(){ renderExplore(); });
+    es.style.marginLeft = 'auto';
+    bar.appendChild(es);
   })();
 
   function doSearch(){
@@ -1257,7 +1277,7 @@
   window.addEventListener('resize', function(){
     clearTimeout(rt);
     rt = setTimeout(function(){
-      if(curView === 'explore') masonry(grid, EXPLORE);
+      if(curView === 'explore') masonry(grid, applySort(EXPLORE));
       else if(curView === 'search' && curSearchIdxs.length){
         searchGrid._cols = null; masonry(searchGrid, curSearchIdxs);
       }
