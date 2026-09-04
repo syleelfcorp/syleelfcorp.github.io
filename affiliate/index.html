@@ -97,7 +97,10 @@
   .filterbar{
     display:flex;align-items:center;gap:10px;flex-wrap:wrap;
     padding:22px 0 4px;
+    position:relative;
   }
+  .filterbar.pop-active{z-index:230;}
+  .pop-backdrop{position:fixed;inset:0;z-index:210;}
   .f-item{position:relative;}
   .f-btn{
     height:44px;padding:0 17px;
@@ -153,8 +156,8 @@
   .opt .check{width:16px;height:16px;opacity:0;flex:none;}
   .opt.is-sel .check{opacity:1;}
 
-  .pop-group + .pop-group{margin-top:16px;}
-  .pop-group .g-label{font-size:var(--fs-xs);color:var(--muted);margin:0 2px 9px;}
+  .pop-group + .pop-group{margin-top:24px;}
+  .pop-group .g-label{font-size:var(--fs-sm);color:var(--muted);margin:0 2px 9px;}
   .pop-chips{display:flex;flex-wrap:wrap;gap:8px;}
   .chip{
     height:40px;padding:0 16px;
@@ -511,6 +514,7 @@
 
 </main>
 
+<div class="pop-backdrop" id="popBackdrop" hidden></div>
 <div class="toast" id="toast" hidden></div>
 
 <div class="modal-scrim" id="detailModal" hidden>
@@ -574,6 +578,7 @@
   var check = '<svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8.5 6.5 12 13 4.5"/></svg>';
 
   var bar = document.getElementById('filterbar');
+  var popBackdrop = document.getElementById('popBackdrop');
 
   FILTERS.forEach(function(f){
     var item = document.createElement('div');
@@ -631,7 +636,12 @@
       e.stopPropagation();
       var open = btn.classList.contains('is-open');
       closeAll();
-      if(!open){ btn.classList.add('is-open'); pop.hidden = false; }
+      if(!open){
+        btn.classList.add('is-open');
+        pop.hidden = false;
+        bar.classList.add('pop-active');
+        popBackdrop.hidden = false;
+      }
     });
     pop.addEventListener('click', function(e){ e.stopPropagation(); });
 
@@ -667,8 +677,10 @@
       b.classList.remove('is-open');
       b.parentElement.querySelector('.pop').hidden = true;
     });
+    bar.classList.remove('pop-active');
+    popBackdrop.hidden = true;
   }
-  document.addEventListener('click', closeAll);
+  popBackdrop.addEventListener('click', closeAll);
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeAll(); });
 
   reset.addEventListener('click', function(e){
