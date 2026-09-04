@@ -311,11 +311,13 @@
   .page-head .sub{font-size:var(--fs-sm);color:var(--muted);margin-top:4px;}
 
   .back{
-    display:inline-flex;align-items:center;gap:5px;
-    margin-top:24px;font-size:var(--fs-sm);color:var(--muted);
+    width:44px;height:44px;margin-top:24px;
+    border:1px solid var(--line-strong);border-radius:999px;
+    display:inline-flex;align-items:center;justify-content:center;color:var(--ink);
+    transition:border-color .12s ease;
   }
-  .back:hover{color:var(--ink);}
-  .back svg{width:15px;height:15px;}
+  .back:hover{border-color:var(--ink);}
+  .back svg{width:17px;height:17px;}
 
   .folder-head{
     display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;
@@ -535,9 +537,8 @@
   </section>
 
   <section id="view-folder" class="view" hidden>
-    <button class="back" type="button" id="folderBack">
+    <button class="back" type="button" id="folderBack" aria-label="폴더 목록으로">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
-      폴더
     </button>
     <div class="page-head folder-head" id="folderHead"></div>
     <div class="folder-empty" id="folderEmpty" hidden>아직 저장한 크리에이터가 없어요</div>
