@@ -36,6 +36,7 @@
   }
 
   *{box-sizing:border-box;margin:0;padding:0;}
+  [hidden]{display:none !important;}
 
   html,body{background:var(--bg);}
   body{
@@ -84,9 +85,11 @@
   }
   .search button:hover{background:var(--point-dark);}
 
+  .logo{cursor:pointer;}
   .header-nav{display:flex;gap:18px;white-space:nowrap;}
   .header-nav a{color:var(--muted);text-decoration:none;font-size:var(--fs-md);}
-  .header-nav a:hover{color:var(--ink);}
+  .header-nav a:hover,.header-nav a.is-active{color:var(--ink);}
+  .header-nav a.is-active{font-weight:600;}
 
   /* ===== Filter bar ===== */
   .filterbar{
@@ -293,12 +296,172 @@
     color:var(--muted-2);font-size:var(--fs-sm);
   }
 
+  /* ===== Views / pages ===== */
+  .page-head{margin:40px 0 20px;}
+  .page-head h1{
+    font-size:32px;font-weight:600;letter-spacing:-0.02em;
+    display:flex;align-items:center;gap:8px;
+  }
+  .page-head h1 svg{width:16px;height:16px;opacity:.55;}
+  .page-head .sub{font-size:var(--fs-sm);color:var(--muted);margin-top:4px;}
+
+  .back{
+    display:inline-flex;align-items:center;gap:5px;
+    margin-top:24px;font-size:var(--fs-sm);color:var(--muted);
+  }
+  .back:hover{color:var(--ink);}
+  .back svg{width:15px;height:15px;}
+
+  .folder-head{
+    display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+  .folder-actions{display:flex;align-items:center;gap:8px;position:relative;flex:none;}
+  .fh-btn{
+    width:42px;height:42px;border-radius:999px;border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;flex:none;color:var(--ink);
+    transition:border-color .12s ease;
+  }
+  .fh-btn:hover{border-color:var(--ink);}
+  .fh-btn svg{width:17px;height:17px;}
+  .folder-menu{left:auto;right:0;}
+  .folder-menu .opt{justify-content:flex-start;}
+
+  .folder-empty{padding:96px 0;text-align:center;color:var(--muted);font-size:var(--fs-sm);}
+
+  .toast{
+    position:fixed;left:50%;bottom:32px;transform:translateX(-50%);
+    background:var(--ink);color:#fff;
+    padding:12px 20px;border-radius:999px;
+    font-size:var(--fs-sm);font-weight:500;
+    z-index:400;box-shadow:0 8px 30px rgba(0,0,0,0.25);
+  }
+
+  .folder-grid{
+    display:grid;gap:24px;margin-top:8px;
+    grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+  }
+  .folder-tile{text-align:left;}
+  .folder-tile .cover{
+    width:100%;aspect-ratio:6/5;border-radius:8px;overflow:hidden;
+    display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:1px;
+    background:var(--row-hover);
+  }
+  .folder-tile .cover img{width:100%;height:100%;object-fit:cover;}
+  .folder-tile .cover .big{grid-row:1 / span 2;}
+  .folder-tile .cover.cover-empty{
+    display:flex;align-items:center;justify-content:center;
+    color:var(--muted-2);font-size:var(--fs-sm);
+  }
+  .folder-tile .ft-name{
+    margin-top:10px;font-size:var(--fs-xl);font-weight:600;
+    display:flex;align-items:center;gap:6px;
+  }
+  .folder-tile .ft-name svg{width:15px;height:15px;opacity:.55;flex:none;}
+  .folder-tile .ft-count{font-size:var(--fs-sm);color:var(--muted);margin-top:2px;}
+  .folder-tile:hover .cover{outline:2px solid var(--ink);outline-offset:2px;}
+  .folder-tile.new .cover{
+    border:1px dashed var(--line-strong);background:#fff;
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+  }
+  .folder-tile.new .cover svg{width:26px;height:26px;}
+
+  /* ===== Detail modal ===== */
+  body.no-scroll{overflow:hidden;}
+  .modal-scrim{
+    position:fixed;inset:0;z-index:300;
+    background:rgba(10,11,13,0.55);
+    -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+    display:flex;align-items:center;justify-content:center;
+    padding:40px;
+  }
+  .modal{
+    width:100%;max-width:none;
+    max-height:calc(100vh - 80px);
+    position:relative;
+    background:#fff;border-radius:16px;overflow:hidden;
+    display:flex;
+  }
+  .modal .m-close{
+    position:absolute;top:14px;right:14px;z-index:6;
+    width:38px;height:38px;border-radius:999px;
+    background:rgba(255,255,255,0.92);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 1px 4px rgba(0,0,0,0.16);
+  }
+  .modal .m-close svg{width:16px;height:16px;}
+
+  .m-left{
+    width:540px;flex:none;
+    overflow-y:auto;
+    border-right:1px solid var(--line);
+  }
+  .m-hero{background:var(--row-hover);aspect-ratio:4/5;}
+  .m-hero img{width:100%;height:100%;object-fit:cover;object-position:center 20%;}
+  .m-left-body{padding:22px 24px;display:flex;flex-direction:column;gap:15px;}
+
+  .m-id{display:flex;align-items:center;gap:12px;}
+  .m-id .ava{width:44px;height:44px;border-radius:999px;object-fit:cover;background:var(--row-hover);flex:none;}
+  .m-id .h{font-size:var(--fs-md);font-weight:600;}
+  .m-id .p{font-size:var(--fs-xs);color:var(--muted);}
+
+  .m-actions{display:flex;gap:8px;position:relative;flex-wrap:wrap;}
+  .m-actions .save{
+    position:static;opacity:1;transform:none;
+    height:38px;padding:0 16px;border:1px solid var(--line-strong);box-shadow:none;
+  }
+  .m-actions .save.is-active{border-color:var(--ink);}
+  .m-actions .save-menu{top:46px;left:0;right:auto;display:none;}
+  .m-actions.menu-open .save-menu{display:block;}
+  .m-actions .ghost{
+    height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line-strong);
+    font-size:var(--fs-sm);font-weight:600;color:var(--ink);text-decoration:none;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .m-actions .ghost:hover{border-color:var(--ink);}
+  .m-actions .ghost svg{width:15px;height:15px;}
+
+  .m-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px 12px;
+    padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .m-stat .n{font-size:var(--fs-md);font-weight:600;}
+  .m-stat .l{font-size:var(--fs-xs);color:var(--muted);margin-top:1px;}
+  .m-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .m-tags span{border:1px solid var(--line-strong);border-radius:999px;padding:3px 10px;font-size:var(--fs-xs);}
+  .m-bio{font-size:var(--fs-xs);color:var(--muted);line-height:1.65;}
+
+  .m-posts-sec h4{font-size:var(--fs-sm);font-weight:600;margin-bottom:8px;}
+  .m-posts{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;}
+  .m-posts img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;background:var(--row-hover);}
+
+  .m-right{
+    flex:1;min-width:0;
+    overflow-y:auto;
+    padding:24px 28px;
+  }
+  .m-right h3{font-size:var(--fs-md);font-weight:600;margin-bottom:18px;}
+  .m-right h3 .m-sim-count{color:var(--muted);font-weight:400;}
+  .m-sim-empty{color:var(--muted);font-size:var(--fs-sm);padding:36px 0;}
+  .m-sim{display:flex;gap:14px;align-items:flex-start;}
+  .m-sim .col{gap:14px;}
+  .m-sim .card .card-top{top:8px;left:12px;right:12px;}
+  .m-sim .card .card-panel{left:12px;right:12px;bottom:12px;}
+
+  @media (max-width:920px){
+    .modal{flex-direction:column;overflow-y:auto;max-height:calc(100vh - 40px);}
+    .modal-scrim{padding:20px;}
+    .m-left{width:auto;border-right:none;border-bottom:1px solid var(--line);overflow:visible;}
+    .m-right{overflow:visible;}
+    .m-hero{aspect-ratio:3/2;}
+  }
+
   @media (max-width:640px){
     :root{--pad-x:16px;}
     .header-inner{flex-wrap:wrap;height:auto;padding:12px 0;gap:10px 20px;}
     .search{order:3;max-width:none;flex-basis:100%;margin:0;}
-    .header-nav{display:none;}
     .pop.pop-wide{width:calc(100vw - 32px);}
+    .modal-scrim{padding:0;}
+    .modal{border-radius:0;max-height:100vh;min-height:100vh;}
   }
 </style>
 </head>
@@ -306,14 +469,14 @@
 
 <header>
   <div class="wrap header-inner">
-    <div class="logo">파트너스</div>
+    <div class="logo" id="navHome">파트너스</div>
     <div class="search">
       <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input type="text" placeholder="브랜드 무드, 착장, 크리에이터 이름으로 검색">
       <button type="button">검색</button>
     </div>
     <nav class="header-nav">
-      <a href="#">내 파트너</a>
+      <a href="#" id="navFolders">폴더</a>
       <a href="#">관리자</a>
     </nav>
   </div>
@@ -321,13 +484,69 @@
 
 <main class="wrap">
 
-  <div class="filterbar" id="filterbar"></div>
+  <section id="view-explore" class="view">
+    <div class="filterbar" id="filterbar"></div>
+    <div class="grid" id="grid"></div>
+  </section>
 
-  <div class="grid" id="grid"></div>
+  <section id="view-folders" class="view" hidden>
+    <div class="page-head">
+      <h1>폴더</h1>
+      <p class="sub">6개 폴더</p>
+    </div>
+    <div class="folder-grid" id="folderGrid"></div>
+  </section>
 
-  <footer class="wrap">파트너스 어필리에이트 파트너 탐색 및 관리 시스템 목업 v0.4</footer>
+  <section id="view-folder" class="view" hidden>
+    <button class="back" type="button" id="folderBack">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
+      폴더
+    </button>
+    <div class="page-head folder-head" id="folderHead"></div>
+    <div class="folder-empty" id="folderEmpty" hidden>아직 저장한 크리에이터가 없어요</div>
+    <div class="grid" id="folderCardGrid"></div>
+  </section>
 
 </main>
+
+<div class="toast" id="toast" hidden></div>
+
+<div class="modal-scrim" id="detailModal" hidden>
+  <div class="modal">
+    <button class="m-close" type="button" aria-label="닫기">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="m-left">
+      <div class="m-hero"><img alt=""></div>
+      <div class="m-left-body">
+        <div class="m-id">
+          <img class="ava" alt="">
+          <div><div class="h"></div><div class="p"></div></div>
+        </div>
+        <div class="m-actions">
+          <button class="save" type="button">저장</button>
+          <div class="save-menu"></div>
+          <a class="ghost" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4h6v6M20 4l-9 9M10 6H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5"/></svg>
+            원문 보기
+          </a>
+        </div>
+        <div class="m-stats"></div>
+        <div class="m-tags"></div>
+        <div class="m-bio"></div>
+        <div class="m-posts-sec">
+          <h4>대표 콘텐츠</h4>
+          <div class="m-posts"></div>
+        </div>
+      </div>
+    </div>
+    <div class="m-right">
+      <h3>유사 크리에이터 <span class="m-sim-count"></span></h3>
+      <div class="m-sim-empty" hidden>겹치는 태그의 크리에이터가 아직 없어요</div>
+      <div class="m-sim"></div>
+    </div>
+  </div>
+</div>
 
 <script>
   /* ---------- filter config ---------- */
@@ -486,15 +705,25 @@
     var VIEWS = ['4.2천','7.1천','9.4천','1.1만','1.9만','2.7만','3.6만','4.4만','5.9만','7.7만','10.6만'];
     var pool = LOOK.concat(PERSONA, MOOD);
     var RATIOS = [0.8, 0.66, 0.9, 0.62, 0.78, 1.0, 0.7, 0.85, 0.6, 0.95];
+    var BROAD = {
+      0: ['캐주얼','미니멀','모던','시크','직장인','크리에이터','트렌드세터','쿨','클래식','페미닌'],
+      1: ['캐주얼','컨템포러리','미니멀','엘레강스','뮤즈','트렌드세터','우아','시크','로맨틱','모던']
+    };
     var used = {}, out = [];
     for(var i = 0; i < 50; i++){
       var nm = A[(i * 7 + 3) % A.length] + SEP[i % 4] + B[(i * 13 + 5) % B.length];
       if(used[nm]) nm += (i + 1);
       used[nm] = 1;
-      var tags = [], cnt = 1 + (i % 3);
-      for(var k = 0; k < cnt; k++){
-        var tg = pool[(i * 3 + k * 17) % pool.length];
-        if(tags.indexOf(tg) === -1) tags.push(tg);
+      var tags;
+      if(BROAD[i]){
+        tags = BROAD[i].slice();
+      } else {
+        tags = [];
+        var cnt = 2 + (i % 4);
+        for(var k = 0; k < cnt; k++){
+          var tg = pool[(i * 5 + k * 11) % pool.length];
+          if(tags.indexOf(tg) === -1) tags.push(tg);
+        }
       }
       out.push({
         name: nm,
@@ -507,148 +736,390 @@
     return out;
   })();
 
-  var grid = document.getElementById('grid');
   var CDN = 'https://raw.githubusercontent.com/syleelfcorp/syleelfcorp.github.io/master/affiliate/img/';
+  function pad(n){ return ('0' + n).slice(-2); }
+  function imgUrl(i){ return CDN + 'c-' + pad((i % 50) + 1) + '.jpg'; }
+  function avaUrl(i){ return CDN + 'a-' + pad((i % 50) + 1) + '.jpg'; }
 
-  /* ---------- save folders ---------- */
+  /* ---------- folders + save store ---------- */
   var FOLDERS = [
-    { name:'즐겨찾기', priv:false, base:0 },
-    { name:'25 SS 캠페인', priv:false, base:4 },
-    { name:'뷰티 협업 후보', priv:true, base:7 },
-    { name:'미니멀 무드', priv:false, base:3 },
-    { name:'20대 타겟 크리에이터', priv:false, base:5 },
-    { name:'시즌오프 프로모션', priv:false, base:2 }
+    { name:'즐겨찾기', priv:false },
+    { name:'블랙프라이데이', priv:false },
+    { name:'헤지스여성 FW캠페인', priv:true },
+    { name:'헤지스여성 9월 리스트', priv:false },
+    { name:'직장인 타겟', priv:false },
+    { name:'헤지스여성 SS 시즌오프', priv:false }
   ];
+  var SAVES = CREATORS.map(function(c, i){
+    var s = new Set();
+    if(i % 3 === 1) s.add(1);
+    if(i % 5 === 0) s.add(4);
+    if(c.t.indexOf('미니멀') > -1 || i % 7 === 2) s.add(3);
+    if(i % 4 === 0) s.add(2);
+    if(i % 9 === 3) s.add(5);
+    return s;
+  });
+  function creatorsInFolder(fi){
+    var out = [];
+    SAVES.forEach(function(s, i){ if(s.has(fi)) out.push(i); });
+    return out;
+  }
+  function folderCount(fi){ return creatorsInFolder(fi).length; }
 
+  /* ---------- icons ---------- */
   var checkSm = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.5 8.5 15 16 6"/></svg>';
   var plusSm = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>';
+  var lockSm = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
 
+  /* ---------- shared save menu ---------- */
   function closeMenus(){
-    document.querySelectorAll('.card.menu-open').forEach(function(c){ c.classList.remove('menu-open'); });
+    document.querySelectorAll('.menu-open').forEach(function(e){ e.classList.remove('menu-open'); });
   }
   document.addEventListener('click', closeMenus);
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenus(); });
+  document.addEventListener('click', function(){
+    var mn = document.querySelector('.folder-menu');
+    if(mn) mn.hidden = true;
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      closeMenus(); closeDetail();
+      var mn = document.querySelector('.folder-menu');
+      if(mn) mn.hidden = true;
+    }
+  });
 
-  function renderMenu(state, menu){
-    var rows = FOLDERS.map(function(f, i){
-      var inIt = state.saved.has(i);
-      var cnt = f.base + (inIt ? 1 : 0);
-      return '<button class="sm-row' + (inIt ? ' is-in' : '') + '" data-i="' + i + '">'
-        + '<span class="sm-thumb" style="background:' + TONES[i % TONES.length] + '"></span>'
-        + '<span class="sm-meta">'
-        +   '<span class="sm-name">' + f.name + '</span>'
-        +   '<span class="sm-count">' + cnt + '명' + (f.priv ? ' · 비공개' : '') + '</span>'
-        + '</span>'
-        + '<span class="sm-check">' + checkSm + '</span>'
-        + '</button>';
-    }).join('');
-    menu.innerHTML = rows
+  function folderRowThumb(fi){
+    var m = creatorsInFolder(fi);
+    if(m.length) return '<img class="sm-thumb" src="' + imgUrl(m[0]) + '" alt="">';
+    return '<span class="sm-thumb" style="background:' + TONES[fi % TONES.length] + '"></span>';
+  }
+  function wireSave(scopeEl, idx, btn, menu){
+    function sync(){
+      var n = SAVES[idx].size;
+      btn.textContent = n ? '저장됨' : '저장';
+      btn.classList.toggle('is-active', n > 0);
+    }
+    function render(){
+      menu.innerHTML = FOLDERS.map(function(f, fi){
+        var inIt = SAVES[idx].has(fi);
+        return '<button class="sm-row' + (inIt ? ' is-in' : '') + '" data-i="' + fi + '">'
+          + folderRowThumb(fi)
+          + '<span class="sm-meta"><span class="sm-name">' + f.name + '</span>'
+          + '<span class="sm-count">' + folderCount(fi) + '명' + (f.priv ? ' · 비공개' : '') + '</span></span>'
+          + '<span class="sm-check">' + checkSm + '</span></button>';
+      }).join('')
       + '<div class="sm-sep"></div>'
-      + '<button class="sm-new">'
-      +   '<span class="sm-thumb">' + plusSm + '</span>'
-      +   '<span class="sm-meta"><span class="sm-name">새 폴더 만들기</span>'
-      +   '<span class="sm-count">크리에이터 정리</span></span>'
-      + '</button>';
-  }
-
-  function syncSave(state, btn){
-    var n = state.saved.size;
-    btn.textContent = n ? '저장됨' : '저장';
-    btn.classList.toggle('is-active', n > 0);
-  }
-
-  var cardEls = CREATORS.map(function(c, i){
-    var tone = TONES[i % TONES.length];
-    var nn = ('0' + (i + 1)).slice(-2);
-    var img = CDN + 'c-' + nn + '.jpg';
-    var avatar = CDN + 'a-' + nn + '.jpg';
-    var chips = c.t.slice(0, 3).map(function(x){ return '<span>' + x + '</span>'; }).join('');
-    var el = document.createElement('article');
-    el.className = 'card';
-    el.innerHTML = ''
-      + '<div class="card-media" style="aspect-ratio:' + c.r + ';background:' + tone + '">'
-      +   '<img class="ph" src="' + img + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">'
-      +   '<div class="card-top">'
-      +     '<div class="creator">'
-      +       '<img class="avatar" src="' + avatar + '" alt="" onerror="this.style.visibility=\'hidden\'">'
-      +       '<span class="name">' + c.name + '</span>'
-      +     '</div>'
-      +     '<button class="save" type="button">저장</button>'
-      +   '</div>'
-      +   '<div class="card-panel">'
-      +     '<div class="p-chips">' + chips + '</div>'
-      +     '<div class="metrics"><span>' + c.f + '</span><span>' + c.v + '</span></div>'
-      +   '</div>'
-      + '</div>'
-      + '<div class="save-menu"></div>';
-
-    var state = { saved: new Set() };
-    var saveBtn = el.querySelector('.save');
-    var menu = el.querySelector('.save-menu');
-
-    saveBtn.addEventListener('click', function(e){
+      + '<button class="sm-new"><span class="sm-thumb">' + plusSm + '</span>'
+      + '<span class="sm-meta"><span class="sm-name">새 폴더 만들기</span>'
+      + '<span class="sm-count">크리에이터 정리</span></span></button>';
+    }
+    btn.addEventListener('click', function(e){
       e.stopPropagation();
-      var open = el.classList.contains('menu-open');
+      var open = scopeEl.classList.contains('menu-open');
       closeMenus();
-      if(!open){ renderMenu(state, menu); el.classList.add('menu-open'); }
+      if(!open){ render(); scopeEl.classList.add('menu-open'); }
     });
-
     menu.addEventListener('click', function(e){
       e.stopPropagation();
       var row = e.target.closest('.sm-row');
       if(row){
-        var idx = +row.dataset.i;
-        if(state.saved.has(idx)) state.saved.delete(idx); else state.saved.add(idx);
-        renderMenu(state, menu);
-        syncSave(state, saveBtn);
+        var fi = +row.dataset.i;
+        if(SAVES[idx].has(fi)) SAVES[idx].delete(fi); else SAVES[idx].add(fi);
+        render(); sync();
         return;
       }
       if(e.target.closest('.sm-new')){
         var nm = prompt('새 폴더 이름');
-        if(nm && nm.trim()){
-          FOLDERS.push({ name:nm.trim(), priv:false, base:0 });
-          state.saved.add(FOLDERS.length - 1);
-          renderMenu(state, menu);
-          syncSave(state, saveBtn);
-        }
+        if(nm && nm.trim()){ FOLDERS.push({ name:nm.trim(), priv:false }); SAVES[idx].add(FOLDERS.length - 1); render(); sync(); }
       }
     });
+    sync();
+  }
 
+  /* ---------- card ---------- */
+  function buildCard(idx){
+    var c = CREATORS[idx];
+    var el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = ''
+      + '<div class="card-media" style="aspect-ratio:' + c.r + ';background:' + TONES[idx % TONES.length] + '">'
+      +   '<img class="ph" src="' + imgUrl(idx) + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">'
+      +   '<div class="card-top">'
+      +     '<div class="creator"><img class="avatar" src="' + avaUrl(idx) + '" alt="" onerror="this.style.visibility=\'hidden\'">'
+      +       '<span class="name">' + c.name + '</span></div>'
+      +     '<button class="save" type="button">저장</button>'
+      +   '</div>'
+      +   '<div class="card-panel"><div class="p-chips">'
+      +     c.t.slice(0, 3).map(function(x){ return '<span>' + x + '</span>'; }).join('')
+      +   '</div><div class="metrics"><span>' + c.f + '</span><span>' + c.v + '</span></div></div>'
+      + '</div>'
+      + '<div class="save-menu"></div>';
+    wireSave(el, idx, el.querySelector('.save'), el.querySelector('.save-menu'));
+    el.addEventListener('click', function(e){
+      if(e.target.closest('.save') || e.target.closest('.save-menu')) return;
+      openDetail(idx);
+    });
     return el;
-  });
+  }
 
+  /* ---------- masonry ---------- */
   var COL_W = 340;
-  var currentCols = 0;
-
-  function layoutGrid(){
-    var gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--gutter'), 10) || 32;
-    var n = Math.max(1, Math.floor((grid.clientWidth + gap) / (COL_W + gap)));
-    if(n === currentCols) return;
-    currentCols = n;
-
-    grid.innerHTML = '';
-    var cols = [], heights = [];
+  function masonry(container, indices, colW, gap, minCols){
+    colW = colW || COL_W;
+    gap = gap || 32;
+    minCols = minCols || 1;
+    var n = Math.max(minCols, Math.floor((container.clientWidth + gap) / (colW + gap)));
+    if(container._cols === n && container._len === indices.length) return;
+    container._cols = n; container._len = indices.length;
+    container.innerHTML = '';
+    var cols = [], h = [];
     for(var i = 0; i < n; i++){
-      var col = document.createElement('div');
-      col.className = 'col';
-      grid.appendChild(col);
-      cols.push(col);
-      heights.push(0);
+      var d = document.createElement('div');
+      d.className = 'col';
+      container.appendChild(d);
+      cols.push(d); h.push(0);
     }
-    cardEls.forEach(function(el, idx){
+    indices.forEach(function(idx){
       var k = 0;
-      for(var j = 1; j < n; j++){ if(heights[j] < heights[k]) k = j; }
-      cols[k].appendChild(el);
-      heights[k] += (1 / CREATORS[idx].r) + 0.16;
+      for(var j = 1; j < n; j++){ if(h[j] < h[k]) k = j; }
+      cols[k].appendChild(buildCard(idx));
+      h[k] += (1 / CREATORS[idx].r) + 0.16;
     });
   }
 
-  layoutGrid();
+  /* ---------- views ---------- */
+  var grid = document.getElementById('grid');
+  var folderGrid = document.getElementById('folderGrid');
+  var folderCardGrid = document.getElementById('folderCardGrid');
+  var EXPLORE = CREATORS.map(function(_, i){ return i; });
+  var curFolder = null, curView = 'explore';
+
+  function showView(name){
+    curView = name;
+    ['explore', 'folders', 'folder'].forEach(function(v){
+      document.getElementById('view-' + v).hidden = (v !== name);
+    });
+    document.getElementById('navFolders').classList.toggle('is-active', name !== 'explore');
+    window.scrollTo(0, 0);
+  }
+  function goExplore(){ showView('explore'); masonry(grid, EXPLORE); }
+
+  function renderFolders(){
+    folderGrid.innerHTML = '';
+    FOLDERS.forEach(function(f, fi){
+      var m = creatorsInFolder(fi);
+      var tile = document.createElement('button');
+      tile.type = 'button'; tile.className = 'folder-tile';
+      var cover;
+      if(!m.length){
+        cover = '<div class="cover cover-empty">비어 있음</div>';
+      } else {
+        var latest = m.slice().reverse();
+        var pics = [];
+        for(var p = 0; p < 3; p++) pics.push(latest[p % latest.length]);
+        cover = '<div class="cover">'
+          + '<img class="big" src="' + imgUrl(pics[0]) + '" alt="">'
+          + '<img src="' + imgUrl(pics[1]) + '" alt="">'
+          + '<img src="' + imgUrl(pics[2]) + '" alt="">'
+          + '</div>';
+      }
+      tile.innerHTML = cover
+        + '<div class="ft-name">' + (f.priv ? lockSm : '') + f.name + '</div>'
+        + '<div class="ft-count">' + m.length + '명</div>';
+      tile.addEventListener('click', function(){ openFolder(fi); });
+      folderGrid.appendChild(tile);
+    });
+    var nw = document.createElement('button');
+    nw.type = 'button'; nw.className = 'folder-tile new';
+    nw.innerHTML = '<div class="cover">' + plusSm + '</div><div class="ft-name">새 폴더 만들기</div><div class="ft-count">&nbsp;</div>';
+    nw.addEventListener('click', function(){
+      var n = prompt('새 폴더 이름');
+      if(n && n.trim()){ FOLDERS.push({ name:n.trim(), priv:false }); renderFolders(); }
+    });
+    folderGrid.appendChild(nw);
+    document.querySelector('#view-folders .sub').textContent = FOLDERS.length + '개 폴더';
+  }
+
+  var linkSm = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M9 15l6-6M11 6l1-1a4 4 0 0 1 6 6l-1 1M13 18l-1 1a4 4 0 0 1-6-6l1-1"/></svg>';
+  var dotsSm = '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg>';
+
+  var toastEl = document.getElementById('toast');
+  var toastT;
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.hidden = false;
+    clearTimeout(toastT);
+    toastT = setTimeout(function(){ toastEl.hidden = true; }, 1800);
+  }
+
+  function renderFolderDetail(fi){
+    curFolder = fi;
+    var f = FOLDERS[fi];
+    var m = creatorsInFolder(fi);
+    var head = document.getElementById('folderHead');
+    head.innerHTML =
+      '<div><h1>' + (f.priv ? lockSm : '') + f.name + '</h1>'
+      + '<p class="sub">' + m.length + '명 · ' + (f.priv ? '비공개' : '공개') + '</p></div>'
+      + '<div class="folder-actions">'
+      +   '<button class="fh-btn share" type="button" aria-label="공유 링크 복사">' + linkSm + '</button>'
+      +   '<button class="fh-btn more" type="button" aria-label="더보기">' + dotsSm + '</button>'
+      +   '<div class="pop folder-menu" hidden>'
+      +     '<button class="opt" data-act="priv"><span>' + (f.priv ? '공개로 전환' : '비공개로 전환') + '</span></button>'
+      +     '<button class="opt" data-act="rename"><span>폴더명 변경</span></button>'
+      +   '</div>'
+      + '</div>';
+
+    var actions = head.querySelector('.folder-actions');
+    var menu = head.querySelector('.folder-menu');
+    head.querySelector('.share').addEventListener('click', function(e){
+      e.stopPropagation();
+      var url = location.href.split('#')[0] + '#folder/' + fi;
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(url).then(function(){ toast('링크가 복사되었어요'); }, function(){ toast('링크가 복사되었어요'); });
+      } else {
+        toast('링크가 복사되었어요');
+      }
+    });
+    head.querySelector('.more').addEventListener('click', function(e){
+      e.stopPropagation();
+      menu.hidden = !menu.hidden;
+    });
+    menu.addEventListener('click', function(e){
+      e.stopPropagation();
+      var opt = e.target.closest('.opt');
+      if(!opt) return;
+      menu.hidden = true;
+      if(opt.dataset.act === 'priv'){
+        f.priv = !f.priv;
+        renderFolderDetail(fi);
+        toast(f.priv ? '비공개로 전환했어요' : '공개로 전환했어요');
+      } else if(opt.dataset.act === 'rename'){
+        var nm = prompt('폴더명 변경', f.name);
+        if(nm && nm.trim()){ f.name = nm.trim(); renderFolderDetail(fi); }
+      }
+    });
+    showView('folder');
+    var empty = document.getElementById('folderEmpty');
+    if(!m.length){
+      empty.hidden = false; folderCardGrid.hidden = true;
+    } else {
+      empty.hidden = true; folderCardGrid.hidden = false;
+      folderCardGrid._cols = null;
+      masonry(folderCardGrid, m);
+    }
+  }
+
+  function openFolder(fi){ location.hash = 'folder/' + fi; }
+
+  /* ---------- detail modal ---------- */
+  var modal = document.getElementById('detailModal');
+  function similar(idx){
+    var mine = CREATORS[idx].t;
+    return CREATORS.map(function(c, i){
+      return { i:i, s:c.t.filter(function(t){ return mine.indexOf(t) > -1; }).length };
+    }).filter(function(o){ return o.i !== idx && o.s > 0; })
+      .sort(function(a, b){ return b.s - a.s || a.i - b.i; })
+      .map(function(o){ return o.i; })
+      .slice(0, 100);
+  }
+  var curDetail = null;
+  function openDetail(idx){
+    curDetail = idx;
+    var c = CREATORS[idx];
+    modal.querySelector('.m-hero img').src = imgUrl(idx);
+    modal.querySelector('.m-id .ava').src = avaUrl(idx);
+    modal.querySelector('.m-id .h').textContent = c.name;
+    modal.querySelector('.m-id .p').textContent = '인스타그램 · 서울';
+    var stats = [
+      ['팔로워', c.f.replace('팔로워 ', '')],
+      ['평균 조회수', c.v.replace('조회수 ', '')],
+      ['게시물', (140 + (idx * 13) % 500)]
+    ];
+    modal.querySelector('.m-stats').innerHTML = stats.map(function(s){
+      return '<div class="m-stat"><div class="n">' + s[1] + '</div><div class="l">' + s[0] + '</div></div>';
+    }).join('');
+    modal.querySelector('.m-tags').innerHTML = c.t.map(function(t){ return '<span>' + t + '</span>'; }).join('');
+    modal.querySelector('.m-bio').textContent =
+      c.name + ' 님은 ' + c.t.join(', ') + ' 무드를 중심으로 일상 착장을 기록하는 크리에이터입니다. '
+      + '브랜드 협업 시 자연스러운 데일리 룩 콘텐츠와 높은 저장율에 강점이 있습니다.';
+    modal.querySelector('.m-posts').innerHTML = [1, 2, 3, 4, 5, 6].map(function(k){
+      return '<img src="' + imgUrl(idx + k) + '" alt="">';
+    }).join('');
+
+    var act = modal.querySelector('.m-actions');
+    var ob = act.querySelector('.save');
+    var nb = ob.cloneNode(true); ob.replaceWith(nb);
+    var om = act.querySelector('.save-menu');
+    var nm = document.createElement('div'); nm.className = 'save-menu'; om.replaceWith(nm);
+    wireSave(act, idx, nb, nm);
+
+    modal.hidden = false;
+    document.body.classList.add('no-scroll');
+
+    var sims = similar(idx);
+    modal.querySelector('.m-sim-count').textContent = sims.length;
+    var sim = modal.querySelector('.m-sim');
+    var simEmpty = modal.querySelector('.m-sim-empty');
+    if(!sims.length){
+      simEmpty.hidden = false; sim.hidden = true;
+    } else {
+      simEmpty.hidden = true; sim.hidden = false;
+      sim._cols = null;
+      masonry(sim, sims, 210, 14, 2);
+    }
+    modal.querySelector('.m-left').scrollTop = 0;
+    modal.querySelector('.m-right').scrollTop = 0;
+  }
+  function closeDetail(){
+    if(modal.hidden) return;
+    closeMenus();
+    modal.hidden = true;
+    curDetail = null;
+    document.body.classList.remove('no-scroll');
+  }
+  modal.addEventListener('click', function(e){
+    if(e.target === modal || e.target.closest('.m-close')) closeDetail();
+  });
+
+  /* ---------- nav + init ---------- */
+  function route(){
+    closeDetail();
+    var h = location.hash.slice(1);
+    var mf = h.match(/^folder\/(\d+)$/);
+    if(mf && FOLDERS[+mf[1]]){
+      renderFolderDetail(+mf[1]);
+    } else if(h === 'folders'){
+      renderFolders(); showView('folders');
+    } else {
+      goExplore();
+    }
+  }
+  window.addEventListener('hashchange', route);
+
+  document.getElementById('navHome').addEventListener('click', function(){ location.hash = 'explore'; });
+  document.getElementById('navFolders').addEventListener('click', function(e){
+    e.preventDefault(); location.hash = 'folders';
+  });
+  document.getElementById('folderBack').addEventListener('click', function(){ location.hash = 'folders'; });
+
   var rt;
   window.addEventListener('resize', function(){
     clearTimeout(rt);
-    rt = setTimeout(layoutGrid, 120);
+    rt = setTimeout(function(){
+      if(curView === 'explore') masonry(grid, EXPLORE);
+      else if(curView === 'folder' && curFolder != null){
+        var m = creatorsInFolder(curFolder);
+        if(m.length) masonry(folderCardGrid, m);
+      }
+      if(curDetail != null){
+        var sim = modal.querySelector('.m-sim');
+        var sims = similar(curDetail);
+        if(sims.length){ sim._cols = null; masonry(sim, sims, 210, 14, 2); }
+      }
+    }, 120);
   });
+
+  route();
 </script>
 
 </body>
