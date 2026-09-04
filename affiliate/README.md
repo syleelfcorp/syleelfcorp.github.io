@@ -4,6 +4,7 @@
 
 - 실행: `affiliate/index.html` 을 브라우저에서 열기
 - 라이브: https://syleelfcorp.github.io/affiliate/
+- **디자인 정의서: `affiliate/DESIGN.md`** (토큰·컴포넌트·인터랙션 전체 스펙)
 - 이미지: `affiliate/img/` (c-01~50 크리에이터 사진, a-01~50 아바타 더미)
 
 ## 화면 / 라우팅 (URL 해시)
