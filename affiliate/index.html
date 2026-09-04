@@ -338,16 +338,14 @@
   }
   .sort-wrap{position:relative;flex:none;}
   .sort-btn{
-    height:44px;padding:0 15px;
+    width:44px;height:44px;
     border:1px solid var(--line-strong);border-radius:999px;
-    display:inline-flex;align-items:center;gap:8px;
-    font-size:var(--fs-sm);font-weight:600;color:var(--ink);
-    transition:border-color .12s ease;
+    display:flex;align-items:center;justify-content:center;color:var(--ink);
+    transition:border-color .12s ease, background .12s ease;
   }
   .sort-btn:hover{border-color:var(--ink);}
-  .sort-btn .sb-ico{width:15px;height:15px;flex:none;}
-  .sort-btn .caret{width:11px;height:11px;opacity:.55;transition:transform .15s ease;}
-  .sort-btn.is-open .caret{transform:rotate(180deg);}
+  .sort-btn.is-open{border-color:var(--ink);background:var(--row-hover);}
+  .sort-btn svg{width:17px;height:17px;}
   .sort-menu{left:auto;right:0;min-width:184px;}
   .sort-menu .opt{justify-content:space-between;}
 
@@ -518,10 +516,8 @@
     <div class="page-head search-head">
       <h1 id="searchTitle"></h1>
       <div class="sort-wrap">
-        <button class="sort-btn" type="button" id="sortBtn">
-          <svg class="sb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 4v16m0 0-3-3m3 3 3-3M17 20V4m0 0-3 3m3-3 3 3"/></svg>
-          <span id="sortLabel">관련도순</span>
-          <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+        <button class="sort-btn" type="button" id="sortBtn" aria-label="정렬">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 4v16m0 0-3-3m3 3 3-3M17 20V4m0 0-3 3m3-3 3 3"/></svg>
         </button>
         <div class="pop sort-menu" id="sortMenu" hidden></div>
       </div>
@@ -956,12 +952,13 @@
 
   /* ---------- search ---------- */
   var searchGrid = document.getElementById('searchGrid');
-  var curSearch = null, curSort = 'rel';
+  var curSearch = null, curSort = 'rel', curSearchIdxs = [];
   var SORTS = [
     { key:'rel', label:'관련도순' },
-    { key:'fol-desc', label:'팔로워 많은순' },
-    { key:'fol-asc', label:'팔로워 적은순' },
-    { key:'view-desc', label:'조회수 많은순' }
+    { key:'latest', label:'최신순' },
+    { key:'oldest', label:'오래된순' },
+    { key:'popular', label:'인기순' },
+    { key:'random', label:'무작위' }
   ];
   function numOf(s){
     var m = String(s).match(/([\d.]+)\s*(만|천)?/);
@@ -980,33 +977,32 @@
   }
   function applySort(idxs){
     var a = idxs.slice();
-    if(curSort === 'fol-desc') a.sort(function(x, y){ return numOf(CREATORS[y].f) - numOf(CREATORS[x].f); });
-    else if(curSort === 'fol-asc') a.sort(function(x, y){ return numOf(CREATORS[x].f) - numOf(CREATORS[y].f); });
-    else if(curSort === 'view-desc') a.sort(function(x, y){ return numOf(CREATORS[y].v) - numOf(CREATORS[x].v); });
+    if(curSort === 'latest') a.sort(function(x, y){ return y - x; });
+    else if(curSort === 'oldest') a.sort(function(x, y){ return x - y; });
+    else if(curSort === 'popular') a.sort(function(x, y){ return numOf(CREATORS[y].f) - numOf(CREATORS[x].f); });
+    else if(curSort === 'random') a.sort(function(){ return Math.random() - 0.5; });
     return a;
   }
   function renderSortMenu(){
-    var menu = document.getElementById('sortMenu');
-    menu.innerHTML = SORTS.map(function(s){
+    document.getElementById('sortMenu').innerHTML = SORTS.map(function(s){
       return '<button class="opt' + (s.key === curSort ? ' is-sel' : '') + '" data-sort="' + s.key + '">'
         + '<span>' + s.label + '</span>' + check + '</button>';
     }).join('');
-    document.getElementById('sortLabel').textContent = (SORTS.filter(function(s){ return s.key === curSort; })[0] || SORTS[0]).label;
   }
   function renderSearch(q){
     curSearch = q;
     document.getElementById('searchInput').value = q;
     document.getElementById('searchTitle').textContent = q;
     renderSortMenu();
-    var idxs = applySort(searchCreators(q));
+    curSearchIdxs = applySort(searchCreators(q));
     showView('search');
     var empty = document.getElementById('searchEmpty');
-    if(!idxs.length){
+    if(!curSearchIdxs.length){
       empty.hidden = false; searchGrid.hidden = true;
     } else {
       empty.hidden = true; searchGrid.hidden = false;
       searchGrid._cols = null;
-      masonry(searchGrid, idxs);
+      masonry(searchGrid, curSearchIdxs);
     }
   }
   (function(){
@@ -1249,9 +1245,8 @@
     clearTimeout(rt);
     rt = setTimeout(function(){
       if(curView === 'explore') masonry(grid, EXPLORE);
-      else if(curView === 'search' && curSearch != null){
-        var si = applySort(searchCreators(curSearch));
-        if(si.length){ searchGrid._cols = null; masonry(searchGrid, si); }
+      else if(curView === 'search' && curSearchIdxs.length){
+        searchGrid._cols = null; masonry(searchGrid, curSearchIdxs);
       }
       else if(curView === 'folder' && curFolder != null){
         var m = creatorsInFolder(curFolder);
