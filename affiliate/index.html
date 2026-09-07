@@ -471,6 +471,20 @@
   .m-id .ava{width:44px;height:44px;border-radius:999px;object-fit:cover;background:var(--skel);flex:none;}
   .m-id .h{font-size:var(--fs-md);font-weight:600;}
   .m-id .p{font-size:var(--fs-xs);color:var(--muted);}
+  /* skeleton: mask profile while the hero image loads */
+  .m-left.is-loading .m-id .ava{display:none;}
+  .m-left.is-loading .m-id::before{
+    content:"";flex:none;width:44px;height:44px;border-radius:999px;
+    background:var(--skel-shape);
+  }
+  .m-left.is-loading .m-id .h{
+    color:transparent;width:120px;height:13px;border-radius:5px;
+    background:var(--skel-shape);
+  }
+  .m-left.is-loading .m-id .p{
+    color:transparent;width:80px;height:10px;border-radius:5px;margin-top:7px;
+    background:var(--skel-shape);
+  }
 
   .m-actions{display:flex;gap:8px;position:relative;flex:none;}
   .m-actions .save{
@@ -1219,9 +1233,14 @@
     curDetail = idx;
     var c = CREATORS[idx];
     var hero = modal.querySelector('.m-hero');
+    var mLeft = modal.querySelector('.m-left');
     var heroImg = hero.querySelector('img');
     hero.classList.add('skel');
-    heroImg.onload = heroImg.onerror = function(){ hero.classList.remove('skel'); };
+    mLeft.classList.add('is-loading');
+    heroImg.onload = heroImg.onerror = function(){
+      hero.classList.remove('skel');
+      mLeft.classList.remove('is-loading');
+    };
     heroImg.src = imgUrl(idx);
     modal.querySelector('.m-id .ava').src = avaUrl(idx);
     modal.querySelector('.m-id .h').textContent = c.name;
