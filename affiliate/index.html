@@ -21,6 +21,7 @@
     --row-sel:#ECECEF;
     --skel:#E8EAED;
     --skel-sheen:rgba(255,255,255,0.55);
+    --skel-shape:rgba(20,21,24,0.09);
 
     --fs-xs:13px;
     --fs-sm:14px;
@@ -239,6 +240,17 @@
     color:#fff;font-size:var(--fs-sm);font-weight:500;
     text-shadow:0 1px 2px rgba(0,0,0,0.28);
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  /* skeleton: mask the profile with placeholder shapes while the card image loads */
+  .card-media.skel .creator .avatar{display:none;}
+  .card-media.skel .creator::before{
+    content:"";flex:none;width:26px;height:26px;border-radius:50%;
+    background:var(--skel-shape);
+  }
+  .card-media.skel .creator .name{
+    color:transparent;text-shadow:none;
+    min-width:76px;height:11px;border-radius:5px;
+    background:var(--skel-shape);
   }
   .save{
     height:34px;padding:0 15px;flex:none;
