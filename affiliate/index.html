@@ -19,6 +19,8 @@
     --muted-2:rgba(20,21,24,0.40);
     --row-hover:#F3F3F5;
     --row-sel:#ECECEF;
+    --skel:#E8EAED;
+    --skel-sheen:rgba(255,255,255,0.55);
 
     --fs-xs:13px;
     --fs-sm:14px;
@@ -177,15 +179,35 @@
   .grid{display:flex;gap:var(--gutter);align-items:flex-start;margin-top:24px;}
   .col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:var(--gutter);}
 
+  /* ---------- skeleton ---------- */
+  @keyframes skel-sheen{
+    0%{background-position:150% 0;}
+    100%{background-position:-150% 0;}
+  }
+  .skel{
+    background-color:var(--skel);
+    background-image:linear-gradient(100deg,
+      rgba(255,255,255,0) 38%,
+      var(--skel-sheen) 50%,
+      rgba(255,255,255,0) 62%);
+    background-size:200% 100%;
+    background-repeat:no-repeat;
+    animation:skel-sheen 1.5s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion:reduce){
+    .skel{background-image:none;animation:none;}
+  }
+
   .card{
     margin:0;
     border-radius:var(--radius-card);
     position:relative;
-    background:#e6e8ec;cursor:pointer;
+    background:var(--skel);cursor:pointer;
   }
   .card-media{
     position:relative;width:100%;overflow:hidden;
     border-radius:var(--radius-card);
+    background-color:var(--skel);
   }
   .card-media .ph{
     position:absolute;inset:0;width:100%;height:100%;
@@ -200,6 +222,7 @@
       linear-gradient(to bottom, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0) 22%),
       linear-gradient(to top, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0) 36%);
   }
+  .card-media.skel::after{display:none;}
 
   .card-top{
     position:absolute;top:16px;left:16px;right:16px;z-index:2;
@@ -251,7 +274,7 @@
   .sm-row:hover,.sm-new:hover{background:var(--row-hover);}
   .sm-thumb{
     width:40px;height:40px;border-radius:10px;flex:none;
-    background:#e8e8ea;object-fit:cover;
+    background:var(--skel);object-fit:cover;
   }
   .sm-new .sm-thumb{
     display:flex;align-items:center;justify-content:center;
@@ -372,9 +395,9 @@
   .folder-tile .cover{
     width:100%;aspect-ratio:6/5;border-radius:8px;overflow:hidden;
     display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:1px;
-    background:var(--row-hover);
+    background-color:var(--skel);
   }
-  .folder-tile .cover .cell{overflow:hidden;}
+  .folder-tile .cover .cell{overflow:hidden;background-color:var(--skel);}
   .folder-tile .cover .cell.big{grid-row:1 / span 2;}
   .folder-tile .cover img{
     width:100%;height:100%;object-fit:cover;
@@ -427,13 +450,13 @@
     overflow-y:auto;
     border-right:1px solid var(--line);
   }
-  .m-hero{aspect-ratio:4/5;}
+  .m-hero{aspect-ratio:4/5;background-color:var(--skel);}
   .m-hero img{width:100%;height:100%;object-fit:cover;object-position:center 20%;}
   .m-left-body{padding:22px 24px;display:flex;flex-direction:column;gap:15px;}
 
   .m-idbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
   .m-id{display:flex;align-items:center;gap:12px;min-width:0;}
-  .m-id .ava{width:44px;height:44px;border-radius:999px;object-fit:cover;background:var(--row-hover);flex:none;}
+  .m-id .ava{width:44px;height:44px;border-radius:999px;object-fit:cover;background:var(--skel);flex:none;}
   .m-id .h{font-size:var(--fs-md);font-weight:600;}
   .m-id .p{font-size:var(--fs-xs);color:var(--muted);}
 
@@ -465,7 +488,7 @@
 
   .m-posts-sec h4{font-size:var(--fs-sm);font-weight:600;margin-bottom:8px;}
   .m-posts{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;}
-  .m-posts img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;background:var(--row-hover);}
+  .m-posts img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;background:var(--skel);}
 
   .m-right{
     flex:1;min-width:0;
@@ -740,16 +763,6 @@
   });
 
   /* ---------- dummy cards ---------- */
-  var TONES = [
-    'linear-gradient(150deg,#a7abb4,#7c828d)',
-    'linear-gradient(150deg,#b6bac2,#8b909b)',
-    'linear-gradient(150deg,#9ea7b3,#6f7783)',
-    'linear-gradient(150deg,#b3aebd,#847e93)',
-    'linear-gradient(150deg,#aab0b0,#7d8483)',
-    'linear-gradient(150deg,#c0c2c8,#94969e)',
-    'linear-gradient(150deg,#a2a0ad,#767482)',
-    'linear-gradient(150deg,#9fb0b6,#71858c)'
-  ];
   var CREATORS = (function(){
     var A = ['mina','seoul','noir','soft','room','sunday','plain','grey','classic','daily',
              'atelier','muse','hyung','quiet','seom','rue','studio','linen','noon','urban',
@@ -849,7 +862,7 @@
   function folderRowThumb(fi){
     var m = creatorsInFolder(fi);
     if(m.length) return '<img class="sm-thumb" src="' + imgUrl(m[0]) + '" alt="">';
-    return '<span class="sm-thumb" style="background:' + TONES[fi % TONES.length] + '"></span>';
+    return '<span class="sm-thumb"></span>';
   }
   function wireSave(scopeEl, idx, btn, menu){
     function sync(){
@@ -900,8 +913,8 @@
     var el = document.createElement('article');
     el.className = 'card';
     el.innerHTML = ''
-      + '<div class="card-media" style="aspect-ratio:' + c.r + ';background:' + TONES[idx % TONES.length] + '">'
-      +   '<img class="ph" src="' + imgUrl(idx) + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">'
+      + '<div class="card-media skel" style="aspect-ratio:' + c.r + '">'
+      +   '<img class="ph" src="' + imgUrl(idx) + '" alt="" loading="lazy" onload="this.parentNode.classList.remove(\'skel\')" onerror="this.parentNode.classList.remove(\'skel\')">'
       +   '<div class="card-top">'
       +     '<div class="creator"><img class="avatar" src="' + avaUrl(idx) + '" alt="" onerror="this.style.visibility=\'hidden\'">'
       +       '<span class="name">' + c.name + '</span></div>'
@@ -1085,9 +1098,9 @@
         var pics = [];
         for(var p = 0; p < 3; p++) pics.push(latest[p % latest.length]);
         cover = '<div class="cover">'
-          + '<div class="cell big"><img src="' + imgUrl(pics[0]) + '" alt=""></div>'
-          + '<div class="cell"><img src="' + imgUrl(pics[1]) + '" alt=""></div>'
-          + '<div class="cell"><img src="' + imgUrl(pics[2]) + '" alt=""></div>'
+          + '<div class="cell big skel"><img src="' + imgUrl(pics[0]) + '" alt="" onload="this.parentNode.classList.remove(\'skel\')" onerror="this.parentNode.classList.remove(\'skel\')"></div>'
+          + '<div class="cell skel"><img src="' + imgUrl(pics[1]) + '" alt="" onload="this.parentNode.classList.remove(\'skel\')" onerror="this.parentNode.classList.remove(\'skel\')"></div>'
+          + '<div class="cell skel"><img src="' + imgUrl(pics[2]) + '" alt="" onload="this.parentNode.classList.remove(\'skel\')" onerror="this.parentNode.classList.remove(\'skel\')"></div>'
           + '</div>';
       }
       tile.innerHTML = cover
@@ -1193,7 +1206,11 @@
   function openDetail(idx){
     curDetail = idx;
     var c = CREATORS[idx];
-    modal.querySelector('.m-hero img').src = imgUrl(idx);
+    var hero = modal.querySelector('.m-hero');
+    var heroImg = hero.querySelector('img');
+    hero.classList.add('skel');
+    heroImg.onload = heroImg.onerror = function(){ hero.classList.remove('skel'); };
+    heroImg.src = imgUrl(idx);
     modal.querySelector('.m-id .ava').src = avaUrl(idx);
     modal.querySelector('.m-id .h').textContent = c.name;
     modal.querySelector('.m-id .p').textContent = '인스타그램 · 서울';
