@@ -9,7 +9,7 @@
   /*
     컬러 규칙 (이 5가지 + 배경 흰색만 사용)
     텍스트 #111111 / #444444 / #777777
-    라인   #eeeeee
+    라인   #eeeeee (유형 블록 구분선만 #dddddd)
     포인트 #dc2832
 
     기본 스펙: 1920px 폭 캔버스 (첫 화면 1920x1080 기준, 세로는 내용만큼 길어짐)
@@ -23,6 +23,7 @@
     --t2: #444444;
     --t3: #777777;
     --line: #eeeeee;
+    --line-strong: #dddddd;  /* 본방송 · 재방송 · VOD 블록 구분선 */
     --point: #dc2832;
     --bg: #ffffff;
     --fs-min: 15.6px;    /* 가장 작은 글씨 */
@@ -74,7 +75,7 @@
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: var(--gap);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--line-strong);
     padding: 40px 0 48px;
   }
   .rail { grid-column: 1 / span 2; }
