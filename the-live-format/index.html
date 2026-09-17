@@ -14,7 +14,7 @@
 
     기본 스펙: 1920px 폭 캔버스 (첫 화면 1920x1080 기준, 세로는 내용만큼 길어짐)
              → 브라우저 폭에 맞춰 비율 유지하며 축소/확대
-    그리드: 좌우 여백 100px → 콘텐츠 1720px / 12칸 / 칸 간격 32px
+    그리드: 좌우 여백 100px → 컨텐츠 1720px / 12칸 / 칸 간격 32px
       - 좌측 2칸: 방송 유형 이름(+ 편성 횟수, 목표 거래액)
       - 우측 10칸: 내용 (2 · 4 · 4 칸으로 나눔 → 두 섹션의 열 위치가 동일)
   */
@@ -84,7 +84,7 @@
     font-weight: 700;
     line-height: 1.25;
   }
-  .stats { margin-top: 28px; }
+  .stats { margin-top: 32px; }
   .stats > div + div { margin-top: 20px; }
   .stats dt {
     font-size: var(--fs-min);
@@ -97,15 +97,6 @@
     line-height: 1.35;
     color: var(--t1);
   }
-  .stats dd small {
-    display: block;
-    font-size: var(--fs-min);
-    font-weight: 400;
-    line-height: 1.4;
-    color: var(--t3);
-    margin-bottom: 16px;
-  }
-  .stats dd small:last-child { margin-bottom: 0; }
   .stats dd.amount { color: var(--point); }
 
   /* 내용 영역: 10칸 */
@@ -142,6 +133,7 @@
   }
   .cell.em { color: var(--t1); }
   .cell li + li { margin-top: 6px; }
+  .num li { display: grid; grid-template-columns: 22px 1fr; }
   .sub {
     font-size: var(--fs-min);
     font-weight: 700;
@@ -153,25 +145,16 @@
   .r2  { grid-row: span 2; }
   .cell.key.point { color: var(--point); }
 
-  /* 이미지 자리 — 열 너비에 맞춘 회색 박스 (16:9) */
+  /* 컨텐츠 발행 이미지 — 여백 잘라낸 이미지, 열 너비에 맞춤 (두 장 동일 비율 879:743) */
   .cell.img-cell { border-top: 0; padding-top: 0; }
-  .img-ph {
+  .shot {
+    display: block;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: auto;
     background: var(--line);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--fs-min);
-    color: var(--t3);
-  }
-  .tag {
-    font-size: var(--fs-min);
-    color: var(--t3);
-    margin-right: 8px;
   }
 
-  /* 발송 대상 조건 — 주구매 / 주방문은 한 줄, 추가 조건은 + − 로 줄바꿈 */
+  /* 발송 대상 — 기본 대상 한 줄, 추가(+) · 제외(−) 대상은 줄바꿈 */
   .cond { color: var(--t1); margin-bottom: 8px; }
   .formula li + li { margin-top: 2px; }
   .formula i {
@@ -180,7 +163,6 @@
     color: var(--t3);
     margin-right: 6px;
   }
-  .formula i.or { margin: 0 10px; }
 
 </style>
 </head>
@@ -193,10 +175,10 @@
   </header>
 
   <!-- =========================================================
-       1. 현재 운영중인 방송 유형
+       1. 현재 운영 중인 방송 유형
        ========================================================= -->
   <section class="section">
-    <h1 class="section-title">현재 운영중인 방송 유형</h1>
+    <h1 class="section-title">현재 운영 중인 방송 유형</h1>
 
     <!-- 본방송 -->
     <article class="block">
@@ -204,25 +186,23 @@
         <h2 class="type-name">본방송</h2>
         <dl class="stats">
           <div><dt>편성 횟수</dt><dd>주 2~3회</dd></div>
-          <div><dt>회차 목표 거래액</dt><dd class="amount">5천만원</dd></div>
+          <div><dt>회차 목표 거래액</dt><dd class="amount">5천만 원</dd></div>
         </dl>
       </div></div>
       <div class="body">
         <div class="cell hd s2">편성 유형</div>
         <div class="cell hd s4">편성 기준</div>
-        <div class="cell hd s4">핵심 성과 지표 (KPI)</div>
+        <div class="cell hd s4">핵심 성과 지표(KPI)</div>
 
         <div class="cell key s2">상품</div>
-        <div class="cell s4"><ul><li>신상품 (콜라보/인플루언서 상품 포함)</li><li>이월제품, 라이브전용물량, 시즌성 상품</li></ul></div>
-        <div class="cell em s4">매출 목표 달성 및 신상품 부스팅</div>
+        <div class="cell s4"><ul><li>신상품(콜라보/인플루언서 상품 포함)</li><li>이월 제품, 라이브 전용 물량, 시즌성 상품</li></ul></div>
+        <div class="cell em s4 r3"><ol class="num"><li><span>1.</span><span>매출 목표 달성 및 신상품 부스팅</span></li><li><span>2.</span><span>라이브 채널을 통한 구매 전환율 향상</span></li><li><span>3.</span><span>신규 회원 유입 및 휴면 회원 활성화</span></li></ol></div>
 
         <div class="cell key s2">자사 브랜드</div>
         <div class="cell s4"><ul><li>매출 성과 우수 브랜드</li><li>매출 부진 브랜드</li></ul></div>
-        <div class="cell em s4"><ul><li><span class="tag">우수</span>매출 목표 달성 및 신상품 부스팅</li><li><span class="tag">부진</span>라이브 채널을 통한 구매 전환율 향상</li></ul></div>
 
         <div class="cell key s2">입점 브랜드</div>
-        <div class="cell s4"><ul><li>신규 입점 브랜드, 소비자 인지도 상위 브랜드</li><li>자사 미보유 카테고리 브랜드 (ex. 푸드/리빙 등)</li></ul></div>
-        <div class="cell em s4">신규 회원 유입 및 휴면회원 활성화</div>
+        <div class="cell s4"><ul><li>신규 입점 브랜드, 소비자 인지도 상위 브랜드</li><li>자사 미보유 카테고리 브랜드(ex. 푸드/리빙 등)</li></ul></div>
       </div>
     </article>
 
@@ -232,17 +212,17 @@
         <h2 class="type-name">재방송</h2>
         <dl class="stats">
           <div><dt>편성 횟수</dt><dd>주 3회</dd></div>
-          <div><dt>회차 목표 거래액</dt><dd class="amount">2천만원</dd></div>
+          <div><dt>회차 목표 거래액</dt><dd class="amount">2천만 원</dd></div>
         </dl>
       </div></div>
       <div class="body">
         <div class="cell hd s2">편성 유형</div>
         <div class="cell hd s4">편성 기준</div>
-        <div class="cell hd s4">핵심 성과 지표 (KPI)</div>
+        <div class="cell hd s4">핵심 성과 지표(KPI)</div>
 
         <div class="cell key s2">목표 100% 이상</div>
         <div class="cell s4">성과 검증 방송 기준 100% 전량 재편성</div>
-        <div class="cell em s4 r3"><ul><li>1. 재방문 고객 유도를 통한 추가 매출 창출</li><li>2. 본방송 놓친 고객들을 위한 혜택 제공</li></ul></div>
+        <div class="cell em s4 r3"><ol class="num"><li><span>1.</span><span>재방문 고객 유도를 통한 추가 매출 창출</span></li><li><span>2.</span><span>본방송을 놓친 고객을 위한 혜택 제공</span></li></ol></div>
 
         <div class="cell key s2">목표 80% 이상</div>
         <div class="cell s4">유입 고객 대비 장바구니/위시리스트 비중 기준 선별&nbsp;편성</div>
@@ -257,22 +237,23 @@
       <div class="rail"><div class="rail-inner">
         <h2 class="type-name">VOD</h2>
         <dl class="stats">
-          <div><dt>편성 횟수</dt><dd>주 2회<small>VOD (재방송)</small>스팟성<small>나이트 라이브</small></dd></div>
-          <div><dt>회차 목표 거래액</dt><dd class="amount">5백만원</dd></div>
+          <div><dt>VOD(재방송) 편성 횟수</dt><dd>주 2회</dd></div>
+          <div><dt>나이트 라이브</dt><dd>스팟성</dd></div>
+          <div><dt>회차 목표 거래액</dt><dd class="amount">5백만 원</dd></div>
         </dl>
       </div></div>
       <div class="body">
         <div class="cell hd s2">편성 유형</div>
         <div class="cell hd s4">편성 기준</div>
-        <div class="cell hd s4">핵심 성과 지표 (KPI)</div>
+        <div class="cell hd s4">핵심 성과 지표(KPI)</div>
 
-        <div class="cell key s2">VOD (재방송)</div>
-        <div class="cell s4"><ul><li>주간 실적 베스트 방송 선별 VOD 송출 (상시노출)</li><li>시즌 이슈 연계 콘텐츠 우선 배치</li></ul></div>
+        <div class="cell key s2">VOD(재방송)</div>
+        <div class="cell s4"><ul><li>주간 실적 베스트 방송 선별 VOD 송출(상시 노출)</li><li>시즌 이슈 연계 컨텐츠 우선 배치</li></ul></div>
         <div class="cell em s4">상시 다시보기 아카이빙을 통한 추가 매출 창출</div>
 
-        <div class="cell key s2">나이트 라이브<small>저녁 10시~11시</small></div>
-        <div class="cell s4">본방송+실시간 재방송의 목표 미달성 대비 추가 보완&nbsp;장치</div>
-        <div class="cell em s4">LF몰 저녁 시간대 유입이 올라가는 저녁 10시 이후 고객 타겟 대상 추가 매출&nbsp;창출</div>
+        <div class="cell key s2">나이트 라이브<small>(스팟성, 저녁 10~11시)</small></div>
+        <div class="cell s4">본방송 + 실시간 재방송의 목표 미달성 대비 추가 보완&nbsp;장치</div>
+        <div class="cell em s4">LF몰 저녁 시간대 유입이 올라가는 저녁 10시 이후 고객을 타깃으로 추가 매출&nbsp;창출</div>
       </div>
     </article>
   </section>
@@ -292,25 +273,24 @@
         <div class="cell hd s2">구분</div>
         <div class="cell hd s8">전체 편성 유형</div>
 
-        <div class="cell key s2">앱푸쉬</div>
-        <div class="cell s8"><ul class="formula"><li>주구매(브랜드+카테고리)<i class="or">/</i>주방문(카테고리)</li><li><i>+</i>해당 브랜드 장바구니/위시리스트</li></ul></div>
+        <div class="cell key s2">앱 푸시</div>
+        <div class="cell s8"><ul class="formula"><li>해당 브랜드, 카테고리를 주로 구매한 고객 또는 해당 카테고리를 주로 방문한 고객</li><li><i>+</i>해당 브랜드 상품을 장바구니, 위시리스트에 담은 고객</li></ul></div>
 
         <div class="cell key s2">SMS 발송</div>
-        <div class="cell s8"><ul class="formula"><li>주구매(브랜드+카테고리)<i class="or">/</i>주방문(카테고리)</li><li><i>+</i>해당 브랜드 장바구니/위시리스트</li></ul></div>
+        <div class="cell s8"><ul class="formula"><li>해당 브랜드, 카테고리를 주로 구매한 고객 또는 해당 카테고리를 주로 방문한 고객</li><li><i>+</i>해당 브랜드 상품을 장바구니, 위시리스트에 담은 고객</li></ul></div>
 
-        <div class="cell key s2">외부광고</div>
-        <div class="cell s8">외부 유입광고 + 진행 브랜드 고관여 커뮤니티</div>
+        <div class="cell key s2">외부 광고</div>
+        <div class="cell s8">외부 유입 광고 + 진행 브랜드 고관여 커뮤니티</div>
 
         <div class="cell key s2">운영 방안</div>
-        <div class="cell s4"><p class="sub">상품 · 자사 브랜드</p>타임특가 + 사전 시딩 + 영업 기획전 + LF몰&nbsp;선진행</div>
-        <div class="cell s4"><p class="sub">입점 브랜드</p>입점 브랜드 마케팅 활용 (카톡플친/메타광고 등)<br>신규 유입 및 가입 고객 → LF몰 락인</div>
+        <div class="cell s8"><ol class="num"><li><span>1.</span><span>타임 특가 + 사전 시딩 + 영업 기획전 + LF몰 선진행</span></li><li><span>2.</span><span>입점 브랜드 마케팅 활용(카톡 플친/메타 광고 등)<br>신규 유입 및 가입 고객 → LF몰 락인</span></li></ol></div>
 
         <div class="cell key point s2 r2">컨텐츠 발행</div>
-        <div class="cell s4"><p class="sub">SNS</p>라이브 대표상품 2~3개로 출근룩 또는 리뷰 영상 사전 티징 영상 제작을 통해 라이브 유입&nbsp;연결</div>
-        <div class="cell s4"><p class="sub">나의 패션 클럽</p><ul class="items"><li><b>엘스파 (어필리에이트)</b>라이브 대표상품 2~3개를 2~30명 인플루언서 매칭하여 실제 라이브 매출&nbsp;연결</li><li><b>나의 패션 클럽</b>클러버 4~5명 매칭하여, 라이브 방송 당일 스토리&amp;피드 업로드로 라이브 유입&nbsp;연결</li></ul></div>
-        <!-- 이미지 자리 (나중에 교체) -->
-        <div class="cell img-cell s4"><div class="img-ph">img</div></div>
-        <div class="cell img-cell s4"><div class="img-ph">img</div></div>
+        <div class="cell s4"><p class="sub">SNS</p>라이브 대표 상품 2~3개로 출근룩 또는 리뷰 영상 사전 티징 영상 제작을 통해 라이브 유입&nbsp;연결</div>
+        <div class="cell s4"><p class="sub">나의 패션 클럽</p><ul class="items"><li><b>엘스파(어필리에이트)</b>라이브 대표 상품 2~3개를 인플루언서 2~30명과 매칭하여 실제 라이브 매출&nbsp;연결</li><li><b>나의 패션 클럽</b>클러버 4~5명을 매칭하여 라이브 방송 당일 스토리&amp;피드 업로드로 라이브 유입&nbsp;연결</li></ul></div>
+        <!-- 컨텐츠 발행 예시 이미지 -->
+        <div class="cell img-cell s4"><img class="shot" src="thelive_sns_crop.png" alt="SNS 라이브 사전 티징 컨텐츠 예시"></div>
+        <div class="cell img-cell s4"><img class="shot" src="thelive_mfc_crop.png" alt="나의 패션 클럽 인플루언서 스토리 업로드 예시"></div>
       </div>
     </article>
 
@@ -321,19 +301,19 @@
       </div></div>
       <div class="body">
         <div class="cell hd s2">구분</div>
-        <div class="cell hd s8">목표 100% 이상 · 80% 이상 · 50% 미만</div>
+        <div class="cell hd s8"></div>
 
-        <div class="cell key s2">앱푸쉬</div>
-        <div class="cell s8"><ul class="formula"><li>주구매(브랜드+카테고리)<i class="or">/</i>주방문(카테고리)</li><li><i>+</i>해당 브랜드 장바구니/위시리스트</li><li><i>+</i>방송 시 주문서 진입 후 이탈 고객</li><li><i>−</i>본방송 때 구매 고객</li></ul></div>
+        <div class="cell key s2">앱 푸시</div>
+        <div class="cell s8"><ul class="formula"><li>해당 브랜드, 카테고리를 주로 구매한 고객 또는 해당 카테고리를 주로 방문한 고객</li><li><i>+</i>해당 브랜드 상품을 장바구니, 위시리스트에 담은 고객</li><li><i>+</i>방송 중 주문서 진입 후 이탈한 고객</li><li><i>−</i>본방송에서 이미 구매한 고객(제외)</li></ul></div>
 
         <div class="cell key s2">SMS 발송</div>
-        <div class="cell s8"><ul class="formula"><li>주구매(브랜드+카테고리)<i class="or">/</i>주방문(카테고리)</li><li><i>+</i>해당 브랜드 장바구니/위시리스트</li><li><i>+</i>방송 시 주문서 진입 후 이탈 고객</li><li><i>−</i>본방송 때 구매 고객</li></ul></div>
+        <div class="cell s8"><ul class="formula"><li>해당 브랜드, 카테고리를 주로 구매한 고객 또는 해당 카테고리를 주로 방문한 고객</li><li><i>+</i>해당 브랜드 상품을 장바구니, 위시리스트에 담은 고객</li><li><i>+</i>방송 중 주문서 진입 후 이탈한 고객</li><li><i>−</i>본방송에서 이미 구매한 고객(제외)</li></ul></div>
 
-        <div class="cell key s2">외부광고</div>
+        <div class="cell key s2">외부 광고</div>
         <div class="cell s8">진행 브랜드 고관여 커뮤니티 선별적 진행</div>
 
         <div class="cell key s2">운영 방안</div>
-        <div class="cell s8">사은품 및 본방송 동일 조건 제공 (재방송 운영 가능 재고 확보 必)</div>
+        <div class="cell s8">사은품 및 본방송 동일 조건 제공(재방송 운영 가능 재고 확보 必)</div>
       </div>
     </article>
 
@@ -344,24 +324,24 @@
       </div></div>
       <div class="body">
         <div class="cell hd s2">구분</div>
-        <div class="cell hd s4">VOD (재방송)</div>
-        <div class="cell hd s4">나이트 라이브</div>
+        <div class="cell hd s4">VOD(재방송)</div>
+        <div class="cell hd s4">나이트 라이브(스팟성, 저녁 10~11시)</div>
 
-        <div class="cell key s2">앱푸쉬</div>
-        <div class="cell s4"><p class="cond">LF몰 고객들에게 반응이 큰 브랜드력 높은 건에 한하여&nbsp;진행</p><ul class="formula"><li>주구매(브랜드+카테고리)<i class="or">/</i>주방문(카테고리)</li><li><i>+</i>해당 브랜드 장바구니/위시리스트</li></ul></div>
-        <div class="cell s4">야간푸쉬 수신동의자(총 4만 명)에 한하여 선별적&nbsp;발송</div>
+        <div class="cell key s2">앱 푸시</div>
+        <div class="cell s4"><p class="cond">LF몰 고객들에게 반응이 크고 브랜드력이 높은 건에 한하여&nbsp;진행</p><ul class="formula"><li>해당 브랜드, 카테고리를 주로 구매한 고객 또는 해당 카테고리를 주로 방문한 고객</li><li><i>+</i>해당 브랜드 상품을 장바구니, 위시리스트에 담은 고객</li></ul></div>
+        <div class="cell s4">야간 푸시 수신 동의자(총 4만 명)에 한하여 선별적&nbsp;발송</div>
 
         <div class="cell key s2">SMS 발송</div>
-        <div class="cell s4"><p class="cond">LF몰 고객들에게 반응이 큰 브랜드력 높은 건에 한하여&nbsp;진행</p><ul class="formula"><li>주구매(브랜드+카테고리)<i class="or">/</i>주방문(카테고리)</li><li><i>+</i>해당 브랜드 장바구니/위시리스트</li></ul></div>
+        <div class="cell s4"><p class="cond">LF몰 고객들에게 반응이 크고 브랜드력이 높은 건에 한하여&nbsp;진행</p><ul class="formula"><li>해당 브랜드, 카테고리를 주로 구매한 고객 또는 해당 카테고리를 주로 방문한 고객</li><li><i>+</i>해당 브랜드 상품을 장바구니, 위시리스트에 담은 고객</li></ul></div>
         <div class="cell s4">본방송 후 익일 리텐션 선별적 발송<br>(방송 시 주문서 진입 후 이탈 고객)</div>
 
-        <div class="cell key s2">외부광고</div>
+        <div class="cell key s2">외부 광고</div>
         <div class="cell s4">진행 브랜드 고관여 커뮤니티 선별적 진행</div>
         <div class="cell s4">진행 브랜드 고관여 커뮤니티 선별적 진행</div>
 
         <div class="cell key s2">운영 방안</div>
         <div class="cell s4">앱 푸시 및 팝업 광고 지원을 통한 시청 유입&nbsp;극대화</div>
-        <div class="cell s4">팝업 광고 지원 + 선별적으로 야간 수신동의 푸쉬 (최대&nbsp;4만)</div>
+        <div class="cell s4">팝업 광고 지원 + 선별적 야간 수신 동의 푸시(최대 4만&nbsp;명)</div>
       </div>
     </article>
   </section>
