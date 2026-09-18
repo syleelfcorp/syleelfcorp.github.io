@@ -143,6 +143,9 @@
   }
   .items li + li { margin-top: 12px; }
   .items b { display: block; font-weight: 400; color: var(--t1); }
+  .dots li { display: grid; grid-template-columns: 14px 1fr; }
+  .dots li + li { margin-top: 2px; }
+  .dots i { font-style: normal; color: var(--t3); }
   .r2  { grid-row: span 2; }
   .cell.key.point { color: var(--point); }
 
@@ -153,6 +156,7 @@
     width: 100%;
     height: auto;
   }
+  .shot.gap { margin-top: 20px; }
 
   /* 발송 대상 — 기본 대상 한 줄, 추가(+) · 제외(−) 대상은 줄바꿈 */
   .cond { color: var(--t1); margin-bottom: 8px; }
@@ -287,10 +291,10 @@
 
         <div class="cell key point s2 r2">컨텐츠 발행</div>
         <div class="cell s4"><p class="sub">SNS</p>라이브 대표 상품 2~3개로 출근룩 또는 리뷰 영상 사전 티징 영상 제작을 통해 라이브 유입&nbsp;연결</div>
-        <div class="cell s4"><p class="sub">나의 패션 클럽</p><ul class="items"><li><b>엘스파(어필리에이트)</b>라이브 대표 상품 2~3개를 인플루언서 2~30명과 매칭하여 실제 라이브 매출&nbsp;연결</li><li><b>나의 패션 클럽</b>클러버 4~5명을 매칭하여 라이브 방송 당일 스토리&amp;피드 업로드로 라이브 유입&nbsp;연결</li></ul></div>
+        <div class="cell s4"><p class="sub">나의 패션 클럽</p><ul class="items"><li><b>엘스파(어필리에이트)</b><ul class="dots"><li><i>-</i><span>라이브 대표 상품 2~3개를 인플루언서 2~30명과 매칭하여 SNS 포스팅을 통해 실제 라이브 매출&nbsp;연결</span></li><li><i>-</i><span>인플루언서가 자체 진행하는 오픈 라이브로 제휴 상품의 매출&nbsp;연결</span></li></ul></li><li><b>나의 패션 클럽</b><ul class="dots"><li><i>-</i><span>클러버 4~5명을 매칭하여 라이브 방송 당일 스토리&amp;피드 업로드로 라이브 유입&nbsp;연결</span></li></ul></li></ul></div>
         <!-- 컨텐츠 발행 예시 이미지 -->
         <div class="cell img-cell s4"><img class="shot" src="thelive_sns.png" alt="SNS 라이브 사전 티징 컨텐츠 예시"></div>
-        <div class="cell img-cell s4"><img class="shot" src="thelive_mfc.png" alt="나의 패션 클럽 인플루언서 스토리 업로드 예시"></div>
+        <div class="cell img-cell s4"><img class="shot" src="thelive_mfc.png" alt="나의 패션 클럽 인플루언서 스토리 업로드 예시"><img class="shot gap" src="thelive_openlive.png" alt="인플루언서 오픈 라이브 방송 예시"></div>
       </div>
     </article>
 
