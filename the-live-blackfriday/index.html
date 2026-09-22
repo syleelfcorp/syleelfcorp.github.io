@@ -17,7 +17,7 @@
     그리드: 좌우 여백 100px → 컨텐츠 1720px / 12칸 / 칸 간격 32px
       - 좌측 2칸: 항목 이름
       - 우측 10칸: 내용
-    폰트: 가장 작은 글씨 15.6 / 본문 16.8 / 강조 22 / 항목 이름 30 / 섹션 제목 44
+    폰트: 가장 작은 글씨 15.6 / 본문 16.8 / 상단 요약 18 / 탭 28 / 항목 이름 30 / 섹션 제목 32 / 문서 제목 44
   */
   :root {
     --t1: #111111;
@@ -66,7 +66,7 @@
   }
   .meta { display: flex; gap: 80px; margin-top: 32px; }
   .meta dt { font-size: var(--fs-min); font-weight: 700; color: var(--t3); }
-  .meta dd { font-size: 22px; font-weight: 700; line-height: 1.35; color: var(--t1); }
+  .meta dd { font-size: 18px; font-weight: 700; line-height: 1.35; color: var(--t1); }
 
   /* ---------- 탭 ---------- */
   .tabs {
@@ -77,7 +77,7 @@
   }
   .tab-btn {
     font-family: inherit;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: -0.02em;
@@ -98,7 +98,7 @@
   /* ---------- 섹션 ---------- */
   .section { margin-top: 88px; }
   .section-title {
-    font-size: 44px;
+    font-size: 32px;
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: -0.035em;
@@ -145,8 +145,9 @@
   }
   tbody td:first-child { font-weight: 700; color: var(--t1); }
   tbody td.gray, tbody td:first-child.gray { font-weight: 400; color: var(--t3); }
+  /* 숨김 처리한 열 (B 편성 구조 표: 편성 구조 · 시간대) */
+  table.hide-right th:not(:first-child), table.hide-right td:not(:first-child) { display: none; }
   .em { color: var(--point); font-weight: 700; }
-  .tag { font-size: var(--fs-min); font-weight: 400; color: var(--t3); }
   .pr-h { color: var(--point); font-weight: 700; }
   .pr-m { color: var(--t3); font-weight: 700; }
 
@@ -200,7 +201,7 @@
       <h2 class="section-title">타사 레퍼런스</h2>
 
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">편성 구조<small>공통</small></p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">편성 구조</p></div></div>
         <div class="body">
           <table>
             <thead><tr><th style="width:20%">사례</th><th>편성 구조</th><th style="width:20%">시간대</th></tr></thead>
@@ -216,7 +217,7 @@
       </div>
 
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">블프 연계 성과<small>A 트랙 근거</small></p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">블프 연계 성과</p></div></div>
         <div class="body">
           <table>
             <thead><tr><th style="width:16%">플랫폼</th><th style="width:40%">사례</th><th>성과</th></tr></thead>
@@ -225,12 +226,11 @@
               <tr><td>에이블리</td><td>정기 행사 메가세일 (2025.10) 기간 쇼핑몰 라이브</td><td>언더비 <span class="em">24배(2342%)</span>, 베니토 17배(1628%), 베이델리 4.5배(350%)</td></tr>
             </tbody>
           </table>
-          <p class="note">위 성과는 대형 프로모션(전관성 행사)에 라이브를 연계했을 때의 사례로, A 트랙의 직접 근거입니다. 거래액 배수는 직전 주 일평균 기준선과 비교한 값이며 2030 저,중가 쇼핑몰 성과이므로 객단가 15-25만원 상품에 그대로 대입할 수 없습니다.</p>
         </div>
       </div>
 
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">현재 라이브 노출 방식<small>공통</small></p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">현재 라이브 노출 방식</p></div></div>
         <div class="body">
           <table>
             <thead><tr><th style="width:20%">사례</th><th>확인된 내용</th></tr></thead>
@@ -244,7 +244,7 @@
       </div>
 
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">올리브영 노출구좌, 노출 시간<small>공통</small></p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">올리브영 노출구좌, 노출 시간</p></div></div>
         <div class="body">
           <table>
             <thead><tr><th style="width:24%">구좌</th><th style="width:14%">구분</th><th>노출 시간</th></tr></thead>
@@ -260,7 +260,7 @@
               <tr><td>매장 LCD (오프라인)</td><td class="gray">고정</td><td>주 단위, 월~금 방송 기준 D-1 ~ 목 노출</td></tr>
             </tbody>
           </table>
-          <p class="note">올리브영 라이브 가이드에서 확인된 구좌별 노출 시간입니다. 앞서 미확인이던 노출 시간을 사실로 확정했습니다. 인스타그램은 파트너 라이브에는 제공되지 않습니다. 자사 노출 구좌 설계 시 D-7(라이브관), D-1(알림), 방송 30분 전(넛지), 19:50(푸시)의 시점별 노출 단계 구조가 참고점입니다.</p>
+          <p class="note">인스타그램은 파트너 라이브에는 제공되지 않습니다. 자사 노출 구좌 설계 시 D-7(라이브관), D-1(알림), 방송 30분 전(넛지), 19:50(푸시)의 시점별 노출 단계 구조가 참고점입니다.</p>
         </div>
       </div>
     </section>
@@ -295,11 +295,10 @@
             <thead><tr><th style="width:26%">구좌</th><th>역할</th><th style="width:34%">블프 기간 운영</th></tr></thead>
             <tbody>
               <tr><td>상시 라이브 탭</td><td>전체 라이브 편성, 다시보기 허브</td><td class="gray">블프 배너 / 편성표 상단 고정</td></tr>
-              <tr><td>전관 페이지</td><td>블프 메가 행사 랜딩</td><td class="gray">라이브 스트립 모듈 삽입</td></tr>
+              <tr><td>전관 페이지</td><td>블프 메가 행사 랜딩</td><td class="gray">라이브 카드 삽입</td></tr>
               <tr><td>전관 상품 카드</td><td>전관 상품 리스트</td><td class="gray">라이브 예정 뱃지 + 알림 신청</td></tr>
             </tbody>
           </table>
-          <p class="note">라이브 스트립은 방송 전(편성 카드 + 알림) / 방송 중(자동재생 + 시청자 수 + 입장) / 방송 후(다시보기 + 혜택 잔여시간)로 상태가 바뀌는 모듈입니다. 전관 스크롤 시 방송 중에만 뜨는 플로팅 미니 플레이어를 함께 검토합니다.</p>
         </div>
       </div>
 
@@ -309,11 +308,11 @@
           <table>
             <thead><tr><th style="width:26%">트랙</th><th>내용</th></tr></thead>
             <tbody>
-              <tr><td>데일리 본방</td><td>전관 기간 매일 20시 전후 1-2회, 누적 시청자 확보</td></tr>
-              <tr><td>마지막 날 피날레</td><td>전관 종료일 원데이 집중 편성으로 마무리</td></tr>
+              <tr><td>A. 데일리 본방</td><td>전관 기간 매일 20시 전후 1-2회, 누적 시청자 확보</td></tr>
+              <tr><td>B. 전관 마지막 날 라이브 특집</td><td>전관 종료일 원데이 집중 편성으로 마무리</td></tr>
             </tbody>
           </table>
-          <p class="note">권장: 전관 기간 대부분은 데일리 본방, 마지막 날을 원데이 피날레로 편성.</p>
+          <p class="note">권장: 전관 기간 대부분은 데일리 본방, 전관 마지막 날은 라이브 특집으로 편성.</p>
         </div>
       </div>
     </section>
@@ -322,7 +321,7 @@
     <section class="section">
       <h2 class="section-title">테마 / 컨셉</h2>
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">컨셉 풀<small>공통</small></p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">컨셉 풀</p></div></div>
         <div class="body">
           <table>
             <thead><tr><th style="width:20%">구분</th><th>컨셉</th></tr></thead>
@@ -348,14 +347,14 @@
         <div class="rail"><div class="rail-inner"><p class="type-name">3-Tier</p></div></div>
         <div class="body">
           <table>
-            <thead><tr><th style="width:16%">구분</th><th>Tier 1, 메가</th><th>Tier 2, 시그니처</th><th>Tier 3, 셀렉트</th></tr></thead>
+            <thead><tr><th style="width:16%">구분</th><th>Tier 1, 메가</th><th>Tier 2, 시그니처</th><th>Tier 3, 오픈 라이브</th></tr></thead>
             <tbody>
-              <tr><td>편성 형태 <span class="tag">(공통)</span></td><td>단독 본방</td><td>테마 연합 (2-3브랜드)</td><td>숏폼 + 편성표 노출</td></tr>
-              <tr><td>슬롯 <span class="tag">(공통)</span></td><td>20시 프라임 1시간</td><td>18시 연합 방송 내 구획</td><td>라이브 상시 슬롯</td></tr>
-              <tr><td>성격 <span class="tag">(공통)</span></td><td>브랜드 완결형 쇼케이스</td><td>테마 안에서 비교, 병렬</td><td>상시 노출, 회유</td></tr>
-              <tr><td>적합 브랜드 <span class="tag">(공통)</span></td><td>인지도 높은 앵커</td><td>테마 적합 중견</td><td>신진, 롱테일</td></tr>
-              <tr><td>제작 지원 <span class="tag">(공통)</span></td><td>풀 제작</td><td>부분 지원</td><td>최소 / 자체</td></tr>
-              <tr><td><span class="em">주요 노출 (A)</span></td><td>전관 KV + 라이브탭 최상단 + 단독 푸시</td><td>라이브 스트립 + 라이브탭 배너 + 연합 푸시</td><td>편성표 + 숏폼존</td></tr>
+              <tr><td>편성 형태</td><td>단독 본방</td><td>테마 연합 (2-3브랜드)</td><td>숏폼 + 편성표 노출</td></tr>
+              <tr><td>슬롯</td><td>20시 프라임 1시간</td><td>18시 연합 방송 내 구획</td><td>라이브 상시 슬롯</td></tr>
+              <tr><td>성격</td><td>브랜드 완결형 쇼케이스</td><td>테마 안에서 비교, 병렬</td><td>상시 노출, 회유</td></tr>
+              <tr><td>적합 브랜드</td><td>인지도 높은 앵커</td><td>테마 적합 중견</td><td>신진, 롱테일</td></tr>
+              <tr><td>제작 지원</td><td>풀 제작</td><td>부분 지원</td><td>최소 / 자체</td></tr>
+              <tr><td><span class="em">주요 노출 (A)</span></td><td>전관 KV + 라이브탭 최상단 + 단독 푸시</td><td>라이브 카드 + 라이브탭 배너 + 연합 푸시</td><td>편성표 + 숏폼존</td></tr>
             </tbody>
           </table>
           <p class="note">Tier 3은 인플루언서 오픈 라이브(소스라이브 경유, 외부 진행분)를 편성표에 편입하는 방안을 포함합니다. 편입 가능 여부는 협조 요청에서 검토합니다. 노출 구좌 행만 트랙별로 다르며, 나머지 골격은 A/B 공통입니다.</p>
@@ -372,14 +371,14 @@
           <table>
             <thead><tr><th style="width:5%">No</th><th style="width:26%">항목</th><th style="width:14%">부서</th><th>검토 내용</th><th style="width:9%">우선순위</th></tr></thead>
             <tbody>
-              <tr><td>1</td><td>라이브 탭 GNB 승격 <span class="tag">(공통)</span></td><td class="gray">개발 / 기획</td><td>홈 내 섹션에서 하단 GNB 탭 이동 가능 여부, 전관 기간 한정 노출</td><td><span class="pr-h">높음</span></td></tr>
+              <tr><td>1</td><td>라이브 탭 GNB 승격</td><td class="gray">개발 / 기획</td><td>홈 내 섹션에서 하단 GNB 탭 이동 가능 여부, 전관 기간 한정 노출</td><td><span class="pr-h">높음</span></td></tr>
               <tr><td>2</td><td>전관-라이브탭 접근성</td><td class="gray">개발</td><td>전관 홈 리다이렉트 시 하단 탭 / 라이브탭 접근 가능 여부</td><td><span class="pr-h">높음</span></td></tr>
-              <tr><td>3</td><td>라이브 스트립 모듈</td><td class="gray">개발</td><td>전관 페이지 내 방송 전 / 중 / 후 상태 가변 모듈 구현</td><td><span class="pr-h">높음</span></td></tr>
+              <tr><td>3</td><td>라이브 카드</td><td class="gray">개발</td><td>전관 페이지 내 방송 전 / 중 / 후 상태 가변 모듈 구현</td><td><span class="pr-h">높음</span></td></tr>
               <tr><td>4</td><td>플로팅 미니 플레이어</td><td class="gray">개발</td><td>전관 스크롤 시 방송 중에만 뜨는 PIP 지원</td><td><span class="pr-m">중간</span></td></tr>
               <tr><td>5</td><td>상품 카드 방송 예정 뱃지</td><td class="gray">개발</td><td>전관 상품 리스트에 라이브 예정 뱃지, 알림 신청 연동</td><td><span class="pr-m">중간</span></td></tr>
-              <tr><td>6</td><td>서드파티 오픈 라이브 편성표 편입 <span class="tag">(공통)</span></td><td class="gray">개발 / 기획</td><td>소스라이브 오픈 라이브를 라이브 탭 편성표에 편입, 편성 데이터 / API 연동 범위 확인</td><td><span class="pr-h">높음</span></td></tr>
-              <tr><td>7</td><td>편성 노출 방식, 정렬 <span class="tag">(공통)</span></td><td class="gray">기획 / 운영</td><td>자율 편성 건을 편성표 / 숏폼존에 노출, 정렬, 사전 등록 프로세스</td><td><span class="pr-m">중간</span></td></tr>
-              <tr><td>8</td><td>상품 연결, 성과 트래킹 <span class="tag">(공통)</span></td><td class="gray">개발 / 커머스</td><td>오픈 라이브에서 상품 연결 및 유입, 구매 집계 가능 여부</td><td><span class="pr-m">중간</span></td></tr>
+              <tr><td>6</td><td>서드파티 오픈 라이브 편성표 편입</td><td class="gray">개발 / 기획</td><td>소스라이브 오픈 라이브를 라이브 탭 편성표에 편입, 편성 데이터 / API 연동 범위 확인</td><td><span class="pr-h">높음</span></td></tr>
+              <tr><td>7</td><td>편성 노출 방식, 정렬</td><td class="gray">기획 / 운영</td><td>자율 편성 건을 편성표 / 숏폼존에 노출, 정렬, 사전 등록 프로세스</td><td><span class="pr-m">중간</span></td></tr>
+              <tr><td>8</td><td>상품 연결, 성과 트래킹</td><td class="gray">개발 / 커머스</td><td>오픈 라이브에서 상품 연결 및 유입, 구매 집계 가능 여부</td><td><span class="pr-m">중간</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -417,9 +416,9 @@
       <h2 class="section-title">타사 레퍼런스</h2>
 
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">편성 구조<small>공통</small></p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">편성 구조</p></div></div>
         <div class="body">
-          <table>
+          <table class="hide-right">
             <thead><tr><th style="width:20%">사례</th><th>편성 구조</th><th style="width:20%">시간대</th></tr></thead>
             <tbody>
               <tr><td><a href="https://oyliveguide.oopy.io/" target="_blank" rel="noopener">올리브영 올영라이브</a></td><td>2019년 시작, 700회 이상 방송 축적 / 오리지널, 파트너 라이브 운영 / 세일 기간 오리지널, 파트너 확대 편성</td><td class="gray">평일 20시 / 월 12시</td></tr>
@@ -433,7 +432,7 @@
       </div>
 
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">독립 유입, 멀티 채널<small>B 트랙 근거</small></p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">독립 유입, 멀티 채널</p></div></div>
         <div class="body">
           <table>
             <thead><tr><th style="width:16%">플랫폼</th><th style="width:40%">사례</th><th>내용</th></tr></thead>
@@ -448,7 +447,7 @@
       </div>
 
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">29CM 라이브 적립금 이벤트<small>타사 사실</small></p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">29CM 라이브 적립금 이벤트</p></div></div>
         <div class="body">
           <table>
             <thead><tr><th style="width:22%">이벤트</th><th style="width:34%">트리거</th><th>혜택 (추첨)</th></tr></thead>
@@ -458,12 +457,12 @@
               <tr><td>취향 공유</td><td>공유 링크로 친구 방문, 가입, 첫 구매</td><td>방문, 가입 적립금 + 초대 상위 5명 최대 29만원</td></tr>
             </tbody>
           </table>
-          <p class="note">2026 이구패션위크 라이브(9.1-15) 페이지에서 확인된 타사 사실입니다. 시청, 구매, 공유를 트리거로 한 적립금 추첨 구조로, 전 구매자 지급이 아닌 추첨 방식입니다. 자사 적용은 별도 판단 사항이며 현재 기획에 포함하지 않습니다. (참고용 기록)</p>
+          <p class="note">2026 이구패션위크 라이브(9.1-15) 페이지에서 확인된 타사 사실입니다. 시청, 구매, 공유를 트리거로 한 적립금 추첨 구조로, 전 구매자 지급이 아닌 추첨 방식입니다.</p>
         </div>
       </div>
 
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">현재 라이브 노출 방식<small>공통</small></p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">현재 라이브 노출 방식</p></div></div>
         <div class="body">
           <table>
             <thead><tr><th style="width:20%">사례</th><th>확인된 내용</th></tr></thead>
@@ -488,7 +487,6 @@
             <tbody>
               <tr><td>멀티 채널 송출로 독립 도달 확보</td><td class="gray">에이블리 앱 / 인스타그램 / 유튜브</td><td>전관 없이 외부 채널로 유입 확보, 소스라이브 송출과 연계</td></tr>
               <tr><td>행사 자체를 독립 브랜딩</td><td class="gray">컬리 그랜드뷰컬페 / 지그재그 오프 더 레코드</td><td>라이브 데이를 독립 IP로 네이밍, 정기화 검토</td></tr>
-              <tr><td>브랜딩형 라이브 (상품설명 탈피)</td><td class="gray">지그재그 오프 더 레코드</td><td>단독 행사 콘텐츠 차별화 수단으로 활용</td></tr>
               <tr><td>요일, 시간 고정 편성이 표준</td><td class="gray">지그재그 매주 월 21시</td><td>독립 편성이므로 시간대 자유 설계 가능</td></tr>
             </tbody>
           </table>
@@ -531,7 +529,7 @@
     <section class="section">
       <h2 class="section-title">테마 / 컨셉</h2>
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">컨셉 풀<small>공통</small></p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">컨셉 풀</p></div></div>
         <div class="body">
           <table>
             <thead><tr><th style="width:20%">구분</th><th>컨셉</th></tr></thead>
@@ -557,13 +555,13 @@
         <div class="rail"><div class="rail-inner"><p class="type-name">3-Tier</p></div></div>
         <div class="body">
           <table>
-            <thead><tr><th style="width:16%">구분</th><th>Tier 1, 메가</th><th>Tier 2, 시그니처</th><th>Tier 3, 셀렉트</th></tr></thead>
+            <thead><tr><th style="width:16%">구분</th><th>Tier 1, 메가</th><th>Tier 2, 시그니처</th><th>Tier 3, 오픈 라이브</th></tr></thead>
             <tbody>
-              <tr><td>편성 형태 <span class="tag">(공통)</span></td><td>단독 본방</td><td>테마 연합 (2-3브랜드)</td><td>숏폼 + 편성표 노출</td></tr>
-              <tr><td>슬롯 <span class="tag">(공통)</span></td><td>20시 프라임 1시간</td><td>18시 연합 방송 내 구획</td><td>라이브 상시 슬롯</td></tr>
-              <tr><td>성격 <span class="tag">(공통)</span></td><td>브랜드 완결형 쇼케이스</td><td>테마 안에서 비교, 병렬</td><td>상시 노출, 회유</td></tr>
-              <tr><td>적합 브랜드 <span class="tag">(공통)</span></td><td>인지도 높은 앵커</td><td>테마 적합 중견</td><td>신진, 롱테일</td></tr>
-              <tr><td>제작 지원 <span class="tag">(공통)</span></td><td>풀 제작</td><td>부분 지원</td><td>최소 / 자체</td></tr>
+              <tr><td>편성 형태</td><td>단독 본방</td><td>테마 연합 (2-3브랜드)</td><td>숏폼 + 편성표 노출</td></tr>
+              <tr><td>슬롯</td><td>20시 프라임 1시간</td><td>18시 연합 방송 내 구획</td><td>라이브 상시 슬롯</td></tr>
+              <tr><td>성격</td><td>브랜드 완결형 쇼케이스</td><td>테마 안에서 비교, 병렬</td><td>상시 노출, 회유</td></tr>
+              <tr><td>적합 브랜드</td><td>인지도 높은 앵커</td><td>테마 적합 중견</td><td>신진, 롱테일</td></tr>
+              <tr><td>제작 지원</td><td>풀 제작</td><td>부분 지원</td><td>최소 / 자체</td></tr>
               <tr><td><span class="em">주요 노출 (B)</span></td><td class="gray">독립 페이지 히어로 + 라이브탭 (전관 KV 없음)</td><td class="gray">독립 페이지 상단 + 라이브탭 배너</td><td class="gray">편성표 + 숏폼존</td></tr>
             </tbody>
           </table>
@@ -581,16 +579,16 @@
           <table>
             <thead><tr><th style="width:5%">No</th><th style="width:26%">항목</th><th style="width:14%">부서</th><th>검토 내용</th><th style="width:9%">우선순위</th></tr></thead>
             <tbody>
-              <tr><td>1</td><td>라이브 탭 GNB 승격 <span class="tag">(공통)</span></td><td class="gray">개발 / 기획</td><td>홈 내 섹션에서 하단 GNB 탭 이동 가능 여부</td><td><span class="pr-h">높음</span></td></tr>
+              <tr><td>1</td><td>라이브 탭 GNB 승격</td><td class="gray">개발 / 기획</td><td>홈 내 섹션에서 하단 GNB 탭 이동 가능 여부</td><td><span class="pr-h">높음</span></td></tr>
               <tr><td>2</td><td>독립 행사 페이지 구성</td><td class="gray">개발 / 기획</td><td>전관과 별개의 라이브 데이 단독 랜딩 페이지 생성 가능 여부</td><td><span class="pr-h">높음</span></td></tr>
               <tr><td>3</td><td>독립 유입 동선</td><td class="gray">기획 / 마케팅</td><td>전관 트래픽 없이 홈 / 푸시 / 외부 채널에서 행사 페이지로 유입시키는 경로</td><td><span class="pr-h">높음</span></td></tr>
               <tr><td>4</td><td>상시 라이브 탭과의 관계</td><td class="gray">기획</td><td>단독 행사와 상시 라이브 탭의 노출 우선순위, 중복 정리</td><td><span class="pr-m">중간</span></td></tr>
-              <tr><td>5</td><td>서드파티 오픈 라이브 편성표 편입 <span class="tag">(공통)</span></td><td class="gray">개발 / 기획</td><td>소스라이브 오픈 라이브를 편성표에 편입, 연동 범위 확인</td><td><span class="pr-h">높음</span></td></tr>
-              <tr><td>6</td><td>편성 노출 방식, 정렬 <span class="tag">(공통)</span></td><td class="gray">기획 / 운영</td><td>자율 편성 건을 편성표 / 숏폼존에 노출, 정렬, 사전 등록</td><td><span class="pr-m">중간</span></td></tr>
-              <tr><td>7</td><td>상품 연결, 성과 트래킹 <span class="tag">(공통)</span></td><td class="gray">개발 / 커머스</td><td>오픈 라이브에서 상품 연결 및 유입, 구매 집계 가능 여부</td><td><span class="pr-m">중간</span></td></tr>
+              <tr><td>5</td><td>서드파티 오픈 라이브 편성표 편입</td><td class="gray">개발 / 기획</td><td>소스라이브 오픈 라이브를 편성표에 편입, 연동 범위 확인</td><td><span class="pr-h">높음</span></td></tr>
+              <tr><td>6</td><td>편성 노출 방식, 정렬</td><td class="gray">기획 / 운영</td><td>자율 편성 건을 편성표 / 숏폼존에 노출, 정렬, 사전 등록</td><td><span class="pr-m">중간</span></td></tr>
+              <tr><td>7</td><td>상품 연결, 성과 트래킹</td><td class="gray">개발 / 커머스</td><td>오픈 라이브에서 상품 연결 및 유입, 구매 집계 가능 여부</td><td><span class="pr-m">중간</span></td></tr>
             </tbody>
           </table>
-          <p class="note">2, 3, 4번은 B 트랙 고유 항목입니다. (공통) 표기 항목은 A와 동일하게 적용됩니다.</p>
+          <p class="note">2, 3, 4번은 B 트랙 고유 항목입니다.</p>
         </div>
       </div>
     </section>
