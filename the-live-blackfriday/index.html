@@ -17,7 +17,7 @@
     그리드: 좌우 여백 100px → 컨텐츠 1720px / 12칸 / 칸 간격 32px
       - 좌측 2칸: 항목 이름
       - 우측 10칸: 내용
-    폰트: 가장 작은 글씨 15.6 / 본문 16.8 / 상단 요약 18 / 탭 28 / 항목 이름 30 / 섹션 제목 20 / 문서 제목 44
+    폰트: 가장 작은 글씨 15.6 / 본문 16.8 / 상단 요약 18(숨김) / 탭 24 / 항목 이름 30 / 섹션 제목 20 / 문서 제목 44
   */
   :root {
     --t1: #111111;
@@ -72,12 +72,12 @@
   .tabs {
     display: flex;
     gap: 56px;
-    margin-top: 72px;
+    margin-top: 88px;
     border-bottom: 1px solid var(--line-strong);
   }
   .tab-btn {
     font-family: inherit;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: -0.02em;
@@ -185,7 +185,7 @@
   <header>
     <img class="logo" src="thelivelogo.png" alt="THE LIVE">
     <h1 class="doc-title">블랙프라이데이 라이브 데이 기획 요약</h1>
-    <dl class="meta">
+    <dl class="meta" hidden>  <!-- 대상 · 시점 · 운영 검토: 우선 숨김 -->
       <div><dt>대상</dt><dd>자사 패션 커머스 (라이브 객단가 15-25만원)</dd></div>
       <div><dt>시점</dt><dd>11월 초</dd></div>
       <div><dt>운영 검토</dt><dd>전관 연계 vs 단독 행사 투트랙</dd></div>
@@ -251,20 +251,20 @@
       </div>
 
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">올리브영<br>노출구좌,<br>노출 시간</p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">올리브영<br>노출구좌<br>및 시간</p></div></div>
         <div class="body">
           <table class="c3">
-            <thead><tr><th>구좌</th><th>구분</th><th>노출 시간</th></tr></thead>
+            <thead><tr><th>구좌</th><th>노출 시간</th><th>구분</th></tr></thead>
             <tbody>
-              <tr><td>라이브관 (APP 내)</td><td class="gray">고정</td><td>D-7 ~ 종료 시</td></tr>
-              <tr><td>이벤트 페이지 (알림받기)</td><td class="gray">고정</td><td>D-1</td></tr>
-              <tr><td>APP 홈 메인 라이브 영역</td><td class="gray">고정</td><td>D-Day 00:00 ~ 종료 시</td></tr>
-              <tr><td>메인 롤링 배너</td><td class="gray">고정</td><td>D-Day 00:00 ~ 종료 시</td></tr>
-              <tr><td>하단 넛지</td><td class="gray">고정</td><td>방송 30분 전 ~ 종료 시</td></tr>
-              <tr><td>APP PUSH</td><td class="gray">고정</td><td>19:50 ~</td></tr>
-              <tr><td>올영라이브 카카오톡 친구톡</td><td class="gray">고정</td><td>라이브 시작 직후 (모수 12.6만, 24.10 기준)</td></tr>
-              <tr><td>올리브영 인스타그램</td><td class="gray">일부 방송</td><td>월/목 10:00 ~ 익일 09:59 (파트너 라이브 제외)</td></tr>
-              <tr><td>매장 LCD (오프라인)</td><td class="gray">고정</td><td>주 단위, 월~금 방송 기준 D-1 ~ 목 노출</td></tr>
+              <tr><td>라이브관 (APP 내)</td><td>D-7 ~ 종료 시</td><td class="gray">고정</td></tr>
+              <tr><td>이벤트 페이지 (알림받기)</td><td>D-1</td><td class="gray">고정</td></tr>
+              <tr><td>APP 홈 메인 라이브 영역</td><td>D-Day 00:00 ~ 종료 시</td><td class="gray">고정</td></tr>
+              <tr><td>메인 롤링 배너</td><td>D-Day 00:00 ~ 종료 시</td><td class="gray">고정</td></tr>
+              <tr><td>하단 넛지</td><td>방송 30분 전 ~ 종료 시</td><td class="gray">고정</td></tr>
+              <tr><td>APP PUSH</td><td>19:50 ~</td><td class="gray">고정</td></tr>
+              <tr><td>올영라이브 카카오톡 친구톡</td><td>라이브 시작 직후 (모수 12.6만, 24.10 기준)</td><td class="gray">고정</td></tr>
+              <tr><td>올리브영 인스타그램</td><td>월/목 10:00 ~ 익일 09:59 (파트너 라이브 제외)</td><td class="gray">일부 방송</td></tr>
+              <tr><td>매장 LCD (오프라인)</td><td>주 단위, 월~금 방송 기준 D-1 ~ 목 노출</td><td class="gray">고정</td></tr>
             </tbody>
           </table>
           <p class="note">인스타그램은 파트너 라이브에는 제공되지 않습니다. 자사 노출 구좌 설계 시 D-7(라이브관), D-1(알림), 방송 30분 전(넛지), 19:50(푸시)의 시점별 노출 단계 구조가 참고점입니다.</p>
