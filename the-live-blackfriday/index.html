@@ -318,25 +318,59 @@
           <table class="c3">
             <thead><tr><th>구좌</th><th>역할</th><th>블프 기간 운영</th></tr></thead>
             <tbody>
-              <tr><td>상시 라이브 탭</td><td>전체 라이브 편성, 다시보기 허브</td><td class="gray">블프 배너 / 편성표 상단 고정</td></tr>
-              <tr><td>전관 페이지</td><td>블프 메가 행사 랜딩</td><td class="gray">라이브 카드 삽입</td></tr>
-              <tr><td>전관 상품 카드</td><td>전관 상품 리스트</td><td class="gray">라이브 예정 뱃지 + 알림 신청</td></tr>
+              <tr><td>프로모션 하위<br>라이브 탭</td><td>라이브 전용 목적지</td><td class="gray">행사 기간에만 노출, 편성 · 알림 · 혜택에 집중</td></tr>
+              <tr><td>프로모션 상품 카드</td><td>상품 리스트에서 라이브로 회수</td><td class="gray">라이브 예정 뱃지 + 알림 신청 (개발실 확인 중)</td></tr>
+              <tr><td>상시 라이브 페이지</td><td>다시보기 수용</td><td class="gray">종료 회차를 다시보기로 연결 (탭 종료 후 동선)</td></tr>
             </tbody>
           </table>
+          <p class="note">전관 안에서는 라이브가 주인공이 될 수 없으므로 구좌를 3개 이내로 제한하고, 라이브 탭 안에서 밀도를 확보합니다. KV 하단 라이브 카드는 전관 구성상 어렵고, 플로팅 미니 플레이어는 방송을 시청한 사용자에게만 노출되는 구조라 두 구좌 모두 제외했습니다.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="rail"><div class="rail-inner"><p class="type-name">라이브 탭 구성</p></div></div>
+        <div class="body">
+          <table class="c3">
+            <thead><tr><th>블록</th><th>내용</th><th>핵심 장치</th></tr></thead>
+            <tbody>
+              <tr><td>1. 탭 헤더</td><td>행사 라이브 이름, 편성 요약 한 줄</td><td>전체 알림 받기</td></tr>
+              <tr><td>2. 회차 편성</td><td>회차 선택 + 회차 카드 (브랜드, 테마, 대표 혜택)</td><td>상태 버튼(알림 신청 → 입장 → 다시보기), 상품 보러가기</td></tr>
+              <tr><td>3. 알림 혜택</td><td>알림 신청자 혜택 안내</td><td>알림 신청 이벤트 (제안 단계)</td></tr>
+            </tbody>
+          </table>
+          <p class="note">별도의 "지금 방송 중" 영역은 두지 않습니다. 회차 카드의 버튼이 방송 전 · 중 · 후로 바뀌므로 상태 표현이 카드 안에서 끝나고, 편성 방식이 확정되지 않아도 화면이 흔들리지 않습니다. 회차를 가로로 나열할지 세로로 나열할지는 개발 대응 범위를 확인한 뒤 정합니다.</p>
         </div>
       </div>
 
       <div class="block">
         <div class="rail"><div class="rail-inner"><p class="type-name">편성 전략</p></div></div>
         <div class="body">
-          <table class="c2">
-            <thead><tr><th>트랙</th><th>내용</th></tr></thead>
+          <table class="c3">
+            <thead><tr><th>구분</th><th>1안 · 데일리형</th><th>2안 · 원데이형</th></tr></thead>
             <tbody>
-              <tr><td>A. 데일리 본방</td><td>전관 기간 매일 20시 전후 1-2회, 누적 시청자 확보</td></tr>
-              <tr><td>B. 전관 마지막 날 라이브 특집</td><td>전관 종료일 원데이 집중 편성으로 마무리</td></tr>
+              <tr><td>편성</td><td>7일간 매일 1회 (20시 전후)</td><td>하루에 5회 연속</td></tr>
+              <tr><td>회차 묶음 기준</td><td class="gray">날짜</td><td class="gray">시간대</td></tr>
+              <tr><td>회차 카드</td><td class="gray">동일</td><td class="gray">동일</td></tr>
+              <tr><td>알림</td><td class="gray">전체 알림 + 회차별 개별 신청</td><td class="gray">전체 알림 + 회차 시작 리마인드</td></tr>
+              <tr><td>성격</td><td class="gray">누적 시청자 확보, 마지막 날 특집 편성</td><td class="gray">하루에 집중, 시간대별 테마 분리</td></tr>
             </tbody>
           </table>
-          <p class="note">권장: 전관 기간 대부분은 데일리 본방, 전관 마지막 날은 라이브 특집으로 편성.</p>
+          <p class="note">두 안은 회차를 묶는 기준(날짜 / 시간대)만 다르고 회차 카드와 알림 구조는 같습니다. 화면을 한 벌로 만들어 두면 편성 방식이 나중에 정해져도 대응할 수 있으며, 이 구조는 A · B 트랙 공통입니다.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="rail"><div class="rail-inner"><p class="type-name">알림 이벤트<br>제안</p></div></div>
+        <div class="body">
+          <table class="c3">
+            <thead><tr><th>제안</th><th>내용</th><th>근거 (29CM 이구패션위크)</th></tr></thead>
+            <tbody>
+              <tr><td>전체 알림 받기</td><td>탭 상단 토글로 전 회차를 한 번에 신청</td><td class="gray">라이브 탭 상단에 전체 알림 받기 제공</td></tr>
+              <tr><td>알림 신청 이벤트</td><td>신청자 대상 혜택 — 전원 라이브 전용 쿠폰 또는 추첨 적립금</td><td class="gray">사전 알림 신청 시 최대 29만원 적립금 추첨</td></tr>
+              <tr><td>방송 전 상품 담기</td><td>회차 카드에서 방송 상품을 미리 확인, 장바구니 유도</td><td class="gray">회차 카드 내 상품 보러가기 버튼</td></tr>
+            </tbody>
+          </table>
+          <p class="note">이벤트 실행 여부는 확정되지 않았으며 제안 단계입니다. 객단가 15-25만원 기준으로는 추첨보다 신청자 전원 쿠폰이 구매 전환에 직접적이지만, 예산이 고정된 경우 추첨이 비용 통제에 유리합니다.</p>
         </div>
       </div>
     </section>
@@ -395,14 +429,16 @@
           <table class="c5">
             <thead><tr><th>No</th><th>항목</th><th>부서</th><th>검토 내용</th><th>우선순위</th></tr></thead>
             <tbody>
-              <tr><td>1</td><td>라이브 탭 GNB 승격</td><td class="gray">개발 / 기획</td><td>홈 내 섹션에서 하단 GNB 탭 이동 가능 여부, 전관 기간 한정 노출</td><td><span class="pr-h">높음</span></td></tr>
-              <tr><td>2</td><td>전관-라이브탭 접근성</td><td class="gray">개발</td><td>전관 홈 리다이렉트 시 하단 탭 / 라이브탭 접근 가능 여부</td><td><span class="pr-h">높음</span></td></tr>
-              <tr><td>3</td><td>라이브 카드</td><td class="gray">개발</td><td>전관 페이지 내 방송 전 / 중 / 후 상태 가변 모듈 구현</td><td><span class="pr-h">높음</span></td></tr>
-              <tr><td>4</td><td>플로팅 미니 플레이어</td><td class="gray">개발</td><td>전관 스크롤 시 방송 중에만 뜨는 PIP 지원</td><td><span class="pr-m">중간</span></td></tr>
-              <tr><td>5</td><td>상품 카드 방송 예정 뱃지</td><td class="gray">개발</td><td>전관 상품 리스트에 라이브 예정 뱃지, 알림 신청 연동</td><td><span class="pr-m">중간</span></td></tr>
-              <tr><td>6</td><td>서드파티 오픈 라이브 편성표 편입</td><td class="gray">개발 / 기획</td><td>소스라이브 오픈 라이브를 라이브 탭 편성표에 편입, 편성 데이터 / API 연동 범위 확인</td><td><span class="pr-h">높음</span></td></tr>
-              <tr><td>7</td><td>편성 노출 방식, 정렬</td><td class="gray">기획 / 운영</td><td>자율 편성 건을 편성표 / 숏폼존에 노출, 정렬, 사전 등록 프로세스</td><td><span class="pr-m">중간</span></td></tr>
-              <tr><td>8</td><td>상품 연결, 성과 트래킹</td><td class="gray">개발 / 커머스</td><td>오픈 라이브에서 상품 연결 및 유입, 구매 집계 가능 여부</td><td><span class="pr-m">중간</span></td></tr>
+              <tr><td>1</td><td>프로모션 페이지 라이브 탭 신설</td><td class="gray">개발 / 기획</td><td>전관 프로모션 페이지 하위 탭에 라이브 탭 추가, 행사 기간에만 노출</td><td><span class="pr-h">높음</span></td></tr>
+              <tr><td>2</td><td>전체 알림 받기</td><td class="gray">개발 / 기획</td><td>라이브 탭 상단에서 전 회차 알림을 한 번에 신청, 회차별 개별 신청과 병행, 신청자 대상 푸시 발송</td><td><span class="pr-h">높음</span></td></tr>
+              <tr><td>3</td><td>회차 카드 상태 처리</td><td class="gray">개발</td><td>회차 카드가 방송 전(알림 신청) / 중(입장) / 후(다시보기)로 바뀌는 처리</td><td><span class="pr-h">높음</span></td></tr>
+              <tr><td>4</td><td>회차 노출 UI</td><td class="gray">개발</td><td>회차를 가로 나열(스와이프)로 노출 가능한지, 세로 나열만 가능한지 대응 범위 확인</td><td><span class="pr-m">중간</span></td></tr>
+              <tr><td>5</td><td>상품 카드 라이브 뱃지</td><td class="gray">개발</td><td>프로모션 상품 리스트 카드에 라이브 예정 뱃지, 알림 신청 연동 (개발실 확인 요청)</td><td><span class="pr-m">중간</span></td></tr>
+              <tr><td>6</td><td>다시보기 게이트</td><td class="gray">개발 / 기획</td><td>종료 회차를 상시 라이브 페이지 다시보기로 연결</td><td><span class="pr-m">중간</span></td></tr>
+              <tr><td>7</td><td>라이브 알림 신청 이벤트</td><td class="gray">기획 / 마케팅</td><td>알림 신청자 대상 적립금, 쿠폰 추첨 이벤트 운영 가능 여부</td><td><span class="pr-m">중간</span></td></tr>
+              <tr><td>8</td><td>서드파티 오픈 라이브 편성표 편입</td><td class="gray">개발 / 기획</td><td>소스라이브 오픈 라이브를 라이브 탭 편성표에 편입, 편성 데이터 / API 연동 범위 확인</td><td><span class="pr-h">높음</span></td></tr>
+              <tr><td>9</td><td>편성 노출 방식, 정렬</td><td class="gray">기획 / 운영</td><td>자율 편성 건을 편성표 / 숏폼존에 노출, 정렬, 사전 등록 프로세스</td><td><span class="pr-m">중간</span></td></tr>
+              <tr><td>10</td><td>상품 연결, 성과 트래킹</td><td class="gray">개발 / 커머스</td><td>오픈 라이브에서 상품 연결 및 유입, 구매 집계 가능 여부</td><td><span class="pr-m">중간</span></td></tr>
             </tbody>
           </table>
         </div>
