@@ -161,6 +161,7 @@
   .pr-m { color: var(--t3); font-weight: 700; }
 
   /* 표 아래 설명 */
+  .note .note-lead { color: var(--t1); }
   .note {
     margin-top: 20px;
     font-size: var(--fs-min);
@@ -255,7 +256,7 @@
       </div>
 
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">현재 라이브<br>노출 방식</p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">홈쇼핑사<br>라이브<br>노출 방식</p></div></div>
         <div class="body">
           <table class="c2">
             <thead><tr><th>사례</th><th>확인된 내용</th></tr></thead>
@@ -492,7 +493,7 @@
         </div>
       </div>
 
-      <div class="block">
+      <div class="block" hidden>  <!-- 독립 유입, 멀티 채널: 레퍼런스 재정비 예정, 우선 숨김 -->
         <div class="rail"><div class="rail-inner"><p class="type-name">독립 유입,<br>멀티 채널</p></div></div>
         <div class="body">
           <table class="c3">
@@ -507,23 +508,10 @@
         </div>
       </div>
 
-      <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">29CM 라이브<br>적립금 이벤트</p></div></div>
-        <div class="body">
-          <table class="c3">
-            <thead><tr><th>이벤트</th><th>트리거</th><th>혜택 (추첨)</th></tr></thead>
-            <tbody>
-              <tr><td>라이브 알림 신청</td><td>전체 알림 신청</td><td>헤드폰 1명 / 적립금 29만원 3명 / 2.9만원 25명</td></tr>
-              <tr><td>라이브 구매</td><td>라이브 1개 이상 시청 + 29만원 이상 구매</td><td>적립금 29만원 5명</td></tr>
-              <tr><td>취향 공유</td><td>공유 링크로 친구 방문, 가입, 첫 구매</td><td>방문, 가입 적립금 + 초대 상위 5명 최대 29만원</td></tr>
-            </tbody>
-          </table>
-          <p class="note">2026 이구패션위크 라이브(9.1-15) 페이지에서 확인된 타사 사실입니다. 시청, 구매, 공유를 트리거로 한 적립금 추첨 구조로, 전 구매자 지급이 아닌 추첨 방식입니다.</p>
-        </div>
       </div>
 
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">현재 라이브<br>노출 방식</p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">홈쇼핑사<br>라이브<br>노출 방식</p></div></div>
         <div class="body">
           <table class="c2">
             <thead><tr><th>사례</th><th>확인된 내용</th></tr></thead>
@@ -537,19 +525,37 @@
       </div>
     </section>
 
+    <!-- B-1b 타사 이벤트 레퍼런스 -->
+    <section class="section">
+      <h2 class="section-title">타사 이벤트 레퍼런스</h2>
+      <div class="block">
+        <div class="rail"><div class="rail-inner"><p class="type-name">29CM 라이브<br>적립금 이벤트</p></div></div>
+        <div class="body">
+          <table class="c3">
+            <thead><tr><th>이벤트</th><th>트리거</th><th>혜택 (추첨)</th></tr></thead>
+            <tbody>
+              <tr><td>라이브 알림 신청</td><td>전체 알림 신청</td><td>헤드폰 1명 / 적립금 29만원 3명 / 2.9만원 25명</td></tr>
+              <tr><td>라이브 구매</td><td>라이브 1개 이상 시청 + 29만원 이상 구매</td><td>적립금 29만원 5명</td></tr>
+              <tr><td>취향 공유</td><td>공유 링크로 친구 방문, 가입, 첫 구매</td><td>방문, 가입 적립금 + 초대 상위 5명 최대 29만원</td></tr>
+            </tbody>
+          </table>
+          <p class="note">2026 이구패션위크 라이브(9.1-15) 페이지에서 확인된 타사 사실입니다. 시청, 구매, 공유를 트리거로 한 적립금 추첨 구조로, 전 구매자 지급이 아닌 추첨 방식입니다.</p>
+        </div>
+    </section>
+
     <!-- B-2 시사점 -->
     <section class="section">
       <h2 class="section-title">시사점</h2>
       <div class="block">
-        <div class="rail"><div class="rail-inner"><p class="type-name">B 트랙 적용</p></div></div>
+        <div class="rail"><div class="rail-inner"><p class="type-name">단독 행사<br>적용</p></div></div>
         <div class="body">
           <table class="c3">
-            <thead><tr><th>시사점</th><th>근거 사례</th><th>B 트랙 적용</th></tr></thead>
+            <thead><tr><th>시사점</th><th>근거 사례</th><th>단독 행사 적용</th></tr></thead>
             <tbody>
-              <tr><td>멀티 채널 송출로 독립 도달 확보</td><td class="gray">에이블리 앱 / 인스타그램 / 유튜브</td><td>전관이 없으므로 채널별 도달 합계가 거래액의 상한이 됨</td></tr>
+              <tr hidden><td>멀티 채널 송출로 독립 도달 확보</td><td class="gray">에이블리 앱 / 인스타그램 / 유튜브</td><td>전관이 없으므로 채널별 도달 합계가 거래액의 상한이 됨</td></tr>
               <tr><td>회차를 모아야 화력이 생김</td><td class="gray">29CM 원브랜드데이 하루 단위 집중 / 컬리 그랜드뷰컬페 분기 1회</td><td>앵커 브랜드 단독 회차에 편성과 혜택을 집중</td></tr>
               <tr><td>알림과 전용 혜택이 전환 장치</td><td class="gray">29CM 라이브 알림 신청 이벤트, 라이브 전용 혜택</td><td>회차별 알림 신청 + 라이브 전용 쿠폰으로 회차 전환율 확보</td></tr>
-              <tr><td>행사명이 있어야 회차가 누적 인지됨</td><td class="gray">컬리 그랜드뷰컬페</td><td>행사명 확정 필요, 정기화는 1회차 성과 확인 후 판단</td></tr>
+              <tr><td>행사명이 있어야 회차가 누적 인지됨</td><td class="gray">컬리 그랜드뷰컬페 / 29CM 이구위크, 이구패션위크 / 올리브영 올영라이브</td><td>행사명 확정 필요, 정기화는 1회차 성과 확인 후 판단</td></tr>
               <tr><td>요일, 시간 고정 편성이 표준</td><td class="gray">지그재그 매주 월 21시</td><td>독립 편성이므로 시간대 자유, 객단가 고려해 20시 프라임 확보</td></tr>
             </tbody>
           </table>
@@ -573,7 +579,7 @@
               <tr><td>다시보기</td><td class="gray">상시 VOD</td><td>행사 회차 상단 고정</td></tr>
             </tbody>
           </table>
-          <p class="note">독립 페이지를 신설하지 않고 상시 라이브 페이지를 행사 기간에만 행사 모드로 전환합니다. 다시보기가 같은 페이지 안에 있어 동선이 끊기지 않고, 화면 부품(회차 카드, 상태 버튼, 상품 보러가기)은 A 트랙 라이브 탭과 공용입니다. 전체 알림 받기는 B 트랙에서 적용이 어려워 회차별 개별 알림 신청으로 운영합니다.</p>
+          <p class="note"><span class="note-lead">독립 행사 페이지를 신설하지 않고 상시 라이브 페이지를 행사 기간에만 행사 모드로 전환하여 사용.</span> 다시보기가 같은 페이지 안에 있어 동선이 끊기지 않고, 행사 시즌에 맞는 오케이션별 상품 제안 및 혜택내용 추가로 이벤트성 페이지로의 운영이 용이할 것으로 예상.</p>
         </div>
       </div>
 
@@ -585,8 +591,9 @@
             <tbody>
               <tr><td>1. 행사 히어로</td><td>행사명 <span class="pt">(확정 필요)</span>, 기간, 편성 요약 한 줄</td><td>행사 인지, 회차 바로가기</td></tr>
               <tr><td>2. 회차 편성</td><td>회차 선택 + 회차 카드 (브랜드, 테마, 대표 혜택)</td><td>상태 버튼(알림 신청 → 입장 → 다시보기), 상품 보러가기</td></tr>
-              <tr><td>3. 혜택</td><td>라이브 전용 쿠폰, 방송 중 한정가</td><td>구매 전환 장치</td></tr>
-              <tr><td>4. 다시보기</td><td>종료 회차 VOD, 숏폼</td><td>행사 회차 상단 고정</td></tr>
+              <tr><td>3. 오케이션 제안</td><td>시즌 오케이션별 상품 제안(예: 직장인 출근룩), 라이브 상품 사전 소개 영상, 연계 상품 묶음</td><td>자체 제작 컨텐츠, 연계 상품 노출로 매출 집중</td></tr>
+              <tr><td>4. 혜택</td><td>라이브 전용 쿠폰, 방송 중 한정가</td><td>구매 전환 장치</td></tr>
+              <tr><td>5. 다시보기</td><td>종료 회차 VOD, 숏폼</td><td>행사 회차 상단 고정</td></tr>
             </tbody>
           </table>
           <p class="note">A 트랙 라이브 탭이 3개 블록으로 절제되는 것과 달리, 상시 라이브 페이지는 라이브가 주인공이므로 혜택과 다시보기를 각각 독립 블록으로 둘 수 있습니다.</p>
