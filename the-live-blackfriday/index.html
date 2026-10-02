@@ -189,10 +189,9 @@
   .figma-split > div:first-child { flex: 7; }
   .figma-split > div:last-child { flex: 3; }
   .figma-cap { font-size: var(--fs-min); font-weight: 700; color: var(--t3); margin-bottom: 10px; }
-  /* 시안 — 틀은 800px, 섹션 쪽은 임베드를 크게 잡고 아래를 잘라 크게 보이도록 */
-  .figma-split .figma-wrap { height: 800px; overflow: hidden; }
+  /* 시안 — 자르지 않고 틀을 키워 줌 버튼까지 보이게 */
+  .figma-split .figma-wrap { height: 1100px; }
   .figma-split .figma-wrap iframe { height: 100%; }
-  .figma-split > div:first-child .figma-wrap iframe { height: 1600px; }
   .figma-wrap { border: 1px solid var(--line); }
   .figma-wrap iframe { display: block; width: 100%; height: 800px; border: 0; }
 
