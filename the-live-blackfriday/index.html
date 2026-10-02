@@ -185,6 +185,10 @@
   .body.full { grid-column: 1 / span 12; }
 
   /* Figma 시안 */
+  .figma-split { display: flex; gap: 32px; align-items: stretch; }
+  .figma-split > div:first-child { flex: 7; }
+  .figma-split > div:last-child { flex: 3; }
+  .figma-cap { font-size: var(--fs-min); font-weight: 700; color: var(--t3); margin-bottom: 10px; }
   .figma-wrap { border: 1px solid var(--line); }
   .figma-wrap iframe { display: block; width: 100%; height: 800px; border: 0; }
 
@@ -1005,13 +1009,27 @@
       <h2 class="section-title">시안</h2>
       <div class="block">
         <div class="body full">
-          <div class="figma-wrap">
-            <iframe
-              title="C안 시안"
-              loading="lazy"
-              allowfullscreen
-              src="https://embed.figma.com/proto/a2OIHFLoIop0OaI72qtLe6/%EB%8D%94%EB%9D%BC%EC%9D%B4%EB%B8%8C-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EC%9C%84%ED%81%AC?node-id=212-10589&amp;scaling=contain&amp;content-scaling=fixed&amp;footer=false&amp;hotspot-hints=false&amp;device-frame=false&amp;embed-host=syleelfcorp-github-io">
-            </iframe>
+          <div class="figma-split">
+            <div>
+              <p class="figma-cap">섹션 — 설명 포함</p>
+              <div class="figma-wrap">
+                <iframe
+                  title="C안 시안 — 섹션"
+                  loading="lazy"
+                  allowfullscreen
+                  src="https://embed.figma.com/design/a2OIHFLoIop0OaI72qtLe6/%EB%8D%94%EB%9D%BC%EC%9D%B4%EB%B8%8C-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EC%9C%84%ED%81%AC?node-id=212-10589&amp;embed-host=syleelfcorp-github-io"></iframe>
+              </div>
+            </div>
+            <div>
+              <p class="figma-cap">미리보기</p>
+              <div class="figma-wrap">
+                <iframe
+                  title="C안 시안 — 미리보기"
+                  loading="lazy"
+                  allowfullscreen
+                  src="https://embed.figma.com/proto/a2OIHFLoIop0OaI72qtLe6/%EB%8D%94%EB%9D%BC%EC%9D%B4%EB%B8%8C-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EC%9C%84%ED%81%AC?node-id=212-10589&amp;scaling=contain&amp;content-scaling=fixed&amp;footer=false&amp;hotspot-hints=false&amp;device-frame=false&amp;embed-host=syleelfcorp-github-io"></iframe>
+              </div>
+            </div>
           </div>
           <p class="note">시안이 보이지 않으면 Figma 파일 공유 설정이 "링크가 있는 모든 사용자"인지 확인이 필요합니다. 원본 링크: <a href="https://www.figma.com/design/a2OIHFLoIop0OaI72qtLe6/%EB%8D%94%EB%9D%BC%EC%9D%B4%EB%B8%8C-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EC%9C%84%ED%81%AC?node-id=212-10589" target="_blank" rel="noopener">Figma에서 열기</a></p>
         </div>
