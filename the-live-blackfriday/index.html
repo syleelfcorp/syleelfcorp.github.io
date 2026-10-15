@@ -184,6 +184,27 @@
   .c4.hide-t3 th:nth-child(4), .c4.hide-t3 td:nth-child(4) { display: none; }  /* Tier 3 숨김 */
   .body.full { grid-column: 1 / span 12; }
 
+  /* ---------- 편성 캘린더 ---------- */
+  .cal { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .cal th, .cal td {
+    border: 1px solid var(--line-strong);
+    padding: 12px 8px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: var(--fs-min);
+    color: var(--t2);
+  }
+  .cal thead th { background: var(--line); color: var(--t3); font-weight: 700; }
+  .cal .lab { background: var(--line); color: var(--t1); font-weight: 700; text-align: left; width: 150px; }
+  .cal .date { background: var(--point); color: #fff; font-weight: 700; }
+  .cal .date.off { background: var(--line); color: #aaaaaa; }
+  .cal .theme { font-weight: 700; color: var(--t1); }
+  .cal .live { color: var(--t1); }
+  .cal .lab.on { color: var(--point); }
+  .cal .enc { color: var(--t1); }
+  .cal .divider td, .cal .divider th { border-bottom: 1px solid var(--t1); }
+  .cal .empty { background: #fafafa; }
+
   /* Figma 시안 */
   .figma-split { display: flex; gap: 32px; align-items: stretch; }
   .figma-split > div:first-child { flex: 7; }
@@ -938,6 +959,25 @@
             </tbody>
           </table>
           <p class="note">앵콜 라이브는 생방송을 추가하지 않고 재방 송출로 운영. 블프 주간에는 재방송에도 실시간 댓글 응대를 운영하며, 알림 신청과 혜택도 본방과 동일하게 적용하므로 "다시보기"가 아니라 "놓친 혜택을 한 번 더"로 소구. 같은 날 본방을 다시 트는 재방과, 다른 날 성과가 좋았던 회차를 트는 앵콜을 시간대로 구분해 성격이 섞이지 않도록 함.</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="rail"><div class="rail-inner"><p class="type-name">예상 편성<br>캘린더</p></div></div>
+        <div class="body">
+          <table class="cal">
+            <thead><tr><th></th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th></tr></thead>
+            <tbody>
+              <tr><td class="lab">11월</td><td class="date off">2</td><td class="date">3</td><td class="date">4</td><td class="date">5</td><td class="date off">6</td></tr>
+              <tr><td class="lab">테마</td><td class="empty"></td><td class="theme">수입데이</td><td class="theme">브랜드데이</td><td class="theme">컨템데이</td><td class="empty"></td></tr>
+              <tr class="divider"><td class="lab">사은품</td><td class="empty"></td><td class="">다이슨</td><td class="">갤럭시탭</td><td class="">뱅앤올룹슨 스피커</td><td class="empty"></td></tr>
+              <tr><td class="lab on">11:00 본방송</td><td class="empty"></td><td class="live">여성수입 (아울렛)</td><td class="live">헤지스 여성</td><td class="live">라코스테</td><td class="empty"></td></tr>
+              <tr><td class="lab">14:00 앵콜</td><td class="empty"></td><td class="enc">닥스키즈</td><td class="enc">헤지스 골프</td><td class="enc">헤지스 여성</td><td class="empty"></td></tr>
+              <tr><td class="lab">16:00 앵콜</td><td class="empty"></td><td class="enc">여성컨템 (아울렛)</td><td class="enc">오리고</td><td class="enc">TNGT</td><td class="empty"></td></tr>
+              <tr><td class="lab on">19:30 본방송</td><td class="empty"></td><td class="live">바버</td><td class="live">TNGT</td><td class="live">남성컨템</td><td class="empty"></td></tr>
+            </tbody>
+          </table>
+          <p class="note">하루 4회 구성 — 본방송 2회(11:00 · 19:30)와 앵콜 2회(14:00 · 16:00). 날짜 · 브랜드 · 사은품은 현재 검토 중인 예상 편성이며 <span class="pt">확정 후 조정 필요</span>. 앵콜 회차는 앞의 소재 기준(1-2일차 사전 성과, 3일차 행사 성과)에 따라 브랜드가 바뀔 수 있음.</p>
         </div>
       </div>
 
