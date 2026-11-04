@@ -14,18 +14,14 @@
 <main class="section form-page">
   <div class="wrap" style="max-width:640px">
 
-    <div class="section-head">
+    <div class="section-head center">
       <h1 class="section-title">체험단 신청서</h1>
       <p class="section-lead">아래 정보를 작성해 주세요. 선정 안내는 적어주신 연락처로 발송됩니다.</p>
     </div>
 
     <div class="form-card">
 
-      <div class="form-progress">
-        <span>신청서 작성</span>
-        <div class="bar"><i></i></div>
-        <span>거의 다 됐어요</span>
-      </div>
+      <p class="form-legend"><span class="req" aria-hidden="true">*</span> 표시는 필수 항목입니다.</p>
 
       <form id="applyForm" novalidate>
 
@@ -35,7 +31,7 @@
 
         <!-- 신청 제품 : 이미지 포함 커스텀 드롭다운 -->
         <div class="field">
-          <label id="productLabel">신청 제품 <span class="req">필수</span></label>
+          <label id="productLabel">신청 제품 <span class="req" aria-hidden="true">*</span></label>
           <div class="combo" id="productCombo">
             <button type="button" class="combo__btn" id="productBtn"
                     aria-haspopup="listbox" aria-expanded="false"
@@ -50,40 +46,26 @@
             </button>
 
             <ul class="combo__list" id="productList" role="listbox" aria-labelledby="productLabel" hidden>
-              <li role="option" aria-selected="false" data-value="w-turtleneck" data-name="캐시미어 블렌드 터틀넥 니트">
+              <li role="option" aria-selected="false" data-value="hzg-bootcut-pants"
+                  data-name="[헤지스골프] 블랙 여성 밍크 기모 밴딩 부츠컷 팬츠">
                 <span class="opt__thumb">
-                  <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M17 6l7 5 7-5 9 6-4 7-4-2v19H16V17l-4 2-4-7 9-6z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+                  <img src="https://nimg.lfmall.co.kr/file/product/prd/HW/2026/1500/HWPA6D903BK_A11.jpg"
+                       alt="" loading="lazy" onerror="this.remove()">
                 </span>
                 <span class="opt__text">
-                  <span class="opt__cat">WOMEN · 니트</span>
-                  <span class="opt__name">캐시미어 블렌드 터틀넥 니트</span>
+                  <span class="opt__cat">헤지스골프</span>
+                  <span class="opt__name">블랙 여성 밍크 기모 밴딩 부츠컷 팬츠</span>
                 </span>
               </li>
-              <li role="option" aria-selected="false" data-value="w-slacks" data-name="울 블렌드 와이드 슬랙스">
+              <li role="option" aria-selected="false" data-value="hvh-mockneck-tee"
+                  data-name="[해브헤지스] 시스루 모크넥 반팔 티셔츠 아이보리">
                 <span class="opt__thumb">
-                  <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M16 6h16l2 36h-8l-2-20-2 20h-8L16 6z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+                  <img src="https://nimg.lfmall.co.kr/file/product/prd/HS/2026/1500/HSTS6DP01IV_03.jpg"
+                       alt="" loading="lazy" onerror="this.remove()">
                 </span>
                 <span class="opt__text">
-                  <span class="opt__cat">WOMEN · 팬츠</span>
-                  <span class="opt__name">울 블렌드 와이드 슬랙스</span>
-                </span>
-              </li>
-              <li role="option" aria-selected="false" data-value="m-overshirt" data-name="프리미엄 코튼 오버셔츠">
-                <span class="opt__thumb">
-                  <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M18 6l6 4 6-4 8 5-3 7-3-1v20H16V17l-3 1-3-7 8-5z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
-                </span>
-                <span class="opt__text">
-                  <span class="opt__cat">MEN · 셔츠</span>
-                  <span class="opt__name">프리미엄 코튼 오버셔츠</span>
-                </span>
-              </li>
-              <li role="option" aria-selected="false" data-value="m-vest" data-name="경량 패딩 베스트">
-                <span class="opt__thumb">
-                  <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M17 7h14l5 7-4 3v24H16V17l-4-3 5-7z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M24 7v33" stroke="currentColor" stroke-width="2.4"/></svg>
-                </span>
-                <span class="opt__text">
-                  <span class="opt__cat">MEN · 아우터</span>
-                  <span class="opt__name">경량 패딩 베스트</span>
+                  <span class="opt__cat">해브헤지스</span>
+                  <span class="opt__name">시스루 모크넥 반팔 티셔츠 아이보리</span>
                 </span>
               </li>
             </ul>
@@ -94,7 +76,7 @@
 
         <!-- 사이즈 -->
         <div class="field">
-          <label>희망 사이즈 <span class="req">필수</span></label>
+          <label>희망 사이즈 <span class="req" aria-hidden="true">*</span></label>
           <span class="hint">선택한 제품에 맞는 사이즈가 표시됩니다.</span>
           <div class="size-group" id="sizeGroup" role="radiogroup" aria-label="희망 사이즈">
             <!-- JS로 채움 -->
@@ -103,18 +85,18 @@
 
         <!-- LF몰 아이디 -->
         <div class="field">
-          <label for="memberId">LF몰 아이디 <span class="req">필수</span></label>
+          <label for="memberId">LF몰 아이디 <span class="req" aria-hidden="true">*</span></label>
           <span class="hint">체험단 활동 확인에 사용됩니다. 가입하신 LF몰 계정의 아이디를 입력해 주세요.</span>
           <input class="input" type="text" id="memberId" name="memberId" placeholder="lfmall_id" autocomplete="username" required>
         </div>
 
         <div class="field-row field-row--2">
           <div class="field">
-            <label for="name">이름 <span class="req">필수</span></label>
+            <label for="name">이름 <span class="req" aria-hidden="true">*</span></label>
             <input class="input" type="text" id="name" name="name" placeholder="홍길동" autocomplete="name" required>
           </div>
           <div class="field">
-            <label for="phone">휴대폰 번호 <span class="req">필수</span></label>
+            <label for="phone">휴대폰 번호 <span class="req" aria-hidden="true">*</span></label>
             <input class="input" type="tel" id="phone" name="phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="numeric" required>
           </div>
         </div>
@@ -122,7 +104,7 @@
         <!-- 성별 · 연령대 -->
         <div class="field-row field-row--2">
           <div class="field">
-            <label>성별 <span class="req">필수</span></label>
+            <label>성별 <span class="req" aria-hidden="true">*</span></label>
             <div class="choice-group" role="radiogroup" aria-label="성별">
               <input type="radio" id="gender-f" name="gender" value="여성" required>
               <label for="gender-f">여성</label>
@@ -133,7 +115,7 @@
             </div>
           </div>
           <div class="field">
-            <label for="ageGroup">연령대 <span class="req">필수</span></label>
+            <label for="ageGroup">연령대 <span class="req" aria-hidden="true">*</span></label>
             <select class="select" id="ageGroup" name="ageGroup" required>
               <option value="" disabled selected>연령대를 선택하세요</option>
               <option value="20-25">20~25세</option>
@@ -149,7 +131,7 @@
 
         <!-- SNS 채널 + 계정명 -->
         <div class="field">
-          <label for="snsType">SNS 아이디 <span class="req">필수</span></label>
+          <label for="snsType">SNS 아이디 <span class="req" aria-hidden="true">*</span></label>
           <span class="hint">선정 시 이 채널로 안내드려요. 공개 계정 권장.</span>
           <div class="sns-row">
             <select class="select" id="snsType" name="snsType">
@@ -168,7 +150,7 @@
 
         <!-- 배송지 -->
         <div class="field">
-          <label for="address">배송 주소 <span class="req">필수</span></label>
+          <label for="address">배송 주소 <span class="req" aria-hidden="true">*</span></label>
           <span class="hint">선정 시 제품이 배송될 주소입니다.</span>
           <input class="input" type="text" id="address" name="address" placeholder="도로명 주소, 상세주소까지 입력" autocomplete="street-address" required>
         </div>
@@ -285,7 +267,7 @@
       <p class="note">필수적인 개인정보 수집 및 이용에 동의하지 않을 권리가 있습니다. 다만, 동의하지 않을 경우 체험단 신청이 제한됩니다.</p>
     </div>
     <div class="modal__foot">
-      <button type="button" class="btn btn--key" data-close data-agree="agreePrivacy">동의하고 닫기</button>
+      <button type="button" class="btn btn--black" data-close data-agree="agreePrivacy">동의하고 닫기</button>
     </div>
   </div>
 </div>
@@ -327,7 +309,7 @@
       </div>
     </div>
     <div class="modal__foot">
-      <button type="button" class="btn btn--key" data-close data-agree="agreePenalty">동의하고 닫기</button>
+      <button type="button" class="btn btn--black" data-close data-agree="agreePenalty">동의하고 닫기</button>
     </div>
   </div>
 </div>
@@ -341,11 +323,10 @@
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxGee0iHmdbZuvI6rE3rviQ5s3urWQwZ4cnYqjwSvAl-XkvoQYGpvFjUTM3L1u9BnuD2Q/exec';
 
   /* ---------- 제품별 사이즈 ---------- */
+  // TODO: 실제 운영 사이즈로 교체 필요 (현재 임시값)
   var SIZES = {
-    'w-turtleneck': ['S','M','L','XL'],
-    'w-slacks':     ['24','26','28','30'],
-    'm-overshirt':  ['M','L','XL','2XL'],
-    'm-vest':       ['95','100','105','110']
+    'hzg-bootcut-pants': ['S','M','L','XL'],
+    'hvh-mockneck-tee':  ['S','M','L','XL']
   };
 
   /* ---------- 상품 드롭다운 ---------- */
