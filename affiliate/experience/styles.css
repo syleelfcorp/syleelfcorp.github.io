@@ -101,7 +101,9 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
+  /* 히어로 구간에서는 연보라, 스크롤해 내려가면 흰색으로 전환된다 */
   background: var(--bg);
+  transition: background-color .7s ease-in-out;
   color: var(--ink);
   font-family: var(--font);
   font-size: 16px;
@@ -115,6 +117,8 @@ a { color: inherit; }
 button { font-family: inherit; }
 [hidden] { display: none !important; }
 :focus-visible { outline: 3px solid var(--key); outline-offset: 2px; border-radius: 4px; }
+body.at-hero { background: var(--key-soft); }
+@media (prefers-reduced-motion: reduce) { body { transition: none; } }
 
 /* ---- 레이아웃 컨테이너 ---- */
 .wrap {
@@ -169,18 +173,29 @@ button { font-family: inherit; }
 .btn--lg { --h: 58px; font-size: 17px; padding: 0 34px; }
 
 /* ---- 히어로 ---- */
-.hero { background: var(--key-soft); }
+/* 배경은 body가 담당하므로 섹션 자체는 투명하게 둔다 */
+.hero { background: transparent; }
 .hero__inner {
-  /* 첫 화면에서 뷰포트의 약 75%를 차지하는 인트로 영역 */
-  min-height: 75vh;
-  min-height: 75svh;
+  /* 첫 화면을 가득 채우는 인트로 영역 */
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex; flex-direction: column; justify-content: center;
-  padding-block: clamp(48px, 8vw, 96px); text-align: center;
+  /* 아래 패딩을 두면 그만큼 타이틀이 고정될 수 있는 구간이 짧아진다 */
+  padding-top: clamp(48px, 8vw, 96px); padding-bottom: 0;
+  text-align: center;
 }
 .hero h1 {
   font-size: clamp(32px, 6vw, 56px); font-weight: 800; line-height: 1.2;
   letter-spacing: -0.03em; margin: 0; text-wrap: balance;
 }
+/* 스크롤하면 상단 100px 지점에 머물다가, 다음 섹션이 올라오면 함께 밀려 올라간다.
+   히어로 영역이 고정 범위를 정하므로 자바스크립트 없이 동작한다. */
+.hero__content { position: sticky; top: 72px; }
+@media (min-width: 768px) { .hero__content { top: 100px; } }
+
+/* 모바일에서는 두 줄, 폭이 넉넉한 PC에서는 한 줄로 */
+.hero h1 .hero-line { display: block; }
+@media (min-width: 1100px) { .hero h1 .hero-line { display: inline; } }
 .hero__sub { margin: 20px auto 0; font-size: clamp(15px, 2.2vw, 18px); color: var(--muted); max-width: 46ch; line-height: 1.65; }
 
 /* ---- 스텝(번호 뱃지) ---- */
@@ -208,7 +223,7 @@ button { font-family: inherit; }
 
 /* ---- 상품 그리드 ---- */
 .period-banner {
-  text-align: center; color: var(--key); font-weight: 700; font-size: 15px;
+  text-align: center; color: var(--key); font-weight: 700; font-size: 17px;
   margin: 0 0 26px;
 }
 .product-grid { display: grid; gap: 52px; max-width: 920px; margin-inline: auto; }
@@ -228,19 +243,20 @@ button { font-family: inherit; }
 .product__thumb img { width: 100%; height: 100%; object-fit: cover; }
 .product__count {
   position: absolute; top: 14px; right: 14px;
-  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
-  width: clamp(58px, 5vw, 66px); height: clamp(58px, 5vw, 66px); border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: clamp(54px, 4.6vw, 60px); height: clamp(54px, 4.6vw, 60px); border-radius: 50%;
   background: var(--black); color: #fff;
-  font-weight: 800; line-height: 1.05; box-shadow: 0 6px 18px rgba(0, 0, 0, .28);
+  font-size: 15px; font-weight: 800; line-height: 1;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .28);
 }
-.product__count b { font-size: clamp(18px, 1.8vw, 21px); font-variant-numeric: tabular-nums; }
-.product__count span { font-size: 10px; font-weight: 600; opacity: .9; }
+.product__count b { font-weight: 800; font-variant-numeric: tabular-nums; }
+.product__count span { font-weight: 800; }
 .product__body { padding: 14px 0 0; display: flex; flex-direction: column; gap: 9px; flex: 1; }
-.product__cat { font-size: 11px; font-weight: 700; letter-spacing: .12em; color: var(--muted); }
-.product__name { font-size: 17px; font-weight: 700; line-height: 1.4; letter-spacing: -0.02em; margin: 0 0 8px; }
+.product__cat { font-size: 14px; font-weight: 700; letter-spacing: 0; color: var(--muted); }
+.product__name { font-size: 20px; font-weight: 700; line-height: 1.4; letter-spacing: -0.02em; margin: 0 0 8px; }
 .product__meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 8px; }
 .chip { font-size: 12px; font-weight: 600; color: var(--ink); background: var(--surface); border: 1px solid var(--line); padding: 4px 9px; border-radius: var(--radius-pill); }
-.product__body .btn { margin-top: auto; }
+.product__body .btn { --h: 54px; margin-top: auto; }
 
 /* ---- 유의사항 ---- */
 .notice {
@@ -304,7 +320,7 @@ button { font-family: inherit; }
 .site-footer__inner { padding-block: 34px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between; }
 .site-footer small { color: var(--muted); font-size: 13px; }
 .site-footer__brand { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.site-footer__brand img { width: 120px; height: auto; display: block; }
+.site-footer__brand img { width: 100px; height: auto; display: block; }
 .site-footer nav { display: flex; gap: 18px; align-items: center; }
 .site-footer nav a { color: var(--muted); font-size: 13px; text-decoration: none; }
 .site-footer nav a:hover { color: var(--ink); }
