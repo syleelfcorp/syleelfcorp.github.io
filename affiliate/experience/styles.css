@@ -31,7 +31,7 @@
   --shadow: 0 1px 2px rgba(21,18,28,.04), 0 8px 24px rgba(21,18,28,.06);
   --shadow-key: 0 10px 28px rgba(105,25,205,.22);
 
-  --maxw: 880px;
+  --maxw: 1100px;
   --gutter: max(18px, env(safe-area-inset-left, 0px));
   --gutter-r: max(18px, env(safe-area-inset-right, 0px));
 
@@ -124,12 +124,12 @@ button { font-family: inherit; }
   padding-left: var(--gutter);
   padding-right: var(--gutter-r);
 }
-.section { padding-block: clamp(48px, 9vw, 88px); }
+.section { padding-block: clamp(48px, 9vw, 104px); }
 .section--surface { background: var(--surface); }
 
 /* ---- 공통 타이포 ---- */
 .section-title {
-  font-size: clamp(24px, 4.4vw, 34px); font-weight: 800; line-height: 1.25;
+  font-size: clamp(24px, 4.4vw, 38px); font-weight: 800; line-height: 1.25;
   letter-spacing: -0.02em; margin: 0; text-wrap: balance;
 }
 .section-lead {
@@ -162,23 +162,32 @@ button { font-family: inherit; }
 .btn--lg { --h: 58px; font-size: 17px; padding: 0 34px; }
 
 /* ---- 히어로 ---- */
-.hero { background: var(--bg); }
-.hero__inner { padding-block: clamp(60px, 11vw, 120px); text-align: center; }
+.hero { background: var(--key-soft); }
+.hero__inner {
+  /* 첫 화면에서 뷰포트의 약 75%를 차지하는 인트로 영역 */
+  min-height: 75vh;
+  min-height: 75svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-block: clamp(48px, 8vw, 96px); text-align: center;
+}
 .hero h1 {
-  font-size: clamp(30px, 5.6vw, 46px); font-weight: 800; line-height: 1.22;
+  font-size: clamp(32px, 6vw, 56px); font-weight: 800; line-height: 1.2;
   letter-spacing: -0.03em; margin: 0; text-wrap: balance;
 }
-.hero__sub { margin: 18px auto 0; font-size: clamp(15px, 2.2vw, 17px); color: var(--muted); max-width: 46ch; line-height: 1.65; }
+.hero__sub { margin: 20px auto 0; font-size: clamp(15px, 2.2vw, 18px); color: var(--muted); max-width: 46ch; line-height: 1.65; }
 
 /* ---- 스텝(번호 뱃지) ---- */
-.steps { display: grid; gap: 18px; }
+.steps { display: grid; gap: clamp(18px, 2vw, 24px); }
 @media (min-width: 720px) { .steps--3 { grid-template-columns: repeat(3, 1fr); } }
 .step {
   position: relative; background: var(--card); border: 1px solid var(--line);
-  border-radius: var(--radius); padding: 26px 24px 24px; box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: clamp(26px, 2.8vw, 34px) clamp(24px, 2.6vw, 32px) clamp(24px, 2.6vw, 32px);
+  box-shadow: var(--shadow);
 }
 .step__num {
-  display: inline-grid; place-items: center; width: 38px; height: 38px;
+  display: inline-grid; place-items: center;
+  width: clamp(38px, 3.4vw, 44px); height: clamp(38px, 3.4vw, 44px);
   border-radius: 11px; background: var(--surface); color: var(--ink);
   border: 1px solid var(--line);
   font-weight: 800; font-size: 17px; font-variant-numeric: tabular-nums;
@@ -193,8 +202,8 @@ button { font-family: inherit; }
   text-align: center; color: var(--key); font-weight: 700; font-size: 15px;
   margin: 0 0 26px;
 }
-.product-grid { display: grid; gap: 52px; }
-@media (min-width: 620px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 46px 20px; } }
+.product-grid { display: grid; gap: 52px; max-width: 920px; margin-inline: auto; }
+@media (min-width: 620px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 46px 24px; } }
 .product {
   display: flex; flex-direction: column; background: transparent;
   transition: transform .15s ease;
@@ -211,10 +220,11 @@ button { font-family: inherit; }
 .product__count {
   position: absolute; top: 14px; right: 14px;
   display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
-  width: 58px; height: 58px; border-radius: 50%; background: var(--key); color: var(--on-key);
-  font-weight: 800; line-height: 1.05; box-shadow: var(--shadow-key);
+  width: clamp(58px, 5vw, 66px); height: clamp(58px, 5vw, 66px); border-radius: 50%;
+  background: var(--black); color: #fff;
+  font-weight: 800; line-height: 1.05; box-shadow: 0 6px 18px rgba(0, 0, 0, .28);
 }
-.product__count b { font-size: 18px; font-variant-numeric: tabular-nums; }
+.product__count b { font-size: clamp(18px, 1.8vw, 21px); font-variant-numeric: tabular-nums; }
 .product__count span { font-size: 10px; font-weight: 600; opacity: .9; }
 .product__body { padding: 14px 0 0; display: flex; flex-direction: column; gap: 9px; flex: 1; }
 .product__cat { font-size: 11px; font-weight: 700; letter-spacing: .12em; color: var(--muted); }
@@ -227,17 +237,21 @@ button { font-family: inherit; }
 .timeline { display: grid; gap: 0; }
 @media (min-width: 720px) { .timeline { grid-template-columns: repeat(4, 1fr); } }
 .tl-item {
-  position: relative; padding: 22px 20px; background: var(--card);
+  position: relative; padding: clamp(22px, 2.4vw, 28px) clamp(20px, 2.2vw, 26px);
+  background: var(--card);
   border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
 }
-.timeline { gap: 14px; }
+.timeline { gap: clamp(14px, 1.8vw, 20px); }
 .tl-item .tl-step { font-size: 12px; font-weight: 700; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
 .tl-item h4 { margin: 10px 0 4px; font-size: 16px; font-weight: 700; }
 .tl-item .tl-date { font-size: 15px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
 .tl-item p { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
 
 /* ---- 유의사항 ---- */
-.notice { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+.notice {
+  /* 박스 없이 본문처럼 — 섹션 좌측에 맞춰 정렬 */
+  max-width: 880px; margin-inline: 0 auto;
+}
 .notice h3 { margin: 0 0 14px; font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
 .notice ul { margin: 0; padding-left: 18px; display: grid; gap: 9px; }
 .notice li { font-size: 14px; color: var(--muted); line-height: 1.6; }
