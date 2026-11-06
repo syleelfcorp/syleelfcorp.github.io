@@ -103,7 +103,7 @@ body {
   margin: 0;
   /* 히어로 구간에서는 연보라, 스크롤해 내려가면 흰색으로 전환된다 */
   background: var(--bg);
-  transition: background-color .7s ease-in-out;
+  transition: background-color .5s ease-in-out;
   color: var(--ink);
   font-family: var(--font);
   font-size: 16px;
@@ -260,12 +260,29 @@ body.at-hero { background: var(--key-soft); }
 
 /* ---- 유의사항 ---- */
 .notice {
-  /* 박스 없이 본문처럼 — 섹션 좌측에 맞춰 정렬 */
+  /* 박스 없이 본문처럼 — 기본은 섹션 좌측에 맞춰 정렬 */
 }
 .notice h3 { margin: 0 0 14px; font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
 .notice ul { margin: 0; padding-left: 18px; display: grid; gap: 9px; }
 .notice li { font-size: 14px; color: var(--muted); line-height: 1.6; }
 .notice li::marker { color: var(--muted); }
+
+/* 중앙정렬 아코디언 변형 (details) —
+   가운데에서는 불릿이 글줄과 떨어져 보이므로 숨기고 줄간격으로 구분한다 */
+.notice--center { text-align: center; }
+.notice--center h3 { display: block; margin: 0; }
+.notice--center ul { padding-left: 0; list-style: none; gap: 4px; margin-top: 14px; }
+.notice__q {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; list-style: none;
+}
+.notice__q::-webkit-details-marker { display: none; }
+/* 키보드 이동일 때만 — 마우스 클릭 후에는 색이 남지 않는다 */
+.notice__q:focus-visible { color: var(--key); }
+.notice__icon { flex-shrink: 0; width: 20px; height: 20px; color: var(--muted); }
+.notice__icon svg { width: 100%; height: 100%; display: block; transition: transform .2s ease; }
+.notice--center[open] .notice__icon svg { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) { .notice__icon svg { transition: none; } }
 
 /* ---- 자주 묻는 질문 ---- */
 .faq { display: grid; gap: 12px; }
@@ -277,8 +294,8 @@ body.at-hero { background: var(--key-soft); }
   line-height: 1.5; cursor: pointer; list-style: none;
 }
 .faq__q::-webkit-details-marker { display: none; }
-.faq__q:hover { color: var(--key); }
-.faq__item:focus-within .faq__q { color: var(--key); }
+/* 키보드 이동일 때만 — 마우스 클릭 후에는 색이 남지 않는다 */
+.faq__q:focus-visible { color: var(--key); }
 .faq__icon { flex-shrink: 0; width: 22px; height: 22px; color: var(--muted); }
 .faq__icon svg { width: 100%; height: 100%; display: block; }
 .faq__icon .v { transition: opacity .18s ease, transform .18s ease; transform-origin: center; }
@@ -287,12 +304,13 @@ body.at-hero { background: var(--key-soft); }
   padding: 0 clamp(20px, 2.4vw, 28px) clamp(22px, 2.4vw, 28px);
   color: var(--muted); font-size: 14.5px; line-height: 1.75;
 }
-.faq__a p { margin: 0 0 8px; }
+.faq__a p { margin: 0 0 2px; }
 .faq__a p:last-child { margin: 0; }
 @media (prefers-reduced-motion: reduce) { .faq__icon .v { transition: none; } }
 
 /* ---- 공유하기 ---- */
-.share { background: var(--bg); border-top: 1px solid var(--line); }
+/* 구분선 없이 FAQ와 이어진다 — 위 섹션의 하단 패딩만으로 간격을 둔다 */
+.share { background: var(--bg); padding-top: 0; }
 .share__list { display: flex; justify-content: center; gap: clamp(14px, 1.6vw, 18px); flex-wrap: wrap; }
 .share__btn {
   width: clamp(56px, 5vw, 64px); height: clamp(56px, 5vw, 64px);

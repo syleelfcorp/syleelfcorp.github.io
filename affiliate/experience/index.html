@@ -28,7 +28,7 @@
   <div class="wrap hero__inner">
     <div class="hero__content">
       <h1><span class="hero-line">이번 시즌 신상품을</span> <span class="hero-line">먼저 체험해 보세요</span></h1>
-      <p class="hero__sub">직접 코디한 후기를 통해 새로운 기회가 열릴지도 몰라요!</p>
+      <p class="hero__sub">직접 코디한 상품 후기를 통해 새로운 기회가 열릴지도 몰라요!</p>
     </div>
   </div>
 </section>
@@ -135,15 +135,20 @@
       </div>
     </div>
 
-    <div class="notice mt-lg">
-      <h3>신청 전 꼭 확인해 주세요</h3>
+    <details class="notice notice--center mt-lg">
+      <summary class="notice__q">
+        <h3>신청 전 꼭 확인해 주세요</h3>
+        <span class="notice__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </span>
+      </summary>
       <ul>
         <li>선정 안내는 신청서에 적어주신 <b>SNS 또는 휴대폰 문자</b>로 발송됩니다. 평소 수신 설정을 확인해 주세요.</li>
         <li>체험 제품은 무료로 제공되며, 선정되신 분은 <b>수령 후 14일 이내 후기 1건 업로드</b>가 필요합니다.</li>
         <li>후기는 LFmall 상품 상세에 노출될 수 있으며, 얼굴 노출 여부는 자유롭게 선택하실 수 있습니다.</li>
         <li>1인당 1개 제품에 한해 신청 가능하며, 중복 신청 시 가장 마지막 신청만 유효합니다.</li>
       </ul>
-    </div>
+    </details>
   </div>
 </section>
 
@@ -271,13 +276,13 @@
 </footer>
 
 <script>
-  /* 히어로 배경 전환 — 화면 40% 지점을 지나면 흰색으로 바뀐다.
-     색 전환 자체는 CSS transition(0.7s)이 처리한다. */
+  /* 히어로 배경 전환 — 화면 30% 지점을 지나면 흰색으로 바뀐다.
+     색 전환 자체는 CSS transition(0.5s)이 처리한다. */
   (function () {
     var body = document.body;
     var ticking = false;
     function sync() {
-      body.classList.toggle('at-hero', window.scrollY < window.innerHeight * 0.4);
+      body.classList.toggle('at-hero', window.scrollY < window.innerHeight * 0.3);
       ticking = false;
     }
     function onScroll() {
