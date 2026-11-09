@@ -16,7 +16,7 @@
 
     <div class="section-head center">
       <h1 class="section-title">체험단 신청서</h1>
-      <p class="section-lead">아래 정보를 작성해 주세요. 선정 안내는 적어주신 연락처로 발송됩니다.</p>
+      <p class="section-lead">아래 정보를 작성해 주세요. 선정 안내는 엘스파 모집에 작성해주신 연락처로 발송됩니다.</p>
     </div>
 
     <div class="form-card">
@@ -28,6 +28,25 @@
         <!-- 봇 차단용 함정 필드. 사람에게는 보이지 않으며, 값이 채워지면 접수하지 않습니다. -->
         <input type="text" name="website" id="website" tabindex="-1" autocomplete="off"
                aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+
+        <!-- ============ 엘스파 회원 확인 ============
+             이 페이지는 외부 시스템 없이 혼자 동작합니다. 회원 여부를 조회하지
+             않고 신청자가 직접 체크하며, 체크 전에는 아래 항목이 모두 잠깁니다. -->
+        <div class="field gate" id="lespaGate">
+          <label>엘스파 회원 확인 <span class="req" aria-hidden="true">*</span></label>
+          <span class="hint">체험단은 엘스파(LF 스타일 파트너) 회원만 신청할 수 있습니다.</span>
+
+          <div class="gate__check" id="lespaBox">
+            <input type="checkbox" id="lespaMember" name="lespaMember" value="Y">
+            <label for="lespaMember">엘스파 회원입니다.</label>
+            <p class="gate__note">
+              아직 회원이 아니라면 먼저 가입하신 뒤 신청해 주세요.
+              <a id="lespaJoinLink" href="#" target="_blank" rel="noopener">엘스파 가입하기</a>
+            </p>
+          </div>
+        </div>
+
+        <hr class="divider" id="gateDivider" style="margin-block:4px 22px">
 
         <!-- 신청 제품 : 이미지 포함 커스텀 드롭다운 -->
         <div class="field">
@@ -145,6 +164,7 @@
           <input class="input" type="text" id="memberId" name="memberId" placeholder="lfmall_id" autocomplete="username" required>
         </div>
 
+<!-- 이름 · 휴대폰 번호 — 숨김 처리 (2026-11-09). 다시 보이려면 이 주석만 풀면 됩니다.
         <div class="field-row field-row--2">
           <div class="field">
             <label for="name">이름 <span class="req" aria-hidden="true">*</span></label>
@@ -155,8 +175,9 @@
             <input class="input" type="tel" id="phone" name="phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="numeric" required>
           </div>
         </div>
+        -->
 
-        <!-- 성별 · 연령대 -->
+<!-- 성별 · 연령대 — 숨김 처리 (2026-11-09). 다시 보이려면 이 주석만 풀면 됩니다.
         <div class="field-row field-row--2">
           <div class="field">
             <label>성별 <span class="req" aria-hidden="true">*</span></label>
@@ -183,6 +204,7 @@
             </select>
           </div>
         </div>
+        -->
 
         <!-- SNS 채널 + 계정명 -->
         <div class="field">
@@ -203,12 +225,13 @@
           </div>
         </div>
 
-        <!-- 배송지 -->
+<!-- 배송 주소 — 숨김 처리 (2026-11-09). 다시 보이려면 이 주석만 풀면 됩니다.
         <div class="field">
           <label for="address">배송 주소 <span class="req" aria-hidden="true">*</span></label>
           <span class="hint">선정 시 제품이 배송될 주소입니다.</span>
           <input class="input" type="text" id="address" name="address" placeholder="도로명 주소, 상세주소까지 입력" autocomplete="street-address" required>
         </div>
+        -->
 
         <hr class="divider" style="margin-block:8px 22px">
 
@@ -227,7 +250,7 @@
               </li>
               <li>
                 <input type="checkbox" id="agreePrivacy" name="agreePrivacy" data-required>
-                <label for="agreePrivacy"><b>[필수]</b> 개인정보 수집·이용 및 후기 콘텐츠 활용에 동의합니다. 수집 항목(LF몰 아이디, 이름, 연락처, 성별, 연령대, SNS 아이디, 배송지)은 체험단 운영·배송·선정 안내 목적에 한해 사용되며, 작성한 후기는 LFmall 내에 노출될 수 있습니다.</label>
+                <label for="agreePrivacy"><b>[필수]</b> 개인정보 수집·이용 및 후기 콘텐츠 활용에 동의합니다. 수집 항목(LF몰 아이디, SNS 아이디)은 체험단 운영·배송·선정 안내 목적에 한해 사용되며, 작성한 후기는 LFmall 내에 노출될 수 있습니다.</label>
                 <button type="button" class="consent__view" data-modal="modalPrivacy">약관보기</button>
               </li>
               <li>
@@ -292,7 +315,7 @@
                   <li>고객 상담 및 불만, 민원 사무 처리</li>
                 </ul>
               </td>
-              <td>LF몰 아이디, 이름, 성별, 연령대, 연락처, SNS 아이디, 배송지 주소(당첨자에 한하여 수집함)</td>
+              <td>LF몰 아이디, SNS 아이디</td>
               <td><span class="keep">탈퇴 요청 5일 후 지체없이 파기</span></td>
             </tr>
             <tr>
@@ -376,6 +399,44 @@
      비워두면 수집 없이 화면 흐름만 동작합니다(디자인 확인용).
      ========================================================= */
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxGee0iHmdbZuvI6rE3rviQ5s3urWQwZ4cnYqjwSvAl-XkvoQYGpvFjUTM3L1u9BnuD2Q/exec';
+
+  /* ---------- 엘스파 회원 확인 ----------
+     이 페이지는 외부 시스템 없이 혼자 동작해야 하므로 회원 조회는 하지 않습니다.
+     신청자가 직접 체크하며, 체크하기 전에는 아래 항목이 모두 잠깁니다. */
+
+  var LESPA_JOIN_URL = 'https://affiliator.lfmall.co.kr/aff_join/index.html';
+
+  var applyFormEl = document.getElementById('applyForm');
+  var gateEl      = document.getElementById('lespaGate');
+  var lespaBox    = document.getElementById('lespaBox');
+  var lespaMember = document.getElementById('lespaMember');
+  var submitBtnEl = applyFormEl.querySelector('button[type="submit"]');
+
+  document.getElementById('lespaJoinLink').href = LESPA_JOIN_URL;
+
+  // 잠글 항목 — 회원 확인 블록, 바로 아래 구분선, 함정 필드, 하단 버튼은 제외
+  var lockTargets = Array.prototype.filter.call(applyFormEl.children, function (el) {
+    return el !== gateEl && el.id !== 'website' && el.id !== 'gateDivider' &&
+           !el.classList.contains('form-actions') &&
+           !el.classList.contains('form-error');
+  });
+
+  function setLocked(locked) {
+    lockTargets.forEach(function (el) {
+      el.classList.toggle('is-locked', locked);
+      if (locked) { el.setAttribute('inert', ''); } else { el.removeAttribute('inert'); }
+    });
+    submitBtnEl.disabled = locked;
+  }
+
+  function syncGate() {
+    var ok = lespaMember.checked;
+    lespaBox.classList.toggle('is-on', ok);
+    setLocked(!ok);
+  }
+
+  lespaMember.addEventListener('change', syncGate);
+  syncGate();   // 처음에는 잠긴 상태
 
   /* ---------- 제품별 사이즈 ---------- */
   // 빈 배열([])이면 사이즈 선택 항목을 숨깁니다(가방 등 단일 사이즈).
@@ -589,6 +650,11 @@
 
     var sizeChecked = form.querySelector('input[name="size"]:checked');
     var consentOk   = agreeItems.every(function (c) { return c.checked; });
+
+    if (!lespaMember.checked) {
+      lespaMember.focus();
+      return;
+    }
 
     if (!form.checkValidity() || !hiddenKey.value || (!sizeChecked && !noSize) || !consentOk) {
       errEl.classList.add('show');

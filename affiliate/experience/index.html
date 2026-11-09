@@ -199,24 +199,27 @@
     </div>
 
     <h3 class="sub-title">참여 방법</h3>
-    <div class="steps steps--3">
+    <div class="steps steps--4">
       <div class="step">
         <span class="step__num">1</span>
-        <h3>체험 제품 신청</h3>
-        <p>원하는 제품을 고르고 신청서를 작성합니다. 사이즈와 SNS 아이디, 배송지를 함께 남겨주세요.</p>
-        <span class="tag">약 2분 소요</span>
+        <h3>엘스파 지원</h3>
+        <p>LF 스타일 파트너 페이지에서 엘스파를 가입 신청 합니다. 기존 파트너는 별도 추가 가입이 필요하지 않습니다.</p>
+        <p class="step__more"><a href="https://affiliator.lfmall.co.kr/aff_join/index.html" target="_blank" rel="noopener">엘스파 가입하기</a></p>
       </div>
       <div class="step">
         <span class="step__num">2</span>
-        <h3>선정 &amp; 제품 수령</h3>
-        <p>선정되신 분께 인스타그램 DM 또는 문자로 개별 안내드립니다. 확인 후 제품을 무료로 받아보세요.</p>
-        <span class="tag">선정자 개별 안내</span>
+        <h3>체험 제품 신청</h3>
+        <p>원하는 제품을 고르고 신청서를 작성합니다. 제품 사이즈와 LF몰 아이디, SNS 아이디를 함께 남겨주세요.</p>
       </div>
       <div class="step">
         <span class="step__num">3</span>
+        <h3>선정 &amp; 제품 수령</h3>
+        <p>선정되신 분께 인스타그램 DM 또는 문자로 개별 안내드립니다.</p>
+      </div>
+      <div class="step">
+        <span class="step__num">4</span>
         <h3>코디 &amp; 후기 업로드</h3>
-        <p>제품을 입고 자유롭게 코디한 사진을 LFmall에 올려주세요. 올려주신 후기는 상품 상세에 소개됩니다.</p>
-        <span class="tag">수령 후 14일 이내</span>
+        <p>제품을 입고 자유롭게 코디한 사진을 LFmall &gt; 나의 패션 클럽과 개인 SNS의 피드 또는 릴스 형태로 올려주세요. 올려주신 후기는 상품 상세에 소개될 수 있습니다.</p>
       </div>
     </div>
 
@@ -351,6 +354,7 @@
 </section>
 
 <!-- ============ 공유하기 ============ -->
+<!-- 체험단 공유하기 — 숨김 처리 (2026-11-09). 다시 보이려면 이 주석만 풀면 됩니다.
 <section class="section share" id="share">
   <div class="wrap">
     <div class="section-head center">
@@ -369,6 +373,7 @@
     </div>
   </div>
 </section>
+-->
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
@@ -383,7 +388,9 @@
       <small>© 2026 LFmall</small>
     </div>
     <nav aria-label="하단 메뉴">
+      <!-- 숨김 처리 (2026-11-09). 다시 보이려면 아래 주석을 풀면 됩니다.
       <a class="is-strong" href="https://www.lfmall.co.kr/app/terms/process" target="_blank" rel="noopener">개인정보 처리방침</a>
+      -->
       <a href="guide.html">수령 후 안내</a>
     </nav>
   </div>
@@ -532,6 +539,12 @@
        https://syleelfcorp.github.io
      키를 넣기 전까지 카카오 버튼은 링크 복사로 동작합니다.
      ============================================ */
+  // 공유 섹션을 숨긴 동안에는 아래 버튼 연결이 모두 건너뛰어집니다.
+  // 섹션 주석을 풀면 따로 손대지 않아도 다시 동작합니다.
+  var elShareCopy  = document.getElementById('shareCopy');
+  var elShareFb    = document.getElementById('shareFacebook');
+  var elShareKakao = document.getElementById('shareKakao');
+
   var KAKAO_JS_KEY = '';   // ← 발급받은 JavaScript 키를 넣으세요
 
   var SHARE_URL   = location.href.split('#')[0];
@@ -574,14 +587,14 @@
       fallback();
     }
   }
-  document.getElementById('shareCopy').addEventListener('click', function () { copyLink(); });
+  if (elShareCopy) elShareCopy.addEventListener('click', function () { copyLink(); });
 
   // 페이스북 — SDK 없이 공유 URL만으로 동작
-  document.getElementById('shareFacebook').href =
+  if (elShareFb) elShareFb.href =
     'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(SHARE_URL);
 
   // 카카오톡 — 키가 있을 때만 SDK를 불러온다
-  if (KAKAO_JS_KEY) {
+  if (KAKAO_JS_KEY && elShareKakao) {
     var sdk = document.createElement('script');
     sdk.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js';
     sdk.onload = function () {
@@ -590,7 +603,7 @@
     document.head.appendChild(sdk);
   }
 
-  document.getElementById('shareKakao').addEventListener('click', function () {
+  if (elShareKakao) elShareKakao.addEventListener('click', function () {
     var K = window.Kakao;
     if (K && K.isInitialized && K.isInitialized() && K.Share) {
       K.Share.sendDefault({
