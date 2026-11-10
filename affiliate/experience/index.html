@@ -18,15 +18,10 @@
 </head>
 <body>
 
-<script>
-  // 히어로 배경을 먼저 입혀 첫 페인트에서 흰 화면이 스치지 않게 한다
-  document.body.classList.add('at-hero');
-</script>
-
 <!-- ============ GNB ============ -->
 <header class="gnb">
   <nav class="gnb__nav" aria-label="섹션 메뉴">
-    <a href="#top">엘픽</a>
+    <a href="#top">엘스파 픽</a>
     <a href="#products">상품</a>
     <a href="#how">참여방법</a>
     <a href="#faq">FAQ</a>
@@ -48,7 +43,7 @@
 
 <!-- ============ 체험 상품 리스트 ============ -->
 <section class="section" id="products">
-  <div class="wrap wrap--wide">
+  <div class="wrap">
     <div class="section-head center">
       <h2 class="section-title">상품 리스트</h2>
     </div>
@@ -226,23 +221,28 @@
       </div>
       <div class="step">
         <span class="step__num">2</span>
-        <h3>상품 신청</h3>
-        <p>이 페이지에서 원하는 제품을 고르고 신청서를 작성합니다. 제품 사이즈와 LF몰 아이디, SNS 아이디를 함께 남겨주세요.</p>
+        <h3>제품 신청</h3>
+        <p>엘스파에 지원하신 후, 이 페이지에서 원하는 제품을 고르고 신청서를 작성합니다. 제품 사이즈와 LF몰 아이디를 함께 남겨주세요.</p>
       </div>
       <div class="step">
         <span class="step__num">3</span>
         <h3>엘스파 승인</h3>
-        <p>내부 심사를 거친 후 엘스파에 승인되면 크리에이터 시스템 추가 가입 안내 메일을 보내드립니다. 크리에이터 시스템 가입까지 마쳐야 선정 대상이 됩니다.</p>
+        <p>내부 심사를 거친 후 엘스파에 승인되면 크리에이터 시스템 추가 가입 안내 메일을 보내드립니다. <span class="ink">크리에이터 시스템 가입까지 마쳐야 선정 대상이 됩니다.</span></p>
       </div>
       <div class="step">
         <span class="step__num">4</span>
-        <h3>선정 &amp; 제품 수령</h3>
-        <p>선정되신 분께 인스타그램 DM 또는 문자로 개별 안내드립니다.</p>
+        <h3>엘스파 픽 선정 및 제품 수령</h3>
+        <p>선정되신 분에 한해 인스타그램 DM 또는 SMS로 개별 안내드립니다.</p>
       </div>
       <div class="step">
         <span class="step__num">5</span>
         <h3>코디 &amp; 후기 업로드</h3>
-        <p>제품을 입고 자유롭게 코디한 사진을 LFmall &gt; 나의 패션 클럽과 개인 SNS의 피드 또는 릴스 형태로 올려주시고, 상품 링크를 공유해 주세요. 공유된 링크에서 상품 판매가 이루어질 경우, 수익이 발생됩니다.</p>
+        <p>제품을 수령하신 후, 자유롭게 코디한 사진을 LFmall &gt; 나의 패션 클럽과 개인 SNS의 피드 또는 릴스 형태로 올려주세요.</p>
+      </div>
+      <div class="step">
+        <span class="step__num">6</span>
+        <h3>상품 링크 공유</h3>
+        <p>크리에이터 시스템에서 생성한 상품 링크를 개인 SNS에 공유해 주신 후, 공유된 링크에서 상품 구매가 발생할 경우 <span class="ink">결제 금액의 5%가 수수료로 지급됩니다.</span></p>
       </div>
     </div>
 
@@ -255,7 +255,7 @@
       <li class="timeline__item">
         <!-- 발표일을 따로 두지 않고, 선정되는 대로 개별 연락합니다 -->
         <span class="timeline__date">수시 안내</span>
-        <h4>선정자 연락</h4>
+        <h4>엘스파 픽 선정자 연락</h4>
         <p>인스타 DM · 문자로 개별 안내</p>
       </li>
       <li class="timeline__item">
@@ -304,7 +304,7 @@
           </span>
         </summary>
         <div class="faq__a">
-          <p>네, 제품 가격과 배송비 모두 받지 않습니다. 대신 12월 13일까지 개인 SNS에 릴스 또는 피드 1건, LFmall 나의 패션 클럽에 착장컷 1건을 올려주셔야 하며, 프로필에 제공받은 상품의 URL을 올려주셔야 합니다. 해당 URL을 통해 판매가 이루어질 경우, 일정 수수료가 지급될 예정입니다.</p>
+          <p>네, 제품 가격과 배송비 모두 받지 않습니다. 대신 12월 13일까지 개인 SNS에 릴스 또는 피드 1건, LFmall 나의 패션 클럽에 착장컷 1건을 올려주셔야 하며, 크리에이터 시스템에서 생성한 상품 링크를 개인 SNS에 공유해 주셔야 합니다. 공유된 링크에서 상품 구매가 발생할 경우 결제 금액의 5%가 수수료로 지급됩니다.</p>
         </div>
       </details>
 
@@ -546,25 +546,6 @@
 
     render();
     setInterval(render, MIN);   // 10시 정각에 새로고침 없이 열리고 닫히도록
-  })();
-
-  /* 히어로 배경 전환 — 화면 30% 지점을 지나면 흰색으로 바뀐다.
-     색 전환 자체는 CSS transition(0.5s)이 처리한다. */
-  (function () {
-    var body = document.body;
-    var ticking = false;
-    function sync() {
-      body.classList.toggle('at-hero', window.scrollY < window.innerHeight * 0.3);
-      ticking = false;
-    }
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(sync);
-    }
-    sync();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
   })();
 
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {

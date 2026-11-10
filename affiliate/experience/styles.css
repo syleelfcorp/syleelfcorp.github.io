@@ -38,7 +38,7 @@
   --glass-hover: rgba(255, 255, 255, .80);
   --glass-fallback: rgba(255, 255, 255, .94);
   --glass-sheen: rgba(255, 255, 255, .55);
-  --maxw: 1200px;
+  --maxw: 1440px;
   --gutter: max(18px, env(safe-area-inset-left, 0px));
   --gutter-r: max(18px, env(safe-area-inset-right, 0px));
 
@@ -120,9 +120,7 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  /* 히어로 구간에서는 연보라, 스크롤해 내려가면 흰색으로 전환된다 */
   background: var(--bg);
-  transition: background-color .5s ease-in-out;
   color: var(--ink);
   font-family: var(--font);
   font-size: 16px;
@@ -136,8 +134,6 @@ a { color: inherit; }
 button { font-family: inherit; }
 [hidden] { display: none !important; }
 :focus-visible { outline: 3px solid var(--key); outline-offset: 2px; border-radius: 4px; }
-body.at-hero { background: var(--key-soft); }
-@media (prefers-reduced-motion: reduce) { body { transition: none; } }
 
 /* ---- 레이아웃 컨테이너 ---- */
 .wrap {
@@ -147,7 +143,7 @@ body.at-hero { background: var(--key-soft); }
   padding-left: var(--gutter);
   padding-right: var(--gutter-r);
 }
-/* PC에서는 좌우 여백을 40px로 — 컨테이너 1200px 기준 콘텐츠 1120px */
+/* PC에서는 좌우 여백을 40px로 — 컨테이너 1440px 기준 콘텐츠 1360px */
 @media (min-width: 900px) {
   :root {
     --gutter: max(40px, env(safe-area-inset-left, 0px));
@@ -235,23 +231,17 @@ body.at-hero { background: var(--key-soft); }
 /* 배경은 body가 담당하므로 섹션 자체는 투명하게 둔다 */
 .hero { background: transparent; }
 .hero__inner {
-  /* 첫 화면을 가득 채우는 인트로 영역 (GNB는 떠 있어 자리를 차지하지 않는다) */
-  min-height: 100vh;
-  min-height: 100svh;
+  /* 첫 화면 영역 (GNB는 떠 있어 자리를 차지하지 않는다) */
+  min-height: 50vh;
+  min-height: 50svh;
   display: flex; flex-direction: column; justify-content: center;
-  /* 아래 패딩을 두면 그만큼 타이틀이 고정될 수 있는 구간이 짧아진다 */
-  padding-top: clamp(48px, 8vw, 96px); padding-bottom: 0;
+  padding-top: clamp(48px, 8vw, 96px); padding-bottom: clamp(24px, 4vw, 48px);
   text-align: center;
 }
 .hero h1 {
   font-size: clamp(32px, 6vw, 56px); font-weight: 800; line-height: 1.2;
   letter-spacing: -0.03em; margin: 0; text-wrap: balance;
 }
-/* 스크롤하면 상단 100px 지점에 머물다가, 다음 섹션이 올라오면 함께 밀려 올라간다.
-   히어로 영역이 고정 범위를 정하므로 자바스크립트 없이 동작한다. */
-.hero__content { position: sticky; top: calc(var(--gnb-top) + var(--gnb-h) + 16px); }
-@media (min-width: 768px) { .hero__content { top: calc(var(--gnb-top) + var(--gnb-h) + 42px); } }
-
 /* 모바일에서는 두 줄, 폭이 넉넉한 PC에서는 한 줄로 */
 /* 히어로 제목은 넓은 화면에서도 두 줄을 유지한다 */
 .hero h1 .hero-line { display: block; }
@@ -281,6 +271,9 @@ body.at-hero { background: var(--key-soft); }
 .step p.step__more { margin-top: 10px; }
 .step p a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .step p a:hover { color: var(--key); }
+/* 꼭 읽어야 하는 한 문장만 본문색으로 올려 눈에 띄게 한다.
+   다크 모드에서는 순검정(#000)이 배경에 묻히므로 본문색 토큰을 쓴다. */
+.step p .ink { color: var(--ink); }
 .step .tag { display: inline-block; margin-top: 14px; font-size: 12px; font-weight: 700; color: var(--muted); background: var(--surface); padding: 4px 10px; border-radius: var(--radius-pill); }
 
 /* ---- 진행 일정 타임라인 ----
@@ -355,10 +348,9 @@ body.at-hero { background: var(--key-soft); }
 }
 
 /* ---- 상품 그리드 ---- */
-/* 체험 상품 리스트만 컨테이너를 1920px까지 넓힌다 (좌우 패딩 40px 포함) */
-.wrap--wide { max-width: 1920px; }
-
-/* 모바일 2열 → 태블릿 3열 → 노트북 4열 → PC 5열.
+/* 모바일 2열 → 태블릿 3열 → 노트북·PC 4열.
+   1440px 컨테이너(콘텐츠 1360px) 기준 4열이면 카드 한 장이 약 328px이다.
+   상품이 7개라 4 + 3으로 떨어진다.
    한 줄을 채우면 다음 상품부터 자동으로 줄바꿈된다.
    좁은 폭에 맞춘 글자·버튼 크기는 아래 620px 분기에서 함께 키운다 */
 .product-grid {
@@ -367,7 +359,6 @@ body.at-hero { background: var(--key-soft); }
 }
 @media (min-width: 620px) { .product-grid { grid-template-columns: repeat(3, 1fr); row-gap: 46px; } }
 @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
-@media (min-width: 1280px) { .product-grid { grid-template-columns: repeat(5, 1fr); } }
 .product {
   display: flex; flex-direction: column; background: transparent;
   transition: transform .15s ease;
@@ -721,7 +712,7 @@ body.no-scroll { overflow: hidden; }
    상태 페이지 (완료 / 안내 공통)
    ============================================================ */
 .status-page { min-height: 70vh; display: grid; place-items: center; padding-block: clamp(48px, 9vw, 90px); }
-/* .wrap(1200px) 안에서 560px 카드가 왼쪽에 붙지 않도록 가운데로 */
+/* .wrap(1440px) 안에서 560px 카드가 왼쪽에 붙지 않도록 가운데로 */
 .status-card { text-align: center; max-width: 560px; margin-inline: auto; }
 .status-icon {
   width: 88px; height: 88px; margin: 0 auto 26px; border-radius: 50%;
@@ -754,10 +745,6 @@ body.no-scroll { overflow: hidden; }
 /* ============================================================
    수령 후 안내 (guide) 추가 요소
    ============================================================ */
-.guide-hero { background: var(--bg); }
-.guide-hero__inner { padding-block: clamp(60px, 11vw, 120px); text-align: center; }
-.guide-hero h1 { font-size: clamp(28px, 5.4vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.22; margin: 0; text-wrap: balance; }
-.guide-hero p { margin: 18px auto 0; color: var(--muted); max-width: 46ch; line-height: 1.65; font-size: clamp(15px, 2.2vw, 17px); }
 
 .do-dont { display: grid; gap: 16px; }
 @media (min-width: 620px) { .do-dont { grid-template-columns: 1fr 1fr; } }
@@ -767,6 +754,28 @@ body.no-scroll { overflow: hidden; }
 .dd-card.is-dont h3 { color: var(--warn); }
 .dd-card ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
 .dd-card li { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+/* ---- 촬영 팁 아코디언 (미션 1단계 안에서 펼친다) ----
+   별도 섹션으로 내려보내지 않으므로 제목·리드는 본문보다 작게 두고,
+   좁은 자리에 들어가는 만큼 Do/Don't 는 좌우가 아니라 위아래로 쌓는다. */
+.tips { margin-top: 12px; }
+.tips__q {
+  display: inline-flex; align-items: center; gap: 4px;
+  cursor: pointer; list-style: none;
+  font-size: 13px; font-weight: 700; color: var(--ink);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.tips__q::-webkit-details-marker { display: none; }
+.tips__q:focus-visible { color: var(--key); }
+.tips__icon { flex-shrink: 0; width: 16px; height: 16px; color: var(--muted); }
+.tips__icon svg { width: 100%; height: 100%; display: block; transition: transform .2s ease; }
+.tips[open] .tips__icon svg { transform: rotate(180deg); }
+.tips__a { margin-top: 14px; }
+.tips__lead { margin: 0 0 12px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.tips .do-dont { grid-template-columns: 1fr; gap: 12px; }
+.tips .dd-card { padding: 16px; box-shadow: none; background: var(--bg); }
+.tips .dd-card h3 { margin-bottom: 10px; font-size: 14px; }
+.tips .dd-card li { font-size: 13px; }
 
 /* 해시태그/멘션 복사 박스 */
 .copybox { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1.5px dashed var(--line); border-radius: var(--radius-sm); padding: 12px 14px; flex-wrap: wrap; }
