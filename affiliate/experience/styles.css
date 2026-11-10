@@ -253,8 +253,8 @@ body.at-hero { background: var(--key-soft); }
 @media (min-width: 768px) { .hero__content { top: calc(var(--gnb-top) + var(--gnb-h) + 42px); } }
 
 /* 모바일에서는 두 줄, 폭이 넉넉한 PC에서는 한 줄로 */
+/* 히어로 제목은 넓은 화면에서도 두 줄을 유지한다 */
 .hero h1 .hero-line { display: block; }
-@media (min-width: 1100px) { .hero h1 .hero-line { display: inline; } }
 .hero__sub { margin: 20px auto 0; font-size: clamp(15px, 2.2vw, 18px); color: var(--muted); max-width: 46ch; line-height: 1.65; }
 
 /* ---- 스텝(번호 뱃지) ---- */
@@ -282,6 +282,77 @@ body.at-hero { background: var(--key-soft); }
 .step p a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .step p a:hover { color: var(--key); }
 .step .tag { display: inline-block; margin-top: 14px; font-size: 12px; font-weight: 700; color: var(--muted); background: var(--surface); padding: 4px 10px; border-radius: var(--radius-pill); }
+
+/* ---- 진행 일정 타임라인 ----
+   점과 선만 쓰고 면·테두리는 두지 않는다.
+   날짜를 먼저 읽히게 올리고, 제목을 그 아래에 둔다. */
+.timeline { list-style: none; margin: 0; padding: 0; max-width: 620px; }
+.timeline__item {
+  position: relative;
+  padding: 0 0 clamp(26px, 3.2vw, 34px) 26px;
+}
+.timeline__item::before {            /* 점 */
+  content: ''; position: absolute; left: 0; top: 5px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--ink);
+}
+.timeline__item::after {             /* 이어지는 선 */
+  content: ''; position: absolute; left: 5px; top: 19px; bottom: 0;
+  width: 1px; background: var(--line);
+}
+.timeline__item:last-child { padding-bottom: 0; }
+.timeline__item:last-child::after { content: none; }
+
+.timeline__date {
+  display: block; margin-bottom: 4px;
+  font-size: 13px; font-weight: 700; color: var(--muted);
+  letter-spacing: -0.01em; font-variant-numeric: tabular-nums;
+}
+.timeline__item h4 {
+  margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -0.02em;
+}
+.timeline__item p {
+  margin: 5px 0 0; font-size: 14px; color: var(--muted);
+  line-height: 1.6; word-break: keep-all;
+}
+@media (min-width: 620px) {
+  .timeline__date { font-size: 14px; }
+  .timeline__item h4 { font-size: 18px; }
+}
+
+/* PC에서는 가로로 눕힌다 — 점이 위로 올라가고 선이 가로로 이어진다.
+   선은 칸마다 긋지 않고 타임라인 전체를 가로지르는 한 줄로 둔다.
+   그래야 왼쪽 끝에서 오른쪽 끝까지 꽉 차고, 흰 점이 선을 가려
+   점과 점 사이만 이어진 것처럼 보인다.
+   마지막 칸은 글자 너비만 차지하며 오른쪽 끝에 붙는다. */
+@media (min-width: 1000px) {
+  .timeline {
+    position: relative;
+    display: flex; align-items: flex-start;
+    max-width: none;
+  }
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 7px; right: 7px; top: 7px;      /* 첫 점 중심 ~ 끝 점 중심 */
+    height: 1px; background: var(--line);
+  }
+  .timeline__item { flex: 1; padding: 30px 28px 0 0; }
+  .timeline__item::before { top: 0; left: 0; }
+  .timeline__item::after { content: none; }   /* 칸마다 긋던 세로선은 쓰지 않는다 */
+
+  /* 마지막 칸은 흐름에서 빼 오른쪽 끝에 붙인다.
+     그래야 앞의 세 칸이 전체 폭을 고르게 나눠 점 간격이 맞는다.
+     ※ 마지막 칸이 끝에서 두 번째 칸 위에 겹쳐 놓이므로,
+        세 번째 항목('제품 발송')의 글은 짧게 유지하세요.
+        지금은 1024px에서 74px, 1280px에서 138px 여유가 있습니다. */
+  .timeline__item:last-child {
+    position: absolute; right: 0; top: 0;
+    max-width: 24%; padding: 30px 0 0; text-align: right;
+  }
+  .timeline__item:last-child::before { left: auto; right: 0; }
+
+  .timeline__date { word-break: keep-all; }
+}
 
 /* ---- 상품 그리드 ---- */
 /* 체험 상품 리스트만 컨테이너를 1920px까지 넓힌다 (좌우 패딩 40px 포함) */
@@ -367,7 +438,10 @@ body.at-hero { background: var(--key-soft); }
 /* 중앙정렬 아코디언 변형 (details) —
    가운데에서는 불릿이 글줄과 떨어져 보이므로 숨기고 줄간격으로 구분한다 */
 .notice--center { text-align: center; }
-.notice--center h3 { display: block; margin: 0; }
+/* 위 간격만 따로 키운다 — .mt-lg 를 건드리면 진행 일정 제목과
+   수령 후 안내 페이지의 유의사항까지 같이 벌어진다 */
+.notice--center.mt-lg { margin-top: clamp(38px, 6.8vw, 60px); }
+.notice--center h3 { display: block; margin: 0; font-size: 14px; font-weight: 500; }
 .notice--center ul { padding-left: 0; list-style: none; gap: 4px; margin-top: 14px; }
 .notice__q {
   display: flex; align-items: center; justify-content: center; gap: 6px;
