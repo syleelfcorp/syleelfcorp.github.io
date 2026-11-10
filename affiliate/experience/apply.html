@@ -250,7 +250,7 @@
               </li>
               <li>
                 <input type="checkbox" id="agreePrivacy" name="agreePrivacy" data-required>
-                <label for="agreePrivacy"><b>[필수]</b> 개인정보 수집·이용 및 후기 콘텐츠 활용에 동의합니다. 수집 항목(LF몰 아이디, SNS 아이디)은 체험단 운영·배송·선정 안내 목적에 한해 사용되며, 작성한 후기는 LFmall 내에 노출될 수 있습니다.</label>
+                <label for="agreePrivacy"><b>[필수]</b> 개인정보 수집·이용 및 후기 컨텐츠 활용에 동의합니다. 수집 항목(LF몰 아이디, SNS 아이디)은 체험단 운영·배송·선정 안내 목적에 한해 사용되며, 작성한 후기는 LFmall 내에 노출될 수 있습니다.</label>
                 <button type="button" class="consent__view" data-modal="modalPrivacy">약관보기</button>
               </li>
               <li>
@@ -491,6 +491,14 @@
     });
     hiddenKey.value  = opt.dataset.value;
     hiddenName.value = opt.dataset.name;
+
+    // 고른 제품을 주소에도 반영 — 새로고침해도 선택이 그대로 남는다.
+    // pushState 가 아니라 replaceState 라 뒤로가기 기록은 쌓이지 않는다.
+    // (file:// 로 열면 막히므로 실패해도 넘어간다)
+    try {
+      history.replaceState(null, '',
+        location.pathname + '?product=' + encodeURIComponent(opt.dataset.value));
+    } catch (e) {}
 
     // 선택한 항목의 썸네일 · 텍스트를 버튼에 그대로 반영
     comboThumb.className = 'opt__thumb';
