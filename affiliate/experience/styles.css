@@ -647,7 +647,8 @@ body.no-scroll { overflow: hidden; }
    상태 페이지 (완료 / 안내 공통)
    ============================================================ */
 .status-page { min-height: 70vh; display: grid; place-items: center; padding-block: clamp(48px, 9vw, 90px); }
-.status-card { text-align: center; max-width: 560px; }
+/* .wrap(1200px) 안에서 560px 카드가 왼쪽에 붙지 않도록 가운데로 */
+.status-card { text-align: center; max-width: 560px; margin-inline: auto; }
 .status-icon {
   width: 88px; height: 88px; margin: 0 auto 26px; border-radius: 50%;
   display: grid; place-items: center; background: var(--surface); color: var(--ink);

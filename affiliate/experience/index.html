@@ -55,7 +55,10 @@
 
     <div class="product-grid">
       <!-- 상품 1 · IETS6F103WT -->
-      <article class="product" data-start="2026-11-03" data-end="2026-11-23">
+      <!-- ⚠ 테스트용 — data-force="open" 은 모집 기간을 무시하고 열린 상태로 보여줍니다.
+           실제 오픈 전에 아래 data-force="open" 을 반드시 지우세요.
+           (지우지 않으면 11/16 10시 전에도 신청을 받게 됩니다) -->
+      <article class="product" data-start="2026-11-16T10:00" data-end="2026-11-23T10:00" data-force="open">
         <div class="product__thumb">
           <img src="https://nimg.lfmall.co.kr/file/product/prd/IE/2026/500/IETS6F103WT_01.jpg"
                alt="LOOPWHEEL 헨리넥 롱 슬리브 티셔츠 아이보리" loading="lazy" onerror="this.remove()">
@@ -74,7 +77,7 @@
         </div>
       </article>
       <!-- 상품 2 · IESW6F101BK -->
-      <article class="product" data-start="2026-11-03" data-end="2026-11-23">
+      <article class="product" data-start="2026-11-16T10:00" data-end="2026-11-23T10:00">
         <div class="product__thumb">
           <img src="https://nimg.lfmall.co.kr/file/product/prd/IE/2026/500/IESW6F101BK_01.jpg"
                alt="[26FW]캐시미어 블렌드 모크넥 니트 블랙" loading="lazy" onerror="this.remove()">
@@ -93,7 +96,7 @@
         </div>
       </article>
       <!-- 상품 3 · IESW6F105BK -->
-      <article class="product" data-start="2026-11-03" data-end="2026-11-23">
+      <article class="product" data-start="2026-11-16T10:00" data-end="2026-11-23T10:00">
         <div class="product__thumb">
           <img src="https://nimg.lfmall.co.kr/file/product/prd/IE/2026/500/IESW6F105BK_01.jpg"
                alt="[26FW]울 블렌드 하프 집업 니트 블랙" loading="lazy" onerror="this.remove()">
@@ -112,7 +115,7 @@
         </div>
       </article>
       <!-- 상품 4 · IEJU6F301BK -->
-      <article class="product" data-start="2026-11-03" data-end="2026-11-23">
+      <article class="product" data-start="2026-11-16T10:00" data-end="2026-11-23T10:00">
         <div class="product__thumb">
           <img src="https://nimg.lfmall.co.kr/file/product/prd/IE/2026/500/IEJU6F301BK_01.jpg"
                alt="[26FW]모노크롬 덕 다운 자켓 블랙" loading="lazy" onerror="this.remove()">
@@ -131,7 +134,7 @@
         </div>
       </article>
       <!-- 상품 5 · IESW6F102G1 -->
-      <article class="product" data-start="2026-11-03" data-end="2026-11-23">
+      <article class="product" data-start="2026-11-16T10:00" data-end="2026-11-23T10:00">
         <div class="product__thumb">
           <img src="https://nimg.lfmall.co.kr/file/product/prd/IE/2026/500/IESW6F102G1_01.jpg"
                alt="[26FW]울 블렌드 라운드넥 니트 라이트그레이" loading="lazy" onerror="this.remove()">
@@ -150,7 +153,7 @@
         </div>
       </article>
       <!-- 상품 6 · HIBA75262W2 -->
-      <article class="product" data-start="2026-11-03" data-end="2026-11-23">
+      <article class="product" data-start="2026-11-16T10:00" data-end="2026-11-23T10:00">
         <div class="product__thumb">
           <img src="https://nimg.lfmall.co.kr/file/product/prd/HI/2026/500/HIBA75262W2_01.jpg"
                alt="[ROA] 로아백 다크브라운 스웨이드 숄더백(파우치참)" loading="lazy" onerror="this.remove()">
@@ -169,7 +172,7 @@
         </div>
       </article>
       <!-- 상품 7 · JABA75055BK -->
-      <article class="product" data-start="2026-11-03" data-end="2026-11-23">
+      <article class="product" data-start="2026-11-16T10:00" data-end="2026-11-23T10:00">
         <div class="product__thumb">
           <img src="https://nimg.lfmall.co.kr/file/product/prd/JA/2026/500/JABA75055BK_01.jpg"
                alt="[FACETTE] 파세트 소가죽 숄더 겸 크로스백 S 블랙" loading="lazy" onerror="this.remove()">
@@ -188,6 +191,21 @@
         </div>
       </article>
     </div>
+
+    <script>
+      /* 상품 노출 순서 섞기 — 페이지를 열 때마다 달라진다.
+         특정 상품이 늘 맨 앞에 오는 이점을 없애기 위한 것이다.
+         그리드 바로 뒤에서 실행해 화면에 그려지기 전에 순서를 바꾼다. */
+      (function () {
+        var grid = document.currentScript.previousElementSibling;
+        var cards = Array.prototype.slice.call(grid.children);
+        for (var i = cards.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = cards[i]; cards[i] = cards[j]; cards[j] = t;
+        }
+        cards.forEach(function (c) { grid.appendChild(c); });
+      })();
+    </script>
   </div>
 </section>
 
@@ -228,26 +246,23 @@
       <div class="step">
         <span class="step__num">1</span>
         <h3>신청 접수</h3>
-        <p>신청서 작성 기간</p>
-        <span class="tag">11.03 – 11.23</span>
+        <p>11.16 (월) 10시 – 11.23 (월) 10시</p>
       </div>
       <div class="step">
         <span class="step__num">2</span>
-        <h3>선정자 발표</h3>
+        <h3>선정자 연락</h3>
+        <!-- 발표일을 따로 두지 않고, 선정되는 대로 개별 연락합니다 -->
         <p>인스타 DM · 문자로 개별 안내</p>
-        <span class="tag">11.27</span>
       </div>
       <div class="step">
         <span class="step__num">3</span>
         <h3>제품 발송</h3>
-        <p>순차 배송 · 배송 조회 제공</p>
-        <span class="tag">12.01 부터</span>
+        <p>12.02 (수) 부터 순차 배송</p>
       </div>
       <div class="step">
         <span class="step__num">4</span>
-        <h3>후기 업로드</h3>
-        <p>코디 사진 · 후기 작성</p>
-        <span class="tag">수령 후 14일</span>
+        <h3>컨텐츠 업로드</h3>
+        <p>12.13 (일) 까지<br>개인 SNS · 나의 패션 클럽</p>
       </div>
     </div>
 
@@ -261,7 +276,7 @@
       </summary>
       <ul>
         <li>선정 안내는 신청서에 적어주신 <b>SNS 또는 휴대폰 문자</b>로 발송됩니다. 평소 수신 설정을 확인해 주세요.</li>
-        <li>체험 제품은 무료로 제공되며, 선정되신 분은 <b>수령 후 14일 이내 후기 1건 업로드</b>가 필요합니다.</li>
+        <li>체험 제품은 무료로 제공되며, 선정되신 분은 <b>12월 13일까지</b> 개인 SNS 릴스 또는 피드 1건과 LFmall <b>나의 패션 클럽</b> 착장컷 1건을 올려주셔야 합니다.</li>
         <li>후기는 LFmall 상품 상세에 노출될 수 있으며, 얼굴 노출 여부는 자유롭게 선택하실 수 있습니다.</li>
         <li>1인당 1개 제품에 한해 신청 가능하며, 중복 신청 시 가장 마지막 신청만 유효합니다.</li>
       </ul>
@@ -285,7 +300,7 @@
           </span>
         </summary>
         <div class="faq__a">
-          <p>네, 제품 가격과 배송비 모두 받지 않습니다. 대신 수령 후 14일 이내에 코디 후기 1건을 올려주시면 됩니다.</p>
+          <p>네, 제품 가격과 배송비 모두 받지 않습니다. 대신 12월 13일까지 개인 SNS에 릴스 또는 피드 1건, LFmall 나의 패션 클럽에 착장컷 1건을 올려주시면 됩니다.</p>
         </div>
       </details>
 
@@ -436,65 +451,97 @@
     document.head.appendChild(tag);
   })();
 
-  /* 상품별 모집 기간 — data-start / data-end로 남은 일수를 표시하고,
+  /* 상품별 모집 기간 — data-start / data-end 로 남은 시간을 표시하고,
      기간이 아닌 상품은 신청 버튼을 잠근다.
-     보는 사람의 기기 시간대와 상관없이 한국 날짜를 기준으로 센다. */
+     값은 'YYYY-MM-DDTHH:MM' 형태의 한국 시각이며, 보는 사람의 기기 시간대와
+     상관없이 같은 순간을 가리킨다. 1분마다 다시 계산해 10시 정각에 열리고 닫힌다. */
   (function () {
-    var DAY = 86400000;
+    var MIN = 60000, HOUR = 3600000, DAY = 86400000;
     var WEEK = ['일', '월', '화', '수', '목', '금', '토'];
 
-    // 'YYYY-MM-DD' → 날짜만 남긴 UTC 기준값 (시각은 버린다)
-    function dayOf(ymd) {
-      var p = ymd.split('-');
-      return Date.UTC(+p[0], +p[1] - 1, +p[2]);
-    }
-    // 지금 이 순간의 '한국 날짜'를 같은 기준으로 환산
-    function todayKst() {
-      var now = new Date();
-      var kst = new Date(now.getTime() + (540 + now.getTimezoneOffset()) * 60000);
-      return Date.UTC(kst.getFullYear(), kst.getMonth(), kst.getDate());
-    }
-    // 날짜와 요일 사이는 줄바꿈 금지 공백 — '11. 23' / '(월)'로 끊기지 않게
-    function label(ymd) {
-      var p = ymd.split('-');
-      return p[1] + '. ' + p[2] + '\u00A0(' + WEEK[new Date(dayOf(ymd)).getUTCDay()] + ')';
+    // 'YYYY-MM-DD' 또는 'YYYY-MM-DDTHH:MM' (한국 시각) → epoch ms
+    // KST는 UTC+9라 시(hour)에서 9를 빼면 그대로 UTC가 된다.
+    function kst(str) {
+      var m = /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}))?$/.exec(str.trim());
+      if (!m) return NaN;
+      return Date.UTC(+m[1], +m[2] - 1, +m[3], (+m[4] || 0) - 9, +m[5] || 0);
     }
 
-    var today = todayKst();
+    // '11. 23 (월) 10시' — 날짜와 요일 사이는 줄바꿈 금지 공백
+    function label(str) {
+      var t = kst(str);
+      var d = new Date(t + 9 * HOUR);   // 한국 시각으로 되돌려 읽는다
+      var out = (d.getUTCMonth() + 1) + '. ' + d.getUTCDate() +
+                '\u00A0(' + WEEK[d.getUTCDay()] + ')';
+      var h = d.getUTCHours();
+      if (h || d.getUTCMinutes()) out += ' ' + h + '시';
+      return out;
+    }
 
-    Array.prototype.forEach.call(document.querySelectorAll('.product[data-end]'), function (card) {
-      var out = card.querySelector('.product__deadline');
-      var btn = card.querySelector('.product__apply');
-      if (!out) return;
+    // 그 순간이 속한 '한국 날짜'의 0시
+    function dayStart(t) {
+      var d = new Date(t + 9 * HOUR);
+      return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - 9 * HOUR;
+    }
+    // 남은 시간을 '6일' / '13시간' / '40분' 으로.
+    // 하루 이상이면 시간이 아니라 달력 날짜 차이로 센다 —
+    // 옆에 적힌 날짜('11. 23까지')와 숫자가 어긋나지 않게 하기 위해서다.
+    function gap(now, target) {
+      var ms = target - now;
+      if (ms < HOUR) return Math.max(1, Math.floor(ms / MIN)) + '분';
+      if (ms < DAY)  return Math.floor(ms / HOUR) + '시간';
+      return Math.round((dayStart(target) - dayStart(now)) / DAY) + '일';
+    }
 
-      var end = dayOf(card.dataset.end);
-      var start = card.dataset.start ? dayOf(card.dataset.start) : null;
-      var state, html;
+    var cards = document.querySelectorAll('.product[data-end]');
 
-      if (start !== null && today < start) {
-        state = 'soon';
-        html = label(card.dataset.start) + ' 오픈 · <b>' + Math.round((start - today) / DAY) + '일 후</b>';
-      } else if (today < end) {
-        state = 'open';
-        html = label(card.dataset.end) + '까지 · <b>' + Math.round((end - today) / DAY) + '일 남음</b>';
-      } else if (today === end) {
-        state = 'open';
-        html = '<b>오늘 마감</b>';
-      } else {
-        state = 'closed';
-        html = '모집 종료';
-      }
+    function render() {
+      var now = Date.now();
 
-      out.innerHTML = html;
-      card.setAttribute('data-state', state);
+      Array.prototype.forEach.call(cards, function (card) {
+        var out = card.querySelector('.product__deadline');
+        var btn = card.querySelector('.product__apply');
+        if (!out) return;
 
-      // 모집 기간이 아니면 신청 페이지로 넘어가지 못하게 한다
-      if (state !== 'open' && btn) {
-        btn.textContent = (state === 'closed') ? '모집 종료' : '오픈 예정';
-        btn.removeAttribute('href');
-        btn.setAttribute('aria-disabled', 'true');
-      }
-    });
+        var end = kst(card.dataset.end);
+        var start = card.dataset.start ? kst(card.dataset.start) : null;
+        var state, html;
+
+        if (card.dataset.force === 'open') {
+          // 테스트용 강제 오픈 — 마크업의 data-force 를 지우면 원래대로 돌아간다
+          state = 'open';
+          html = label(card.dataset.end) + '까지 · <b>' + gap(now, end) + ' 남음</b>';
+        } else if (start !== null && now < start) {
+          state = 'soon';
+          html = label(card.dataset.start) + ' 오픈 · <b>' + gap(now, start) + ' 후</b>';
+        } else if (now < end) {
+          state = 'open';
+          html = label(card.dataset.end) + '까지 · <b>' + gap(now, end) + ' 남음</b>';
+        } else {
+          state = 'closed';
+          html = '모집 종료';
+        }
+
+        if (card.getAttribute('data-state') === state && out.dataset.html === html) return;
+        out.innerHTML = html;
+        out.dataset.html = html;
+        card.setAttribute('data-state', state);
+
+        // 모집 기간이 아니면 신청 페이지로 넘어가지 못하게 한다
+        if (state === 'open') {
+          btn.textContent = '신청하기';
+          btn.setAttribute('href', 'apply.html?product=' + card.querySelector('[data-code]').dataset.code);
+          btn.removeAttribute('aria-disabled');
+        } else if (btn) {
+          btn.textContent = (state === 'closed') ? '모집 종료' : '오픈 예정';
+          btn.removeAttribute('href');
+          btn.setAttribute('aria-disabled', 'true');
+        }
+      });
+    }
+
+    render();
+    setInterval(render, MIN);   // 10시 정각에 새로고침 없이 열리고 닫히도록
   })();
 
   /* 히어로 배경 전환 — 화면 30% 지점을 지나면 흰색으로 바뀐다.
