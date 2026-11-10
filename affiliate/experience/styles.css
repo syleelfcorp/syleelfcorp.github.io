@@ -1,5 +1,5 @@
 /* ============================================================
-   LFmall 체험단 — 공용 스타일시트
+   LFmall 엘스파 픽 — 공용 스타일시트
    키컬러: #6919cd (퍼플)  /  세컨더리: #000000
    폰트: Pretendard
    레이아웃: 중앙 1컬럼, 퍼플 히어로 + 번호 스텝 + 상품 그리드
@@ -378,9 +378,11 @@ button { font-family: inherit; }
 /* 모집 인원 / 누적 신청 수, 마감일 — 숫자만 진하게 */
 .product__stat,
 .product__deadline { font-size: 12.5px; color: var(--muted); margin: 0; font-variant-numeric: tabular-nums; }
-.product__stat b,
 .product__deadline b { color: var(--ink); font-weight: 700; }
-.product__deadline { margin-bottom: 4px; }
+/* 모집/신청 줄과 날짜 줄만 바짝 붙인다.
+   .product__body 의 gap(7px)을 음수 마진으로 끌어올려 실제 간격을 2px로 만든다.
+   상품명과 모집/신청 줄 사이 간격은 gap 그대로 유지된다. */
+.product__deadline { margin-top: -5px; margin-bottom: 4px; }
 /* 모집 기간이 아닌 상품 — 썸네일을 눕히고 버튼을 잠근다 */
 .product[data-state="closed"] .product__thumb,
 .product[data-state="soon"] .product__thumb { opacity: .5; }
@@ -412,7 +414,7 @@ button { font-family: inherit; }
   .product__name { font-size: 20px; }
   .product__stat,
   .product__deadline { font-size: 14px; }
-  .product__deadline { margin-bottom: 6px; }
+  .product__deadline { margin-top: -7px; margin-bottom: 6px; }   /* gap 9px - 7px = 2px */
   .product__actions { gap: 8px; }
   .product__body .btn { --h: 42px; font-size: 14px; }
 }
