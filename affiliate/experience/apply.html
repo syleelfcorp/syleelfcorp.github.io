@@ -270,7 +270,7 @@
       <p class="note">필수적인 개인정보 수집 및 이용에 동의하지 않을 권리가 있습니다. 다만, 동의하지 않을 경우 체험단 신청이 제한됩니다.</p>
     </div>
     <div class="modal__foot">
-      <button type="button" class="btn btn--black" data-close data-agree="agreePrivacy">동의하고 닫기</button>
+      <button type="button" class="btn btn--black" data-close>닫기</button>
     </div>
   </div>
 </div>
@@ -313,7 +313,7 @@
       </div>
     </div>
     <div class="modal__foot">
-      <button type="button" class="btn btn--black" data-close data-agree="agreePenalty">동의하고 닫기</button>
+      <button type="button" class="btn btn--black" data-close>닫기</button>
     </div>
   </div>
 </div>
@@ -528,6 +528,9 @@
   document.querySelectorAll('.modal').forEach(function (m) {
     m.querySelectorAll('[data-close]').forEach(function (b) {
       b.addEventListener('click', function () {
+        // data-agree 가 붙은 버튼은 닫으면서 해당 동의에 체크한다.
+        // 지금은 버튼 이름이 '닫기'라 어느 버튼에도 붙이지 않았다 —
+        // 읽기만 하고 닫는 버튼이 동의까지 대신 체크하면 안 되기 때문이다.
         var id = b.getAttribute('data-agree');
         if (id) {
           var cb = document.getElementById(id);

@@ -48,12 +48,13 @@
       <h2 class="section-title">상품 리스트</h2>
     </div>
 
+    <!-- ⚠ 지금은 7개 상품이 모두 '열림'으로 보입니다.
+         모집 기간(11/16 10시 ~ 11/23 10시)을 무시하는 테스트 설정이며,
+         켜고 끄는 곳은 이 파일 아래쪽 스크립트의 FORCE_OPEN_ALL 한 줄입니다.
+         (지금 상태에서는 11/16 10시 전에도 신청이 접수됩니다) -->
     <div class="product-grid">
       <!-- 상품 1 · IETS6F103WT -->
-      <!-- ⚠ 테스트용 — data-force="open" 은 모집 기간을 무시하고 열린 상태로 보여줍니다.
-           실제 오픈 전에 아래 data-force="open" 을 반드시 지우세요.
-           (지우지 않으면 11/16 10시 전에도 신청을 받게 됩니다) -->
-      <article class="product" data-start="2026-11-16T10:00" data-end="2026-11-23T10:00" data-force="open">
+      <article class="product" data-start="2026-11-16T10:00" data-end="2026-11-23T10:00">
         <div class="product__thumb">
           <img src="https://nimg.lfmall.co.kr/file/product/prd/IE/2026/500/IETS6F103WT_00.jpg"
                alt="LOOPWHEEL 헨리넥 롱 슬리브 티셔츠 아이보리" loading="lazy" onerror="this.remove()">
@@ -460,6 +461,12 @@
      값은 'YYYY-MM-DDTHH:MM' 형태의 한국 시각이며, 보는 사람의 기기 시간대와
      상관없이 같은 순간을 가리킨다. 1분마다 다시 계산해 10시 정각에 열리고 닫힌다. */
   (function () {
+    /* ⚠ 테스트용 전체 강제 오픈 스위치
+       true  : 모집 기간과 상관없이 7개 상품이 모두 열린 것처럼 보이고 신청도 받습니다.
+       false : 아래 data-start / data-end 대로 11/16 10시에 열리고 11/23 10시에 닫힙니다.
+       실제 운영을 시작할 때 false 로 바꾸세요. 이 한 줄만 고치면 됩니다. */
+    var FORCE_OPEN_ALL = true;
+
     var MIN = 60000, HOUR = 3600000, DAY = 86400000;
     var WEEK = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -511,8 +518,8 @@
         var start = card.dataset.start ? kst(card.dataset.start) : null;
         var state, html;
 
-        if (card.dataset.force === 'open') {
-          // 테스트용 강제 오픈 — 마크업의 data-force 를 지우면 원래대로 돌아간다
+        if (FORCE_OPEN_ALL || card.dataset.force === 'open') {
+          // 테스트용 강제 오픈 — 위 FORCE_OPEN_ALL 을 false 로 두면 원래대로 돌아간다
           state = 'open';
           html = label(card.dataset.end) + '까지 · <b>' + gap(now, end) + ' 남음</b>';
         } else if (start !== null && now < start) {

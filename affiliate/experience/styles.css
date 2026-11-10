@@ -663,7 +663,7 @@ body.no-scroll { overflow: hidden; }
 .opt__thumb--empty { background: var(--surface); border: 1px solid var(--line); }
 .opt__thumb--empty svg { color: var(--muted); }
 .opt__text { display: grid; gap: 2px; min-width: 0; }
-.opt__cat { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--muted); }
+.opt__cat { font-size: 11px; font-weight: 700; letter-spacing: 0; color: var(--muted); }
 .opt__name { font-size: 15px; font-weight: 700; line-height: 1.35; }
 .opt__placeholder { font-size: 15px; font-weight: 500; color: var(--muted); }
 
