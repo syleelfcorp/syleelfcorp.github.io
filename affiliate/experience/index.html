@@ -15,6 +15,9 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="styles.css">
+<!-- 등장 효과는 자바스크립트가 켜져 있을 때만 씁니다.
+     이 한 줄이 먼저 실행돼야 글이 잠깐 보였다 사라지는 깜빡임이 없습니다. -->
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
@@ -30,29 +33,78 @@
 
 <!-- ============ 히어로 ============ -->
 <section class="hero" id="top">
+  <!-- 히어로 배경은 색(--surface)만 씁니다. styles.css 의 .hero 한 줄입니다.
+       나중에 배경 사진을 다시 쓰시려면 아래 한 줄을 되살리면 됩니다.
+  <div class="hero__bg" data-speed="0.3" aria-hidden="true"
+       style="background-image: url('이미지주소')"></div>
+  -->
+
   <div class="wrap hero__inner">
     <div class="hero__content">
-      <h1><span class="hero-line">원하는 아이템을</span> <span class="hero-line">직접 Pick해 보세요</span></h1>
-      <p class="hero__sub">직접 코디한 제품 후기를 통해 새로운 기회가 열릴지도 몰라요!</p>
+      <h1 class="reveal"><span class="hero-line">원하는 아이템을</span> <span class="hero-line hero-line--key">직접 Pick해 보세요</span></h1>
+      <p class="hero__sub reveal" data-delay="1">직접 코디한 제품 후기를 통해 새로운 기회가 열릴지도 몰라요!</p>
+    </div>
+  </div>
+
+  <!-- ▼ PC용 사진 (760px 이상에서만 보임) — 가운데가 가장 크고 좌우로 겹쳐 펼쳐집니다.
+       사진이 오면 <div class="pf__img">1</div> 을
+       <img class="pf__img" src="주소" alt=""> 로 바꾸면 됩니다. -->
+  <div class="hero__fan" data-speed="0.12" aria-hidden="true">
+      <!-- 가운데 3번은 처음부터 자리를 잡고 있고, 2 → 4 → 1 → 5 순서로 올라옵니다.
+           순서를 바꾸려면 data-delay 숫자만 바꾸면 됩니다. -->
+      <div class="pf pf--1 reveal" data-delay="3"><div class="pf__img">1</div></div>
+      <div class="pf pf--2 reveal" data-delay="1"><div class="pf__img">2</div></div>
+      <div class="pf pf--3"><div class="pf__img">3</div></div>
+      <div class="pf pf--4 reveal" data-delay="2"><div class="pf__img">4</div></div>
+      <div class="pf pf--5 reveal" data-delay="4"><div class="pf__img">5</div></div>
+  </div>
+
+  <!-- ▼ 모바일용 사진 (759px 이하에서만 보임) — 카드가 포개진 모양입니다.
+       PC와 다른 사진을 넣을 수 있도록 아예 따로 둡니다. -->
+  <div class="hero__stack" data-speed="0.1" aria-hidden="true">
+      <div class="pf pf--s1 reveal" data-delay="3"><div class="pf__img">M1</div></div>
+      <div class="pf pf--s2 reveal" data-delay="2"><div class="pf__img">M2</div></div>
+      <div class="pf pf--s3 reveal" data-delay="1"><div class="pf__img">M3</div></div>
+  </div>
+</section>
+
+<!-- ============ 서비스 소개 ============ -->
+<section class="section" id="about">
+  <!-- 이 섹션만 패럴랙스를 쓰지 않습니다. 첫 화면 바로 아래라
+       내용이 움직이면 '서비스 소개' 제목이 늦게 보이기 때문입니다.
+       다시 켜려면 아래 div 에 data-speed="0.07" 을 붙이면 됩니다. -->
+  <div class="wrap">
+    <div class="section-head center">
+      <h2 class="section-title reveal reveal--load" data-delay="2">서비스 소개</h2>
+    </div>
+    <div class="intro-grid">
+      <div class="intro-col reveal" data-delay="1" id="about-lsp">
+        <h3>LF 스타일 파트너</h3>
+        <p>LF 스타일 파트너, 엘스파는 패션을 좋아하는 크리에이터가 감각적인 컨텐츠로 수익을 만드는 LF의 공식 쇼핑 파트너입니다.</p>
+        <p class="intro-col__more"><a href="https://www.lfmall.co.kr/app/event/113640" target="_blank" rel="noopener">엘스파 소개 보러가기</a></p>
+      </div>
+      <div class="intro-col reveal" data-delay="2" id="about-pick">
+        <h3>엘스파 픽</h3>
+        <p>‘엘스파 픽’은 원하는 아이템을 직접 픽(Pick)해서 참여하는 역제안 프로그램입니다.</p>
+      </div>
     </div>
   </div>
 </section>
 
-
-
-
 <!-- ============ 제품 리스트 ============ -->
 <section class="section" id="products">
-  <div class="wrap">
+  <!-- 섹션 안쪽만 조금 느리게 움직여 섹션끼리 시차가 생깁니다.
+       느린 정도는 data-speed 숫자입니다(0 = 안 느림). -->
+  <div class="wrap" data-speed="0.07">
     <div class="section-head center">
-      <h2 class="section-title">제품 리스트</h2>
+      <h2 class="section-title reveal">제품 리스트</h2>
     </div>
 
     <!-- ⚠ 지금은 7개 제품이 모두 '열림'으로 보입니다.
          모집 기간(11/16 10시 ~ 11/23 10시)을 무시하는 테스트 설정이며,
          켜고 끄는 곳은 이 파일 아래쪽 스크립트의 FORCE_OPEN_ALL 한 줄입니다.
          (지금 상태에서는 11/16 10시 전에도 신청이 접수됩니다) -->
-    <div class="product-grid">
+    <div class="product-grid reveal" data-delay="1">
       <!-- 제품 1 · IETS6F103WT -->
       <article class="product" data-start="2026-11-16T10:00" data-end="2026-11-23T10:00">
         <div class="product__thumb">
@@ -60,7 +112,7 @@
                alt="LOOPWHEEL 헨리넥 롱 슬리브 티셔츠 아이보리" loading="lazy" onerror="this.remove()">
         </div>
         <div class="product__body">
-          <span class="product__cat">일꼬르소</span>
+          <span class="product__cat">ILCORSO</span>
           <h3 class="product__name">LOOPWHEEL 헨리넥 롱 슬리브 티셔츠 아이보리</h3>
           <p class="product__stat" data-code="IETS6F103WT">30명 모집</p>
           <p class="product__deadline"></p>
@@ -79,7 +131,7 @@
                alt="캐시미어 블렌드 모크넥 니트 블랙" loading="lazy" onerror="this.remove()">
         </div>
         <div class="product__body">
-          <span class="product__cat">일꼬르소</span>
+          <span class="product__cat">ILCORSO</span>
           <h3 class="product__name">캐시미어 블렌드 모크넥 니트 블랙</h3>
           <p class="product__stat" data-code="IESW6F101BK">5명 모집</p>
           <p class="product__deadline"></p>
@@ -98,7 +150,7 @@
                alt="울 블렌드 하프 집업 니트 블랙" loading="lazy" onerror="this.remove()">
         </div>
         <div class="product__body">
-          <span class="product__cat">일꼬르소</span>
+          <span class="product__cat">ILCORSO</span>
           <h3 class="product__name">울 블렌드 하프 집업 니트 블랙</h3>
           <p class="product__stat" data-code="IESW6F105BK">5명 모집</p>
           <p class="product__deadline"></p>
@@ -117,7 +169,7 @@
                alt="모노크롬 덕 다운 자켓 블랙" loading="lazy" onerror="this.remove()">
         </div>
         <div class="product__body">
-          <span class="product__cat">일꼬르소</span>
+          <span class="product__cat">ILCORSO</span>
           <h3 class="product__name">모노크롬 덕 다운 자켓 블랙</h3>
           <p class="product__stat" data-code="IEJU6F301BK">5명 모집</p>
           <p class="product__deadline"></p>
@@ -136,7 +188,7 @@
                alt="울 블렌드 라운드넥 니트 라이트그레이" loading="lazy" onerror="this.remove()">
         </div>
         <div class="product__body">
-          <span class="product__cat">일꼬르소</span>
+          <span class="product__cat">ILCORSO</span>
           <h3 class="product__name">울 블렌드 라운드넥 니트 라이트그레이</h3>
           <p class="product__stat" data-code="IESW6F102G1">5명 모집</p>
           <p class="product__deadline"></p>
@@ -155,7 +207,7 @@
                alt="로아백 다크브라운 스웨이드 숄더백(파우치참)" loading="lazy" onerror="this.remove()">
         </div>
         <div class="product__body">
-          <span class="product__cat">헤지스 ACC</span>
+          <span class="product__cat">HAZZYS ACC</span>
           <h3 class="product__name">로아백 다크브라운 스웨이드 숄더백(파우치참)</h3>
           <p class="product__stat" data-code="HIBA75262W2">15명 모집</p>
           <p class="product__deadline"></p>
@@ -174,7 +226,7 @@
                alt="파세트 소가죽 숄더 겸 크로스백 S 블랙" loading="lazy" onerror="this.remove()">
         </div>
         <div class="product__body">
-          <span class="product__cat">질스튜어트 뉴욕 ACC</span>
+          <span class="product__cat">JILLSTUART NEWYORK ACC</span>
           <h3 class="product__name">파세트 소가죽 숄더 겸 크로스백 S 블랙</h3>
           <p class="product__stat" data-code="JABA75055BK">15명 모집</p>
           <p class="product__deadline"></p>
@@ -206,17 +258,19 @@
 </section>
 
 <!-- ============ 참여 방법 안내 (참여 방법 + 진행 일정) ============ -->
-<section class="section section--tint" id="how">
-  <div class="wrap">
+<section class="section section--surface" id="how">
+  <!-- 섹션 안쪽만 조금 느리게 움직여 섹션끼리 시차가 생깁니다.
+       느린 정도는 data-speed 숫자입니다(0 = 안 느림). -->
+  <div class="wrap" data-speed="0.07">
     <div class="section-head center">
-      <h2 class="section-title">참여 방법 안내</h2>
+      <h2 class="section-title reveal">참여 방법 안내</h2>
     </div>
 
-    <h3 class="sub-title">참여 방법</h3>
+    <h3 class="sub-title reveal" data-delay="1">참여 방법</h3>
     <!-- 각 단계의 아이콘은 <span class="step__ico"> 안의 <svg> 하나입니다.
          다시 1~6 숫자로 되돌리려면 그 span 을
          <span class="step__num">1</span> 처럼 바꾸면 됩니다. -->
-    <div class="steps steps--3">
+    <div class="steps steps--3 reveal" data-delay="2">
       <div class="step">
         <span class="step__ico" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg></span>
         <h3>엘스파 지원</h3>
@@ -251,8 +305,8 @@
       </div>
     </div>
 
-    <h3 class="sub-title mt-lg">진행 일정</h3>
-    <ol class="timeline">
+    <h3 class="sub-title mt-lg reveal" data-delay="1">진행 일정</h3>
+    <ol class="timeline reveal" data-delay="2">
       <li class="timeline__item">
         <span class="timeline__date">11.16 (월) 10시 – 11.23 (월) 10시</span>
         <h4>신청 접수</h4>
@@ -275,7 +329,7 @@
       </li>
     </ol>
 
-    <details class="notice notice--center mt-lg">
+    <details class="notice notice--center mt-lg reveal" data-delay="1">
       <summary class="notice__q">
         <h3>신청 전 꼭 확인해 주세요</h3>
         <span class="notice__icon" aria-hidden="true">
@@ -295,12 +349,14 @@
 
 <!-- ============ 자주 묻는 질문 ============ -->
 <section class="section" id="faq">
-  <div class="wrap">
+  <!-- 섹션 안쪽만 조금 느리게 움직여 섹션끼리 시차가 생깁니다.
+       느린 정도는 data-speed 숫자입니다(0 = 안 느림). -->
+  <div class="wrap" data-speed="0.07">
     <div class="section-head center">
-      <h2 class="section-title">자주 묻는 질문</h2>
+      <h2 class="section-title reveal">자주 묻는 질문</h2>
     </div>
 
-    <div class="faq">
+    <div class="faq reveal" data-delay="1">
       <details class="faq__item">
         <summary class="faq__q">
           엘스파 픽에서 제공하는 착장 제품은 정말 무료인가요?
@@ -672,6 +728,90 @@
       copyLink('링크를 복사했어요. 카카오톡에 붙여넣어 주세요');
     }
   });
+</script>
+<script>
+  /* ---------- 배경 패럴랙스 ----------
+     data-speed 가 붙은 요소를, 그 요소를 감싼 섹션보다 느리게 움직입니다.
+     숫자는 HTML 쪽 data-speed 에서 조절합니다 (0 = 안 느림, 1 = 화면에 고정).
+     '동작 줄이기' 설정이면 아예 움직이지 않습니다.
+     스크롤 중에는 브라우저 그리는 주기에 맞춰서만 계산해 버벅임을 줄입니다. */
+  (function () {
+    var els = document.querySelectorAll('[data-speed]');
+    if (!els.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var vh = window.innerHeight;
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        var host = el.parentElement;
+        var r = host.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh + 200) continue;   // 화면 밖이면 건너뛴다
+
+        var speed = parseFloat(el.getAttribute('data-speed'));
+        if (!(speed > 0)) speed = 0.3;
+
+        // 섹션 한가운데가 화면 한가운데에서 얼마나 떨어져 있는지
+        var offset = (r.top + r.height / 2) - vh / 2;
+        el.style.transform = 'translate3d(0,' + (-offset * speed).toFixed(1) + 'px,0)';
+      }
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+</script>
+
+<script>
+  /* ---------- 스크롤 등장 효과 ----------
+     class="reveal" 이 붙은 요소가 화면에 들어오면 한 번만 올라옵니다.
+     한 번 보이고 나면 다시 숨지 않습니다.
+
+     숫자를 바꾸고 싶을 때
+     - 시작 시점 : 바로 아래 ENTER_MARGIN (-12% = 화면 아래에서 12% 들어오면 시작)
+     - 속도/딜레이 : styles.css 의 '.reveal' 묶음
+     자바스크립트가 막히거나 '동작 줄이기' 설정이면 효과 없이 그냥 보입니다. */
+  (function () {
+    var ENTER_MARGIN = '0px 0px -12% 0px';
+
+    var els = document.querySelectorAll('.reveal');
+    if (!els.length) return;
+
+    /* 'reveal--load' 가 붙은 것은 스크롤을 기다리지 않고 페이지가 열릴 때 바로 재생합니다.
+       첫 화면 경계에 걸쳐 있어 스크롤 전에는 효과가 발동하지 않는 글을 위한 것입니다.
+       (딜레이는 다른 요소와 똑같이 data-delay 로 맞춥니다) */
+    var now = document.querySelectorAll('.reveal--load');
+    for (var n = 0; n < now.length; n++) now[n].classList.add('is-in');
+
+    // 아주 오래된 브라우저 — 효과 없이 바로 보여준다
+    if (!('IntersectionObserver' in window)) {
+      for (var i = 0; i < els.length; i++) els[i].classList.add('is-in');
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (!entries[i].isIntersecting) continue;
+        entries[i].target.classList.add('is-in');
+        io.unobserve(entries[i].target);
+      }
+    }, { threshold: 0, rootMargin: ENTER_MARGIN });
+
+    for (var j = 0; j < els.length; j++) {
+      if (els[j].classList.contains('is-in')) continue;   // 이미 재생한 것은 제외
+      io.observe(els[j]);
+    }
+  })();
 </script>
 </body>
 </html>
