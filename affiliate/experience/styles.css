@@ -273,6 +273,8 @@ button { font-family: inherit; }
 .step h3 { margin: 0 0 8px; font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
 .step p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
 .step p.step__more { margin-top: 10px; }
+/* 한 문장만 줄을 바꿔 키컬러로 띄워 쓰는 자리 (수수료 안내 등) */
+.step p.step__key { margin-top: 10px; color: var(--key); }
 .step p a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .step p a:hover { color: var(--key); }
 /* 꼭 읽어야 하는 한 문장만 본문색으로 올려 눈에 띄게 한다.
