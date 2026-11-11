@@ -19,6 +19,7 @@
 
   --bg: #ffffff;
   --surface: #faf8fd;      /* 섹션 면 */
+  --tint: #f4f2f5;         /* 섹션 면(조금 더 진한 회보라) */
   --card: #ffffff;
   --line: #e8e4f0;         /* 기본 보더 */
 
@@ -67,6 +68,7 @@
 
     --bg: #0e0b14;
     --surface: #161120;
+    --tint: #171321;
     --card: #191322;
     --line: #2a2338;
 
@@ -98,6 +100,7 @@
 
   --bg: #0e0b14;
   --surface: #161120;
+  --tint: #171321;
   --card: #191322;
   --line: #2a2338;
 
@@ -152,6 +155,7 @@ button { font-family: inherit; }
 }
 .section { padding-block: clamp(48px, 9vw, 104px); }
 .section--surface { background: var(--surface); }
+.section--tint { background: var(--tint); }
 
 /* ---- 공통 타이포 ---- */
 .section-title {
