@@ -2,7 +2,7 @@
    LFmall 엘스파 픽 — 공용 스타일시트
    키컬러: #6919cd (퍼플)  /  세컨더리: #000000
    폰트: Pretendard
-   레이아웃: 중앙 1컬럼, 퍼플 히어로 + 번호 스텝 + 상품 그리드
+   레이아웃: 중앙 1컬럼, 퍼플 히어로 + 번호 스텝 + 제품 그리드
    ============================================================ */
 
 /* ---- 디자인 토큰 : 라이트(기본) ---- */
@@ -171,6 +171,8 @@ button { font-family: inherit; }
 .center { text-align: center; }
 .center .section-lead { margin-inline: auto; }
 .center .section-lead { max-width: 56ch; }
+/* 문장 안에서 한 조각만 키컬러로 올릴 때 */
+.key-ink { color: var(--key); }
 
 /* ---- 버튼 ---- */
 .btn {
@@ -353,11 +355,11 @@ button { font-family: inherit; }
   .timeline__date { word-break: keep-all; }
 }
 
-/* ---- 상품 그리드 ---- */
+/* ---- 제품 그리드 ---- */
 /* 모바일 2열 → 태블릿 3열 → 노트북·PC 4열.
    1440px 컨테이너(콘텐츠 1360px) 기준 4열이면 카드 한 장이 약 328px이다.
-   상품이 7개라 4 + 3으로 떨어진다.
-   한 줄을 채우면 다음 상품부터 자동으로 줄바꿈된다.
+   제품이 7개라 4 + 3으로 떨어진다.
+   한 줄을 채우면 다음 제품부터 자동으로 줄바꿈된다.
    좁은 폭에 맞춘 글자·버튼 크기는 아래 620px 분기에서 함께 키운다 */
 .product-grid {
   display: grid; grid-template-columns: repeat(2, 1fr);
@@ -387,9 +389,9 @@ button { font-family: inherit; }
 .product__deadline b { color: var(--ink); font-weight: 700; }
 /* 모집/신청 줄과 날짜 줄만 바짝 붙인다.
    .product__body 의 gap(7px)을 음수 마진으로 끌어올려 실제 간격을 2px로 만든다.
-   상품명과 모집/신청 줄 사이 간격은 gap 그대로 유지된다. */
+   제품명과 모집/신청 줄 사이 간격은 gap 그대로 유지된다. */
 .product__deadline { margin-top: -5px; margin-bottom: 4px; }
-/* 모집 기간이 아닌 상품 — 썸네일을 눕히고 버튼을 잠근다 */
+/* 모집 기간이 아닌 제품 — 썸네일을 눕히고 버튼을 잠근다 */
 .product[data-state="closed"] .product__thumb,
 .product[data-state="soon"] .product__thumb { opacity: .5; }
 .product[data-state="closed"] .product__apply,
@@ -400,7 +402,7 @@ button { font-family: inherit; }
 .product__meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 8px; }
 .chip { font-size: 12px; font-weight: 600; color: var(--ink); background: var(--surface); border: 1px solid var(--line); padding: 4px 9px; border-radius: var(--radius-pill); }
 /* 리스트 버튼은 주 CTA가 아니므로 테두리만, 썸네일 너비의 75%로 */
-/* 상품보기 / 신청하기 — 카드 너비를 꽉 채워 반반 */
+/* 제품보기 / 신청하기 — 카드 너비를 꽉 채워 반반 */
 .product__actions {
   display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
   margin-top: auto;
@@ -429,8 +431,8 @@ button { font-family: inherit; }
 .notice {
   /* 박스 없이 본문처럼 — 기본은 섹션 좌측에 맞춰 정렬 */
 }
-.notice h3 { margin: 0 0 14px; font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-.notice ul { margin: 0; padding-left: 18px; display: grid; gap: 9px; }
+.notice h3 { margin: 0 0 14px; font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.notice ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
 .notice li { font-size: 14px; color: var(--muted); line-height: 1.6; }
 .notice li::marker { color: var(--muted); }
 
@@ -633,7 +635,7 @@ body.no-scroll { overflow: hidden; }
 .form-error { color: var(--warn); font-size: 13.5px; font-weight: 600; margin-top: -12px; margin-bottom: 14px; display: none; }
 .form-error.show { display: block; }
 
-/* 상품 선택 드롭다운 (이미지 포함 커스텀 셀렉트) */
+/* 제품 선택 드롭다운 (이미지 포함 커스텀 셀렉트) */
 .combo { position: relative; }
 .combo__btn {
   width: 100%; display: flex; align-items: center; gap: 14px;
@@ -741,6 +743,8 @@ body.no-scroll { overflow: hidden; }
 .next-item__ico { flex-shrink: 0; width: 40px; height: 40px; border-radius: 11px; background: var(--bg); color: var(--ink); border: 1px solid var(--line); display: grid; place-items: center; font-weight: 800; font-variant-numeric: tabular-nums; }
 .next-item__ico svg { width: 20px; height: 20px; }
 .next-item h3 { margin: 0 0 4px; font-size: 15.5px; font-weight: 700; }
+/* 수령 후 안내의 미션 목록만 제목을 키운다. 완료 페이지의 같은 목록은 그대로 둔다. */
+.next-list--mission .next-item h3 { font-size: 18px; }
 .next-item p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.6; }
 .next-item p a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 
