@@ -272,6 +272,7 @@ button { font-family: inherit; }
   box-shadow: 0 16px 36px rgba(16, 8, 32, .20), 0 2px 6px rgba(16, 8, 32, .10);
   translate: var(--pf-dx, 0) var(--pf-dy, 0);
   rotate: var(--pf-rot, 0deg);
+  scale: var(--pf-scale, 1);
   z-index: var(--pf-z, 1);
 }
 /* 사진이 들어올 자리. <img class="pf__img"> 로 바꿔도 같은 크기·비율이 된다. */
@@ -323,16 +324,45 @@ div.pf__img {
    세 장을 같은 칸에 겹쳐 두고 조금씩 어긋나게 민다. 맨 앞이 s3 이다. */
 .hero__stack {
   display: none;
-  position: absolute; left: 0; right: 0; bottom: -9%;
+  position: absolute; left: 0; right: 0; bottom: calc(-9% + 30px);
   place-items: center;
   z-index: 2; pointer-events: none;
 }
 @media (max-width: 759px) { .hero__stack { display: grid; } }
 .hero__stack .pf { grid-area: 1 / 1; }
 
-.pf--s1 { --pf-w: 176px; --pf-rot: -8deg; --pf-dx: -40px; --pf-dy: -18px; --pf-z: 1; }
-.pf--s2 { --pf-w: 176px; --pf-rot:  7deg; --pf-dx:  40px; --pf-dy: -10px; --pf-z: 2; }
-.pf--s3 { --pf-w: 198px; --pf-rot: -1deg; --pf-dx:   0;   --pf-dy:   0;   --pf-z: 3; }
+/* ---- 모바일 : 한 번만 쌓이고 멈추는 더미 ----
+   페이지가 열리면 M1 → M2 → M3 순서로 제자리에서 나타나 더미를 이루고,
+   그 상태로 그대로 유지된다. 반복하지 않으므로 사라지는 장면이 없다.
+
+   위치·기울기·크기는 아래 .pf--s1~s3 세 줄에 모여 있다.
+     --pf-dx / --pf-dy : 자리      --pf-rot : 기울기
+     --pf-scale        : 크기 배율 (뒤로 갈수록 작게 — 깊이감)
+     --pf-z            : 앞뒤 순서 (s3 가 맨 위)
+   나타나는 간격은 .hero__stack .pf--sN 의 animation-delay 다. */
+.hero__stack .pf { --pf-w: 277px; }
+.hero__stack .pf--s1 { --pf-dx: -6px; --pf-dy: -14px; --pf-rot: -5deg; --pf-scale: .95;  --pf-z: 1; }
+.hero__stack .pf--s2 { --pf-dx:  5px; --pf-dy:  -8px; --pf-rot:   3deg; --pf-scale: .975; --pf-z: 2; }
+.hero__stack .pf--s3 { --pf-dx: -2px; --pf-dy:    0;  --pf-rot:  -1deg; --pf-scale: 1;    --pf-z: 3; }
+
+@media (max-width: 759px) {
+  /* 움직임 없이 제자리에서 나타나기만 한다 (both = 시작 전에도 끝난 뒤에도 값 유지) */
+  .hero__stack .pf { animation: pf-settle .55s ease both; }
+  /* 선택자를 .hero__stack 까지 써야 위의 animation 단축 속성(딜레이 0s 로 초기화)을 이긴다 */
+  .hero__stack .pf--s1 { animation-delay: .1s; }
+  .hero__stack .pf--s2 { animation-delay: .45s; }
+  .hero__stack .pf--s3 { animation-delay: .8s; }
+}
+
+@keyframes pf-settle {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* '동작 줄이기'를 켠 분께는 나타나는 효과 없이 바로 더미로 보여준다 */
+@media (prefers-reduced-motion: reduce) {
+  .hero__stack .pf { animation: none; }
+}
 
 /* ---- 서비스 소개 2단 ---- */
 .intro-grid {
@@ -368,6 +398,17 @@ div.pf__img {
 .hero h1 .hero-line { display: block; }
 .hero h1 .hero-line--key { color: var(--key); }
 .hero__sub { margin: 20px auto 0; font-size: clamp(15px, 2.2vw, 18px); color: var(--muted); max-width: 46ch; line-height: 1.65; }
+
+/* 모바일에서만 줄을 바꾸는 지점.
+   <br class="br-mo"> 는 760px 이상에서 숨겨서 한 줄로 이어지게 한다.
+   (br 을 숨기는 쪽으로 처리해야 모바일에서 줄바꿈이 확실히 동작한다) */
+@media (min-width: 760px) { .br-mo { display: none; } }
+
+/* ---- 모바일 히어로 글자 크기 ---- */
+@media (max-width: 759px) {
+  .hero h1 { font-size: 36px; line-height: 1.3; }
+  .hero__sub { font-size: 16px; }
+}
 
 /* ---- 스텝(번호 뱃지) ---- */
 .steps { display: grid; gap: clamp(18px, 2vw, 24px); }

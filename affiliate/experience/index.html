@@ -42,7 +42,7 @@
   <div class="wrap hero__inner">
     <div class="hero__content">
       <h1 class="reveal"><span class="hero-line">원하는 아이템을</span> <span class="hero-line hero-line--key">직접 Pick해 보세요</span></h1>
-      <p class="hero__sub reveal" data-delay="1">직접 코디한 제품 후기를 통해 새로운 기회가 열릴지도 몰라요!</p>
+      <p class="hero__sub reveal" data-delay="1">직접 코디한 제품 후기를 통해<br class="br-mo"> 새로운 기회가 열릴지도 몰라요!</p>
     </div>
   </div>
 
@@ -62,9 +62,12 @@
   <!-- ▼ 모바일용 사진 (759px 이하에서만 보임) — 카드가 포개진 모양입니다.
        PC와 다른 사진을 넣을 수 있도록 아예 따로 둡니다. -->
   <div class="hero__stack" data-speed="0.1" aria-hidden="true">
-      <div class="pf pf--s1 reveal" data-delay="3"><div class="pf__img">M1</div></div>
-      <div class="pf pf--s2 reveal" data-delay="2"><div class="pf__img">M2</div></div>
-      <div class="pf pf--s3 reveal" data-delay="1"><div class="pf__img">M3</div></div>
+      <!-- 페이지가 열릴 때 M1 → M2 → M3 순서로 한 번만 얹히고 그대로 멈춥니다.
+           반복하지 않으므로 사라지는 장면이 없습니다.
+           모션은 styles.css 의 @keyframes pf-settle 이 담당합니다. -->
+      <div class="pf pf--s1"><div class="pf__img">M1</div></div>
+      <div class="pf pf--s2"><div class="pf__img">M2</div></div>
+      <div class="pf pf--s3"><div class="pf__img">M3</div></div>
   </div>
 </section>
 
