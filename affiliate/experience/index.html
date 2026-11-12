@@ -411,30 +411,6 @@
   </div>
 </section>
 
-<!-- ============ 공유하기 ============ -->
-<!--
-<section class="section share" id="share">
-  <div class="wrap">
-    <div class="section-head center">
-      <h2 class="section-title">엘스파 픽 공유하기</h2>
-    </div>
-    <div class="share__list">
-      <button type="button" class="share__btn" id="shareKakao" aria-label="카카오톡으로 공유" title="카카오톡">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.99 3 3 6.2 3 10.14c0 2.5 1.65 4.7 4.14 5.97l-1.02 3.77c-.09.33.28.6.57.41l4.5-2.98c.26.02.53.03.81.03 5.01 0 9-3.2 9-7.2S17.01 3 12 3z"/></svg>
-      </button>
-      <a class="share__btn" id="shareFacebook" href="#" target="_blank" rel="noopener" aria-label="페이스북으로 공유" title="페이스북">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.1 21v-8.2h2.8l.42-3.2H14.1V7.55c0-.93.26-1.56 1.59-1.56h1.7V3.13A22.8 22.8 0 0 0 14.91 3c-2.46 0-4.14 1.5-4.14 4.26V9.6H7.95v3.2h2.82V21h3.33z"/></svg>
-      </a>
-      <button type="button" class="share__btn" id="shareCopy" aria-label="링크 복사" title="링크 복사">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      </button>
-    </div>
-  </div>
-</section>
-      -->
-
-<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-
 <!-- ============ 푸터 ============ -->
 <footer class="site-footer">
   <div class="wrap site-footer__inner">
@@ -594,85 +570,6 @@
       var top = el.getBoundingClientRect().top + window.pageYOffset - gnb - 20;
       window.scrollTo({ top: top, behavior: 'smooth' });
     });
-  });
-
-  var elShareCopy  = document.getElementById('shareCopy');
-  var elShareFb    = document.getElementById('shareFacebook');
-  var elShareKakao = document.getElementById('shareKakao');
-
-  var KAKAO_JS_KEY = '';
-
-  var SHARE_URL   = location.href.split('#')[0];
-  var SHARE_TITLE = 'LFmall 엘스파 픽';
-  var SHARE_DESC  = '이번 시즌 새로 나온 제품을 먼저 만나보세요.';
-  var SHARE_IMAGE = 'https://nimg.lfmall.co.kr/file/product/prd/IE/2026/1000/IEJU6F301BK_A13.jpg';
-
-  var toastEl = document.getElementById('toast');
-  var toastTimer;
-  function showToast(msg) {
-    toastEl.textContent = msg;
-    toastEl.hidden = false;
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () { toastEl.hidden = true; }, 2200);
-  }
-
-  function copyLink(msg) {
-    function done() { showToast(msg || '링크를 복사했어요'); }
-    function fallback() {
-      try {
-        var ta = document.createElement('textarea');
-        ta.value = SHARE_URL;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'fixed';
-        ta.style.left = '-9999px';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        done();
-      } catch (e) {
-        showToast('복사하지 못했어요. 주소창의 주소를 복사해 주세요.');
-      }
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(SHARE_URL).then(done).catch(fallback);
-    } else {
-      fallback();
-    }
-  }
-  if (elShareCopy) elShareCopy.addEventListener('click', function () { copyLink(); });
-
-  if (elShareFb) elShareFb.href =
-    'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(SHARE_URL);
-
-  if (KAKAO_JS_KEY && elShareKakao) {
-    var sdk = document.createElement('script');
-    sdk.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js';
-    sdk.onload = function () {
-      try { window.Kakao.init(KAKAO_JS_KEY); } catch (e) {}
-    };
-    document.head.appendChild(sdk);
-  }
-
-  if (elShareKakao) elShareKakao.addEventListener('click', function () {
-    var K = window.Kakao;
-    if (K && K.isInitialized && K.isInitialized() && K.Share) {
-      K.Share.sendDefault({
-        objectType: 'feed',
-        content: {
-          title: SHARE_TITLE,
-          description: SHARE_DESC,
-          imageUrl: SHARE_IMAGE,
-          link: { mobileWebUrl: SHARE_URL, webUrl: SHARE_URL }
-        },
-        buttons: [{
-          title: '엘스파 픽 신청하기',
-          link: { mobileWebUrl: SHARE_URL, webUrl: SHARE_URL }
-        }]
-      });
-    } else {
-      copyLink('링크를 복사했어요. 카카오톡에 붙여넣어 주세요');
-    }
   });
 </script>
 <script>

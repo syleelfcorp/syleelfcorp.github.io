@@ -749,31 +749,6 @@ div.pf__img {
 .faq__a p:last-child { margin: 0; }
 @media (prefers-reduced-motion: reduce) { .faq__icon .v { transition: none; } }
 
-/* ---- 공유하기 ---- */
-/* 구분선 없이 FAQ와 이어진다 — 위 섹션의 하단 패딩만으로 간격을 둔다 */
-.share { background: var(--bg); padding-top: 0; }
-.share__list { display: flex; justify-content: center; gap: clamp(14px, 1.6vw, 18px); flex-wrap: wrap; }
-.share__btn {
-  width: clamp(56px, 5vw, 64px); height: clamp(56px, 5vw, 64px);
-  border-radius: 50%; border: 0; padding: 0;
-  background: var(--surface); color: var(--ink);
-  display: grid; place-items: center; cursor: pointer; text-decoration: none;
-  transition: background .15s ease, transform .12s ease;
-}
-.share__btn:hover { background: var(--line); }
-.share__btn:active { transform: translateY(1px); }
-.share__btn svg { width: 24px; height: 24px; }
-
-/* ---- 토스트 ---- */
-.toast {
-  position: fixed; left: 50%; transform: translateX(-50%);
-  bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 200;
-  background: var(--ink); color: var(--bg);
-  padding: 12px 20px; border-radius: var(--radius-pill);
-  font-size: 14px; font-weight: 600; box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
-  max-width: calc(100% - 32px);
-}
-
 /* ---- 푸터 ---- */
 .site-footer { background: var(--bg); border-top: 1px solid var(--line); }
 .site-footer__inner { padding-block: 34px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between; }
