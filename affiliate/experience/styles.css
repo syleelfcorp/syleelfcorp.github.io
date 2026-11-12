@@ -436,6 +436,8 @@ div.pf__img {
 
 /* ---- 모바일 히어로 글자 크기 ---- */
 @media (max-width: 759px) {
+  /* 히어로 높이는 PC 보다 16px 낮게 (기본값 clamp(610px, 76svh + 50px, 850px) 에서 -16px) */
+  .hero__inner { min-height: clamp(594px, calc(76svh + 34px), 834px); }
   .hero h1 { font-size: 36px; line-height: 1.3; }
   .hero__sub { font-size: 16px; margin-top: 12px; }
 
