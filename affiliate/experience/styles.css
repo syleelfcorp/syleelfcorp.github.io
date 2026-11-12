@@ -154,6 +154,12 @@ button { font-family: inherit; }
    (섹션 안쪽 내용이 패럴랙스로 최대 ±67px 움직여도 가장자리에 붙지 않도록) */
 .section { padding-block: clamp(100px, 9vw, 128px); }
 .section--surface { background: var(--surface); }
+/* 모바일은 화면이 짧아 100px 이 과하게 비어 보인다 — 네 페이지 모두 60px */
+@media (max-width: 759px) {
+  .section { padding-block: 60px; }
+}
+/* 위아래를 좁게 쓰는 섹션. 선택자를 두 겹으로 써야 위의 기본값과 모바일값을 모두 이긴다 */
+.section.section--slim { padding-block: 40px; }
 
 /* ---- 공통 타이포 ---- */
 .section-title {
@@ -195,6 +201,18 @@ button { font-family: inherit; }
 .btn--ghost:hover { border-color: var(--ink); color: var(--ink); }
 .btn--block { width: 100%; }
 .btn--lg { --h: 58px; font-size: 17px; padding: 0 34px; }
+/* 문장 끝 링크 대신 쓰는 작은 알약 버튼.
+   상품 카드의 '신청하기'(38~42px)보다 한 단 작다. */
+.btn--sm { --h: 34px; font-size: 13px; padding: 0 18px; }
+/* 밑줄 링크 규칙(.step p a 등)이 더 구체적이라, 버튼으로 쓸 때만 되돌린다.
+   테두리는 상품 카드의 '신청하기'와 같은 블랙 라인으로 맞춘다. */
+.step p a.btn,
+.intro-col__more a.btn {
+  text-decoration: none; font-weight: 600;
+  color: var(--ink); border-color: var(--black);
+}
+.step p a.btn:hover,
+.intro-col__more a.btn:hover { background: var(--black); color: #fff; border-color: var(--black); }
 
 /* ---- 히어로 ---- */
 /* ---- GNB (가운데 떠 있는 글래스 pill) ---- */
@@ -285,8 +303,9 @@ button { font-family: inherit; }
 }
 /* 사진이 들어올 자리. <img class="pf__img"> 로 바꿔도 같은 크기·비율이 된다. */
 .pf__img {
-  display: block; width: 100%; aspect-ratio: 3 / 4;
-  object-fit: cover; background: var(--surface);
+  display: block; width: 100%; aspect-ratio: 4 / 5;
+  object-fit: cover;        /* 비율이 다른 사진은 가운데 기준으로 잘라 채운다 */
+  background: var(--surface);
 }
 /* 번호 표시는 사진이 오기 전의 빈 자리(div)에만 적용된다 */
 div.pf__img {
@@ -332,7 +351,7 @@ div.pf__img {
    세 장을 같은 칸에 겹쳐 두고 조금씩 어긋나게 민다. 맨 앞이 s3 이다. */
 .hero__stack {
   display: none;
-  position: absolute; left: 0; right: 0; bottom: calc(-9% + 41px);
+  position: absolute; left: 0; right: 0; bottom: calc(-9% + 57px);
   place-items: center;
   z-index: 2; pointer-events: none;
 }
@@ -725,7 +744,7 @@ div.pf__img {
 .site-footer__inner { padding-block: 34px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between; }
 .site-footer small { color: var(--muted); font-size: 13px; }
 .site-footer__brand { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.site-footer__brand img { width: 100px; height: auto; display: block; }
+.site-footer__brand img { width: 70px; height: auto; display: block; }
 .site-footer__meta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 .site-footer nav { display: flex; gap: 18px; align-items: center; }
 .site-footer nav a { color: var(--muted); font-size: 13px; text-decoration: none; }

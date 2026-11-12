@@ -47,16 +47,15 @@
   </div>
 
   <!-- ▼ PC용 사진 (760px 이상에서만 보임) — 가운데가 가장 크고 좌우로 겹쳐 펼쳐집니다.
-       사진이 오면 <div class="pf__img">1</div> 을
-       <img class="pf__img" src="주소" alt=""> 로 바꾸면 됩니다. -->
+       사진은 img/1.jpg ~ img/5.jpg 이고, 바꾸려면 src 만 고치면 됩니다. -->
   <div class="hero__fan" data-speed="0.12" aria-hidden="true">
       <!-- 가운데 3번은 처음부터 자리를 잡고 있고, 2 → 4 → 1 → 5 순서로 올라옵니다.
            순서를 바꾸려면 data-delay 숫자만 바꾸면 됩니다. -->
-      <div class="pf pf--1 reveal" data-delay="3"><div class="pf__img">1</div></div>
-      <div class="pf pf--2 reveal" data-delay="1"><div class="pf__img">2</div></div>
-      <div class="pf pf--3"><div class="pf__img">3</div></div>
-      <div class="pf pf--4 reveal" data-delay="2"><div class="pf__img">4</div></div>
-      <div class="pf pf--5 reveal" data-delay="4"><div class="pf__img">5</div></div>
+      <div class="pf pf--1 reveal" data-delay="3"><img class="pf__img" src="img/1.jpg" alt="" decoding="async"></div>
+      <div class="pf pf--2 reveal" data-delay="1"><img class="pf__img" src="img/2.jpg" alt="" decoding="async"></div>
+      <div class="pf pf--3"><img class="pf__img" src="img/3.jpg" alt="" decoding="async"></div>
+      <div class="pf pf--4 reveal" data-delay="2"><img class="pf__img" src="img/4.jpg" alt="" decoding="async"></div>
+      <div class="pf pf--5 reveal" data-delay="4"><img class="pf__img" src="img/5.jpg" alt="" decoding="async"></div>
   </div>
 
   <!-- ▼ 모바일용 사진 (759px 이하에서만 보임) — 카드가 포개진 모양입니다.
@@ -65,9 +64,9 @@
       <!-- 페이지가 열릴 때 M1 → M2 → M3 순서로 한 번만 얹히고 그대로 멈춥니다.
            반복하지 않으므로 사라지는 장면이 없습니다.
            모션은 styles.css 의 @keyframes pf-settle 이 담당합니다. -->
-      <div class="pf pf--s1"><div class="pf__img">M1</div></div>
-      <div class="pf pf--s2"><div class="pf__img">M2</div></div>
-      <div class="pf pf--s3"><div class="pf__img">M3</div></div>
+      <div class="pf pf--s1"><img class="pf__img" src="img/1.jpg" alt="" decoding="async"></div>
+      <div class="pf pf--s2"><img class="pf__img" src="img/2.jpg" alt="" decoding="async"></div>
+      <div class="pf pf--s3"><img class="pf__img" src="img/3.jpg" alt="" decoding="async"></div>
   </div>
 </section>
 
@@ -84,7 +83,7 @@
       <div class="intro-col reveal" data-delay="1" id="about-lsp">
         <h3>LF 스타일 파트너</h3>
         <p>LF 스타일 파트너, 엘스파는 패션을 좋아하는 크리에이터가 감각적인 컨텐츠로 수익을 만드는 LF의 공식 쇼핑 파트너입니다.</p>
-        <p class="intro-col__more"><a href="https://www.lfmall.co.kr/app/event/113640" target="_blank" rel="noopener">엘스파 소개 보러가기</a></p>
+        <p class="intro-col__more"><a class="btn btn--ghost btn--sm" href="https://www.lfmall.co.kr/app/event/113640" target="_blank" rel="noopener">엘스파 소개 보러가기</a></p>
       </div>
       <div class="intro-col reveal" data-delay="2" id="about-pick">
         <h3>엘스파 픽</h3>
@@ -278,7 +277,7 @@
         <span class="step__ico" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg></span>
         <h3>엘스파 지원</h3>
         <p>LF 스타일 파트너 페이지에서 엘스파를 가입 신청 합니다. 기존 파트너는 별도 추가 지원이 필요하지 않습니다.</p>
-        <p class="step__more"><a href="https://affiliator.lfmall.co.kr/aff_join/index.html" target="_blank" rel="noopener">엘스파 가입하기</a></p>
+        <p class="step__more"><a class="btn btn--ghost btn--sm" href="https://affiliator.lfmall.co.kr/aff_join/index.html" target="_blank" rel="noopener">엘스파 가입 신청하기</a></p>
       </div>
       <div class="step">
         <span class="step__ico" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span>
@@ -743,13 +742,26 @@
     if (!els.length) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    /* 좁은 화면에서는 섹션 내용에 패럴랙스를 걸지 않는다.
+       화면이 짧아서 내용이 밀린 만큼 섹션 위아래 여백이 들쭉날쭉해 보이기 때문이다.
+       히어로 안의 사진은 그대로 둔다. */
+    var MOBILE_MAX = 759;
+
     var ticking = false;
 
     function update() {
       ticking = false;
       var vh = window.innerHeight;
+      var narrow = window.innerWidth <= MOBILE_MAX;
+
       for (var i = 0; i < els.length; i++) {
         var el = els[i];
+
+        if (narrow && !el.closest('.hero')) {   // 모바일에서는 섹션 내용만 끈다
+          if (el.style.transform) el.style.transform = '';
+          continue;
+        }
+
         var host = el.parentElement;
         var r = host.getBoundingClientRect();
         if (r.bottom < -200 || r.top > vh + 200) continue;   // 화면 밖이면 건너뛴다
