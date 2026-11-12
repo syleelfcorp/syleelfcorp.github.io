@@ -15,8 +15,6 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="styles.css">
-<!-- 등장 효과는 자바스크립트가 켜져 있을 때만 씁니다.
-     이 한 줄이 먼저 실행돼야 글이 잠깐 보였다 사라지는 깜빡임이 없습니다. -->
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -33,11 +31,10 @@
 
 <!-- ============ 히어로 ============ -->
 <section class="hero" id="top">
-  <!-- 히어로 배경은 색(--surface)만 씁니다. styles.css 의 .hero 한 줄입니다.
-       나중에 배경 사진을 다시 쓰시려면 아래 한 줄을 되살리면 됩니다.
+  <!--
   <div class="hero__bg" data-speed="0.3" aria-hidden="true"
        style="background-image: url('이미지주소')"></div>
-  -->
+      -->
 
   <div class="wrap hero__inner">
     <div class="hero__content">
@@ -46,11 +43,8 @@
     </div>
   </div>
 
-  <!-- ▼ PC용 사진 (760px 이상에서만 보임) — 가운데가 가장 크고 좌우로 겹쳐 펼쳐집니다.
-       사진은 img/1.jpg ~ img/5.jpg 이고, 바꾸려면 src 만 고치면 됩니다. -->
+  <!-- PC용 사진 -->
   <div class="hero__fan" data-speed="0.12" aria-hidden="true">
-      <!-- 3 → 2 → 4 → 1 → 5 순서로 등장합니다.
-           등장 시점은 styles.css 의 '.hero__fan .pf--N { --reveal-delay }' 다섯 줄입니다. -->
       <div class="pf pf--1 reveal"><img class="pf__img" src="img/1.jpg" alt="" decoding="async"></div>
       <div class="pf pf--2 reveal"><img class="pf__img" src="img/2.jpg" alt="" decoding="async"></div>
       <div class="pf pf--3 reveal"><img class="pf__img" src="img/3.jpg" alt="" decoding="async"></div>
@@ -58,12 +52,8 @@
       <div class="pf pf--5 reveal"><img class="pf__img" src="img/5.jpg" alt="" decoding="async"></div>
   </div>
 
-  <!-- ▼ 모바일용 사진 (759px 이하에서만 보임) — 카드가 포개진 모양입니다.
-       PC와 다른 사진을 넣을 수 있도록 아예 따로 둡니다. -->
+  <!-- 모바일용 사진 -->
   <div class="hero__stack" data-speed="0.1" aria-hidden="true">
-      <!-- 페이지가 열릴 때 M1 → M2 → M3 순서로 한 번만 얹히고 그대로 멈춥니다.
-           반복하지 않으므로 사라지는 장면이 없습니다.
-           모션은 styles.css 의 @keyframes pf-settle 이 담당합니다. -->
       <div class="pf pf--s1"><img class="pf__img" src="img/1.jpg" alt="" decoding="async"></div>
       <div class="pf pf--s2"><img class="pf__img" src="img/2.jpg" alt="" decoding="async"></div>
       <div class="pf pf--s3"><img class="pf__img" src="img/3.jpg" alt="" decoding="async"></div>
@@ -72,9 +62,6 @@
 
 <!-- ============ 서비스 소개 ============ -->
 <section class="section" id="about">
-  <!-- 이 섹션만 패럴랙스를 쓰지 않습니다. 첫 화면 바로 아래라
-       내용이 움직이면 '서비스 소개' 제목이 늦게 보이기 때문입니다.
-       다시 켜려면 아래 div 에 data-speed="0.07" 을 붙이면 됩니다. -->
   <div class="wrap">
     <div class="section-head center">
       <h2 class="section-title reveal reveal--load" data-delay="2">서비스 소개</h2>
@@ -95,17 +82,11 @@
 
 <!-- ============ 제품 리스트 ============ -->
 <section class="section" id="products">
-  <!-- 섹션 안쪽만 조금 느리게 움직여 섹션끼리 시차가 생깁니다.
-       느린 정도는 data-speed 숫자입니다(0 = 안 느림). -->
   <div class="wrap" data-speed="0.07">
     <div class="section-head center">
       <h2 class="section-title reveal">제품 리스트</h2>
     </div>
 
-    <!-- ⚠ 지금은 7개 제품이 모두 '열림'으로 보입니다.
-         모집 기간(11/16 10시 ~ 11/23 10시)을 무시하는 테스트 설정이며,
-         켜고 끄는 곳은 이 파일 아래쪽 스크립트의 FORCE_OPEN_ALL 한 줄입니다.
-         (지금 상태에서는 11/16 10시 전에도 신청이 접수됩니다) -->
     <div class="product-grid reveal" data-delay="1">
       <!-- 제품 1 · IETS6F103WT -->
       <article class="product" data-start="2026-11-16T10:00" data-end="2026-11-23T10:00">
@@ -243,9 +224,7 @@
     </div>
 
     <script>
-      /* 제품 노출 순서 섞기 — 페이지를 열 때마다 달라진다.
-         특정 제품이 늘 맨 앞에 오는 이점을 없애기 위한 것이다.
-         그리드 바로 뒤에서 실행해 화면에 그려지기 전에 순서를 바꾼다. */
+
       (function () {
         var grid = document.currentScript.previousElementSibling;
         var cards = Array.prototype.slice.call(grid.children);
@@ -261,33 +240,33 @@
 
 <!-- ============ 참여 방법 안내 (참여 방법 + 진행 일정) ============ -->
 <section class="section section--surface" id="how">
-  <!-- 섹션 안쪽만 조금 느리게 움직여 섹션끼리 시차가 생깁니다.
-       느린 정도는 data-speed 숫자입니다(0 = 안 느림). -->
   <div class="wrap" data-speed="0.07">
     <div class="section-head center">
       <h2 class="section-title reveal">참여 방법 안내</h2>
     </div>
 
     <h3 class="sub-title reveal" data-delay="1">참여 방법</h3>
-    <!-- 각 단계의 아이콘은 <span class="step__ico"> 안의 <svg> 하나입니다.
+    <!--
+각 단계의 아이콘은 <span class="step__ico"> 안의 <svg> 하나입니다.
          다시 1~6 숫자로 되돌리려면 그 span 을
-         <span class="step__num">1</span> 처럼 바꾸면 됩니다. -->
+         <span class="step__num">1</span> 처럼 바꾸면 됩니다.
+      -->
     <div class="steps steps--3 reveal" data-delay="2">
       <div class="step">
         <span class="step__ico" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg></span>
         <h3>엘스파 지원</h3>
-        <p>LF 스타일 파트너 페이지에서 엘스파를 가입 신청 합니다. 기존 파트너는 별도 추가 지원이 필요하지 않습니다.</p>
+        <p>LF 스타일 파트너 페이지에서 엘스파 가입 신청을 완료해 주세요. 기존 파트너는 추가 신청 없이 바로 참여하실 수 있습니다.</p>
         <p class="step__more"><a class="btn btn--ghost btn--sm" href="https://affiliator.lfmall.co.kr/aff_join/index.html" target="_blank" rel="noopener">엘스파 가입 신청하기</a></p>
       </div>
       <div class="step">
         <span class="step__ico" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span>
         <h3>제품 신청</h3>
-        <p>엘스파에 지원하신 후, 이 페이지에서 원하는 제품을 고르고 신청서를 작성합니다. 제품 사이즈와 LF몰 아이디를 함께 남겨주세요.</p>
+        <p>지원 완료 후, 원하는 제품을 선택해 신청서를 제출해 주세요. 신청 시 제품 사이즈와 LF몰 아이디를 함께 입력해 주세요.</p>
       </div>
       <div class="step">
         <span class="step__ico" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></span>
         <h3>엘스파 승인</h3>
-        <p>내부 심사를 거친 후 엘스파에 승인되면 크리에이터 시스템 추가 가입 안내 메일을 보내드립니다. <span class="ink">크리에이터 시스템 가입까지 마쳐야 선정 대상이 됩니다.</span></p>
+        <p>내부 심사 후 엘스파 승인이 완료되면 크리에이터 시스템 가입 안내 메일을 드립니다. <span class="ink">원활한 수익 정산과 최종 선정을 위해 해당 시스템 가입까지 꼭 완료해 주세요.</span></p>
       </div>
       <div class="step">
         <span class="step__ico" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></span>
@@ -297,13 +276,14 @@
       <div class="step">
         <span class="step__ico" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4"/><path d="m15.4 6.5-6.8 4"/></svg></span>
         <h3>SNS 코디 &amp; 링크 업로드</h3>
-        <p>제품을 수령하신 후, 자유롭게 코디한 사진을 개인 SNS의 피드 또는 릴스 형태로 올려주시고 크리에이터 시스템에서 생성한 제품 링크를 개인 SNS에 공유해 주세요.</p>
-        <p class="step__key">공유된 링크에서 제품 구매가 발생할 경우 결제 금액의 5%가 수수료로 지급됩니다.</p>
+        <p>수령하신 제품으로 나만의 컨텐츠를 제작해 개인 SNS(피드·릴스)에 올려주시고, 크리에이터 시스템에서 생성한 제품 링크를 연결해 주세요.</p>
+        <p class="step__key">링크를 통한 구매 발생 시 결제 금액의 5%가 수수료로 정산됩니다.</p>
+        <p class="step__note">※ 작성해 주신 후기 및 컨텐츠는 LF몰 내부 채널에서 활용될 수 있습니다.</p>
       </div>
       <div class="step">
         <span class="step__ico" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="1.8"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></span>
         <h3>나의 패션 클럽 업로드</h3>
-        <p>SNS에 올린 이미지와 게시물을 LFmall &gt; 나의 패션 클럽에도 동일하게 올려주세요.</p>
+        <p>개인 SNS에 업로드하신 코디 사진과 후기 글을 LF몰 내 나의 패션 클럽에도 동일하게 등록해 주시면 최종 활동이 완료됩니다.</p>
       </div>
     </div>
 
@@ -314,7 +294,6 @@
         <h4>신청 접수</h4>
       </li>
       <li class="timeline__item">
-        <!-- 발표일을 따로 두지 않고, 선정되는 대로 개별 연락합니다 -->
         <span class="timeline__date">수시 안내</span>
         <h4>엘스파 픽 선정자 연락</h4>
         <p>인스타 DM · 문자로 개별 안내</p>
@@ -335,7 +314,6 @@
       <summary class="notice__q">
         <h3>신청 전 꼭 확인해 주세요</h3>
         <span class="notice__icon" aria-hidden="true">
-          <!-- width/height 속성 필수 — CSS가 늦게 로드돼도 아이콘이 커지지 않는다 -->
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </span>
       </summary>
@@ -351,8 +329,6 @@
 
 <!-- ============ 자주 묻는 질문 ============ -->
 <section class="section" id="faq">
-  <!-- 섹션 안쪽만 조금 느리게 움직여 섹션끼리 시차가 생깁니다.
-       느린 정도는 data-speed 숫자입니다(0 = 안 느림). -->
   <div class="wrap" data-speed="0.07">
     <div class="section-head center">
       <h2 class="section-title reveal">자주 묻는 질문</h2>
@@ -436,7 +412,7 @@
 </section>
 
 <!-- ============ 공유하기 ============ -->
-<!-- 엘스파 픽 공유하기 — 숨김 처리 (2026-11-09). 다시 보이려면 이 주석만 풀면 됩니다.
+<!--
 <section class="section share" id="share">
   <div class="wrap">
     <div class="section-head center">
@@ -455,7 +431,7 @@
     </div>
   </div>
 </section>
--->
+      -->
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
@@ -468,10 +444,8 @@
              alt="LF몰" width="100" height="22">
       </a>
     </div>
-    <!-- 메뉴와 저작권 표기를 한 덩어리로 묶어 오른쪽에 붙인다 -->
     <div class="site-footer__meta">
-      <!-- 하단 메뉴 전체 숨김 처리 (2026-11-11).
-           '수령 후 안내'는 선정되신 분께만 안내하는 페이지라 메인 푸터에서 내렸습니다.
+      <!--
            빈 <nav> 를 남기면 저작권 표기 앞에 여백만 생겨서 통째로 주석 처리했습니다.
            다시 보이려면 아래 주석을 풀면 됩니다.
       <nav aria-label="하단 메뉴">
@@ -485,10 +459,7 @@
 </footer>
 
 <script>
-  /* 제품별 누적 신청 수 — 집계 서버에서 받아 '20명 모집' 뒤에 덧붙인다.
-     JSONP로 받는 이유: Apps Script는 /exec에서 다른 주소로 리디렉션하는데
-     이때 브라우저 CORS 검사에 걸리는 경우가 있다.
-     응답이 없거나 실패해도 '20명 모집'은 그대로 남는다. */
+
   (function () {
     var COUNTS_URL = 'https://script.google.com/macros/s/AKfycbxGee0iHmdbZuvI6rE3rviQ5s3urWQwZ4cnYqjwSvAl-XkvoQYGpvFjUTM3L1u9BnuD2Q/exec';
     var els = document.querySelectorAll('.product__stat[data-code]');
@@ -508,7 +479,7 @@
       if (res && res.ok && res.counts) {
         Array.prototype.forEach.call(els, function (el) {
           var n = res.counts[el.getAttribute('data-code')];
-          // 0건일 때는 '0명 신청'을 띄우지 않고 '모집'만 남긴다
+
           if (typeof n === 'number' && n > 0) {
             el.insertAdjacentHTML('beforeend',
               ' / ' + n.toLocaleString('ko-KR') + '명 신청');
@@ -524,32 +495,22 @@
     document.head.appendChild(tag);
   })();
 
-  /* 제품별 모집 기간 — data-start / data-end 로 남은 시간을 표시하고,
-     기간이 아닌 제품은 신청 버튼을 잠근다.
-     값은 'YYYY-MM-DDTHH:MM' 형태의 한국 시각이며, 보는 사람의 기기 시간대와
-     상관없이 같은 순간을 가리킨다. 1분마다 다시 계산해 10시 정각에 열리고 닫힌다. */
   (function () {
-    /* ⚠ 테스트용 전체 강제 오픈 스위치
-       true  : 모집 기간과 상관없이 7개 제품이 모두 열린 것처럼 보이고 신청도 받습니다.
-       false : 아래 data-start / data-end 대로 11/16 10시에 열리고 11/23 10시에 닫힙니다.
-       실제 운영을 시작할 때 false 로 바꾸세요. 이 한 줄만 고치면 됩니다. */
+
     var FORCE_OPEN_ALL = true;
 
     var MIN = 60000, HOUR = 3600000, DAY = 86400000;
     var WEEK = ['일', '월', '화', '수', '목', '금', '토'];
 
-    // 'YYYY-MM-DD' 또는 'YYYY-MM-DDTHH:MM' (한국 시각) → epoch ms
-    // KST는 UTC+9라 시(hour)에서 9를 빼면 그대로 UTC가 된다.
     function kst(str) {
       var m = /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}))?$/.exec(str.trim());
       if (!m) return NaN;
       return Date.UTC(+m[1], +m[2] - 1, +m[3], (+m[4] || 0) - 9, +m[5] || 0);
     }
 
-    // '11. 23 (월) 10시' — 날짜와 요일 사이는 줄바꿈 금지 공백
     function label(str) {
       var t = kst(str);
-      var d = new Date(t + 9 * HOUR);   // 한국 시각으로 되돌려 읽는다
+      var d = new Date(t + 9 * HOUR);
       var out = (d.getUTCMonth() + 1) + '. ' + d.getUTCDate() +
                 '\u00A0(' + WEEK[d.getUTCDay()] + ')';
       var h = d.getUTCHours();
@@ -557,14 +518,11 @@
       return out;
     }
 
-    // 그 순간이 속한 '한국 날짜'의 0시
     function dayStart(t) {
       var d = new Date(t + 9 * HOUR);
       return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - 9 * HOUR;
     }
-    // 남은 시간을 '6일' / '13시간' / '40분' 으로.
-    // 하루 이상이면 시간이 아니라 달력 날짜 차이로 센다 —
-    // 옆에 적힌 날짜('11. 23까지')와 숫자가 어긋나지 않게 하기 위해서다.
+
     function gap(now, target) {
       var ms = target - now;
       if (ms < HOUR) return Math.max(1, Math.floor(ms / MIN)) + '분';
@@ -587,7 +545,7 @@
         var state, html;
 
         if (FORCE_OPEN_ALL || card.dataset.force === 'open') {
-          // 테스트용 강제 오픈 — 위 FORCE_OPEN_ALL 을 false 로 두면 원래대로 돌아간다
+
           state = 'open';
           html = label(card.dataset.end) + '까지 · <b>' + gap(now, end) + ' 남음</b>';
         } else if (start !== null && now < start) {
@@ -606,7 +564,6 @@
         out.dataset.html = html;
         card.setAttribute('data-state', state);
 
-        // 모집 기간이 아니면 신청 페이지로 넘어가지 못하게 한다
         if (state === 'open') {
           btn.textContent = '신청하기';
           btn.setAttribute('href', 'apply.html?product=' + card.querySelector('[data-code]').dataset.code);
@@ -620,7 +577,7 @@
     }
 
     render();
-    setInterval(render, MIN);   // 10시 정각에 새로고침 없이 열리고 닫히도록
+    setInterval(render, MIN);
   })();
 
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
@@ -630,7 +587,7 @@
       var el = document.querySelector(id);
       if (!el) return;
       e.preventDefault();
-      // 떠 있는 GNB가 가리는 높이(위 여백 + pill 높이)만큼 빼야 제목이 보인다
+
       var cs = getComputedStyle(document.documentElement);
       var gnb = (parseFloat(cs.getPropertyValue('--gnb-top')) || 0)
               + (parseFloat(cs.getPropertyValue('--gnb-h')) || 0);
@@ -639,27 +596,17 @@
     });
   });
 
-  /* ================= 공유하기 =================
-     카카오톡은 공개 공유 URL이 없어 공식 SDK와 앱 키가 필요합니다.
-     카카오 개발자센터(developers.kakao.com)에서 애플리케이션을 만들고
-     JavaScript 키를 발급받은 뒤, 플랫폼 > Web에 아래 도메인을 등록하세요.
-       https://syleelfcorp.github.io
-     키를 넣기 전까지 카카오 버튼은 링크 복사로 동작합니다.
-     ============================================ */
-  // 공유 섹션을 숨긴 동안에는 아래 버튼 연결이 모두 건너뛰어집니다.
-  // 섹션 주석을 풀면 따로 손대지 않아도 다시 동작합니다.
   var elShareCopy  = document.getElementById('shareCopy');
   var elShareFb    = document.getElementById('shareFacebook');
   var elShareKakao = document.getElementById('shareKakao');
 
-  var KAKAO_JS_KEY = '';   // ← 발급받은 JavaScript 키를 넣으세요
+  var KAKAO_JS_KEY = '';
 
   var SHARE_URL   = location.href.split('#')[0];
   var SHARE_TITLE = 'LFmall 엘스파 픽';
   var SHARE_DESC  = '이번 시즌 새로 나온 제품을 먼저 만나보세요.';
   var SHARE_IMAGE = 'https://nimg.lfmall.co.kr/file/product/prd/IE/2026/1000/IEJU6F301BK_A13.jpg';
 
-  // 토스트
   var toastEl = document.getElementById('toast');
   var toastTimer;
   function showToast(msg) {
@@ -669,7 +616,6 @@
     toastTimer = setTimeout(function () { toastEl.hidden = true; }, 2200);
   }
 
-  // 링크 복사
   function copyLink(msg) {
     function done() { showToast(msg || '링크를 복사했어요'); }
     function fallback() {
@@ -696,11 +642,9 @@
   }
   if (elShareCopy) elShareCopy.addEventListener('click', function () { copyLink(); });
 
-  // 페이스북 — SDK 없이 공유 URL만으로 동작
   if (elShareFb) elShareFb.href =
     'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(SHARE_URL);
 
-  // 카카오톡 — 키가 있을 때만 SDK를 불러온다
   if (KAKAO_JS_KEY && elShareKakao) {
     var sdk = document.createElement('script');
     sdk.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js';
@@ -732,19 +676,12 @@
   });
 </script>
 <script>
-  /* ---------- 배경 패럴랙스 ----------
-     data-speed 가 붙은 요소를, 그 요소를 감싼 섹션보다 느리게 움직입니다.
-     숫자는 HTML 쪽 data-speed 에서 조절합니다 (0 = 안 느림, 1 = 화면에 고정).
-     '동작 줄이기' 설정이면 아예 움직이지 않습니다.
-     스크롤 중에는 브라우저 그리는 주기에 맞춰서만 계산해 버벅임을 줄입니다. */
+
   (function () {
     var els = document.querySelectorAll('[data-speed]');
     if (!els.length) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    /* 좁은 화면에서는 섹션 내용에 패럴랙스를 걸지 않는다.
-       화면이 짧아서 내용이 밀린 만큼 섹션 위아래 여백이 들쭉날쭉해 보이기 때문이다.
-       히어로 안의 사진은 그대로 둔다. */
     var MOBILE_MAX = 759;
 
     var ticking = false;
@@ -757,19 +694,18 @@
       for (var i = 0; i < els.length; i++) {
         var el = els[i];
 
-        if (narrow && !el.closest('.hero')) {   // 모바일에서는 섹션 내용만 끈다
+        if (narrow && !el.closest('.hero')) {
           if (el.style.transform) el.style.transform = '';
           continue;
         }
 
         var host = el.parentElement;
         var r = host.getBoundingClientRect();
-        if (r.bottom < -200 || r.top > vh + 200) continue;   // 화면 밖이면 건너뛴다
+        if (r.bottom < -200 || r.top > vh + 200) continue;
 
         var speed = parseFloat(el.getAttribute('data-speed'));
         if (!(speed > 0)) speed = 0.3;
 
-        // 섹션 한가운데가 화면 한가운데에서 얼마나 떨어져 있는지
         var offset = (r.top + r.height / 2) - vh / 2;
         el.style.transform = 'translate3d(0,' + (-offset * speed).toFixed(1) + 'px,0)';
       }
@@ -788,27 +724,16 @@
 </script>
 
 <script>
-  /* ---------- 스크롤 등장 효과 ----------
-     class="reveal" 이 붙은 요소가 화면에 들어오면 한 번만 올라옵니다.
-     한 번 보이고 나면 다시 숨지 않습니다.
 
-     숫자를 바꾸고 싶을 때
-     - 시작 시점 : 바로 아래 ENTER_MARGIN (-12% = 화면 아래에서 12% 들어오면 시작)
-     - 속도/딜레이 : styles.css 의 '.reveal' 묶음
-     자바스크립트가 막히거나 '동작 줄이기' 설정이면 효과 없이 그냥 보입니다. */
   (function () {
     var ENTER_MARGIN = '0px 0px -12% 0px';
 
     var els = document.querySelectorAll('.reveal');
     if (!els.length) return;
 
-    /* 'reveal--load' 가 붙은 것은 스크롤을 기다리지 않고 페이지가 열릴 때 바로 재생합니다.
-       첫 화면 경계에 걸쳐 있어 스크롤 전에는 효과가 발동하지 않는 글을 위한 것입니다.
-       (딜레이는 다른 요소와 똑같이 data-delay 로 맞춥니다) */
     var now = document.querySelectorAll('.reveal--load');
     for (var n = 0; n < now.length; n++) now[n].classList.add('is-in');
 
-    // 아주 오래된 브라우저 — 효과 없이 바로 보여준다
     if (!('IntersectionObserver' in window)) {
       for (var i = 0; i < els.length; i++) els[i].classList.add('is-in');
       return;
@@ -823,7 +748,7 @@
     }, { threshold: 0, rootMargin: ENTER_MARGIN });
 
     for (var j = 0; j < els.length; j++) {
-      if (els[j].classList.contains('is-in')) continue;   // 이미 재생한 것은 제외
+      if (els[j].classList.contains('is-in')) continue;
       io.observe(els[j]);
     }
   })();

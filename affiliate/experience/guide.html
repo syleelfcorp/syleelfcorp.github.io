@@ -28,7 +28,6 @@
             <summary class="tips__q">
               촬영 팁 보기
               <span class="tips__icon" aria-hidden="true">
-                <!-- width/height 속성 필수 — CSS가 늦게 로드돼도 아이콘이 커지지 않는다 -->
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </span>
             </summary>
@@ -61,7 +60,6 @@
         <div>
           <h3>미션 ① 개인 SNS에 릴스 또는 피드 올리기</h3>
           <p>엘스파 지원 시 작성해 주신 SNS 계정에 <b>릴스(영상) 또는 피드(사진)</b> 중 편한 형식으로 1건 올려주세요. 다른 사람이 볼 수 있도록 <b>공개 게시물</b>로 착용감(사이즈, 핏, 두께 등)이나 스타일링 관련 내용을 함께 올려주시고, 아래 해시태그를 함께 적어주세요.</p>
-          <!-- 게시물에 넣어야 하는 문구. 해시태그 줄 끝의 '복사'를 누르면 태그만 복사된다 -->
           <div class="tagset">
             <p class="tagset__line"><b>게시글 상단 첫줄:</b> #광고 또는 #제품제공 및 @lfmall_official 계정태그</p>
             <p class="tagset__line"><b>해시태그:</b> <span id="tagText">#LF몰 #엘스파 #엘스파픽</span><button class="copy-link" type="button" id="copyBtn" aria-live="polite">복사</button></p>
@@ -80,8 +78,6 @@
         <div>
           <h3>미션 ③ 나의 패션 클럽에 착장컷 올리기</h3>
           <p>LFmall 로그인 → 마이페이지 → <b>나의 패션 클럽</b>에서 받으신 제품을 입은 착장컷을 올려주세요. 게시글은 SNS와 동일한 내용으로 올려주시면 되며, 올려주신 착장컷은 해당 제품 상세에 소개될 수 있습니다.</p>
-          <!-- 안내 이미지 — 바꾸려면 src 와 width/height(원본 픽셀 크기)만 고치면 됩니다.
-               width/height 를 적어두면 이미지가 늦게 떠도 자리가 미리 잡혀 화면이 밀리지 않습니다. -->
           <img class="img-slot__img" src="mfc.png" width="1343" height="756"
                alt="LFmall 앱 홈에서 나의 패션 클럽으로 들어가 '나의 스타일 업로드'로 사진을 올리는 화면 순서">
         </div>
@@ -122,12 +118,11 @@
              alt="LF몰" width="100" height="22">
       </a>
     </div>
-    <!-- 메뉴와 저작권 표기를 한 덩어리로 묶어 오른쪽에 붙인다 -->
     <div class="site-footer__meta">
       <nav aria-label="하단 메뉴">
-        <!-- 숨김 처리 (2026-11-09). 다시 보이려면 아래 주석을 풀면 됩니다.
+        <!--
         <a class="is-strong" href="https://www.lfmall.co.kr/app/terms/process" target="_blank" rel="noopener">개인정보 처리방침</a>
-        -->
+      -->
         <a href="index.html">엘스파 픽 메인</a>
       </nav>
       <small>© 2026 LFmall</small>
@@ -136,7 +131,7 @@
 </footer>
 
 <script>
-  // 해시태그 복사
+
   var copyBtn = document.getElementById('copyBtn');
   var tagText = document.getElementById('tagText');
   copyBtn.addEventListener('click', function () {
@@ -160,7 +155,6 @@
     }
   });
 
-  // 앵커 스무스 스크롤 (헤더 보정)
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var id = a.getAttribute('href');

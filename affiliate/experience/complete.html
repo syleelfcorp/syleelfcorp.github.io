@@ -68,12 +68,11 @@
              alt="LF몰" width="100" height="22">
       </a>
     </div>
-    <!-- 메뉴와 저작권 표기를 한 덩어리로 묶어 오른쪽에 붙인다 -->
     <div class="site-footer__meta">
       <nav aria-label="하단 메뉴">
-        <!-- 숨김 처리 (2026-11-09). 다시 보이려면 아래 주석을 풀면 됩니다.
+        <!--
         <a class="is-strong" href="https://www.lfmall.co.kr/app/terms/process" target="_blank" rel="noopener">개인정보 처리방침</a>
-        -->
+      -->
         <a href="guide.html">수령 후 안내</a>
       </nav>
       <small>© 2026 LFmall</small>
@@ -82,10 +81,7 @@
 </footer>
 
 <script>
-  // 신청서에서 넘어온 이름/제품으로 개인화
-  // 주의: 변수명을 name 으로 두면 전역 window.name 에 덮여 씌워집니다.
-  //       window.name 은 문자열만 담을 수 있어 null 이 "null" 로 바뀌고,
-  //       이름 없이 들어왔을 때 'null님' 이 찍힙니다.
+
   var params = new URLSearchParams(location.search);
   var applicantName = params.get('name');
   var product = params.get('product');
