@@ -216,17 +216,25 @@ button { font-family: inherit; }
   .gnb { background: var(--glass-fallback); }
 }
 
-.gnb__nav { display: flex; align-items: center; gap: 2px; max-width: calc(100vw - 24px); overflow-x: auto; scrollbar-width: none; }
+/* 넓어진 만큼 메뉴를 양끝으로 펼친다 */
+.gnb__nav { display: flex; align-items: center; justify-content: space-between; gap: 2px; overflow-x: auto; scrollbar-width: none; }
 .gnb__nav::-webkit-scrollbar { display: none; }
 .gnb__nav a {
   display: block; padding: 7px clamp(10px, 1.1vw, 16px); border-radius: var(--radius-pill);
-  font-size: 13px; font-weight: 600; color: var(--muted);
+  font-size: 14px; font-weight: 500; color: var(--muted);
   text-decoration: none; white-space: nowrap;
   transition: color .15s ease, background-color .15s ease;
 }
 .gnb__nav a:hover { color: var(--ink); background: var(--glass-hover); }
-@media (min-width: 620px) {
-  .gnb__nav a { font-size: 14px; }
+/* 글자 크기는 화면 크기와 상관없이 14px 로 고정 */
+
+/* ---- 모바일에서만 화면 가득 ----
+   PC 에서는 내용 너비 그대로의 알약으로 떠 있고,
+   좁은 화면에서만 좌우 30px 만 남기고 늘어난다.
+   양끝 글자가 모서리에 붙지 않도록 안쪽 여백도 16px 로 키운다.
+   (100vw 대신 100% — 고정 요소의 100% 는 스크롤바를 뺀 너비라 삐져나오지 않는다) */
+@media (max-width: 759px) {
+  .gnb { width: calc(100% - 60px); padding-inline: 16px; }
 }
 
 /* 앵커로 이동할 때 떠 있는 GNB에 제목이 가리지 않도록 */
@@ -324,7 +332,7 @@ div.pf__img {
    세 장을 같은 칸에 겹쳐 두고 조금씩 어긋나게 민다. 맨 앞이 s3 이다. */
 .hero__stack {
   display: none;
-  position: absolute; left: 0; right: 0; bottom: calc(-9% + 30px);
+  position: absolute; left: 0; right: 0; bottom: calc(-9% + 41px);
   place-items: center;
   z-index: 2; pointer-events: none;
 }
@@ -341,17 +349,20 @@ div.pf__img {
      --pf-z            : 앞뒤 순서 (s3 가 맨 위)
    나타나는 간격은 .hero__stack .pf--sN 의 animation-delay 다. */
 .hero__stack .pf { --pf-w: 277px; }
-.hero__stack .pf--s1 { --pf-dx: -6px; --pf-dy: -14px; --pf-rot: -5deg; --pf-scale: .95;  --pf-z: 1; }
-.hero__stack .pf--s2 { --pf-dx:  5px; --pf-dy:  -8px; --pf-rot:   3deg; --pf-scale: .975; --pf-z: 2; }
-.hero__stack .pf--s3 { --pf-dx: -2px; --pf-dy:    0;  --pf-rot:  -1deg; --pf-scale: 1;    --pf-z: 3; }
+/* 맨 위(s3)를 가장 많이 기울여야 아래 장들의 모서리가 드러나 '쌓인' 것처럼 보인다.
+   기울기 차이(14도)와 좌우 어긋남을 키워 모서리가 더 나오게 했다.
+   크기 차이는 줄였다 — 많이 작아지면 오히려 위 장에 가려 안 보인다. */
+.hero__stack .pf--s1 { --pf-dx:  14px; --pf-dy: -18px; --pf-rot:  5deg; --pf-scale: .96; --pf-z: 1; }
+.hero__stack .pf--s2 { --pf-dx: -10px; --pf-dy:  -9px; --pf-rot: -2deg; --pf-scale: .98; --pf-z: 2; }
+.hero__stack .pf--s3 { --pf-dx:    0;  --pf-dy:    0;  --pf-rot: -9deg; --pf-scale: 1;   --pf-z: 3; }
 
 @media (max-width: 759px) {
   /* 움직임 없이 제자리에서 나타나기만 한다 (both = 시작 전에도 끝난 뒤에도 값 유지) */
   .hero__stack .pf { animation: pf-settle .55s ease both; }
   /* 선택자를 .hero__stack 까지 써야 위의 animation 단축 속성(딜레이 0s 로 초기화)을 이긴다 */
-  .hero__stack .pf--s1 { animation-delay: .1s; }
-  .hero__stack .pf--s2 { animation-delay: .45s; }
-  .hero__stack .pf--s3 { animation-delay: .8s; }
+  .hero__stack .pf--s1 { animation-delay: .4s; }
+  .hero__stack .pf--s2 { animation-delay: .85s; }
+  .hero__stack .pf--s3 { animation-delay: 1.25s; }
 }
 
 @keyframes pf-settle {
@@ -407,7 +418,37 @@ div.pf__img {
 /* ---- 모바일 히어로 글자 크기 ---- */
 @media (max-width: 759px) {
   .hero h1 { font-size: 36px; line-height: 1.3; }
-  .hero__sub { font-size: 16px; }
+  .hero__sub { font-size: 16px; margin-top: 12px; }
+
+  /* ---- 모바일 가운데 정렬 ----
+     화면이 좁을 때는 가운데로 모아야 줄이 들쭉날쭉해 보이지 않는다. */
+  .sub-title { text-align: center; }     /* '참여 방법', '진행 일정' */
+  .intro-col { text-align: center; }     /* 서비스 소개 두 칼럼 */
+  .step { text-align: center; }          /* 참여 방법 카드 */
+  /* 아이콘도 가운데로.
+     .step__ico 는 display:block 이라 가로를 꽉 채워서 auto 마진이 듣지 않는다.
+     inline-block 으로 바꿔 글자처럼 취급하면 text-align:center 를 따라간다. */
+  .step .step__ico { display: inline-block; }
+
+  /* ---- 진행 일정 : 모바일 전용 배치 ----
+     PC는 점이 글 왼쪽에 붙는 구조지만, 좁은 화면에서는 그 때문에
+     덩어리가 왼쪽으로 쏠려 보인다. 모바일에서는 글을 모두 가운데 두고,
+     점 대신 '항목과 항목 사이'를 잇는 짧은 선만 가운데에 세운다.
+     (기본 .timeline 규칙이 이 블록보다 뒤에 있어 선택자를 한 단 더 구체적으로 쓴다) */
+  .section .timeline { max-width: none; }
+  .section .timeline__item {
+    padding: 0 0 36px;        /* 왼쪽 들여쓰기 제거 */
+    text-align: center;
+  }
+  .section .timeline__item::before { content: none; }   /* 점은 쓰지 않는다 */
+  .section .timeline__item::after {                     /* 항목 사이를 잇는 짧은 선 */
+    left: 50%; translate: -50% 0;
+    top: auto; bottom: 9px;
+    width: 1px; height: 18px;
+    /* --line(#e8e4f0)은 섹션 배경(#faf8fd)과 거의 같아 보이지 않는다.
+       키컬러를 50% 섞어 연보라 선으로 띄운다. 진하게 하려면 숫자를 올리면 된다. */
+    background: color-mix(in srgb, var(--key) 30%, transparent);
+  }
 }
 
 /* ---- 스텝(번호 뱃지) ---- */
