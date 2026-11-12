@@ -49,13 +49,13 @@
   <!-- ▼ PC용 사진 (760px 이상에서만 보임) — 가운데가 가장 크고 좌우로 겹쳐 펼쳐집니다.
        사진은 img/1.jpg ~ img/5.jpg 이고, 바꾸려면 src 만 고치면 됩니다. -->
   <div class="hero__fan" data-speed="0.12" aria-hidden="true">
-      <!-- 가운데 3번은 처음부터 자리를 잡고 있고, 2 → 4 → 1 → 5 순서로 올라옵니다.
-           순서를 바꾸려면 data-delay 숫자만 바꾸면 됩니다. -->
-      <div class="pf pf--1 reveal" data-delay="3"><img class="pf__img" src="img/1.jpg" alt="" decoding="async"></div>
-      <div class="pf pf--2 reveal" data-delay="1"><img class="pf__img" src="img/2.jpg" alt="" decoding="async"></div>
-      <div class="pf pf--3"><img class="pf__img" src="img/3.jpg" alt="" decoding="async"></div>
-      <div class="pf pf--4 reveal" data-delay="2"><img class="pf__img" src="img/4.jpg" alt="" decoding="async"></div>
-      <div class="pf pf--5 reveal" data-delay="4"><img class="pf__img" src="img/5.jpg" alt="" decoding="async"></div>
+      <!-- 3 → 2 → 4 → 1 → 5 순서로 등장합니다.
+           등장 시점은 styles.css 의 '.hero__fan .pf--N { --reveal-delay }' 다섯 줄입니다. -->
+      <div class="pf pf--1 reveal"><img class="pf__img" src="img/1.jpg" alt="" decoding="async"></div>
+      <div class="pf pf--2 reveal"><img class="pf__img" src="img/2.jpg" alt="" decoding="async"></div>
+      <div class="pf pf--3 reveal"><img class="pf__img" src="img/3.jpg" alt="" decoding="async"></div>
+      <div class="pf pf--4 reveal"><img class="pf__img" src="img/4.jpg" alt="" decoding="async"></div>
+      <div class="pf pf--5 reveal"><img class="pf__img" src="img/5.jpg" alt="" decoding="async"></div>
   </div>
 
   <!-- ▼ 모바일용 사진 (759px 이하에서만 보임) — 카드가 포개진 모양입니다.

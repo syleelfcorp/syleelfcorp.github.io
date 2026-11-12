@@ -345,6 +345,14 @@ div.pf__img {
 .pf--4 { --pf-w: 190px; --pf-rot: -13deg; --pf-dx:   29px; --pf-dy: -139px; --pf-z: 2; }
 .pf--5 { --pf-w: 130px; --pf-rot:   8deg; --pf-dx:   75px; --pf-dy: -300px; --pf-z: 4; }
 
+/* PC 사진 등장 시점 — 모바일처럼 천천히, 가운데(3)부터 바깥으로.
+   숫자만 바꾸면 순서와 간격이 달라진다. */
+.hero__fan .pf--3 { --reveal-delay: .4s; }
+.hero__fan .pf--2 { --reveal-delay: .75s; }
+.hero__fan .pf--4 { --reveal-delay: 1.05s; }
+.hero__fan .pf--1 { --reveal-delay: 1.3s; }
+.hero__fan .pf--5 { --reveal-delay: 1.55s; }
+
 /* 폭이 좁은 화면에서는 좌우가 잘려도 그대로 둔다(히어로가 잘라낸다). */
 
 /* ---- 모바일(~759px) : 카드가 포개진 모양 ----
@@ -392,6 +400,30 @@ div.pf__img {
 /* '동작 줄이기'를 켠 분께는 나타나는 효과 없이 바로 더미로 보여준다 */
 @media (prefers-reduced-motion: reduce) {
   .hero__stack .pf { animation: none; }
+}
+
+/* ---- 화면 높이가 낮을 때 사진 덩어리 줄이기 ----
+   사진은 히어로 바닥에 붙어 있고 크기가 고정이라, 화면이 짧으면 위로 올라와
+   제목·서브문구를 덮는다. 높이 구간마다 덩어리 전체를 줄여 글과 겹치지 않게 한다.
+   아래쪽을 기준으로 줄이므로 바닥에 걸친 모양은 그대로 유지된다.
+   (가로 크기와는 무관하므로 max-height 만 본다) */
+.hero__fan, .hero__stack { transform-origin: bottom center; }
+
+/* PC 콜라주 — 화면이 아주 높으면 조금 더 키운다 */
+@media (min-width: 760px) {
+  @media (min-height: 961px) { .hero__fan { scale: 1.05; } }
+  @media (max-height: 900px) { .hero__fan { scale: .92; } }
+  @media (max-height: 840px) { .hero__fan { scale: .86; } }
+  @media (max-height: 790px) { .hero__fan { scale: .78; } }
+  @media (max-height: 740px) { .hero__fan { scale: .72; } }
+  @media (max-height: 690px) { .hero__fan { scale: .66; } }
+}
+/* 모바일 더미 — 같은 높이에서도 PC 보다 덜 줄여도 된다 */
+@media (max-width: 759px) {
+  @media (min-height: 881px) { .hero__stack { scale: 1.05; } }
+  @media (max-height: 800px) { .hero__stack { scale: .88; } }
+  @media (max-height: 720px) { .hero__stack { scale: .80; } }
+  @media (max-height: 650px) { .hero__stack { scale: .74; } }
 }
 
 /* ---- 서비스 소개 2단 ---- */
